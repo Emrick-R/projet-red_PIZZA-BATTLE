@@ -1,8 +1,11 @@
 package character
 
-import "inventory"
+import (
+	"fmt"
+	"inventory"
+)
 
-type character struct {
+type Character struct {
 	name      string
 	class     string
 	level     int
@@ -12,15 +15,15 @@ type character struct {
 }
 
 func InitCharacter() {
-	personnage_c1 := character{"Harold", "Elfe", 1, 100, []inventory.Objects{"potions", 3}}
+	personnage_c1 := Character{"Harold", "Elfe", 1, 100, []inventory.Objects{"potions", 3}}
 }
 
 func AccessInventory() {
-	fmt.printlf(character.inventory)
+	fmt.Printlf(personnage_c1.inventory)
 }
 
 func DisplayInfo() {
-	fmt.printlf(character)
+	fmt.Printlf(personnage_c1)
 }
 
 func characterCreation() {
