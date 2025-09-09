@@ -20,3 +20,6 @@ func AccessInventory() {
 func DisplayInfo() {
 	fmt.printlf(character)
 }
+
+func characterCreation() {
+}
