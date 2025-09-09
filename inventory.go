@@ -2,7 +2,7 @@ package inventory
 
 import "fmt"
 
-type objects struct {
+type Objects struct {
 	name     string
 	quantity int
 }
