@@ -11,7 +11,6 @@ type character struct {
 
 func InitCharacter() {
 	personnage_c1 := character{"Harold", "class", 1, 100, []inventory{"3 potions"}}
-
 }
 
 func AccessInventory() {
@@ -20,5 +19,4 @@ func AccessInventory() {
 
 func DisplayInfo() {
 	fmt.printlf(character)
-
 }
