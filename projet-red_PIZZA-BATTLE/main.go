@@ -7,11 +7,16 @@ import (
 )
 
 func main() {
-	c1 := character.InitCharacter("Harold", "Elfe", 1, 100, inventory.Object{"Potions", 3})
-	fmt.Println(c1)
+	// Création de l'inventaire
+	inv := []inventory.Object{
+		{"Potion", 3},
+	}
 
-}
+	// Création du perso
+	c1 := character.InitCharacter("Harold", "Elfe", 1, 100, 100, inv)
 
-func IsDead() {
-	return 0
+	// Affichage
+	fmt.Println(c1)      // brut
+	c1.DisplayInfo()     // via méthode
+	c1.AccessInventory() // affiche inventaire
 }

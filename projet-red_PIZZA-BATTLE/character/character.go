@@ -6,26 +6,29 @@ import (
 )
 
 type Character struct {
-	name      string
-	class     string
-	level     int
-	max_pv    int
-	actual_pv int
-	inventory []inventory.Objects
+	Name      string
+	Class     string
+	Level     int
+	MaxPv     int
+	ActualPv  int
+	Inventory []inventory.Object
 }
 
-func InitCharacter(name string, class string, level int, max_pv int, actual_pv int, name_object string, quantity int) {
-	personnage_c1 := Character{name, class, level, max_pv, []inventory.Object{name_object, quantity}}
-	return personnage_c1
+func InitCharacter(name string, class string, level int, maxPv int, actualPv int, inv []inventory.Object) Character {
+	return Character{
+		Name:      name,
+		Class:     class,
+		Level:     level,
+		MaxPv:     maxPv,
+		ActualPv:  actualPv,
+		Inventory: inv,
+	}
 }
 
-func AccessInventory() {
-	fmt.Println(personnage_c1.inventory)
+func (c Character) DisplayInfo() {
+	fmt.Println(c)
 }
 
-func DisplayInfo() {
-	fmt.Println(personnage_c1)
-}
-
-func CharacterCreation() {
+func (c Character) AccessInventory() {
+	fmt.Println(c.Inventory)
 }
