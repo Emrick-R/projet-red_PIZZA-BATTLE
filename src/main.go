@@ -21,11 +21,13 @@ func main() {
 	c1.DisplayInfo()     // via méthode
 	c1.AccessInventory() // affiche inventaire
 
-	c1.ActualPv = 50
+	c1.ActualPv -= 50
 
-	fmt.Print(c1.ActualPv)
+	fmt.Println(c1.ActualPv)
 
 	items.TakePot(c1)
 
-	fmt.Print(c1.ActualPv)
+	fmt.Println(c1.ActualPv)
+
+	c1.AccessInventory()
 }
