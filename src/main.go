@@ -19,4 +19,9 @@ func main() {
 	fmt.Println(c1)      // brut
 	c1.DisplayInfo()     // via méthode
 	c1.AccessInventory() // affiche inventaire
+
+	c1.ActualPv = 50
+
+	fmt.Print(c1.ActualPv)
+
 }
