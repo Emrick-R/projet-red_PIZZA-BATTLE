@@ -13,10 +13,10 @@ fogrgerons : l'oncle pepito, couturier ( construction d'habit = toq, tablier, co
 Code structure et fonctions à faire:
 
 PHASE 1
-1. Structure Character
-2. initcharacter = initialisation du personnage (Dans la fonction main)
-3. Fonction display info 
-4. fonction acces inventory
+1. Structure Character X
+2. initcharacter = initialisation du personnage (Dans la fonction main) X
+3. Fonction display info X
+4. fonction acces inventory X
 5 Fonction takePot
 6. Menu (switch case)
 7. Fonction acces inventory 
