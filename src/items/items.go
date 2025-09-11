@@ -1,13 +1,16 @@
 package items
 
-func TakePot(c *Character) {
-	inv := c.inventory
-	for i := 0; i < len(c.inventory); i++ {
-		if Object.Name == "potion" {
-			c.ActualPv = c.ActualPv + 50
-			Object.Quantity[i] = Object.Quantity[i] - 1
-			if Object.Quantity[i] == 0 {
-				c.inventory = append(c.inventory[:i], c.inventory[i+1:]...)
+import (
+	"projet-red_PIZZA-BATTLE/character"
+)
+
+func TakePot(c1 character.Character) {
+	for i := 0; i < len(c1.Inventory); i++ {
+		if c1.Inventory[i].Name == "Potion" {
+			c1.ActualPv = c1.ActualPv + 50
+			c1.Inventory[i].Quantity = c1.Inventory[1].Quantity - 1
+			if c1.Inventory[1].Quantity == 0 {
+				c1.Inventory = append(c1.Inventory[:i], c1.Inventory[i+1:]...)
 				return
 			}
 		}

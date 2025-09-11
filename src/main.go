@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"projet-red_PIZZA-BATTLE/character"
 	"projet-red_PIZZA-BATTLE/inventory"
+	"projet-red_PIZZA-BATTLE/items"
 )
 
 func main() {
@@ -24,4 +25,7 @@ func main() {
 
 	fmt.Print(c1.ActualPv)
 
+	items.TakePot(c1)
+
+	fmt.Print(c1.ActualPv)
 }
