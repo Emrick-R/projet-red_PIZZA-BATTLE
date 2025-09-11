@@ -1,16 +1,16 @@
 package items
 
-func TakePot(c1 *Character) {
-	inv := c1.inventory
-	for i := 0; i < len(c1.inventory); i++ {
+func TakePot(c *Character) {
+	inv := c.inventory
+	for i := 0; i < len(c.inventory); i++ {
 		if Object.Name == "potion" {
-			c1.ActualPv = c1.ActualPv + 50
+			c.ActualPv = c.ActualPv + 50
 			Object.Quantity[i] = Object.Quantity[i] - 1
 			if Object.Quantity[i] == 0 {
-				Object.Name[i] = ""
+				c.inventory = append(c.inventory[:i], c.inventory[i+1:]...)
+				return
 			}
 		}
-
 	}
 
 }
