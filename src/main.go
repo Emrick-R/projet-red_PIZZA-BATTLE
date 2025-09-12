@@ -27,7 +27,7 @@ func main() {
 	fmt.Println("======== Menu Personnage : ========")
 	fmt.Println("1 - Afficher le personnage")
 	fmt.Println("2 - Afficher l'inventaire")
-	fmt.Println("3 - Prendre une potion")
+	fmt.Println("3 - Test de combat : Prendre une potion")
 	fmt.Scan(&menuChoice)
 
 	switch menuChoice {
@@ -37,9 +37,8 @@ func main() {
 		character.AccessInventory(c1)
 	case 3:
 		c1.ActualHp -= 50
-		fmt.Println("HP avant potion :", c1.ActualHp)
+		fmt.Printf("\nPV avant potion : %d\n\n", c1.ActualHp)
 		items.TakePot(c1)
-		fmt.Println("HP après potion :", c1.ActualHp)
 		character.AccessInventory(c1)
 	}
 }

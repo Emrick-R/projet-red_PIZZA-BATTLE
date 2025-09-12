@@ -13,7 +13,9 @@ func TakePot(c *structures.Character) {
 			if c.Inventory[i].Quantity == 0 {
 				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
 			}
-			fmt.Println("Potion consommée !")
+			fmt.Printf("Potion consommée !\n")
+			fmt.Printf("PV actuels: %d\n", c.ActualHp)
+
 			return
 		}
 	}

@@ -13,7 +13,7 @@ func DisplayInfo(c *structures.Character) {
 func AccessInventory(c *structures.Character) {
 	fmt.Println("\nInventaire :")
 	for _, item := range c.Inventory {
-		fmt.Printf(" %s x%d\n", item.Name, item.Quantity)
+		fmt.Printf("%s x%d\n", item.Name, item.Quantity)
 	}
 	fmt.Println()
 }
