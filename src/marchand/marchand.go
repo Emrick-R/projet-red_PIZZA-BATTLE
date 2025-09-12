@@ -13,16 +13,23 @@ func Marchand(c *structures.Character) {
 	for {
 		fmt.Println("======== Marchand : ========")
 		fmt.Println("Bonjour je suis le marchand, quel est votre choix ?")
-		fmt.Println("Choix 1 : Potion de vie (Gratuit)")
-		fmt.Println("Choix 2 : Objet 2")
-		fmt.Println("Choix 2 : Objet 3")
-		fmt.Println("RETOUR")
+		fmt.Println("1 - Potion de vie (Gratuit)")
+		fmt.Println("2 - /vide/")
+		fmt.Println("3 - /vide/")
+		fmt.Println("4 - RETOUR")
 		fmt.Scan(&marchand_choice)
 		switch marchand_choice {
 		case 1:
 			inventory.AddInventory(c, PotionDeVie)
 			fmt.Println("Super ! Tu as obtenu 1 potion")
 			character.AccessInventory(c)
+		case 2:
+			fmt.Println("Désolé ! Pas d'objet pour le moment.")
+		case 3:
+			fmt.Println("Désolé ! Pas d'objet pour le moment.")
+		case 4:
+			return
+
 		}
 	}
 }

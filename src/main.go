@@ -25,26 +25,34 @@ func main() {
 			}
 
 			c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 100, inv)
+			for {
+				fmt.Println("======== Menu Personnage : ========")
+				fmt.Println("1 - Afficher le personnage")
+				fmt.Println("2 - Afficher l'inventaire")
+				fmt.Println("3 - Marchand")
+				fmt.Println("4 - Test de combat : Prendre une potion")
+				fmt.Println("5 - RETOUR")
+				fmt.Scan(&menuChoice)
 
-			fmt.Println("======== Menu Personnage : ========")
-			fmt.Println("1 - Afficher le personnage")
-			fmt.Println("2 - Afficher l'inventaire")
-			fmt.Println("3 - Test de combat : Prendre une potion")
-			fmt.Scan(&menuChoice)
-
-			switch menuChoice {
-			case 1:
-				character.DisplayInfo(c1)
-			case 2:
-				character.AccessInventory(c1)
-			case 3:
-				c1.ActualHp -= 50
-				fmt.Printf("\nPV avant potion : %d\n\n", c1.ActualHp)
-				items.TakePot(c1)
-				character.AccessInventory(c1)
-			case 4:
-				marchand.Marchand(c1)
-
+				switch menuChoice {
+				case 1:
+					character.DisplayInfo(c1)
+				case 2:
+					character.AccessInventory(c1)
+				case 3:
+					marchand.Marchand(c1)
+				case 4:
+					c1.ActualHp -= 50
+					fmt.Printf("\nPV avant potion : %d\n\n", c1.ActualHp)
+					items.TakePot(c1)
+					character.AccessInventory(c1)
+				case 5:
+					break
+				}
+				if menuChoice == 5 {
+					menuChoice = 0
+					break
+				}
 			}
 		case 2:
 			os.Exit(0)
