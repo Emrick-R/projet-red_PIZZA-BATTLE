@@ -94,11 +94,9 @@ func main() {
 	switch choice {
 	case 1:
 		fmt.Print("Commencer la partie")
-	case 2 : 
-
+	case 2:
 
 	case 5:
 		fmt.Print("Ariverderci !")
 	}
 }
-c
