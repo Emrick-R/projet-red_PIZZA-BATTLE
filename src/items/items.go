@@ -7,7 +7,7 @@ import (
 func TakePot(c1 *character.Character) {
 	for i := 0; i < len(c1.Inventory); i++ {
 		if c1.Inventory[i].Name == "Potion" {
-			c1.ActualPv = c1.ActualPv + 50
+			c1.ActualHp = c1.ActualHp + 50
 			c1.Inventory[i].Quantity = c1.Inventory[i].Quantity - 1
 			if c1.Inventory[i].Quantity == 0 {
 				c1.Inventory = append(c1.Inventory[:i], c1.Inventory[i+1:]...)
