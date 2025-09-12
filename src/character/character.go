@@ -6,8 +6,8 @@ import (
 )
 
 func DisplayInfo(c *structures.Character) {
-	fmt.Printf("\nNom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\n\n",
-		c.Name, c.Class, c.Level, c.ActualHp, c.MaxHp)
+	fmt.Printf("\nNom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\nArgent: %d\n\n",
+		c.Name, c.Class, c.Level, c.ActualHp, c.MaxHp, c.Money)
 }
 
 func AccessInventory(c *structures.Character) {

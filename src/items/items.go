@@ -30,13 +30,9 @@ func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
 				e.ActualHp -= 10
 				c.Inventory[i].Quantity--
-				if c.Inventory[i].Quantity == 0 {
-					c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
-				}
-				fmt.Printf("Potion envoyée !\n")
-				fmt.Printf("L'ennemi a perdu : %d hp\n", e.ActualHp)
 			}
-
+			fmt.Printf("Potion envoyée !\n")
+			fmt.Printf("L'ennemi a perdu : %d hp\n", e.ActualHp)
 		}
 	}
 }

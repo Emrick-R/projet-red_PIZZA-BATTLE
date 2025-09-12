@@ -24,7 +24,7 @@ func main() {
 				{HpPot.Name, 3},
 			}
 
-			c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 100, inv)
+			c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 100, inv, 100)
 			for {
 				fmt.Println("======== Menu Personnage : ========")
 				fmt.Println("1 - Afficher le personnage")
