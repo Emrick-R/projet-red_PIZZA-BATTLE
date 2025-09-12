@@ -8,7 +8,8 @@ import (
 func TakePot(c *structures.Character) {
 	HpPot := structures.Object{"Potion de Vie", 1}
 	if c.ActualHp == c.MaxHp {
-		fmt.Println("Les points de vie sont déjà au max")
+		fmt.Println("\nLes points de vie sont déjà au max")
+		return
 	}
 	for i := 0; i < len(c.Inventory); i++ {
 		if c.Inventory[i].Name == HpPot.Name {
@@ -17,7 +18,10 @@ func TakePot(c *structures.Character) {
 			if c.Inventory[i].Quantity == 0 {
 				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
 			}
-			fmt.Printf("Potion consommée !\n")
+			if c.ActualHp >= c.MaxHp {
+				c.ActualHp = c.MaxHp
+			}
+			fmt.Printf("\nPotion consommée !\n")
 			fmt.Printf("PV actuels: %d\n", c.ActualHp)
 
 			return
@@ -34,7 +38,7 @@ func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 				e.ActualHp -= 10
 				c.Inventory[i].Quantity--
 			}
-			fmt.Printf("Potion envoyée !\n")
+			fmt.Printf("\nPotion envoyée !\n")
 			fmt.Printf("L'ennemi a perdu : %d hp\n", e.ActualHp)
 		}
 	}

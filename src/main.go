@@ -27,7 +27,7 @@ func main() {
 			skillList := []structures.Skill{
 				{punch.Name, punch.Damage},
 			}
-			c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 100, inv, 100, skillList)
+			c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 99, inv, 100, skillList)
 			e1 := structures.InitEnemy("Giovanni", 100, 100)
 
 			for {
@@ -50,11 +50,9 @@ func main() {
 						fmt.Println("1 - Utiliser une potion")
 						fmt.Println("2 - RETOUR")
 						fmt.Scan(&menuChoice)
-						menuChoice = 0
 						switch menuChoice {
 						case 1:
 							items.TakePot(c1)
-							character.AccessInventory(c1)
 						case 2:
 							break
 						}
