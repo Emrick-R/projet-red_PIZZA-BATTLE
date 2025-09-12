@@ -23,9 +23,9 @@ PHASE 1
 7.1 fonction addInventory X
 7.2 Fonction removeInventory X
 8.fonctionis dead X
-9. Fonction poisonPot (biblio time)
-10.Attribut skill (de base, skillbook)
-10.1 Skill de base
+9. Fonction poisonPot (biblio time) 
+10.Attribut skill (de base, skillbook) X
+10.1 Skill de base X
 10.2 Skill book
 10.3 Fonction spellbook (utilisation du sort)
 11. fonction character création (choix de nom, classe)
