@@ -14,7 +14,7 @@ type Character struct {
 	Inventory []Object
 }
 
-func InitCharacter(name string, class string, level int, maxhp int, actualhp int, inv []Object) *Character {
+func InitCharacter(name, class string, level, maxhp, actualhp int, inv []Object) *Character {
 	return &Character{
 		Name:      name,
 		Class:     class,

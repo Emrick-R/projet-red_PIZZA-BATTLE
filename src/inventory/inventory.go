@@ -1,31 +1,27 @@
 package inventory
 
-import (
-	"fmt"
-	"projet-red_PIZZA-BATTLE/structures"
-)
+import "projet-red_PIZZA-BATTLE/structures"
 
-func AddInventory(c *structures.Character, obj structures.Object) {
-	/* Si un objet existe déjà dans l'inventaire incrémenter sa quantité sinon créer un nouvel objet et mettre sa quantité à 1 */
-	for i, obj := range c.Inventory {
-		if c.Inventory[i] == c.Inventory[i].Name {
-			obj.Quantity = obj.Quantity + 1
-		} else {
-			c.Inventory = append(c.Inventory, obj)
+func AddInventory(c *structures.Character, newObj structures.Object) {
+	for i := range c.Inventory {
+		if c.Inventory[i].Name == newObj.Name {
+			c.Inventory[i].Quantity += newObj.Quantity
+			return
 		}
 	}
+	c.Inventory = append(c.Inventory, newObj)
 }
 
 func RemoveInventory(c *structures.Character, obj structures.Object) {
-	/* Si un objet existe déjà dans l'inventaire vérifier si sa quantité est égal à 1 puis si c'est 1 l'enlever de l'inventaire sinon rien pcq pas présent dans l'inventaire*/
-	for i, obj := range c.Inventory {
-		if c.Inventory[i] == c.Inventory[i].Name {
-			if obj.Quantity == 1 {
-				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
+	for i := range c.Inventory {
+		if c.Inventory[i].Name == obj.Name {
+			if c.Inventory[i].Quantity > obj.Quantity {
+				c.Inventory[i].Quantity -= obj.Quantity
 			} else {
-				fmt.Println("Vous ne pouvez pas perdre cet objet car il n'existe pas dans l'inventaire")
-				return
+				// retirer complètement si quantité <= obj.Quantity
+				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
 			}
+			return
 		}
 	}
 }

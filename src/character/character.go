@@ -2,25 +2,27 @@ package character
 
 import (
 	"fmt"
+	"projet-red_PIZZA-BATTLE/structures"
 )
 
-func (c *Character) DisplayInfo() {
-	fmt.Printf("\nNom: %s\nClasse: %s\nNiveau: %d\nPoint de vie: %d/%d\n\n", c.Name, c.Class, c.Level, c.ActualHp, c.MaxHp)
+func DisplayInfo(c *structures.Character) {
+	fmt.Printf("\nNom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\n\n",
+		c.Name, c.Class, c.Level, c.ActualHp, c.MaxHp)
 }
 
-func (c Character) AccessInventory() {
-	fmt.Println("\nInventaire:")
+func AccessInventory(c *structures.Character) {
+	fmt.Println("\nInventaire :")
 	for _, item := range c.Inventory {
-		fmt.Printf("\n %s %d\n", item.Name, item.Quantity)
+		fmt.Printf(" %s x%d\n", item.Name, item.Quantity)
 	}
-	fmt.Print("\n")
+	fmt.Println()
 }
 
-func (c *Character) IsDead() {
-	if c.ActualHp == 0 {
-		fmt.Print("Vous êtes mort !")
-		c.MaxHp = c.MaxHp / 2
-		fmt.Printf("Vous venez de renaître avec 50% de hp en moins.\n")
+func IsDead(c *structures.Character) {
+	if c.ActualHp <= 0 {
+		fmt.Println("Vous êtes mort !")
+		c.MaxHp /= 2
+		c.ActualHp = c.MaxHp
+		fmt.Println("Vous venez de renaître avec 50% de HP en moins.")
 	}
-
 }
