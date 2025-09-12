@@ -13,7 +13,7 @@ func main() {
 	var menuChoice int
 	for {
 		fmt.Println("======== Faites votre choix : ========")
-		fmt.Println("1 - Commencer la partie")
+		fmt.Println("1 - Commencer une nouvelle partie")
 		fmt.Println("2 - Quitter")
 		fmt.Scan(&menuChoice)
 
@@ -42,6 +42,7 @@ func main() {
 				case 3:
 					marchand.Marchand(c1)
 				case 4:
+					fmt.Printf("\nUn petit enfant te lance un gros caillou dans ta pizza\n-50 PV\n")
 					c1.ActualHp -= 50
 					fmt.Printf("\nPV avant potion : %d\n\n", c1.ActualHp)
 					items.TakePot(c1)
