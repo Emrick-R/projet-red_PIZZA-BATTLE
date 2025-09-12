@@ -1,10 +1,8 @@
 package items
 
-import (
-	"projet-red_PIZZA-BATTLE/character"
-)
+import "projet-red_PIZZA-BATTLE/structures"
 
-func TakePot(c1 *character.Character) {
+func TakePot(c1 *structures.Character) {
 	for i := 0; i < len(c1.Inventory); i++ {
 		if c1.Inventory[i].Name == "Potion" {
 			c1.ActualHp = c1.ActualHp + 50

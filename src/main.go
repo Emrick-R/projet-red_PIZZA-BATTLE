@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"projet-red_PIZZA-BATTLE/character"
-	"projet-red_PIZZA-BATTLE/inventory"
 	"projet-red_PIZZA-BATTLE/items"
+	"projet-red_PIZZA-BATTLE/structures"
 )
 
 func main() {
@@ -19,12 +19,12 @@ func main() {
 	switch menuChoice {
 	case 1:
 		// Création de l'inventaire
-		inv := []inventory.Object{
+		inv := []structures.Object{
 			{"Potion", 3},
 		}
 
 		// Création du perso
-		c1 := character.InitCharacter("Harold", "Elfe", 1, 100, 100, inv)
+		c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 100, inv)
 
 		//Nouveau menu
 		menuChoice := 0
@@ -35,7 +35,7 @@ func main() {
 		fmt.Scan(&menuChoice)
 		switch menuChoice {
 		case 1:
-			c1.DisplayInfo() // affiche la fishe de perso
+			character.DisplayInfo(c1) // affiche la fishe de perso
 
 		case 2:
 			c1.AccessInventory() // affiche inventaire
