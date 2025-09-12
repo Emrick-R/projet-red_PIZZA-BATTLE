@@ -4,30 +4,29 @@ import (
 	"fmt"
 	"projet-red_PIZZA-BATTLE/character"
 	"projet-red_PIZZA-BATTLE/inventory"
-	"projet-red_PIZZA-BATTLE/items"
 )
 
 func main() {
-	// Création de l'inventaire
-	inv := []inventory.Object{
-		{"Potion", 3},
+
+	choice := 0
+	fmt.Print("======== Faites votre choix :======== \n")
+	fmt.Print("1 - Commencer la partie \n")
+	fmt.Print("2 - Quitter \n")
+	fmt.Scan(&choice)
+
+	switch choice {
+	case 1:
+
+		// Création de l'inventaire
+		inv := []inventory.Object{
+			{"Potion", 3},
+		}
+
+		// Création du perso
+		c1 := character.InitCharacter("Harold", "Elfe", 1, 100, 100, inv)
+		c1.DisplayInfo()
+	case 2:
+		fmt.Print("Ariverderci !")
+
 	}
-
-	// Création du perso
-	c1 := character.InitCharacter("Harold", "Elfe", 1, 100, 100, inv)
-
-	// Affichage
-	fmt.Println(c1)      // brut
-	c1.DisplayInfo()     // via méthode
-	c1.AccessInventory() // affiche inventaire
-
-	c1.ActualPv -= 50
-
-	fmt.Println(c1.ActualPv)
-
-	items.TakePot(c1)
-
-	fmt.Println(c1.ActualPv)
-
-	c1.AccessInventory()
 }

@@ -17,9 +17,9 @@ PHASE 1
 2. initcharacter = initialisation du personnage (Dans la fonction main) X
 3. Fonction display info X
 4. fonction acces inventory X
-5 Fonction takePot
-6. Menu (switch case)
-7. Fonction acces inventory 
+5 Fonction takePot X
+6. Menu (switch case) 
+7. Fonction acces inventory X
 7.1 fonction addInventory
 7.2 Fonction removeInventory
 8.fonctionis dead
