@@ -13,6 +13,11 @@ type Character struct {
 	ActualHp  int
 	Inventory []Object
 }
+type Enemy struct {
+	Name     string
+	MaxHp    int
+	ActualHp int
+}
 
 func InitCharacter(name string, class string, level int, maxhp int, actualhp int, inv []Object) *Character {
 	return &Character{
