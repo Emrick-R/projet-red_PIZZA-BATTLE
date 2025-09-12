@@ -1,6 +1,9 @@
 package inventory
 
-import "projet-red_PIZZA-BATTLE/character"
+import (
+	"fmt"
+	"projet-red_PIZZA-BATTLE/character"
+)
 
 type Object struct {
 	Name     string
@@ -25,7 +28,8 @@ func RemoveInventory(c *character.Character, obj Object) {
 			if obj.Quantity == 1 {
 				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
 			} else {
-				return "Vous ne pouvez pas perdre cet objet car il n'existe pas dans l'inventaire"
+				fmt.Println("Vous ne pouvez pas perdre cet objet car il n'existe pas dans l'inventaire")
+				return
 			}
 		}
 	}
