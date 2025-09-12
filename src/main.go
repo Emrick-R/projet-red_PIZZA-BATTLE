@@ -35,7 +35,7 @@ func main() {
 				fmt.Println("1 - Afficher le personnage")
 				fmt.Println("2 - Afficher l'inventaire")
 				fmt.Println("3 - Marchand")
-				fmt.Println("4 - Test de combat : Prendre une potion")
+				fmt.Println("4 - Test de combat : Utiliser une potion de poison")
 				fmt.Println("5 - RETOUR")
 				fmt.Scan(&menuChoice)
 
@@ -63,8 +63,11 @@ func main() {
 				case 3:
 					marchand.Marchand(c1)
 				case 4:
-					fmt.Printf("\nLe petit enfant Giovanni te lance un gros caillou dans ta pizza\n-50 PV\n")
-					c1.ActualHp -= 50
+					fmt.Printf("\nLe petit enfant Giovanni apparaît devant toi !\n-50 PV\n")
+					character.DisplayEInfo(e1)
+
+					fmt.Println("Tu lance une potion de poison !")
+					items.ThrowPoisonPot(c1, e1)
 					character.DisplayEInfo(e1)
 
 				case 5:

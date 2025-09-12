@@ -28,7 +28,7 @@ func TakePot(c *structures.Character) {
 			return
 		}
 	}
-	fmt.Println("Il n'y a pas de potions dans l'inventaire")
+	fmt.Println("Il n'y a pas de potions de Vie dans l'inventaire")
 }
 func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 	PoisonPot := structures.Object{Name: "Potion de Poison"}
@@ -48,4 +48,5 @@ func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 
 		}
 	}
+	fmt.Println("Il n'y a pas de potions de Poison dans l'inventaire")
 }
