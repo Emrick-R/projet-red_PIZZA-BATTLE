@@ -9,8 +9,8 @@ import (
 
 func Marchand(c *structures.Character) {
 	var marchand_choice int
-	HpPot := structures.Object{"Potion de Vie", 1}
-	PoisonPot := structures.Object{"Potion de Poison", 1}
+	HpPot := structures.Object{Name: "Potion de Vie", Quantity: 1}
+	PoisonPot := structures.Object{Name: "Potion de Poison", Quantity: 1}
 	for {
 		fmt.Println("======== Marchand : ========")
 		fmt.Println("Bonjour je suis le marchand, quel est votre choix ?")

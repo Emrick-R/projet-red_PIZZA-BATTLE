@@ -6,7 +6,7 @@ import (
 )
 
 func TakePot(c *structures.Character) {
-	HpPot := structures.Object{"Potion de Vie", 1}
+	HpPot := structures.Object{Name: "Potion de Vie"}
 	if c.ActualHp == c.MaxHp {
 		fmt.Println("\nLes points de vie sont déjà au max")
 		return
@@ -30,7 +30,7 @@ func TakePot(c *structures.Character) {
 	fmt.Println("Il n'y a pas de potions dans l'inventaire")
 }
 func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
-	PoisonPot := structures.Object{"Potion de Poison", 1}
+	PoisonPot := structures.Object{Name: "Potion de Poison"}
 	for i := 0; i < len(c.Inventory); i++ {
 		if c.Inventory[i].Name == PoisonPot.Name {
 			if c.Inventory[i].Quantity == 0 {

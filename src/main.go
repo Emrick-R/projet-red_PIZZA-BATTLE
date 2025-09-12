@@ -19,13 +19,13 @@ func main() {
 
 		switch menuChoice {
 		case 1:
-			HpPot := structures.Object{"Potion de Vie", 1}
+			HpPot := structures.Object{Name: "Potion de Vie"}
 			inv := []structures.Object{
-				{HpPot.Name, 3},
+				{Name: HpPot.Name, Quantity: 3},
 			}
 			punch := structures.InitSkill("Coup de poing", 10)
 			skillList := []structures.Skill{
-				{punch.Name, punch.Damage},
+				{Name: punch.Name, Damage: punch.Damage},
 			}
 			c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 100, inv, 100, skillList)
 			e1 := structures.InitEnemy("Giovanni", 100, 100)
