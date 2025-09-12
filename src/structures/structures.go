@@ -13,6 +13,7 @@ type Character struct {
 	ActualHp  int
 	Inventory []Object
 	Money     int
+	SkillList []Skill
 }
 type Enemy struct {
 	Name     string
@@ -20,7 +21,12 @@ type Enemy struct {
 	ActualHp int
 }
 
-func InitCharacter(name string, class string, level int, maxhp int, actualhp int, inv []Object, money int) *Character {
+type Skill struct {
+	Name   string
+	Damage int
+}
+
+func InitCharacter(name string, class string, level int, maxhp int, actualhp int, inv []Object, money int, skill []Skill) *Character {
 	return &Character{
 		Name:      name,
 		Class:     class,
@@ -29,6 +35,7 @@ func InitCharacter(name string, class string, level int, maxhp int, actualhp int
 		ActualHp:  actualhp,
 		Inventory: inv,
 		Money:     money,
+		SkillList: skill,
 	}
 }
 func InitEnemy(name string, maxhp int, actualhp int) *Enemy {
@@ -37,4 +44,12 @@ func InitEnemy(name string, maxhp int, actualhp int) *Enemy {
 		MaxHp:    maxhp,
 		ActualHp: actualhp,
 	}
+}
+
+func InitSkill(name string, damage int) *Skill {
+	return &Skill{
+		Name:   name,
+		Damage: damage,
+	}
+
 }

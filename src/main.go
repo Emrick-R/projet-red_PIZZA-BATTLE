@@ -23,8 +23,11 @@ func main() {
 			inv := []structures.Object{
 				{HpPot.Name, 3},
 			}
-
-			c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 100, inv, 100)
+			punch := structures.InitSkill("Coup de poing", 10)
+			skillList := []structures.Skill{
+				{punch.Name, punch.Damage},
+			}
+			c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 100, inv, 100, skillList)
 			e1 := structures.InitEnemy("Giovanni", 100, 100)
 
 			for {
