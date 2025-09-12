@@ -19,9 +19,9 @@ func main() {
 
 		switch menuChoice {
 		case 1:
-			PotionDeVie := structures.Object{"Potion de Vie", 1}
+			HpPot := structures.Object{"Potion de Vie", 1}
 			inv := []structures.Object{
-				{PotionDeVie.Name, 3},
+				{HpPot.Name, 3},
 			}
 
 			c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 100, inv)

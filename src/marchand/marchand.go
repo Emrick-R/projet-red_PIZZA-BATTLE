@@ -9,7 +9,7 @@ import (
 
 func Marchand(c *structures.Character) {
 	var marchand_choice int
-	PotionDeVie := structures.Object{"Potion de Vie", 1}
+	HpPot := structures.Object{"Potion de Vie", 1}
 	for {
 		fmt.Println("======== Marchand : ========")
 		fmt.Println("Bonjour je suis le marchand, quel est votre choix ?")
@@ -20,7 +20,7 @@ func Marchand(c *structures.Character) {
 		fmt.Scan(&marchand_choice)
 		switch marchand_choice {
 		case 1:
-			inventory.AddInventory(c, PotionDeVie)
+			inventory.AddInventory(c, HpPot)
 			fmt.Println("Super ! Tu as obtenu 1 potion")
 			character.AccessInventory(c)
 		case 2:
