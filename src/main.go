@@ -45,7 +45,7 @@ func main() {
 				case 2:
 					for {
 						menuChoice = 0
-						fmt.Println("======== Menu Inventare : ========")
+						fmt.Println("======== Menu Inventaire : ========")
 						character.AccessInventory(c1)
 						fmt.Println("1 - Utiliser une potion")
 						fmt.Println("2 - RETOUR")
