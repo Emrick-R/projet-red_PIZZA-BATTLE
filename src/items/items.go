@@ -7,7 +7,7 @@ import (
 
 func TakePot(c *structures.Character) {
 	for i := 0; i < len(c.Inventory); i++ {
-		if c.Inventory[i].Name == "Potion" {
+		if c.Inventory[i].Name == "Potion de vie" {
 			c.ActualHp += 50
 			c.Inventory[i].Quantity--
 			if c.Inventory[i].Quantity == 0 {

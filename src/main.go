@@ -19,7 +19,7 @@ func main() {
 	}
 
 	inv := []structures.Object{
-		{"Potion", 3},
+		{"Potion de vie", 3},
 	}
 
 	c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 100, inv)
