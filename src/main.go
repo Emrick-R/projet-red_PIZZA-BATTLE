@@ -43,15 +43,32 @@ func main() {
 				case 1:
 					character.DisplayInfo(c1)
 				case 2:
-					character.AccessInventory(c1)
+					for {
+						menuChoice = 0
+						fmt.Println("======== Menu Inventare : ========")
+						character.AccessInventory(c1)
+						fmt.Println("1 - Utiliser une potion")
+						fmt.Println("2 - RETOUR")
+						fmt.Scan(&menuChoice)
+						menuChoice = 0
+						switch menuChoice {
+						case 1:
+							items.TakePot(c1)
+							character.AccessInventory(c1)
+						case 2:
+							break
+						}
+						if menuChoice == 2 {
+							menuChoice = 0
+							break
+						}
+					}
 				case 3:
 					marchand.Marchand(c1)
 				case 4:
 					fmt.Printf("\nUn petit enfant te lance un gros caillou dans ta pizza\n-50 PV\n")
 					c1.ActualHp -= 50
-					fmt.Printf("\nPV avant potion : %d\n\n", c1.ActualHp)
-					items.TakePot(c1)
-					character.AccessInventory(c1)
+					fmt.Println(e1)
 				case 5:
 					break
 				}
