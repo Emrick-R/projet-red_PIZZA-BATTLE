@@ -5,6 +5,7 @@ import (
 	"os"
 	"projet-red_PIZZA-BATTLE/character"
 	"projet-red_PIZZA-BATTLE/items"
+	"projet-red_PIZZA-BATTLE/marchand"
 	"projet-red_PIZZA-BATTLE/structures"
 )
 
@@ -46,6 +47,9 @@ func main() {
 			fmt.Printf("\nPV avant potion : %d\n\n", c1.ActualHp)
 			items.TakePot(c1)
 			character.AccessInventory(c1)
+		case 4:
+			marchand.Marchand(c1)
+
 		}
 	}
 }
