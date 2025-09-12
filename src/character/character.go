@@ -36,3 +36,12 @@ func (c Character) AccessInventory() {
 	}
 	fmt.Print("\n")
 }
+
+func (c Character) IsDead() {
+	if c.ActualHp == 0 {
+		fmt.Print("Vous êtes mort !")
+	}
+	c.MaxHp = c.MaxHp * 0.5
+	fmt.Print("Vous venez de renaître avec 50%% de hp en moins.\n")
+
+}
