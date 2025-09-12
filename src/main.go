@@ -24,30 +24,28 @@ func main() {
 			os.Exit(0)
 		}
 
-		inv := []structures.Object{
-			{"Potion", 3},
-		}
+	inv := []structures.Object{
+		{"Potion", 3},
+	}
 
-		c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 100, inv)
-		for {
-			fmt.Println("======== Menu Personnage : ========")
-			fmt.Println("1 - Afficher le personnage")
-			fmt.Println("2 - Afficher l'inventaire")
-			fmt.Println("3 - Prendre une potion")
-			fmt.Scan(&menuChoice)
+	c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 100, inv)
 
-			switch menuChoice {
-			case 1:
-				character.DisplayInfo(c1)
-			case 2:
-				character.AccessInventory(c1)
-			case 3:
-				c1.ActualHp -= 50
-				fmt.Println("HP avant potion :", c1.ActualHp)
-				items.TakePot(c1)
-				fmt.Println("HP après potion :", c1.ActualHp)
-				character.AccessInventory(c1)
-			}
-		}
+	fmt.Println("======== Menu Personnage : ========")
+	fmt.Println("1 - Afficher le personnage")
+	fmt.Println("2 - Afficher l'inventaire")
+	fmt.Println("3 - Prendre une potion")
+	fmt.Scan(&menuChoice)
+
+	switch menuChoice {
+	case 1:
+		character.DisplayInfo(c1)
+	case 2:
+		character.AccessInventory(c1)
+	case 3:
+		c1.ActualHp -= 50
+		fmt.Println("HP avant potion :", c1.ActualHp)
+		items.TakePot(c1)
+		fmt.Println("HP après potion :", c1.ActualHp)
+		character.AccessInventory(c1)
 	}
 }
