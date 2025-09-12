@@ -20,9 +20,9 @@ PHASE 1
 5 Fonction takePot X
 6. Menu (switch case) 
 7. Fonction acces inventory X
-7.1 fonction addInventory
-7.2 Fonction removeInventory
-8.fonctionis dead
+7.1 fonction addInventory X
+7.2 Fonction removeInventory X
+8.fonctionis dead X
 9. Fonction poisonPot (biblio time)
 10.Attribut skill (de base, skillbook)
 10.1 Skill de base
