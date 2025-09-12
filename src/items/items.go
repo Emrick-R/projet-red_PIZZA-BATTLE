@@ -21,24 +21,22 @@ func TakePot(c *structures.Character) {
 		}
 	}
 	fmt.Println("Il n'y a pas de potions dans l'inventaire")
+}
+func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 	PoisonPot := structures.Object{"Potion de Poison", 1}
-	func ThrowPoisonPot(c *structures.Character) {
-		for i := 0; i < len(c.Inventory); i++ {
+	for i := 0; i < len(c.Inventory); i++ {
 		if c.Inventory[i].Name == PoisonPot.Name {
-			
 			if c.Inventory[i].Quantity == 0 {
 				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
+				e.ActualHp -= 10
+				c.Inventory[i].Quantity--
+				if c.Inventory[i].Quantity == 0 {
+					c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
+				}
+				fmt.Printf("Potion envoyée !\n")
+				fmt.Printf("L'ennemi a perdu : %d hp\n", e.ActualHp)
 			}
 
-
-
-
-
-
 		}
-
-
-
-
 	}
 }
