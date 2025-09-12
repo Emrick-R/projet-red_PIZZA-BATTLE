@@ -26,8 +26,9 @@ func Marchand(c *structures.Character) {
 			character.AccessInventory(c)
 		case 2:
 			inventory.AddInventory(c, PoisonPot)
-			fmt.Println("Super ! Tu as obtenu 1 potion - 3 Pièces d'or")
+			fmt.Println("Super ! Tu as obtenu 1 potion -3 Pièces d'or")
 			c.Money -= 3
+			fmt.Println("Super ! Tu as maintenant", c.Money, "Pièces d'or")
 			character.AccessInventory(c)
 		case 3:
 			fmt.Println("Désolé ! Pas d'objet pour le moment.")
