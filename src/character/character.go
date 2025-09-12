@@ -5,13 +5,18 @@ import (
 	"projet-red_PIZZA-BATTLE/structures"
 )
 
-func DisplayInfo(c *structures.Character) {
+func DisplayCInfo(c *structures.Character) {
 	fmt.Printf("\nNom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\nArgent: %d\n",
 		c.Name, c.Class, c.Level, c.ActualHp, c.MaxHp, c.Money)
 	for _, skill := range c.SkillList {
 		fmt.Printf("Liste des skills :\n%s, %d de dégats\n\n", skill.Name, skill.Damage)
 	}
 
+}
+
+func DisplayEInfo(e *structures.Enemy) {
+	fmt.Printf("\nNom: %s\nPV: %d/%d\n",
+		e.Name, e.ActualHp, e.MaxHp)
 }
 
 func AccessInventory(c *structures.Character) {

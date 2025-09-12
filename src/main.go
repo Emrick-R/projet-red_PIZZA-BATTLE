@@ -41,7 +41,7 @@ func main() {
 
 				switch menuChoice {
 				case 1:
-					character.DisplayInfo(c1)
+					character.DisplayCInfo(c1)
 				case 2:
 					for {
 						menuChoice = 0
@@ -54,7 +54,6 @@ func main() {
 						case 1:
 							items.TakePot(c1)
 						case 2:
-							break
 						}
 						if menuChoice == 2 {
 							menuChoice = 0
@@ -64,11 +63,11 @@ func main() {
 				case 3:
 					marchand.Marchand(c1)
 				case 4:
-					fmt.Printf("\nUn petit enfant te lance un gros caillou dans ta pizza\n-50 PV\n")
+					fmt.Printf("\nLe petit enfant Giovanni te lance un gros caillou dans ta pizza\n-50 PV\n")
 					c1.ActualHp -= 50
-					fmt.Println(e1)
+					character.DisplayEInfo(e1)
+
 				case 5:
-					break
 				}
 				if menuChoice == 5 {
 					menuChoice = 0
