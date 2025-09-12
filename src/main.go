@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"projet-red_PIZZA-BATTLE/character"
 	"projet-red_PIZZA-BATTLE/items"
 	"projet-red_PIZZA-BATTLE/structures"
@@ -9,17 +10,22 @@ import (
 
 func main() {
 	var menuChoice int
-	fmt.Println("======== Faites votre choix : ========")
-	fmt.Println("1 - Commencer la partie")
-	fmt.Println("2 - Quitter")
-	fmt.Scan(&menuChoice)
+	for {
+		fmt.Println("======== Faites votre choix : ========")
+		fmt.Println("1 - Commencer la partie")
+		fmt.Println("2 - Quitter")
+		fmt.Scan(&menuChoice)
 
-	if menuChoice != 1 {
-		return
-	}
+		switch menuChoice {
+		case 1:
+			break
+
+		case 2:
+			os.Exit(0)
+		}
 
 	inv := []structures.Object{
-		{"Potion de vie", 3},
+		{"Potion", 3},
 	}
 
 	c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 100, inv)
@@ -27,7 +33,7 @@ func main() {
 	fmt.Println("======== Menu Personnage : ========")
 	fmt.Println("1 - Afficher le personnage")
 	fmt.Println("2 - Afficher l'inventaire")
-	fmt.Println("3 - Test de combat : Prendre une potion")
+	fmt.Println("3 - Prendre une potion")
 	fmt.Scan(&menuChoice)
 
 	switch menuChoice {
@@ -37,8 +43,9 @@ func main() {
 		character.AccessInventory(c1)
 	case 3:
 		c1.ActualHp -= 50
-		fmt.Printf("\nPV avant potion : %d\n\n", c1.ActualHp)
+		fmt.Println("HP avant potion :", c1.ActualHp)
 		items.TakePot(c1)
+		fmt.Println("HP après potion :", c1.ActualHp)
 		character.AccessInventory(c1)
 	}
 }

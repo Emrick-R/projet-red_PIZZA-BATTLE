@@ -18,7 +18,6 @@ func RemoveInventory(c *structures.Character, obj structures.Object) {
 			if c.Inventory[i].Quantity > obj.Quantity {
 				c.Inventory[i].Quantity -= obj.Quantity
 			} else {
-				// retirer complètement si quantité <= obj.Quantity
 				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
 			}
 			return
