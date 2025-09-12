@@ -31,3 +31,10 @@ func InitCharacter(name string, class string, level int, maxhp int, actualhp int
 		Money:     money,
 	}
 }
+func InitEnemy(name string, maxhp int, actualhp int) *Enemy {
+	return &Enemy{
+		Name:     name,
+		MaxHp:    maxhp,
+		ActualHp: actualhp,
+	}
+}
