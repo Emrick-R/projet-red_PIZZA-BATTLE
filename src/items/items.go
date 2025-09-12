@@ -3,6 +3,7 @@ package items
 import (
 	"fmt"
 	"projet-red_PIZZA-BATTLE/structures"
+	"time"
 )
 
 func TakePot(c *structures.Character) {
@@ -39,7 +40,12 @@ func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 				c.Inventory[i].Quantity--
 			}
 			fmt.Printf("\nPotion envoyée !\n")
-			fmt.Printf("L'ennemi a perdu : %d hp\n", e.ActualHp)
+			for i := 0; i < 3; i++ {
+				e.ActualHp -= 10
+				fmt.Printf("L'ennemi a perdu : %d hp\n", e.ActualHp)
+				time.Sleep(1 * time.Second)
+			}
+
 		}
 	}
 }
