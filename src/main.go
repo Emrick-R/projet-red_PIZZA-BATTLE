@@ -31,7 +31,7 @@ func main() {
 			e1 := structures.InitEnemy("Giovanni", 100, 100)
 
 			for {
-				fmt.Println("======== Menu Personnage : ========")
+				fmt.Println("\n======== Menu Personnage : ========")
 				fmt.Println("1 - Afficher le personnage")
 				fmt.Println("2 - Afficher l'inventaire")
 				fmt.Println("3 - Marchand")

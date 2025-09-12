@@ -6,8 +6,12 @@ import (
 )
 
 func DisplayInfo(c *structures.Character) {
-	fmt.Printf("\nNom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\nArgent: %d\n\n",
-		c.Name, c.Class, c.Level, c.ActualHp, c.MaxHp, c.Money, c.SkillList)
+	fmt.Printf("\nNom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\nArgent: %d\n",
+		c.Name, c.Class, c.Level, c.ActualHp, c.MaxHp, c.Money)
+	for _, skill := range c.SkillList {
+		fmt.Printf("Liste des skills :\n%s, %d de dégats\n\n", skill.Name, skill.Damage)
+	}
+
 }
 
 func AccessInventory(c *structures.Character) {
