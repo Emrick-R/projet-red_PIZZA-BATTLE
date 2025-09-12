@@ -26,6 +26,7 @@ func main() {
 
 			c1 := structures.InitCharacter("Harold", "Elfe", 1, 100, 100, inv, 100)
 			e1 := structures.InitEnemy("Giovanni", 100, 100)
+
 			for {
 				fmt.Println("======== Menu Personnage : ========")
 				fmt.Println("1 - Afficher le personnage")
