@@ -11,7 +11,7 @@ func main() {
 
 	//Nouveau menu
 	menuChoice := 0
-	fmt.Print("======== Faites votre choix :======== \n")
+	fmt.Print("\n======== Faites votre choix :======== \n")
 	fmt.Print("1 - Commencer la partie \n")
 	fmt.Print("2 - Quitter \n")
 	fmt.Scan(&menuChoice)
@@ -28,7 +28,7 @@ func main() {
 
 		//Nouveau menu
 		menuChoice := 0
-		fmt.Print("======== Faites votre choix :======== \n")
+		fmt.Print("\n======== Faites votre choix :======== \n")
 		fmt.Print("1 - Afficher le parsonage \n")
 		fmt.Print("2 - Afficher l'inventaire \n")
 		fmt.Print("3 - Retour \n")
