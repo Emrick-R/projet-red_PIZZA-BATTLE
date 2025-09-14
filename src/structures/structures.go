@@ -26,6 +26,13 @@ type Skill struct {
 	Damage int
 }
 
+type Equipment struct {
+	/*Un équipement de tête
+	Un équipement pour le torse
+	Un équipement pour les pieds */
+
+}
+
 func InitCharacter(name string, class string, level int, maxhp int, actualhp int, inv []Object, money int, skill []Skill) *Character {
 	return &Character{
 		Name:      name,
