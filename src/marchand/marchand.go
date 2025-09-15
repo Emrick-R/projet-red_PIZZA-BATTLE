@@ -39,9 +39,10 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Super ! Tu as acheté une Potion de vie. Tu perds 3 Pièces d'or.")
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
+			} else {
+				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				character.AccessInventory(c)
 			}
-			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
-			character.AccessInventory(c)
 		case 2:
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, PoisonPot)
@@ -49,9 +50,10 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Super ! Tu as acheté une Potion de poison. Tu perds 6 Pièces d'or.")
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
+			} else {
+				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				character.AccessInventory(c)
 			}
-			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
-			character.AccessInventory(c)
 		case 3:
 			if skills.CheckSkills(c, FireBall) {
 				skills.AddSkills(c, FireBall)
@@ -60,9 +62,10 @@ func Marchand(c *structures.Character) {
 				fmt.Printf("Tu connais maintenant la compétance %s : %d de dégats\n", FireBall.Name, FireBall.Damage)
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
+			} else {
+				fmt.Print("Tu possèdes déjà cette compétence\n\n")
+				character.AccessInventory(c)
 			}
-			fmt.Print("Tu possèdes déjà cette compétence\n\n")
-			character.AccessInventory(c)
 		case 4:
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, WolfFur)
@@ -70,9 +73,10 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Super ! Tu as acheté une Fourrure de Loup. Tu perds 4 Pièces d'or.")
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
+			} else {
+				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				character.AccessInventory(c)
 			}
-			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
-			character.AccessInventory(c)
 		case 5:
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, TrollSkin)
@@ -80,9 +84,10 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Super ! Tu as acheté une Peau de Troll. Tu perds 7 Pièces d'or.")
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
+			} else {
+				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				character.AccessInventory(c)
 			}
-			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
-			character.AccessInventory(c)
 		case 6:
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, BoarLeather)
@@ -90,9 +95,10 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Super ! Tu as acheté un Cuir de Sanglier. Tu perds 3 Pièces d'or.")
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
+			} else {
+				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				character.AccessInventory(c)
 			}
-			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
-			character.AccessInventory(c)
 		case 7:
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, RavenFeather)
@@ -100,9 +106,10 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Super ! Tu as acheté une Plume de Corbeau. Tu perds 1 Pièce d'or.")
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
+			} else {
+				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				character.AccessInventory(c)
 			}
-			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
-			character.AccessInventory(c)
 		case 8:
 			return
 

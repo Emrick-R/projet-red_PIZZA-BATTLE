@@ -27,7 +27,8 @@ func main() {
 			skillList := []structures.Skill{
 				{Name: punch.Name, Damage: punch.Damage},
 			}
-			c1 := structures.InitCharacter("", "", 1, 100, 100, inv, 10, 100, skillList)
+			Armor := structures.Equipment{}
+			c1 := structures.InitCharacter(1, inv, 10, 100, skillList, Armor)
 			character.CharacterCreation(c1)
 			e1 := structures.InitEnemy("Giovanni", 100, 100)
 
@@ -49,6 +50,7 @@ func main() {
 						menuChoice = 0
 						fmt.Println("======== Menu Inventaire : ========")
 						character.AccessInventory(c1)
+						character.AccessSkills(c1)
 						fmt.Println("1 - Utiliser une potion")
 						fmt.Println("2 - RETOUR")
 						fmt.Scan(&menuChoice)

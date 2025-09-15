@@ -15,6 +15,7 @@ type Character struct {
 	MaxInv    int
 	Money     int
 	SkillList []Skill
+	Armor     Equipment
 }
 type Enemy struct {
 	Name     string
@@ -28,23 +29,20 @@ type Skill struct {
 }
 
 type Equipment struct {
-	/*Un équipement de tête
-	Un équipement pour le torse
-	Un équipement pour les pieds */
+	Head  *Object //Pointeur unique vide de structure Objects
+	Chest *Object //Un équipement pour le torse
+	Legs  *Object //Un équipement pour les pieds
 
 }
 
-func InitCharacter(name string, class string, level int, maxhp int, actualhp int, inv []Object, maxInv int, money int, skill []Skill) *Character {
+func InitCharacter(level int, inv []Object, maxInv int, money int, skill []Skill, Armor Equipment) *Character {
 	return &Character{
-		Name:      name,
-		Class:     class,
 		Level:     level,
-		MaxHp:     maxhp,
-		ActualHp:  actualhp,
 		Inventory: inv,
 		MaxInv:    maxInv,
 		Money:     money,
 		SkillList: skill,
+		Armor:     Armor,
 	}
 }
 func InitEnemy(name string, maxhp int, actualhp int) *Enemy {
