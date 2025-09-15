@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"projet-red_PIZZA-BATTLE/character"
 	"projet-red_PIZZA-BATTLE/inventory"
+	"projet-red_PIZZA-BATTLE/skills"
 	"projet-red_PIZZA-BATTLE/structures"
 )
 
@@ -11,22 +12,23 @@ func Marchand(c *structures.Character) {
 	var marchand_choice int
 	HpPot := structures.Object{Name: "Potion de Vie", Quantity: 1}
 	PoisonPot := structures.Object{Name: "Potion de Poison", Quantity: 1}
-	FireballBook := structures.Object{Name: "Livre de Sort : Boule de feu", Quantity: 1} //J'ai mit Objet mais je pense que ca appartient aux skills au skill list faudra revoir ca
 	WolfFur := structures.Object{Name: "Peau de Loup", Quantity: 1}
 	TrollSkin := structures.Object{Name: "Peau de Troll", Quantity: 1}
 	BoarLeather := structures.Object{Name: "Cuir de Sanglier", Quantity: 1}
 	RavenFeather := structures.Object{Name: "Plume de Corbeau", Quantity: 1}
 
+	FireBall := structures.Skill{Name: "Boule de feu", Damage: 20}
+
 	for {
 		fmt.Println("\n======== Marchand : ========")
 		fmt.Printf("Bonjour je suis le marchand, quel est votre choix ?\n\n")
-		fmt.Println("1 - Potion de vie - 3 Pièces d'or")
-		fmt.Println("2 - Potion de poison - 6 Pièces d'or")
-		fmt.Println("3 - Livre de Sort : Boule de feu - 25 pièces d'or")
-		fmt.Println("4 - Fourrure de Loup  - 4 pièces d'or")
-		fmt.Println("5 - Peau de Troll - 7 pièces d'or")
-		fmt.Println("6 - Cuir de Sanglier - 3 pièces d'or")
-		fmt.Println("7 - Plume de Corbeau - 1 pièce d'or")
+		fmt.Printf("1 - %s - 3 Pièces d'or\n", HpPot.Name)
+		fmt.Printf("2 - %s - 6 Pièces d'or\n", PoisonPot.Name)
+		fmt.Printf("3 - Livre de Sort : %s - 25 pièces d'or\n", FireBall.Name)
+		fmt.Printf("4 - %s - 4 pièces d'or\n", WolfFur.Name)
+		fmt.Printf("5 - %s - 7 pièces d'or\n", TrollSkin.Name)
+		fmt.Printf("6 - %s - 3 pièces d'or\n", BoarLeather.Name)
+		fmt.Printf("7 - %s - 1 pièce d'or\n", RavenFeather.Name)
 		fmt.Println("8 - RETOUR")
 		fmt.Scan(&marchand_choice)
 		switch marchand_choice {
@@ -51,14 +53,15 @@ func Marchand(c *structures.Character) {
 			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
 			character.AccessInventory(c)
 		case 3:
-			if inventory.CheckMaxInventory(c) {
-				inventory.AddInventory(c, FireballBook)
+			if skills.CheckSkills(c, FireBall) {
+				skills.AddSkills(c, FireBall)
 				c.Money -= 25
-				fmt.Println("Super ! Tu as acheté un Livre de Sort : Boule de feu. Tu perds 25 Pièces d'or.")
+				fmt.Printf("Super ! Tu as acheté un Livre de Sort : %s. Tu perds 25 Pièces d'or.\n", FireBall.Name)
+				fmt.Printf("Tu connais maintenant la compétance %s : %d de dégats\n", FireBall.Name, FireBall.Damage)
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
 			}
-			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+			fmt.Print("Tu possèdes déjà cette compétence\n\n")
 			character.AccessInventory(c)
 		case 4:
 			if inventory.CheckMaxInventory(c) {

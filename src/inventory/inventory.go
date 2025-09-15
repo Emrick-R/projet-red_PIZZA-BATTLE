@@ -27,7 +27,7 @@ func RemoveInventory(c *structures.Character, obj structures.Object) {
 	}
 }
 
-func CheckMaxInventory(c *structures.Character) bool {
+func CheckMaxInventory(c *structures.Character) bool { // True = Il y a de la place
 	counter := 0
 	for i := range c.Inventory {
 		counter = counter + c.Inventory[i].Quantity
