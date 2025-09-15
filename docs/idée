@@ -29,7 +29,21 @@ PHASE 1
 10.2 Skill book
 10.3 Fonction spellbook (utilisation du sort)
 11. fonction character création (choix de nom, classe)
-12 fonction limit d'inventaire
+12 fonction limit d'inventaire x
 
 
-Objet: "Potion de vie"
+Objet: 
+Potion de Vie
+Potion de Poison
+Livre de Sort : Boule de feu
+Peau de Loup
+Peau de Troll
+Cuir de Sanglier
+Plume de Corbeau
+
+skill : 
+Coup de poing
+Boule de feu 
+
+
+

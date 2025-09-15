@@ -12,7 +12,7 @@ func Marchand(c *structures.Character) {
 	HpPot := structures.Object{Name: "Potion de Vie", Quantity: 1}
 	PoisonPot := structures.Object{Name: "Potion de Poison", Quantity: 1}
 	FireballBook := structures.Object{Name: "Livre de Sort : Boule de feu", Quantity: 1} //J'ai mit Objet mais je pense que ca appartient aux skills au skill list faudra revoir ca
-	WolfFur := structures.Object{Name: "Fourrure de Loup", Quantity: 1}
+	WolfFur := structures.Object{Name: "Peau de Loup", Quantity: 1}
 	TrollSkin := structures.Object{Name: "Peau de Troll", Quantity: 1}
 	BoarLeather := structures.Object{Name: "Cuir de Sanglier", Quantity: 1}
 	RavenFeather := structures.Object{Name: "Plume de Corbeau", Quantity: 1}
