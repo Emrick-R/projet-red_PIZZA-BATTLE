@@ -111,7 +111,14 @@ func Marchand(c *structures.Character) {
 				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
 				character.AccessInventory(c)
 			}
+
 		case 8:
+			c.Money -= 30
+			fmt.Println("Super ! Ton inventaire s'est agrandi de 10 slots. Tu perds 30 Pièce d'or.")
+			fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+			inventory.UpgradeInventorySlot(c)
+
+		case 9:
 			return
 
 		}
