@@ -14,6 +14,7 @@ func min(a, b int) int {
 
 func Forgeron(c *structures.Character) {
 	var forgeron_choice int
+	var craft_confirmation int
 
 	for {
 		fmt.Println("======== Forgeron : ========")
@@ -46,6 +47,16 @@ func Forgeron(c *structures.Character) {
 				fmt.Println("Vous n'avez pas les items requis pour craft le Chapeau de l'Aventurier")
 			} else {
 				fmt.Println("Vous pouvez craft", itemcraftable, "x Chapeau de l'Aventurier")
+				fmt.Scan(&craft_confirmation)
+			}
+			switch craft_confirmation {
+			case 1:
+				fmt.Println("1 - Oui je suis sûr !")
+				// Enlevez les items de l'inventaires et craft le ou les items
+
+			case 2:
+				fmt.Println("1 - Non je ne suis pas sûr, retour !")
+
 			}
 		case 2:
 			itemcraftable := min(countWolfFur/2, countTrollSkin)
@@ -54,12 +65,30 @@ func Forgeron(c *structures.Character) {
 			} else {
 				fmt.Println("Vous pouvez craft", itemcraftable, "x Tunique de l'Aventurier")
 			}
+			switch craft_confirmation {
+			case 1:
+				fmt.Println("1 - Oui je suis sûr !")
+				// Enlevez les items de l'inventaires et craft le ou les items
+
+			case 2:
+				fmt.Println("1 - Non je ne suis pas sûr, retour !")
+
+			}
 		case 3:
 			itemcraftable := min(countWolfFur, countBoarLeather)
 			if itemcraftable < 1 {
 				fmt.Println("Vous n'avez pas les items requis pour craft les Bottes de l'Aventurier")
 			} else {
 				fmt.Println("Vous pouvez craft", itemcraftable, "x Bottes de l'Aventurier")
+			}
+			switch craft_confirmation {
+			case 1:
+				fmt.Println("1 - Oui je suis sûr !")
+				// Enlevez les items de l'inventaires et craft le ou les items
+
+			case 2:
+				fmt.Println("1 - Non je ne suis pas sûr, retour !")
+
 			}
 		case 4:
 			return
