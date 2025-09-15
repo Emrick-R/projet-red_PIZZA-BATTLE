@@ -53,48 +53,60 @@ func IsAlpha(s string) bool {
 }
 
 func CharacterCreation(c *structures.Character) {
-	var username string
-	var valid bool
-	var class_choice int
-	for {
-		fmt.Println("Quel est votre pseudo ?")
-		fmt.Scan(&username)
-		valid = true
-		result := []rune(username)
+	{
+		var username string
+		var valid bool
 
-		if len(result) == 0 {
-			fmt.Println("Le pseudo ne peut pas être vide.")
-			valid = false
-			continue
-		}
+		for {
+			fmt.Println("Quel est votre pseudo ?")
+			fmt.Scan(&username)
+			valid = true
+			result := []rune(username)
 
-		for _, r := range result {
-			if r < 65 || (r > 90 && r < 97) || r > 122 {
-				fmt.Println("Votre pseudo n'est pas correct, il ne contient pas que des lettres.")
+			if len(result) == 0 {
+				fmt.Println("Le pseudo ne peut pas être vide.")
 				valid = false
+				continue
+			}
+
+			for _, r := range result {
+				if r < 65 || (r > 90 && r < 97) || r > 122 {
+					fmt.Println("Votre pseudo n'est pas correct, il ne contient que des lettres.")
+					valid = false
+					break
+				}
+			}
+
+			if valid {
+				if result[0] >= 97 && result[0] <= 122 {
+					result[0] = result[0] - ('a' - 'A')
+				}
+				for i := 1; i < len(result); i++ {
+					if result[i] >= 65 && result[i] <= 90 {
+						result[i] = result[i] + ('a' - 'A')
+					}
+				}
+
+				username = string(result)
+				c.Name = username
 				break
 			}
 		}
 
-		if valid {
-			if result[0] >= 97 && result[0] <= 122 {
-				result[0] = result[0] - ('a' - 'A')
-			}
-			for i := 1; i < len(result); i++ {
-				if result[i] >= 65 && result[i] <= 90 {
-					result[i] = result[i] + ('a' - 'A')
-				}
-			}
-
-			username = string(result)
-			c.Name = username
-		}
-
 		fmt.Println("Personnage créé avec le nom :", c.Name)
-		fmt.Println("Super", c.Name, ", Quel classe veux-tu choisir maintenant ?")
-		fmt.Println("1 - Elfe : 80 PV Max")
-		fmt.Println("2 - Nain : 120 PV Max")
-		fmt.Println("3 - Humain : 100 PV Max")
+		var class_choice int
+		for {
+			fmt.Println("Super", c.Name, ", quelle classe veux-tu choisir ?")
+			fmt.Println("1 - Elfe : 80 PV Max")
+			fmt.Println("2 - Nain : 120 PV Max")
+			fmt.Println("3 - Humain : 100 PV Max")
+			fmt.Scan(&class_choice)
+
+			if class_choice >= 1 && class_choice <= 3 {
+				break
+			}
+			fmt.Println("Choix invalide, essaye encore.")
+		}
 
 		switch class_choice {
 		case 1:
@@ -102,19 +114,16 @@ func CharacterCreation(c *structures.Character) {
 			c.MaxHp = 80
 			c.ActualHp = 40
 			c.Class = "Elfe"
-			break
 		case 2:
 			fmt.Println("Tu as choisi la classe Nain : robuste, courageux et maître de la forge.")
 			c.MaxHp = 120
 			c.ActualHp = 60
 			c.Class = "Nain"
-			break
 		case 3:
 			fmt.Println("Tu as choisi la classe Humain : polyvalent, ingénieux et déterminé.")
 			c.MaxHp = 100
 			c.ActualHp = 50
 			c.Class = "Humain"
-			break
 		}
 	}
 }
