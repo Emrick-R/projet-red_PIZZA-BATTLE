@@ -84,91 +84,90 @@ func EquipEquipment(c *structures.Character, slot string, newEquip structures.Ob
 		fmt.Println("2 - Torse")
 		fmt.Println("3 - Jambes")
 		var choice int
-	fmt.Scan(&choice)
-	switch choice {
-	case 1:
-		c.Armor.Head = &newEquip
-	case 2:
-		c.Armor.Chest = &newEquip
-	case 3:
-		c.Armor.Legs = &newEquip
-	default:
-		fmt.Println("Slot d'équipement invalide.")
+		fmt.Scan(&choice)
+		switch choice {
+		case 1:
+			c.Armor.Head = &newEquip
+		case 2:
+			c.Armor.Chest = &newEquip
+		case 3:
+			c.Armor.Legs = &newEquip
+		default:
+			fmt.Println("Slot d'équipement invalide.")
+		}
 	}
 }
 
 func CharacterCreation(c *structures.Character) {
-	{
-		var username string
-		var valid bool
+	var username string
+	var valid bool
 
-		for {
-			fmt.Println("\nQuel est votre pseudo ?")
-			fmt.Scan(&username)
-			valid = true
-			result := []rune(username)
+	for {
+		fmt.Println("\nQuel est votre pseudo ?")
+		fmt.Scan(&username)
+		valid = true
+		result := []rune(username)
 
-			if len(result) == 0 {
-				fmt.Println("Le pseudo ne peut pas être vide.")
+		if len(result) == 0 {
+			fmt.Println("Le pseudo ne peut pas être vide.")
+			valid = false
+			continue
+		}
+
+		for _, r := range result {
+			if r < 65 || (r > 90 && r < 97) || r > 122 {
+				fmt.Println("Votre pseudo n'est pas correct, il ne contient que des lettres.")
 				valid = false
-				continue
-			}
-
-			for _, r := range result {
-				if r < 65 || (r > 90 && r < 97) || r > 122 {
-					fmt.Println("Votre pseudo n'est pas correct, il ne contient que des lettres.")
-					valid = false
-					break
-				}
-			}
-
-			if valid {
-				if result[0] >= 97 && result[0] <= 122 {
-					result[0] = result[0] - ('a' - 'A')
-				}
-				for i := 1; i < len(result); i++ {
-					if result[i] >= 65 && result[i] <= 90 {
-						result[i] = result[i] + ('a' - 'A')
-					}
-				}
-
-				username = string(result)
-				c.Name = username
 				break
 			}
 		}
 
-		fmt.Println("\nPersonnage créé avec le nom :", c.Name)
-		var class_choice int
-		for {
-			fmt.Println("\nSuper", c.Name, ", quelle classe veux-tu choisir ?")
-			fmt.Println("1 - Elfe : 80 PV Max")
-			fmt.Println("2 - Nain : 120 PV Max")
-			fmt.Println("3 - Humain : 100 PV Max")
-			fmt.Scan(&class_choice)
-
-			if class_choice >= 1 && class_choice <= 3 {
-				break
+		if valid {
+			if result[0] >= 97 && result[0] <= 122 {
+				result[0] = result[0] - ('a' - 'A')
 			}
-			fmt.Println("Choix invalide, essaye encore.")
-		}
+			for i := 1; i < len(result); i++ {
+				if result[i] >= 65 && result[i] <= 90 {
+					result[i] = result[i] + ('a' - 'A')
+				}
+			}
 
-		switch class_choice {
-		case 1:
-			fmt.Println("\nTu as choisi la classe Elfe : agile, précis et en communion avec la nature.")
-			c.MaxHp = 80
-			c.ActualHp = 40
-			c.Class = "Elfe"
-		case 2:
-			fmt.Println("\nTu as choisi la classe Nain : robuste, courageux et maître de la forge.")
-			c.MaxHp = 120
-			c.ActualHp = 60
-			c.Class = "Nain"
-		case 3:
-			fmt.Println("\nTu as choisi la classe Humain : polyvalent, ingénieux et déterminé.")
-			c.MaxHp = 100
-			c.ActualHp = 50
-			c.Class = "Humain"
+			username = string(result)
+			c.Name = username
+			break
 		}
+	}
+
+	fmt.Println("\nPersonnage créé avec le nom :", c.Name)
+	var class_choice int
+	for {
+		fmt.Println("\nSuper", c.Name, ", quelle classe veux-tu choisir ?")
+		fmt.Println("1 - Elfe : 80 PV Max")
+		fmt.Println("2 - Nain : 120 PV Max")
+		fmt.Println("3 - Humain : 100 PV Max")
+		fmt.Scan(&class_choice)
+
+		if class_choice >= 1 && class_choice <= 3 {
+			break
+		}
+		fmt.Println("Choix invalide, essaye encore.")
+	}
+
+	switch class_choice {
+	case 1:
+		fmt.Println("\nTu as choisi la classe Elfe : agile, précis et en communion avec la nature.")
+		c.MaxHp = 80
+		c.ActualHp = 40
+		c.Class = "Elfe"
+	case 2:
+		fmt.Println("\nTu as choisi la classe Nain : robuste, courageux et maître de la forge.")
+		c.MaxHp = 120
+		c.ActualHp = 60
+		c.Class = "Nain"
+	case 3:
+		fmt.Println("\nTu as choisi la classe Humain : polyvalent, ingénieux et déterminé.")
+		c.MaxHp = 100
+		c.ActualHp = 50
+		c.Class = "Humain"
 	}
 }

@@ -53,78 +53,75 @@ func Forgeron(c *structures.Character) {
 		case 1:
 			itemcraftable := min(countRavenFeather, countBoarLeather)
 			if itemcraftable < 1 {
-				fmt.Println("Tu n'as pas les items requis pour fabriquer le Chapeau de l'Aventurier")
+				fmt.Printf("\nTu n'as pas les objets requis pour fabriquer le Chapeau de l'Aventurier\n\n")
+				break
 			} else {
-				fmt.Println("Tu peux fabriquer", itemcraftable, "x Chapeau de l'Aventurier")
+				fmt.Println("\nTu peux fabriquer", itemcraftable, "x Chapeau de l'Aventurier\n")
 			}
 
-			if inventory.CheckMaxInventory(c) {
-				fmt.Scan(&craft_confirmation)
-				fmt.Println("1 - Oui je suis sûr !")
-				fmt.Println("2 - Non je ne suis pas sûr, retour !")
-				switch craft_confirmation {
-				case 1:
-					inventory.AddInventory(c, chapeauAventurier)
-					fmt.Println("Tu viens de fabriquer", itemcraftable, "x Chapeau de l'Aventurier")
-					inventory.RemoveInventory(c, ravenFeather)
-					inventory.RemoveInventory(c, boarLeather)
-				case 2:
-					fmt.Println("Retour au menu précédent")
-					break
-				}
-			} else {
-				fmt.Printf("\nTu n'as pas de places dans ton inventaire, il est plein...\n\n")
-				return
+			fmt.Println("1 - Oui je suis sûr !")
+			fmt.Println("2 - Non je ne suis pas sûr, retour !")
+			fmt.Scan(&craft_confirmation)
+			switch craft_confirmation {
+			case 1:
+				fmt.Println("\nTu viens de fabriquer", itemcraftable, "x Chapeau de l'Aventurier")
+				inventory.RemoveInventory(c, ravenFeather)
+				inventory.RemoveInventory(c, boarLeather)
+				inventory.AddInventory(c, chapeauAventurier)
+			case 2:
+				fmt.Println("\nRetour au menu précédent\n")
 			}
 
 		case 2:
 			itemcraftable := min(countWolfFur/2, countTrollSkin) //besoin de 2 fourrures de loup
 			if itemcraftable < 1 {
-				fmt.Println("Tu n'as pas les items requis pour Tunique de l'aventurier de l'Aventurier")
+				fmt.Printf("\nTu n'as pas les objets requis pour Tunique de l'aventurier de l'Aventurier\n\n")
+				break
 			} else {
-				fmt.Println("Tu peux fabriquer", itemcraftable, "x Tunique de l'aventurier")
+				fmt.Println("\nTu peux fabriquer", itemcraftable, "x Tunique de l'aventurier\n\n")
 			}
 
-			if inventory.CheckMaxInventory(c) {
-				fmt.Scan(&craft_confirmation)
-				fmt.Println("1 - Oui je suis sûr !")
-				fmt.Println("2 - Non je ne suis pas sûr, retour !")
-				switch craft_confirmation {
-				case 1:
-					inventory.AddInventory(c, tuniqueAventurier)
-					fmt.Println("Tu viens de fabriquer", itemcraftable, "x Tunique de l'Aventurier")
-					inventory.RemoveInventory(c, wolfFur)
-					inventory.RemoveInventory(c, trollSkin)
-				case 2:
-					fmt.Println("Retour au menu précédent")
-					break
-				}
-			} else {
-				fmt.Printf("\nTu n'as pas de places dans ton inventaire, il est plein...\n\n")
+			fmt.Println("1 - Oui je suis sûr !")
+			fmt.Println("2 - Non je ne suis pas sûr, retour !")
+			fmt.Scan(&craft_confirmation)
+			switch craft_confirmation {
+			case 1:
+				fmt.Println("\nTu viens de fabriquer", itemcraftable, "x Tunique de l'Aventurier\n\n")
+				inventory.RemoveInventory(c, wolfFur)
+				inventory.RemoveInventory(c, wolfFur) //Retire 2 fourrures de loup
+				inventory.RemoveInventory(c, trollSkin)
+				inventory.AddInventory(c, tuniqueAventurier)
+			case 2:
+				fmt.Println("\nRetour au menu précédent\n\n")
 			}
-
-			return
 
 		case 3:
 			itemcraftable := min(countWolfFur, countBoarLeather)
 			if itemcraftable < 1 {
-				fmt.Println("Vous n'avez pas les items requis pour craft les Bottes de l'Aventurier")
+				fmt.Printf("\nTu n'as pas les objets requis pour Bottes de l'aventurier de l'Aventurier\n\n")
+				break
 			} else {
-				fmt.Println("Vous pouvez craft", itemcraftable, "x Bottes de l'Aventurier")
+				fmt.Println("\nTu peux fabriquer", itemcraftable, "x Bottes de l'aventurier\n")
 			}
+
+			fmt.Println("1 - Oui je suis sûr !")
+			fmt.Println("2 - Non je ne suis pas sûr, retour !")
+			fmt.Scan(&craft_confirmation)
 			switch craft_confirmation {
 			case 1:
-				fmt.Println("1 - Oui je suis sûr !")
-				// Enlevez les items de l'inventaires et craft le ou les items
-
+				fmt.Println("\nTu viens de fabriquer", itemcraftable, "x Bottes de l'Aventurier\n\n")
+				inventory.RemoveInventory(c, wolfFur)
+				inventory.RemoveInventory(c, boarLeather)
+				inventory.AddInventory(c, bottesAventurier)
 			case 2:
-				fmt.Println("1 - Non je ne suis pas sûr, retour !")
-
+				fmt.Println("\nRetour au menu précédent\n")
 			}
+
 		case 4:
-			return
-		default:
-			fmt.Println("Choix invalide, veuillez réessayer")
+		}
+		if forgeron_choice == 4 {
+			forgeron_choice = 0
+			break
 		}
 	}
 }

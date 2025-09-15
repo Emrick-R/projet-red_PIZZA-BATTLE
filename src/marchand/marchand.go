@@ -20,7 +20,7 @@ func Marchand(c *structures.Character) {
 	FireBall := structures.Skill{Name: "Boule de feu", Damage: 20}
 
 	for {
-		fmt.Println("======== Marchand : ========")
+		fmt.Println("\n======== Marchand : ========")
 		fmt.Printf("Bonjour je suis le marchand, quel est votre choix ?\n\n")
 		fmt.Printf("1 - %s - 3 Pièces d'or\n", HpPot.Name)
 		fmt.Printf("2 - %s - 6 Pièces d'or\n", PoisonPot.Name)
@@ -59,7 +59,7 @@ func Marchand(c *structures.Character) {
 			if !skills.CheckSkills(c, FireBall) {
 				skills.AddSkills(c, FireBall)
 				c.Money -= 25
-				fmt.Printf("Super ! Tu as acheté un Livre de Sort : %s. Tu perds 25 Pièces d'or.\n", FireBall.Name)
+				fmt.Printf("\nSuper ! Tu as acheté un Livre de Sort : %s. Tu perds 25 Pièces d'or.\n", FireBall.Name)
 				fmt.Printf("Tu connais maintenant la compétance %s : %d de dégats\n", FireBall.Name, FireBall.Damage)
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
@@ -71,7 +71,7 @@ func Marchand(c *structures.Character) {
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, WolfFur)
 				c.Money -= 4
-				fmt.Println("Super ! Tu as acheté une Fourrure de Loup. Tu perds 4 Pièces d'or.")
+				fmt.Println("\nSuper ! Tu as acheté une Fourrure de Loup. Tu perds 4 Pièces d'or.")
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
 			} else {
@@ -82,7 +82,7 @@ func Marchand(c *structures.Character) {
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, TrollSkin)
 				c.Money -= 7
-				fmt.Println("Super ! Tu as acheté une Peau de Troll. Tu perds 7 Pièces d'or.")
+				fmt.Println("\nSuper ! Tu as acheté une Peau de Troll. Tu perds 7 Pièces d'or.")
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
 			} else {
@@ -93,7 +93,7 @@ func Marchand(c *structures.Character) {
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, BoarLeather)
 				c.Money -= 3
-				fmt.Println("Super ! Tu as acheté un Cuir de Sanglier. Tu perds 3 Pièces d'or.")
+				fmt.Println("\nSuper ! Tu as acheté un Cuir de Sanglier. Tu perds 3 Pièces d'or.")
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
 			} else {
@@ -104,7 +104,7 @@ func Marchand(c *structures.Character) {
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, RavenFeather)
 				c.Money -= 1
-				fmt.Println("Super ! Tu as acheté une Plume de Corbeau. Tu perds 1 Pièce d'or.")
+				fmt.Println("\nSuper ! Tu as acheté une Plume de Corbeau. Tu perds 1 Pièce d'or.")
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
 			} else {
@@ -114,13 +114,15 @@ func Marchand(c *structures.Character) {
 
 		case 8:
 			c.Money -= 30
-			fmt.Println("Super ! Ton inventaire s'est agrandi de 10 slots. Tu perds 30 Pièce d'or.")
+			fmt.Println("\nSuper ! Ton inventaire s'est agrandi de 10 slots. Tu perds 30 Pièce d'or.")
 			fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 			inventory.UpgradeInventorySlot(c)
 
 		case 9:
-			return
-
+		}
+		if marchand_choice == 9 {
+			marchand_choice = 0
+			break
 		}
 	}
 }
