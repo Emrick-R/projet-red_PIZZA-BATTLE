@@ -56,7 +56,7 @@ func Forgeron(c *structures.Character) {
 				fmt.Printf("\nTu n'as pas les objets requis pour fabriquer le Chapeau de l'Aventurier\n\n")
 				break
 			} else {
-				fmt.Println("\nTu peux fabriquer", itemcraftable, "x Chapeau de l'Aventurier\n")
+				fmt.Printf("\nTu peux fabriquer %d x Chapeau de l'Aventurier\n", itemcraftable)
 			}
 
 			fmt.Println("1 - Oui je suis sûr !")
@@ -69,7 +69,7 @@ func Forgeron(c *structures.Character) {
 				inventory.RemoveInventory(c, boarLeather)
 				inventory.AddInventory(c, chapeauAventurier)
 			case 2:
-				fmt.Println("\nRetour au menu précédent\n")
+				fmt.Printf("\nRetour au menu précédent\n")
 			}
 
 		case 2:
@@ -78,7 +78,7 @@ func Forgeron(c *structures.Character) {
 				fmt.Printf("\nTu n'as pas les objets requis pour Tunique de l'aventurier de l'Aventurier\n\n")
 				break
 			} else {
-				fmt.Println("\nTu peux fabriquer", itemcraftable, "x Tunique de l'aventurier\n\n")
+				fmt.Printf("\nTu peux fabriquer %d x Tunique de l'aventurier\n\n", itemcraftable)
 			}
 
 			fmt.Println("1 - Oui je suis sûr !")
@@ -86,13 +86,13 @@ func Forgeron(c *structures.Character) {
 			fmt.Scan(&craft_confirmation)
 			switch craft_confirmation {
 			case 1:
-				fmt.Println("\nTu viens de fabriquer", itemcraftable, "x Tunique de l'Aventurier\n\n")
+				fmt.Printf("\nTu viens de fabriquer %d x Tunique de l'Aventurier\n\n", itemcraftable)
 				inventory.RemoveInventory(c, wolfFur)
 				inventory.RemoveInventory(c, wolfFur) //Retire 2 fourrures de loup
 				inventory.RemoveInventory(c, trollSkin)
 				inventory.AddInventory(c, tuniqueAventurier)
 			case 2:
-				fmt.Println("\nRetour au menu précédent\n\n")
+				fmt.Printf("\nRetour au menu précédent\n\n")
 			}
 
 		case 3:
@@ -101,7 +101,7 @@ func Forgeron(c *structures.Character) {
 				fmt.Printf("\nTu n'as pas les objets requis pour Bottes de l'aventurier de l'Aventurier\n\n")
 				break
 			} else {
-				fmt.Println("\nTu peux fabriquer", itemcraftable, "x Bottes de l'aventurier\n")
+				fmt.Printf("\nTu peux fabriquer %d x Bottes de l'aventurier\n", itemcraftable)
 			}
 
 			fmt.Println("1 - Oui je suis sûr !")
@@ -109,12 +109,12 @@ func Forgeron(c *structures.Character) {
 			fmt.Scan(&craft_confirmation)
 			switch craft_confirmation {
 			case 1:
-				fmt.Println("\nTu viens de fabriquer", itemcraftable, "x Bottes de l'Aventurier\n\n")
+				fmt.Printf("\nTu viens de fabriquer %d x Bottes de l'Aventurier\n\n", itemcraftable)
 				inventory.RemoveInventory(c, wolfFur)
 				inventory.RemoveInventory(c, boarLeather)
 				inventory.AddInventory(c, bottesAventurier)
 			case 2:
-				fmt.Println("\nRetour au menu précédent\n")
+				fmt.Printf("\nRetour au menu précédent\n")
 			}
 
 		case 4:
