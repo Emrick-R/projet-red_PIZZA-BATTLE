@@ -24,6 +24,7 @@ func Forgeron(c *structures.Character) {
 	chapeauAventurier := structures.Object{Name: "Chapeau de l'aventurier", Quantity: 1}
 	tuniqueAventurier := structures.Object{Name: "Tunique de l'aventurier", Quantity: 1}
 	bottesAventurier := structures.Object{Name: "Bottes de l'aventurier", Quantity: 1}
+
 	for {
 		fmt.Println("======== Forgeron : ========")
 		fmt.Println("Bonjour je suis le Forgeron, quel est votre choix ?")
