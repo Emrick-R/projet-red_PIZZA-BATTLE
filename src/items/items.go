@@ -9,7 +9,7 @@ import (
 func TakePot(c *structures.Character) {
 	HpPot := structures.Object{Name: "Potion de Vie"}
 	if c.ActualHp == c.MaxHp {
-		fmt.Println("\nLes points de vie sont déjà au max")
+		fmt.Printf("\nLes points de vie sont déjà au max\n\n")
 		return
 	}
 	for i := 0; i < len(c.Inventory); i++ {

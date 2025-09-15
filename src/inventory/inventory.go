@@ -1,6 +1,8 @@
 package inventory
 
-import "projet-red_PIZZA-BATTLE/structures"
+import (
+	"projet-red_PIZZA-BATTLE/structures"
+)
 
 func AddInventory(c *structures.Character, newObj structures.Object) {
 	for i := range c.Inventory {
@@ -23,4 +25,12 @@ func RemoveInventory(c *structures.Character, obj structures.Object) {
 			return
 		}
 	}
+}
+
+func CheckMaxInventory(c *structures.Character) bool {
+	counter := 0
+	for i := range c.Inventory {
+		counter = counter + c.Inventory[i].Quantity
+	}
+	return counter < c.MaxInv
 }

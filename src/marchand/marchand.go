@@ -18,8 +18,8 @@ func Marchand(c *structures.Character) {
 	RavenFeather := structures.Object{Name: "Plume de Corbeau", Quantity: 1}
 
 	for {
-		fmt.Println("======== Marchand : ========")
-		fmt.Println("Bonjour je suis le marchand, quel est votre choix ?")
+		fmt.Println("\n======== Marchand : ========")
+		fmt.Println("Bonjour je suis le marchand, quel est votre choix ?\n")
 		fmt.Println("1 - Potion de vie - 3 Pièces d'or")
 		fmt.Println("2 - Potion de poison - 6 Pièces d'or")
 		fmt.Println("3 - Livre de Sort : Boule de feu - 25 pièces d'or")
@@ -31,46 +31,74 @@ func Marchand(c *structures.Character) {
 		fmt.Scan(&marchand_choice)
 		switch marchand_choice {
 		case 1:
-			inventory.AddInventory(c, HpPot)
-			c.Money -= 3
-			fmt.Println("Super ! Tu as acheté une Potion de vie. Tu perds 3 Pièces d'or.")
-			fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+			if inventory.CheckMaxInventory(c) {
+				inventory.AddInventory(c, HpPot)
+				c.Money -= 3
+				fmt.Println("Super ! Tu as acheté une Potion de vie. Tu perds 3 Pièces d'or.")
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			}
+			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
 			character.AccessInventory(c)
 		case 2:
-			inventory.AddInventory(c, PoisonPot)
-			c.Money -= 6
-			fmt.Println("Super ! Tu as acheté une Potion de poison. Tu perds 6 Pièces d'or.")
-			fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+			if inventory.CheckMaxInventory(c) {
+				inventory.AddInventory(c, PoisonPot)
+				c.Money -= 6
+				fmt.Println("Super ! Tu as acheté une Potion de poison. Tu perds 6 Pièces d'or.")
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			}
+			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
 			character.AccessInventory(c)
 		case 3:
-			inventory.AddInventory(c, FireballBook)
-			c.Money -= 25
-			fmt.Println("Super ! Tu as acheté un Livre de Sort : Boule de feu. Tu perds 25 Pièces d'or.")
-			fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+			if inventory.CheckMaxInventory(c) {
+				inventory.AddInventory(c, FireballBook)
+				c.Money -= 25
+				fmt.Println("Super ! Tu as acheté un Livre de Sort : Boule de feu. Tu perds 25 Pièces d'or.")
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			}
+			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
 			character.AccessInventory(c)
 		case 4:
-			inventory.AddInventory(c, WolfFur)
-			c.Money -= 4
-			fmt.Println("Super ! Tu as acheté une Fourrure de Loup. Tu perds 4 Pièces d'or.")
-			fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+			if inventory.CheckMaxInventory(c) {
+				inventory.AddInventory(c, WolfFur)
+				c.Money -= 4
+				fmt.Println("Super ! Tu as acheté une Fourrure de Loup. Tu perds 4 Pièces d'or.")
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			}
+			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
 			character.AccessInventory(c)
 		case 5:
-			inventory.AddInventory(c, TrollSkin)
-			c.Money -= 7
-			fmt.Println("Super ! Tu as acheté une Peau de Troll. Tu perds 7 Pièces d'or.")
-			fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+			if inventory.CheckMaxInventory(c) {
+				inventory.AddInventory(c, TrollSkin)
+				c.Money -= 7
+				fmt.Println("Super ! Tu as acheté une Peau de Troll. Tu perds 7 Pièces d'or.")
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			}
+			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
 			character.AccessInventory(c)
 		case 6:
-			inventory.AddInventory(c, BoarLeather)
-			c.Money -= 3
-			fmt.Println("Super ! Tu as acheté un Cuir de Sanglier. Tu perds 3 Pièces d'or.")
-			fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+			if inventory.CheckMaxInventory(c) {
+				inventory.AddInventory(c, BoarLeather)
+				c.Money -= 3
+				fmt.Println("Super ! Tu as acheté un Cuir de Sanglier. Tu perds 3 Pièces d'or.")
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			}
+			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
 			character.AccessInventory(c)
 		case 7:
-			inventory.AddInventory(c, RavenFeather)
-			c.Money -= 1
-			fmt.Println("Super ! Tu as acheté une Plume de Corbeau. Tu perds 1 Pièce d'or.")
-			fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+			if inventory.CheckMaxInventory(c) {
+				inventory.AddInventory(c, RavenFeather)
+				c.Money -= 1
+				fmt.Println("Super ! Tu as acheté une Plume de Corbeau. Tu perds 1 Pièce d'or.")
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			}
+			fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
 			character.AccessInventory(c)
 		case 8:
 			return

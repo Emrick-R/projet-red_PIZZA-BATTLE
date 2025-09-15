@@ -12,6 +12,7 @@ type Character struct {
 	MaxHp     int
 	ActualHp  int
 	Inventory []Object
+	MaxInv    int
 	Money     int
 	SkillList []Skill
 }
@@ -33,7 +34,7 @@ type Equipment struct {
 
 }
 
-func InitCharacter(name string, class string, level int, maxhp int, actualhp int, inv []Object, money int, skill []Skill) *Character {
+func InitCharacter(name string, class string, level int, maxhp int, actualhp int, inv []Object, maxInv int, money int, skill []Skill) *Character {
 	return &Character{
 		Name:      name,
 		Class:     class,
@@ -41,6 +42,7 @@ func InitCharacter(name string, class string, level int, maxhp int, actualhp int
 		MaxHp:     maxhp,
 		ActualHp:  actualhp,
 		Inventory: inv,
+		MaxInv:    maxInv,
 		Money:     money,
 		SkillList: skill,
 	}
