@@ -27,8 +27,8 @@ func main() {
 			skillList := []structures.Skill{
 				{Name: punch.Name, Damage: punch.Damage},
 			}
-			Armor := structures.Equipment{}
-			c1 := structures.InitCharacter(1, inv, 10, 100, skillList, Armor)
+			// Initialiser le personnage
+			c1 := structures.InitCharacter(1, inv, 10, 100, skillList)
 			character.CharacterCreation(c1)
 			e1 := structures.InitEnemy("Giovanni", 100, 100)
 

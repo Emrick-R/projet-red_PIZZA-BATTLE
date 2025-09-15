@@ -42,19 +42,19 @@ func AccessEquipement(c *structures.Character) {
 	L := c.Armor.Legs.Name
 	if c.Armor.Head.Name == "" {
 		H = "Rien"
-	} else {
-		fmt.Println("Armure de tête : ", H)
 	}
+	fmt.Println("Armure de tête : ", H)
+
 	if c.Armor.Chest.Name == "" {
 		C = "Rien"
-	} else {
-		fmt.Println("Armure de tête : ", C)
 	}
+	fmt.Println("Armure de torse : ", C)
+
 	if c.Armor.Legs.Name == "" {
 		L = "Rien"
-	} else {
-		fmt.Println("Armure de tête : ", L)
 	}
+	fmt.Println("Armure de jambes : ", L)
+
 }
 
 func IsDead(c *structures.Character) {

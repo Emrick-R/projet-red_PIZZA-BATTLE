@@ -14,9 +14,6 @@ func min(a, b int) int {
 }
 
 func Forgeron(c *structures.Character) {
-	wolfFur := structures.Object{Name: "Peau de Loup", Quantity: 1}
-	trollSkin := structures.Object{Name: "Peau de Troll", Quantity: 1}
-	boarLeather := structures.Object{Name: "Cuir de Sanglier", Quantity: 1}
 	ravenFeather := structures.Object{Name: "Plume de Corbeau", Quantity: 1}
 
 	var forgeron_choice int

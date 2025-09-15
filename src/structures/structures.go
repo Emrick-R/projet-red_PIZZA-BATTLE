@@ -42,14 +42,18 @@ type Monster struct {
 	Damage   int
 }
 
-func InitCharacter(level int, inv []Object, maxInv int, money int, skill []Skill, Armor Equipment) *Character {
+func InitCharacter(level int, inv []Object, maxInv int, money int, skill []Skill) *Character {
 	return &Character{
 		Level:     level,
 		Inventory: inv,
 		MaxInv:    maxInv,
 		Money:     money,
 		SkillList: skill,
-		Armor:     Armor,
+		Armor: Equipment{
+			Head:  &Object{Name: ""},
+			Chest: &Object{Name: ""},
+			Legs:  &Object{Name: ""},
+		},
 	}
 }
 func InitEnemy(name string, maxhp int, actualhp int) *Enemy {
