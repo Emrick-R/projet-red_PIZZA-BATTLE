@@ -16,10 +16,8 @@ func main() {
 		fmt.Println("1 - Commencer une nouvelle partie")
 		fmt.Println("2 - Quitter")
 		fmt.Scan(&menuChoice)
-
 		switch menuChoice {
 		case 1:
-			// Créer les objets de base
 			HpPot := structures.Object{Name: "Potion de Vie"}
 			inv := []structures.Object{
 				{Name: HpPot.Name, Quantity: 3},
@@ -28,14 +26,8 @@ func main() {
 			skillList := []structures.Skill{
 				{Name: punch.Name, Damage: punch.Damage},
 			}
-
-			// Créer le personnage avec un nom temporaire
 			c1 := structures.InitCharacter("", "Elfe", 1, 100, 100, inv, 10, 100, skillList)
-
-			// Demander le nom du personnage à l'utilisateur
 			character.CharacterCreation(c1)
-
-			// Créer l'ennemi
 			e1 := structures.InitEnemy("Giovanni", 100, 100)
 
 			for {

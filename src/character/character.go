@@ -27,6 +27,14 @@ func AccessInventory(c *structures.Character) {
 	fmt.Println()
 }
 
+func AccessSkills(c *structures.Character) {
+	fmt.Println("\nCompétences :")
+	for _, Skill := range c.SkillList {
+		fmt.Printf("%s: %d points de dégâts\n", Skill.Name, Skill.Damage)
+	}
+	fmt.Println()
+}
+
 func IsDead(c *structures.Character) {
 	if c.ActualHp <= 0 {
 		fmt.Println("Vous êtes mort !")
@@ -47,11 +55,10 @@ func IsAlpha(s string) bool {
 func CharacterCreation(c *structures.Character) {
 	var username string
 	var valid bool
-
+	var class_choice int
 	for {
 		fmt.Println("Quel est votre pseudo ?")
 		fmt.Scan(&username)
-
 		valid = true
 		result := []rune(username)
 
@@ -81,9 +88,33 @@ func CharacterCreation(c *structures.Character) {
 
 			username = string(result)
 			c.Name = username
+		}
+
+		fmt.Println("Personnage créé avec le nom :", c.Name)
+		fmt.Println("Super", c.Name, ", Quel classe veux-tu choisir maintenant ?")
+		fmt.Println("1 - Elfe : 80 PV Max")
+		fmt.Println("2 - Nain : 120 PV Max")
+		fmt.Println("3 - Humain : 100 PV Max")
+
+		switch class_choice {
+		case 1:
+			fmt.Println("Tu as choisi la classe Elfe : agile, précis et en communion avec la nature.")
+			c.MaxHp = 80
+			c.ActualHp = 40
+			c.Class = "Elfe"
+			break
+		case 2:
+			fmt.Println("Tu as choisi la classe Nain : robuste, courageux et maître de la forge.")
+			c.MaxHp = 120
+			c.ActualHp = 60
+			c.Class = "Nain"
+			break
+		case 3:
+			fmt.Println("Tu as choisi la classe Humain : polyvalent, ingénieux et déterminé.")
+			c.MaxHp = 100
+			c.ActualHp = 50
+			c.Class = "Humain"
 			break
 		}
 	}
-
-	fmt.Println("Personnage créé avec le nom :", c.Name)
 }
