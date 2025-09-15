@@ -2,9 +2,14 @@ package forgeron
 
 import (
 	"fmt"
+	"projet-red_PIZZA-BATTLE/structures"
+)
+import (
+	"fmt"
 	structures "projet-red_PIZZA-BATTLE/Structures"
 )
 
+func Forgeron(c *structures.Character) {
 func Forgeron(c *structures.Character) {
 	var forgeron_choice int
 	for {

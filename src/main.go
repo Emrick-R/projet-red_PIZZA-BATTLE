@@ -27,7 +27,7 @@ func main() {
 			skillList := []structures.Skill{
 				{Name: punch.Name, Damage: punch.Damage},
 			}
-			c1 := structures.InitCharacter("", "Elfe", 1, 100, 100, inv, 10, 100, skillList)
+			c1 := structures.InitCharacter("", "", 1, 100, 100, inv, 10, 100, skillList)
 			character.CharacterCreation(c1)
 			e1 := structures.InitEnemy("Giovanni", 100, 100)
 
@@ -69,6 +69,7 @@ func main() {
 					fmt.Println("Tu lance une potion de poison !")
 					items.ThrowPoisonPot(c1, e1)
 					character.DisplayEInfo(e1)
+<<<<<<< HEAD
 				case 4:
 					marchand.Marchand(c1)
 				case 5:
@@ -78,6 +79,15 @@ func main() {
 						menuChoice = 0
 						break
 					}
+=======
+				case 5:
+					forgeron.Forgeron(c1)
+				case 6:
+				}
+				if menuChoice == 6 {
+					menuChoice = 0
+					break
+>>>>>>> 7d7152fc07ff705aa627705708b4232abc4fb528
 				}
 			}
 		case 2:
