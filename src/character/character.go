@@ -35,3 +35,55 @@ func IsDead(c *structures.Character) {
 		fmt.Println("Vous venez de renaître avec 50% de HP en moins.")
 	}
 }
+func IsAlpha(s string) bool {
+	for _, c := range s {
+		if (c < 'A' || c > 'Z') && (c < 'a' || c > 'z') && (c < '0' || c > '9') {
+			return false
+		}
+	}
+	return true
+}
+
+func CharacterCreation(c *structures.Character) {
+	var username string
+	var valid bool
+
+	for {
+		fmt.Println("Quel est votre pseudo ?")
+		fmt.Scan(&username)
+
+		valid = true
+		result := []rune(username)
+
+		if len(result) == 0 {
+			fmt.Println("Le pseudo ne peut pas être vide.")
+			valid = false
+			continue
+		}
+
+		for _, r := range result {
+			if r < 65 || (r > 90 && r < 97) || r > 122 {
+				fmt.Println("Votre pseudo n'est pas correct, il ne contient pas que des lettres.")
+				valid = false
+				break
+			}
+		}
+
+		if valid {
+			if result[0] >= 97 && result[0] <= 122 {
+				result[0] = result[0] - ('a' - 'A')
+			}
+			for i := 1; i < len(result); i++ {
+				if result[i] >= 65 && result[i] <= 90 {
+					result[i] = result[i] + ('a' - 'A')
+				}
+			}
+
+			username = string(result)
+			c.Name = username
+			break
+		}
+	}
+
+	fmt.Println("Personnage créé avec le nom :", c.Name)
+}
