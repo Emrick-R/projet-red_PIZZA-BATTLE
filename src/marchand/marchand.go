@@ -55,7 +55,7 @@ func Marchand(c *structures.Character) {
 				character.AccessInventory(c)
 			}
 		case 3:
-			if skills.CheckSkills(c, FireBall) {
+			if skills.CheckSkills(c, FireBall) == false {
 				skills.AddSkills(c, FireBall)
 				c.Money -= 25
 				fmt.Printf("Super ! Tu as acheté un Livre de Sort : %s. Tu perds 25 Pièces d'or.\n", FireBall.Name)
