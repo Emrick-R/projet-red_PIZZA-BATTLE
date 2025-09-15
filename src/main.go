@@ -69,7 +69,6 @@ func main() {
 					fmt.Println("Tu lance une potion de poison !")
 					items.ThrowPoisonPot(c1, e1)
 					character.DisplayEInfo(e1)
-<<<<<<< HEAD
 				case 4:
 					marchand.Marchand(c1)
 				case 5:
@@ -79,15 +78,6 @@ func main() {
 						menuChoice = 0
 						break
 					}
-=======
-				case 5:
-					forgeron.Forgeron(c1)
-				case 6:
-				}
-				if menuChoice == 6 {
-					menuChoice = 0
-					break
->>>>>>> 7d7152fc07ff705aa627705708b4232abc4fb528
 				}
 			}
 		case 2:
