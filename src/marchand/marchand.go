@@ -19,7 +19,7 @@ func Marchand(c *structures.Character) {
 
 	for {
 		fmt.Println("\n======== Marchand : ========")
-		fmt.Println("Bonjour je suis le marchand, quel est votre choix ?\n")
+		fmt.Printf("Bonjour je suis le marchand, quel est votre choix ?\n\n")
 		fmt.Println("1 - Potion de vie - 3 Pièces d'or")
 		fmt.Println("2 - Potion de poison - 6 Pièces d'or")
 		fmt.Println("3 - Livre de Sort : Boule de feu - 25 pièces d'or")
