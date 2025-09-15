@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
-	forgeron "projet-red_PIZZA-BATTLE/Forgeron"
 	"projet-red_PIZZA-BATTLE/character"
+	"projet-red_PIZZA-BATTLE/forgeron"
 	"projet-red_PIZZA-BATTLE/items"
 	"projet-red_PIZZA-BATTLE/marchand"
 	"projet-red_PIZZA-BATTLE/structures"
@@ -74,10 +74,10 @@ func main() {
 				case 5:
 					forgeron.Forgeron(c1)
 				case 6:
-					if menuChoice == 6 {
-						menuChoice = 0
-						break
-					}
+				}
+				if menuChoice == 6 {
+					menuChoice = 0
+					break
 				}
 			}
 		case 2:

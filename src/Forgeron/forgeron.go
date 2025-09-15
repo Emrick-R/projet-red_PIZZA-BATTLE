@@ -4,12 +4,7 @@ import (
 	"fmt"
 	"projet-red_PIZZA-BATTLE/structures"
 )
-import (
-	"fmt"
-	structures "projet-red_PIZZA-BATTLE/Structures"
-)
 
-func Forgeron(c *structures.Character) {
 func Forgeron(c *structures.Character) {
 	var forgeron_choice int
 	for {
@@ -25,6 +20,11 @@ func Forgeron(c *structures.Character) {
 		case 1:
 			fmt.Println("Super ! Tu as craft Chapeau de l'aventurier.")
 			fmt.Println("Tu as maintenant")
+			for i := range c.Inventory {
+				if c.Inventory[i].Name == RavenFeather
+					if c.Inventory[i].Quantity == RavenFeather
+				}
+			}
 
 		case 2:
 			fmt.Println("Super ! Tu as craft Tunique de l’aventurier")
