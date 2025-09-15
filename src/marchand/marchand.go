@@ -29,7 +29,8 @@ func Marchand(c *structures.Character) {
 		fmt.Printf("5 - %s - 7 pièces d'or\n", TrollSkin.Name)
 		fmt.Printf("6 - %s - 3 pièces d'or\n", BoarLeather.Name)
 		fmt.Printf("7 - %s - 1 pièce d'or\n", RavenFeather.Name)
-		fmt.Println("8 - RETOUR")
+		fmt.Printf("8 - Augmenter la taille de l'inventaire +10 slots - 30 pièce d'or\n")
+		fmt.Println("9 - RETOUR")
 		fmt.Scan(&marchand_choice)
 		switch marchand_choice {
 		case 1:

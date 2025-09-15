@@ -34,3 +34,7 @@ func CheckMaxInventory(c *structures.Character) bool { // True = Il y a de la pl
 	}
 	return counter < c.MaxInv
 }
+
+func upgradeInventorySlot(c *structures.Character) {
+	c.MaxInv = c.MaxInv + 10
+}

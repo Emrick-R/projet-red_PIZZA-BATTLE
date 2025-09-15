@@ -35,6 +35,13 @@ type Equipment struct {
 
 }
 
+type Monster struct {
+	Name     string
+	MaxHp    int
+	ActualHp int
+	Damage   int
+}
+
 func InitCharacter(level int, inv []Object, maxInv int, money int, skill []Skill, Armor Equipment) *Character {
 	return &Character{
 		Level:     level,

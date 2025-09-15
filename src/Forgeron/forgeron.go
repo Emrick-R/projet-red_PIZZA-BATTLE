@@ -54,6 +54,7 @@ func Forgeron(c *structures.Character) {
 				fmt.Println("1 - Oui je suis sûr !")
 				// Enlevez les items de l'inventaires et craft le ou les items
 
+				return
 			case 2:
 				fmt.Println("1 - Non je ne suis pas sûr, retour !")
 
