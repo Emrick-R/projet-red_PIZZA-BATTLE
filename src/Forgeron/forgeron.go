@@ -2,6 +2,7 @@ package forgeron
 
 import (
 	"fmt"
+	"projet-red_PIZZA-BATTLE/inventory"
 	"projet-red_PIZZA-BATTLE/structures"
 )
 
@@ -15,7 +16,7 @@ func min(a, b int) int {
 func Forgeron(c *structures.Character) {
 	var forgeron_choice int
 	var craft_confirmation int
-
+	chapeauAventurier := structures.Object{Name: "Chapeau de l'aventurier", Quantity: 1}
 	for {
 		fmt.Println("======== Forgeron : ========")
 		fmt.Println("Bonjour je suis le Forgeron, quel est votre choix ?")
@@ -52,7 +53,14 @@ func Forgeron(c *structures.Character) {
 			switch craft_confirmation {
 			case 1:
 				fmt.Println("1 - Oui je suis sûr !")
-				// Enlevez les items de l'inventaires et craft le ou les items
+				if inventory.CheckMaxInventory(c) {
+					inventory.AddInventory(c, chapeauAventurier)
+					fmt.Println("Vous venez de craft", itemcraftable, "x Chapeau de l'Aventurier")
+					inventory.RemoveInventory(c, ravenFeather) // Enlever 1 plume de corbeau et 1 cuir de sanglier
+
+				} else {
+					fmt.Println("Vous n'avez pas de places dans votre inventaire, il est plein...")
+				}
 
 				return
 			case 2:
