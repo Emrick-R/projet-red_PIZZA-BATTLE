@@ -20,7 +20,7 @@ func Marchand(c *structures.Character) {
 	FireBall := structures.Skill{Name: "Boule de feu", Damage: 20}
 
 	for {
-		fmt.Println("\n======== Marchand : ========")
+		fmt.Println("======== Marchand : ========")
 		fmt.Printf("Bonjour je suis le marchand, quel est votre choix ?\n\n")
 		fmt.Printf("1 - %s - 3 Pièces d'or\n", HpPot.Name)
 		fmt.Printf("2 - %s - 6 Pièces d'or\n", PoisonPot.Name)
@@ -56,7 +56,7 @@ func Marchand(c *structures.Character) {
 				character.AccessInventory(c)
 			}
 		case 3:
-			if skills.CheckSkills(c, FireBall) {
+			if !skills.CheckSkills(c, FireBall) {
 				skills.AddSkills(c, FireBall)
 				c.Money -= 25
 				fmt.Printf("Super ! Tu as acheté un Livre de Sort : %s. Tu perds 25 Pièces d'or.\n", FireBall.Name)
@@ -64,7 +64,7 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
 			} else {
-				fmt.Print("Tu possèdes déjà cette compétence\n\n")
+				fmt.Print("\nTu possèdes déjà cette compétence\n\n")
 				character.AccessInventory(c)
 			}
 		case 4:

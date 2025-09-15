@@ -10,8 +10,9 @@ func AddSkills(c *structures.Character, newSkill structures.Skill) {
 
 func CheckSkills(c *structures.Character, newSkill structures.Skill) bool { //True = Il a déjà la comp.
 	for i := range c.SkillList {
-		return c.SkillList[i].Name == newSkill.Name
-
+		if c.SkillList[i].Name == newSkill.Name {
+			return true
+		}
 	}
 	return false
 }
