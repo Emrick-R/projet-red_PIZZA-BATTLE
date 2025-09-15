@@ -58,7 +58,7 @@ func CharacterCreation(c *structures.Character) {
 		var valid bool
 
 		for {
-			fmt.Println("Quel est votre pseudo ?")
+			fmt.Println("\nQuel est votre pseudo ?")
 			fmt.Scan(&username)
 			valid = true
 			result := []rune(username)
@@ -93,10 +93,10 @@ func CharacterCreation(c *structures.Character) {
 			}
 		}
 
-		fmt.Println("Personnage créé avec le nom :", c.Name)
+		fmt.Println("\nPersonnage créé avec le nom :", c.Name)
 		var class_choice int
 		for {
-			fmt.Println("Super", c.Name, ", quelle classe veux-tu choisir ?")
+			fmt.Println("\nSuper", c.Name, ", quelle classe veux-tu choisir ?")
 			fmt.Println("1 - Elfe : 80 PV Max")
 			fmt.Println("2 - Nain : 120 PV Max")
 			fmt.Println("3 - Humain : 100 PV Max")
@@ -110,17 +110,17 @@ func CharacterCreation(c *structures.Character) {
 
 		switch class_choice {
 		case 1:
-			fmt.Println("Tu as choisi la classe Elfe : agile, précis et en communion avec la nature.")
+			fmt.Println("\nTu as choisi la classe Elfe : agile, précis et en communion avec la nature.")
 			c.MaxHp = 80
 			c.ActualHp = 40
 			c.Class = "Elfe"
 		case 2:
-			fmt.Println("Tu as choisi la classe Nain : robuste, courageux et maître de la forge.")
+			fmt.Println("\nTu as choisi la classe Nain : robuste, courageux et maître de la forge.")
 			c.MaxHp = 120
 			c.ActualHp = 60
 			c.Class = "Nain"
 		case 3:
-			fmt.Println("Tu as choisi la classe Humain : polyvalent, ingénieux et déterminé.")
+			fmt.Println("\nTu as choisi la classe Humain : polyvalent, ingénieux et déterminé.")
 			c.MaxHp = 100
 			c.ActualHp = 50
 			c.Class = "Humain"
