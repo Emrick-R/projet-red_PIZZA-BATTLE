@@ -35,6 +35,28 @@ func AccessSkills(c *structures.Character) {
 	fmt.Println()
 }
 
+func AccessEquipement(c *structures.Character) {
+	fmt.Println("\nEquipement :")
+	H := c.Armor.Head.Name
+	C := c.Armor.Chest.Name
+	L := c.Armor.Legs.Name
+	if c.Armor.Head.Name == "" {
+		H = "Rien"
+	} else {
+		fmt.Println("Armure de tête : ", H)
+	}
+	if c.Armor.Chest.Name == "" {
+		C = "Rien"
+	} else {
+		fmt.Println("Armure de tête : ", C)
+	}
+	if c.Armor.Legs.Name == "" {
+		L = "Rien"
+	} else {
+		fmt.Println("Armure de tête : ", L)
+	}
+}
+
 func IsDead(c *structures.Character) {
 	if c.ActualHp <= 0 {
 		fmt.Println("Vous êtes mort !")
