@@ -74,6 +74,29 @@ func IsAlpha(s string) bool {
 	return true
 }
 
+func EquipEquipment(c *structures.Character, slot string, newEquip structures.Object) {
+	chapAvent := structures.Object{Name: "Chapeau de l'aventurier", Quantity: 1}
+	fmt.Println("Quel équipement veux-tu équiper ?")
+	for _, i := range c.Inventory {
+		if i.Name == chapAvent.Name {
+		}
+		fmt.Println("1 - Tête")
+		fmt.Println("2 - Torse")
+		fmt.Println("3 - Jambes")
+		var choice int
+	fmt.Scan(&choice)
+	switch choice {
+	case 1:
+		c.Armor.Head = &newEquip
+	case 2:
+		c.Armor.Chest = &newEquip
+	case 3:
+		c.Armor.Legs = &newEquip
+	default:
+		fmt.Println("Slot d'équipement invalide.")
+	}
+}
+
 func CharacterCreation(c *structures.Character) {
 	{
 		var username string
