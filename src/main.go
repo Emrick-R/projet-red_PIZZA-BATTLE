@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	forgeron "projet-red_PIZZA-BATTLE/Forgeron"
 	"projet-red_PIZZA-BATTLE/character"
 	"projet-red_PIZZA-BATTLE/items"
 	"projet-red_PIZZA-BATTLE/marchand"
@@ -69,10 +70,11 @@ func main() {
 					fmt.Println("Tu lance une potion de poison !")
 					items.ThrowPoisonPot(c1, e1)
 					character.DisplayEInfo(e1)
-
 				case 5:
+					forgeron.Forgeron(c1)
+				case 6:
 				}
-				if menuChoice == 5 {
+				if menuChoice == 6 {
 					menuChoice = 0
 					break
 				}
