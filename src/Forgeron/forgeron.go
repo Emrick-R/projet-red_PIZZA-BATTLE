@@ -1,8 +1,11 @@
 package forgeron
 
-import "fmt"
+import (
+	"fmt"
+	structures "projet-red_PIZZA-BATTLE/Structures"
+)
 
-func Forgeron() {
+func Forgeron(c *structures.Character) {
 	var forgeron_choice int
 	for {
 		fmt.Println("======== Forgeron : ========")

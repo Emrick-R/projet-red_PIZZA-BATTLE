@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	forgeron "projet-red_PIZZA-BATTLE/Forgeron"
 	"projet-red_PIZZA-BATTLE/character"
 	"projet-red_PIZZA-BATTLE/items"
 	"projet-red_PIZZA-BATTLE/marchand"
@@ -34,9 +35,10 @@ func main() {
 				fmt.Println("\n======== Menu Personnage : ========")
 				fmt.Println("1 - Afficher le personnage")
 				fmt.Println("2 - Afficher l'inventaire")
-				fmt.Println("3 - Marchand")
-				fmt.Println("4 - Test de combat : Utiliser une potion de poison")
-				fmt.Println("5 - RETOUR")
+				fmt.Println("2 - Test de combat : Utiliser une potion de poison")
+				fmt.Println("4 - Marchand")
+				fmt.Println("5 - Forgeron")
+				fmt.Println("6 - RETOUR")
 				fmt.Scan(&menuChoice)
 
 				switch menuChoice {
@@ -61,20 +63,21 @@ func main() {
 						}
 					}
 				case 3:
-					marchand.Marchand(c1)
-				case 4:
 					fmt.Printf("\nLe petit enfant Giovanni apparaît devant toi !\n-50 PV\n")
 					character.DisplayEInfo(e1)
 
 					fmt.Println("Tu lance une potion de poison !")
 					items.ThrowPoisonPot(c1, e1)
 					character.DisplayEInfo(e1)
-
+				case 4:
+					marchand.Marchand(c1)
 				case 5:
-				}
-				if menuChoice == 5 {
-					menuChoice = 0
-					break
+					forgeron.Forgeron(c1)
+				case 6:
+					if menuChoice == 6 {
+						menuChoice = 0
+						break
+					}
 				}
 			}
 		case 2:
