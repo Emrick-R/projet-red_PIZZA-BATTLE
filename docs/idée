@@ -41,14 +41,16 @@ Peau de Troll
 Cuir de Sanglier
 Plume de Corbeau
 
-
-	wolfFur := structures.Object{Name: "Peau de Loup", Quantity: 1}
-	trollSkin := structures.Object{Name: "Peau de Troll", Quantity: 1}
-	boarLeather := structures.Object{Name: "Cuir de Sanglier", Quantity: 1}
-
 skill : 
 Coup de poing, Dmg: 10
 Boule de feu, Dmg: 20
+
+equipement:
+
+chapeauAventurier
+tuniqueAventurier
+bottesAventurier
+
 
 
 

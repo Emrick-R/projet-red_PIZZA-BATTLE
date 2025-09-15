@@ -2,6 +2,7 @@ package character
 
 import (
 	"fmt"
+	"projet-red_PIZZA-BATTLE/inventory"
 	"projet-red_PIZZA-BATTLE/structures"
 )
 
@@ -65,35 +66,57 @@ func IsDead(c *structures.Character) {
 		fmt.Println("Vous venez de renaître avec 50% de HP en moins.")
 	}
 }
-func IsAlpha(s string) bool {
-	for _, c := range s {
-		if (c < 'A' || c > 'Z') && (c < 'a' || c > 'z') && (c < '0' || c > '9') {
-			return false
-		}
-	}
-	return true
-}
 
-func EquipEquipment(c *structures.Character, slot string, newEquip structures.Object) {
+func EquipEquipment(c *structures.Character) {
+	var newEquipChoice int
 	chapAvent := structures.Object{Name: "Chapeau de l'aventurier", Quantity: 1}
-	fmt.Println("Quel équipement veux-tu équiper ?")
-	for _, i := range c.Inventory {
-		if i.Name == chapAvent.Name {
+	tunAvent := structures.Object{Name: "Tunique de l'aventurier", Quantity: 1}
+	botAvent := structures.Object{Name: "Bottes de l'aventurier", Quantity: 1}
+	for {
+		fmt.Println("\nQuel équipement veux-tu porter ?")
+		fmt.Println("1 - Chapeau de l'aventurier")
+		fmt.Println("2 - Tunique de l'aventurier")
+		fmt.Println("3 - Bottes de l'aventurier")
+		fmt.Println("4 - RETOUR")
+		fmt.Scan(&newEquipChoice)
+		hadChap := false
+		hadTun := false
+		hadBot := false
+		for _, i := range c.Inventory {
+			if i.Name == chapAvent.Name {
+				hadChap = true
+			}
+			if i.Name == tunAvent.Name {
+				hadTun = true
+			}
+			if i.Name == botAvent.Name {
+				hadBot = true
+			}
 		}
-		fmt.Println("1 - Tête")
-		fmt.Println("2 - Torse")
-		fmt.Println("3 - Jambes")
-		var choice int
-		fmt.Scan(&choice)
-		switch choice {
+		switch newEquipChoice {
 		case 1:
-			c.Armor.Head = &newEquip
+			if hadChap {
+				inventory.AddEquipment(c, chapAvent)
+			} else {
+				fmt.Printf("\nTu ne possèdes pas : %s\n\n", chapAvent.Name)
+			}
 		case 2:
-			c.Armor.Chest = &newEquip
+			if hadTun {
+				inventory.AddEquipment(c, tunAvent)
+			} else {
+				fmt.Printf("\nTu ne possèdes pas : %s\n\n", tunAvent.Name)
+			}
 		case 3:
-			c.Armor.Legs = &newEquip
-		default:
-			fmt.Println("Slot d'équipement invalide.")
+			if hadBot {
+				inventory.AddEquipment(c, botAvent)
+			} else {
+				fmt.Printf("\nTu ne possèdes pas : %s\n\n", botAvent.Name)
+			}
+		case 4:
+		}
+		if newEquipChoice == 4 {
+			newEquipChoice = 0
+			break
 		}
 	}
 }

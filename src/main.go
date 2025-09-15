@@ -19,9 +19,15 @@ func main() {
 		fmt.Scan(&menuChoice)
 		switch menuChoice {
 		case 1:
+			chapAvent := structures.Object{Name: "Chapeau de l'aventurier"}
+			tunAvent := structures.Object{Name: "Tunique de l'aventurier"}
+			botAvent := structures.Object{Name: "Bottes de l'aventurier"}
 			HpPot := structures.Object{Name: "Potion de Vie"}
 			inv := []structures.Object{
 				{Name: HpPot.Name, Quantity: 3},
+				{Name: chapAvent.Name, Quantity: 2},
+				{Name: tunAvent.Name, Quantity: 2},
+				{Name: botAvent.Name, Quantity: 2},
 			}
 			punch := structures.InitSkill("Coup de poing", 10)
 			skillList := []structures.Skill{
@@ -36,7 +42,7 @@ func main() {
 				fmt.Println("\n======== Menu Personnage : ========")
 				fmt.Println("1 - Afficher le personnage")
 				fmt.Println("2 - Afficher l'inventaire")
-				fmt.Println("2 - Test de combat : Utiliser une potion de poison")
+				fmt.Println("3 - Test de combat : Utiliser une potion de poison")
 				fmt.Println("4 - Marchand")
 				fmt.Println("5 - Forgeron")
 				fmt.Println("6 - RETOUR")
@@ -53,14 +59,17 @@ func main() {
 						character.AccessEquipement(c1)
 						character.AccessSkills(c1)
 						fmt.Println("1 - Utiliser une potion")
-						fmt.Println("2 - RETOUR")
+						fmt.Println("2 - Equiper un équipement")
+						fmt.Println("3 - RETOUR")
 						fmt.Scan(&menuChoice)
 						switch menuChoice {
 						case 1:
 							items.TakePot(c1)
 						case 2:
+							character.EquipEquipment(c1)
+						case 3:
 						}
-						if menuChoice == 2 {
+						if menuChoice == 3 {
 							menuChoice = 0
 							break
 						}

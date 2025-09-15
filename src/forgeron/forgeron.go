@@ -19,11 +19,12 @@ func Forgeron(c *structures.Character) {
 	boarLeather := structures.Object{Name: "Cuir de Sanglier", Quantity: 1}
 	ravenFeather := structures.Object{Name: "Plume de Corbeau", Quantity: 1}
 
-	var forgeron_choice int
-	var craft_confirmation int
 	chapeauAventurier := structures.Object{Name: "Chapeau de l'aventurier", Quantity: 1}
 	tuniqueAventurier := structures.Object{Name: "Tunique de l'aventurier", Quantity: 1}
 	bottesAventurier := structures.Object{Name: "Bottes de l'aventurier", Quantity: 1}
+
+	var forgeron_choice int
+	var craft_confirmation int
 
 	for {
 		fmt.Println("======== Forgeron : ========")
