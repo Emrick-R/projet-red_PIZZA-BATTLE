@@ -145,6 +145,8 @@ func Marchand(c *structures.Character) {
 				fmt.Print("\nTu possèdes déjà cette compétence\n\n")
 				character.AccessInventory(c)
 			}
+		default:
+			fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
 		}
 		if marchand_choice == 10 {
 			marchand_choice = 0
