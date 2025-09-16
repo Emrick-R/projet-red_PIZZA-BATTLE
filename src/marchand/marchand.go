@@ -19,6 +19,7 @@ func Marchand(c *structures.Character) {
 	RavenFeather := structures.Object{Name: "Plume de Corbeau", Quantity: 1}
 
 	FireBall := structures.Skill{Name: "Boule de feu", Damage: 20}
+	DeathSpell := structures.Skill{Name: "Sort de la mort qui tue", Damage: 500}
 
 	for {
 		fmt.Println("\n======== Marchand : ========")
@@ -33,6 +34,7 @@ func Marchand(c *structures.Character) {
 		fmt.Printf("8 - %s - 1 pièce d'or\n", RavenFeather.Name)
 		fmt.Printf("9 - Augmenter la taille de l'inventaire +10 slots - 30 pièce d'or\n")
 		fmt.Println("10 - RETOUR")
+		fmt.Printf("11 - Livre de Sort : %s - 50 pièces d'or (test)\n", DeathSpell.Name)
 		fmt.Scan(&marchand_choice)
 		switch marchand_choice {
 		case 1:
@@ -127,13 +129,24 @@ func Marchand(c *structures.Character) {
 
 		case 9:
 			c.Money -= 30
-			fmt.Println("\nSuper ! Ton inventaire s'est agrandi de 10 slots. Tu perds 30 Pièce d'or.")
+			fmt.Println("\nSuper ! Ton inventaire s'est agrandi de 10 places. Tu perds 30 Pièce d'or.")
 			fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 			inventory.UpgradeInventorySlot(c)
 
 		case 10:
+		case 11:
+			if !skills.CheckSkills(c, DeathSpell) {
+				skills.AddSkills(c, DeathSpell)
+				fmt.Printf("\nSuper ! Tu as acheté un Livre de Sort : %s. Tu test le sort.\n", DeathSpell.Name)
+				fmt.Printf("Tu connais maintenant la compétance %s : %d de dégats\n", DeathSpell.Name, DeathSpell.Damage)
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			} else {
+				fmt.Print("\nTu possèdes déjà cette compétence\n\n")
+				character.AccessInventory(c)
+			}
 		}
-		if marchand_choice == 9 {
+		if marchand_choice == 10 {
 			marchand_choice = 0
 			break
 		}

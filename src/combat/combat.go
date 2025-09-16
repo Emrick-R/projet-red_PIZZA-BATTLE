@@ -13,6 +13,60 @@ import (
 	"time"
 )
 
+var choix int
+
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
+func rollDice() int {
+	return rand.Intn(100) + 1
+}
+
+func InitiativeMamma(c *structures.Character, e *structures.Enemy) {
+
+	fmt.Println("🟩⬜🟥 Épreuve de la Mamma : choisissez un nombre, celui le plus proche du score de la Mamma commence.")
+
+	// input joueur sécurisé
+	for {
+		fmt.Print("Entrez votre nombre (1-100) : ")
+		_, err := fmt.Scan(&choix)
+		if err == nil && choix >= 1 && choix <= 100 {
+			break
+		}
+		fmt.Println("Valeur invalide ! Tapez un nombre entre 1 et 100.")
+	}
+
+	// premier lancer
+	mamma := rollDice()
+	ennemi := rollDice()
+
+	// affichage clair
+	fmt.Printf("Ton Chiffre : %d | Chiffre de la Mamma : %d | Chiffre de l'ennemi : %d\n", choix, mamma, ennemi)
+
+	// en cas d'égalité
+	for choix == ennemi {
+		fmt.Println("Égalité — relance du nombre !")
+		mamma = rollDice()
+		ennemi = rollDice()
+		fmt.Printf("Chiffre : %d | Chiffre de la Mamma : %d | Chiffre de l'ennemi : %d\n", choix, mamma, ennemi)
+	}
+
+	// distances absolues
+	distJoueur := abs(choix - mamma)
+	distEnnemi := abs(ennemi - mamma)
+
+	// initiative
+	if distJoueur < distEnnemi {
+		fmt.Printf("✅ Vous êtes le plus proche du chiffre de la Mamma avec une distance de %d, vous commencez !\n", distJoueur)
+	} else {
+		fmt.Printf("❌ L'ennemi le plus proche du chiffre de la Mamma avec une distance de %d, il commence !\n", distEnnemi)
+	}
+}
+
 func DisplayCombatInventory(c *structures.Character, e *structures.Enemy) {
 	for {
 		character.AccessInventory(c)
@@ -188,7 +242,7 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 			fmt.Printf("A ton tour %s!\n\n", c.Name)
 			CharacterTurn(c, e)
 			if EnemyIsDead(e) {
-				score.Addscore(c, e)
+				break
 			}
 			Turn++
 		} else { //Le tour de l'IA, donc Tour 2
@@ -199,63 +253,11 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 			Turn++
 		}
 	}
-
-}
-
-var choix int
-
-func abs(x int) int {
-	if x < 0 {
-		return -x
-	}
-	return x
-}
-
-func rollDice() int {
-	return rand.Intn(100) + 1
-}
-
-func InitiativeMamma(c *structures.Character, e *structures.Enemy) {
-
-	fmt.Println("🟩⬜🟥 Épreuve de la Mamma : choisissez un nombre, celui le plus proche du score de la Mamma commence.")
-
-	// input joueur sécurisé
-	for {
-		fmt.Print("Entrez votre nombre (1-100) : ")
-		_, err := fmt.Scan(&choix)
-		if err == nil && choix >= 1 && choix <= 100 {
-			break
-		}
-		fmt.Println("Valeur invalide ! Tapez un nombre entre 1 et 100.")
-	}
-
-	// premier lancer
-	mamma := rollDice()
-	ennemi := rollDice()
-
-	// affichage clair
-	fmt.Printf("Ton Chiffre : %d | Chiffre de la Mamma : %d | Chiffre de l'ennemi : %d\n", choix, mamma, ennemi)
-
-	// en cas d'égalité
-	for choix == ennemi {
-		fmt.Println("Égalité — relance du nombre !")
-		mamma = rollDice()
-		ennemi = rollDice()
-		fmt.Printf("Chiffre : %d | Chiffre de la Mamma : %d | Chiffre de l'ennemi : %d\n", choix, mamma, ennemi)
-	}
-
-	// distances absolues
-	distJoueur := abs(choix - mamma)
-	distEnnemi := abs(ennemi - mamma)
-
-	// initiative
-	if distJoueur < distEnnemi {
-		fmt.Printf("✅ Vous êtes le plus proche du chiffre de la Mamma avec une distance de %d, vous commencez !\n", distJoueur)
-		c.Initiative = c.Initiative + distJoueur
-		fmt.Printf("Vous avez %d durant ce combat\n", c.Initiative)
-	} else {
-		fmt.Printf("❌ L'ennemi le plus proche du chiffre de la Mamma avec une distance de %d, il commence !\n", distEnnemi)
-		e.Initiative = e.Initiative - distEnnemi
-		fmt.Printf("l'ennemi a %d durant ce combat\n", c.Initiative)
-	}
+	fmt.Printf("\nBravo ! Tu as térassé %s !\n", e.Name)
+	ScoreWon := score.AddScore(c, e)
+	MoneyWon := items.AddMoney(c, e)
+	fmt.Printf("\nTu gagnes %d d'argent\n", MoneyWon)
+	fmt.Printf("Tu as %d d'argent\n", c.Money)
+	fmt.Printf("\nTu gagnes %d points de score\n", ScoreWon)
+	score.ShowScore(c)
 }

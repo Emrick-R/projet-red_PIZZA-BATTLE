@@ -75,3 +75,18 @@ func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 	}
 	fmt.Println("Il n'y a pas de potions de Poison dans l'inventaire")
 }
+
+func AddMoney(c *structures.Character, e *structures.Enemy) int {
+	switch e.Difficulty {
+	case "Facile":
+		c.Money += 5
+		return 5
+	case "Normal":
+		c.Money += 10
+		return 10
+	case "Boss":
+		c.Money += 20
+		return 20
+	}
+	return 0
+}

@@ -9,8 +9,8 @@ import (
 )
 
 func DisplayCInfo(c *structures.Character) {
-	fmt.Printf("\nNom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\nArgent: %d\nScore: %d\nInitiative: %d",
-		c.Name, c.Class, c.Level, c.ActualHp, c.MaxHp, c.Money, c.Score, c.Initiative, c.ExpActual, c.ExpMax)
+	fmt.Printf("\nNom: %s\nClasse: %s, PV: %d/%d\n Niveau: %d, Expérience: %d/%d\nArgent: %d\nInitiative: %d\nScore: %d\n",
+		c.Name, c.Class, c.ActualHp, c.MaxHp, c.Level, c.ExpActual, c.ExpMax, c.Money, c.Initiative, c.Score)
 	for _, skill := range c.SkillList {
 		fmt.Printf("Liste des skills :\n%s, %d de dégats\n\n", skill.Name, skill.Damage)
 	}
