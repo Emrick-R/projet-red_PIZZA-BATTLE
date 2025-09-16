@@ -6,19 +6,8 @@ import (
 )
 
 // AddScore ajoute des points au score du personnage en fonction de la difficulté de l'ennemi vaincu
-func AddScore(c *structures.Character, e *structures.Enemy) int {
-	switch e.Difficulty {
-	case "Facile":
-		c.Score += 5
-		return 5
-	case "Normal":
-		c.Score += 10
-		return 10
-	case "Boss":
-		c.Score += 20
-		return 20
-	}
-	return 0
+func AddScore(c *structures.Character, e *structures.Enemy) {
+	c.Score += e.GiveScore
 }
 
 // ShowScore affiche le score actuel du personnage

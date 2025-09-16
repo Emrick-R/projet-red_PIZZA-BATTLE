@@ -49,7 +49,7 @@ func AddEquipment(c *structures.Character, newObj structures.Object) {
 			RemoveInventory(c, newObj)
 		} else {
 			// Si l'armure de tête est déjà équipée, affiche un message et ne fait rien
-			fmt.Printf("\nTu as déjà équipé : %s\n\n", newObj.Name)
+			fmt.Printf("\n❌ Tu as déjà équipé : %s\n\n", newObj.Name)
 		}
 	case "Tunique de l'aventurier":
 		// Vérifie si l'armure de torse est déjà équipée, si ce n'est pas le cas, l'équipe
@@ -62,7 +62,7 @@ func AddEquipment(c *structures.Character, newObj structures.Object) {
 			c.MaxHp += 25
 			RemoveInventory(c, newObj)
 		} else {
-			fmt.Printf("\nTu as déjà équipé : %s\n\n", newObj.Name)
+			fmt.Printf("\n❌ Tu as déjà équipé : %s\n\n", newObj.Name)
 		}
 	case "Bottes de l'aventurier":
 		// Vérifie si l'armure de jambes est déjà équipée, si ce n'est pas le cas, l'équipe
@@ -75,9 +75,14 @@ func AddEquipment(c *structures.Character, newObj structures.Object) {
 			c.MaxHp += 15
 			RemoveInventory(c, newObj)
 		} else {
-			fmt.Printf("\nTu as déjà équipé : %s\n\n", newObj.Name)
+			fmt.Printf("\n❌ Tu as déjà équipé : %s\n\n", newObj.Name)
 		}
 	}
+}
+
+// Fonction pour ajouter de l'argent au personnage en fonction de la difficulté de l'ennemi vaincu
+func AddMoney(c *structures.Character, e *structures.Enemy) {
+	c.Money += e.GiveMoney
 }
 
 // CheckMaxInventory vérifie si l'inventaire du personnage a de la place pour ajouter de nouveaux objets

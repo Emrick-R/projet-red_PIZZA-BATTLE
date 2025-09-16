@@ -11,7 +11,7 @@ import (
 // DisplayCInfo affiche les informations du personnage (nom, classe, PV, niveau, expérience, argent, initiative, score)
 func DisplayCInfo(c *structures.Character) {
 	fmt.Printf("\nNom: %s\nClasse: %s, PV: %d/%d\n Niveau: %d, Expérience: %d/%d\nArgent: %d\nInitiative: %d\nScore: %d\n",
-		c.Name, c.Class, c.ActualHp, c.MaxHp, c.Level, c.ExpActual, c.ExpMax, c.Money, c.Initiative, c.Score)
+		c.Name, c.Class, c.ActualHp, c.MaxHp, c.Level, c.ActualExp, c.MaxExp, c.Money, c.Initiative, c.Score)
 }
 
 // DisplayEInfo affiche les informations de l'ennemi (nom, PV, initiative)
@@ -79,7 +79,7 @@ func InventoryChoice(c *structures.Character) {
 		case 3:
 		// Retour
 		default:
-			fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
+			fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 		}
 		if menuChoice == 3 {
 			menuChoice = 0
@@ -154,7 +154,7 @@ func EquipEquipment(c *structures.Character) {
 		case 4:
 
 		default:
-			fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
+			fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 		}
 		if newEquipChoice == 4 {
 			newEquipChoice = 0
@@ -178,7 +178,7 @@ func CharacterCreation(c *structures.Character) {
 
 		// Vérification que le pseudo n'est pas vide et ne contient que des lettres
 		if len(result) == 0 {
-			fmt.Println("Le pseudo ne peut pas être vide.")
+			fmt.Println("❌ Le pseudo ne peut pas être vide.")
 			valid = false
 			continue
 		}
@@ -186,7 +186,7 @@ func CharacterCreation(c *structures.Character) {
 		// Vérification que chaque caractère est une lettre
 		for _, r := range result {
 			if r < 65 || (r > 90 && r < 97) || r > 122 {
-				fmt.Println("Votre pseudo n'est pas correct, il ne contient que des lettres.")
+				fmt.Println("❌ Votre pseudo n'est pas correct, il ne contient que des lettres.")
 				valid = false
 				break
 			}
@@ -228,7 +228,7 @@ func CharacterCreation(c *structures.Character) {
 			// Choix valide, on sort de la boucle
 			break
 		}
-		fmt.Println("Choix invalide, essaye encore.")
+		fmt.Println("❌ Choix invalide, essaye encore.")
 	}
 
 	// Assignation des caractéristiques en fonction de la classe choisie
@@ -258,4 +258,9 @@ func CharacterCreation(c *structures.Character) {
 		c.ActualMana = 80
 		c.Class = "Humain"
 	}
+}
+
+// Fonction pour ajouter de l'experience au personnage en fonction de la difficulté de l'ennemi vaincu
+func AddExp(c *structures.Character, e *structures.Enemy) {
+	c.ActualExp += e.GiveExp
 }

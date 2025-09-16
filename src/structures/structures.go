@@ -20,21 +20,27 @@ type Character struct {
 	Armor      Equipment
 	Score      int
 	Initiative int
-	ExpActual  int
-	ExpMax     int
+	ActualExp  int
+	MaxExp     int
 	ActualMana int
 	ManaMax    int
 }
 
 // Enemy représente un ennemi avec ses attributs
 type Enemy struct {
-	Name       string
-	MaxHp      int
-	ActualHp   int
-	Damage     int
-	Difficulty string //3 types : Facile= score 5, Normale= score 10, Boss= score 20
-	Initiative int
-	PowerCount int
+	Name         string
+	MaxHp        int
+	ActualHp     int
+	Damage       int
+	Difficulty   string //3 types : Facile= score 5, Normale= score 10, Boss= score 20
+	Initiative   int
+	PowerCount   int
+	GiveScore    int
+	GiveMoney    int
+	GiveExp      int
+	Poisoned     bool
+	PoisonTurns  int
+	PoisonDamage int
 }
 
 // Skill représente une compétence que le personnage peut utiliser en combat
@@ -56,8 +62,8 @@ type Equipment struct {
 func InitCharacter() *Character {
 	return &Character{
 		Level:      1,
-		ExpActual:  0,
-		ExpMax:     100,
+		ActualExp:  0,
+		MaxExp:     100,
 		Initiative: 100,
 		// Initialisation avec 3 potions
 		Inventory: []Object{
@@ -84,7 +90,7 @@ func InitCharacter() *Character {
 // InitEnemy initialise un Ennemi avec des valeurs donnée selon la difficulté donnée et les valeurs données
 func InitEnemy(name string, grade string) *Enemy {
 	switch grade {
-	// si La difficultées donnée est "Facile"
+	// si La difficulté donnée est "Facile"
 	case "Facile":
 
 		return &Enemy{
@@ -95,8 +101,11 @@ func InitEnemy(name string, grade string) *Enemy {
 			Difficulty: "Facile",
 			Initiative: 100,
 			PowerCount: 0,
+			GiveScore:  5,
+			GiveMoney:  5,
+			GiveExp:    100,
 		}
-		// si La difficultées donnée est "Normale"
+		// si La difficulté donnée est "Normale"
 	case "Normale":
 
 		return &Enemy{
@@ -107,8 +116,11 @@ func InitEnemy(name string, grade string) *Enemy {
 			Difficulty: "Normal",
 			Initiative: 120,
 			PowerCount: 0,
+			GiveScore:  10,
+			GiveMoney:  10,
+			GiveExp:    150,
 		}
-		// si La difficultées donnée est "Boss"
+		// si La difficulté donnée est "Boss"
 	case "Boss":
 
 		return &Enemy{
@@ -119,9 +131,12 @@ func InitEnemy(name string, grade string) *Enemy {
 			Difficulty: "Boss",
 			Initiative: 150,
 			PowerCount: 0,
+			GiveScore:  5,
+			GiveMoney:  5,
+			GiveExp:    300,
 		}
 	}
-	// si La difficultées donnée est rien initialise quand même un ennemi "Facile"
+	// si La difficulté donnée est rien, initialise quand même un ennemi "Facile"
 	return &Enemy{
 		Name:       name,
 		MaxHp:      100,
@@ -130,6 +145,9 @@ func InitEnemy(name string, grade string) *Enemy {
 		Difficulty: "Facile",
 		Initiative: 100,
 		PowerCount: 0,
+		GiveScore:  5,
+		GiveMoney:  5,
+		GiveExp:    100,
 	}
 }
 

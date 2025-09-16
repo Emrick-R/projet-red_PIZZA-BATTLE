@@ -3,7 +3,6 @@ package items
 import (
 	"fmt"
 	"projet-red_PIZZA-BATTLE/structures"
-	"time"
 )
 
 // Fonction pour utiliser une potion de vie
@@ -40,7 +39,21 @@ func TakePot(c *structures.Character) {
 		}
 	}
 	// Si la potion de vie n'est pas trouvée dans l'inventaire, afficher un message d'erreur
-	fmt.Println("Il n'y a pas de potions de Vie dans l'inventaire")
+	fmt.Println("❌ Il n'y a pas de potions de Vie dans l'inventaire")
+}
+
+func CheckPoisonStatus(e *structures.Enemy) {
+	if e.Poisoned && e.PoisonTurns > 0 {
+		e.ActualHp -= e.PoisonDamage
+		fmt.Printf("☠️ %s subit %d dégâts de poison (%d tours restants)\n", e.Name, e.PoisonDamage, e.PoisonTurns)
+		e.PoisonTurns--
+
+		if e.PoisonTurns == 0 {
+			e.Poisoned = false
+			fmt.Println("✅ Le poison s’est dissipé.")
+		}
+	}
+
 }
 
 // Fonction pour utiliser une potion de mana
@@ -67,7 +80,7 @@ func TakeManaPot(c *structures.Character) {
 			return
 		}
 	}
-	fmt.Println("Il n'y a pas de potions de Mana dans l'inventaire")
+	fmt.Println("❌Il n'y a pas de potions de Mana dans l'inventaire")
 }
 
 // Fonction pour utiliser une potion de poison
@@ -87,29 +100,15 @@ func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 			// Effet de la potion de poison sur 3 tours (10 dégâts par tour)
 			//A FINIR (ajouter un effet de poison sur plusieurs tours)
 			fmt.Printf("\nPotion envoyée !\n")
-			for i := 0; i < 3; i++ {
-				e.ActualHp -= 10
-				fmt.Printf("L'ennemi a perdu : %d hp\n", e.ActualHp)
-				time.Sleep(1 * time.Second)
-			}
 
+			// Appliquer l’effet poison
+			e.Poisoned = true
+			e.PoisonTurns = 3   // dure 3 tours
+			e.PoisonDamage = 10 // 10 dégâts par tour
+
+			fmt.Println("\n💀 L'ennemi est empoisonné pour 3 tours !")
+			return
 		}
 	}
-	fmt.Println("Il n'y a pas de potions de Poison dans l'inventaire")
-}
-
-// Fonction pour ajouter de l'argent au personnage en fonction de la difficulté de l'ennemi vaincu
-func AddMoney(c *structures.Character, e *structures.Enemy) int {
-	switch e.Difficulty {
-	case "Facile":
-		c.Money += 5
-		return 5
-	case "Normal":
-		c.Money += 10
-		return 10
-	case "Boss":
-		c.Money += 20
-		return 20
-	}
-	return 0
+	fmt.Println("❌ Il n'y a pas de potion de poison dans l'inventaire.")
 }

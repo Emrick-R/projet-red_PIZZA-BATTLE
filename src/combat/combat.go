@@ -6,6 +6,7 @@ import (
 	"os"
 	"projet-red_PIZZA-BATTLE/affichage"
 	"projet-red_PIZZA-BATTLE/character"
+	"projet-red_PIZZA-BATTLE/inventory"
 	"projet-red_PIZZA-BATTLE/items"
 	"projet-red_PIZZA-BATTLE/score"
 	"projet-red_PIZZA-BATTLE/skills"
@@ -48,7 +49,7 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 			// input valide, on sort de la boucle
 			break
 		}
-		fmt.Println("Valeur invalide ! Tapez un nombre entre 1 et 100.")
+		fmt.Println("❌ Valeur invalide ! Tapez un nombre entre 1 et 100.")
 	}
 
 	// premier lancer
@@ -120,7 +121,7 @@ func DisplayCombatInventory(c *structures.Character, e *structures.Enemy) {
 				//Retour
 				default:
 					// Choix autre que 1, 2 ou 3
-					fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
+					fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 				}
 
 				if menuChoice == 3 {
@@ -137,7 +138,7 @@ func DisplayCombatInventory(c *structures.Character, e *structures.Enemy) {
 			//Retour
 		default:
 			// Choix autre que 1, 2 ou 3
-			fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
+			fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 		}
 
 		if menuChoice == 3 {
@@ -270,7 +271,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 						//Retour
 						default:
 							// Choix autre que 1, 2 ou 3
-							fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
+							fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 						}
 						//Reset de la variable menuChoice
 						if menuChoice == 3 {
@@ -285,7 +286,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 				// Retour
 				default:
 					// Choix autre que 1, 2 ou 3
-					fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
+					fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 				}
 				//Reset de la variable menuChoice
 				if menuChoice == 3 {
@@ -295,7 +296,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 			}
 		default:
 			// Choix autre que 1 ou 2
-			fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
+			fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 		}
 
 	}
@@ -332,6 +333,12 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 			//Le tour de l'IA (Turn == impair)
 			fmt.Println("\nTour :", TrueTurn)
 			fmt.Printf("C'est au tour de %s \n\n", e.Name)
+			//Verification de l'effet de poison
+			items.CheckPoisonStatus(e)
+			if EnemyIsDead(e) {
+				//L'ennemi est mort
+				break
+			}
 			//Déroulement du tour de l'IA
 			EnemyPattern(c, e, Turn)
 			//Vérification de la mort
@@ -343,12 +350,13 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 	//Fin du combat (ennemi mort)
 	fmt.Printf("\nBravo ! Tu as térassé %s !\n", e.Name)
 	//Récompenses du combat (Argent + Score)
-	ScoreWon := score.AddScore(c, e)
-	MoneyWon := items.AddMoney(c, e)
-	fmt.Printf("\nTu gagnes %d d'argent\n", MoneyWon)
-	fmt.Printf("Tu as %d d'argent\n", c.Money)
-	fmt.Printf("\nTu gagnes %d points de score\n", ScoreWon)
-	//Affichage du score
-	score.ShowScore(c)
+	score.AddScore(c, e)
+	inventory.AddMoney(c, e)
+	character.AddExp(c, e)
+	fmt.Printf("\nTu gagnes %d d'argent\n", e.GiveMoney)
+	fmt.Printf("\nTu gagnes %d d'expérience\n", e.GiveExp)
+	fmt.Printf("\nTu gagnes %d points de score\n", e.GiveScore)
+	//Affichage de l'argent, de l'Exp et du score
+	fmt.Printf("Argent : %d; Exp : %d/%d; Score : %d\n", c.Money, c.ActualExp, c.MaxHp, c.Score)
 	// Retour au menu principal
 }

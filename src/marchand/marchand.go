@@ -61,7 +61,7 @@ func Marchand(c *structures.Character) {
 				// Retour au menu du marchand
 			} else {
 				// Message d'erreur si l'inventaire est plein
-				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
 				// Affichage de l'inventaire
 				character.AccessInventory(c)
 				// Retour au menu du marchand
@@ -75,7 +75,7 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
 			} else {
-				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
 				character.AccessInventory(c)
 			}
 		case 3:
@@ -87,7 +87,7 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
 			} else {
-				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
 				character.AccessInventory(c)
 			}
 		case 4:
@@ -103,7 +103,7 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
 			} else {
-				fmt.Print("\nTu possèdes déjà cette compétence\n\n")
+				fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
 				character.AccessInventory(c)
 			}
 		case 5:
@@ -115,7 +115,7 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
 			} else {
-				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
 				character.AccessInventory(c)
 			}
 		case 6:
@@ -127,7 +127,7 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
 			} else {
-				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
 				character.AccessInventory(c)
 			}
 		case 7:
@@ -139,7 +139,7 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
 			} else {
-				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
 				character.AccessInventory(c)
 			}
 		case 8:
@@ -151,7 +151,7 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
 			} else {
-				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
 				character.AccessInventory(c)
 			}
 
@@ -174,12 +174,12 @@ func Marchand(c *structures.Character) {
 				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
 				character.AccessInventory(c)
 			} else {
-				fmt.Print("\nTu possèdes déjà cette compétence\n\n")
+				fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
 				character.AccessInventory(c)
 			}
 		default:
 			// Choix autre que 1 à 10
-			fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
+			fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 		}
 		// Retour au menu précédent si le choix est 10
 		// Reset de la variable marchand_choice si le choix est 10

@@ -66,7 +66,7 @@ func Forgeron(c *structures.Character) {
 			itemcraftable := min(countRavenFeather, countBoarLeather)
 			//Vérification si le joueur a les matériaux nécessaires
 			if itemcraftable < 1 {
-				fmt.Printf("\nTu n'as pas les objets requis pour fabriquer le Chapeau de l'Aventurier\n\n")
+				fmt.Printf("\n❌ Tu n'as pas les objets requis pour fabriquer le Chapeau de l'Aventurier\n\n")
 				// Il n'a pas les matériaux nécessaires, retour au menu
 				break
 			} else {
@@ -98,7 +98,7 @@ func Forgeron(c *structures.Character) {
 			//besoin de 2 fourrures de loup + 1 peau de troll
 			itemcraftable := min(countWolfFur/2, countTrollSkin)
 			if itemcraftable < 1 {
-				fmt.Printf("\nTu n'as pas les objets requis pour Tunique de l'aventurier de l'Aventurier\n\n")
+				fmt.Printf("\n❌ Tu n'as pas les objets requis pour Tunique de l'aventurier de l'Aventurier\n\n")
 				break
 			} else {
 				fmt.Printf("\nTu peux fabriquer %d x Tunique de l'aventurier\n\n", itemcraftable)
@@ -124,7 +124,7 @@ func Forgeron(c *structures.Character) {
 			// Fabrication des Bottes de l'aventurier
 			itemcraftable := min(countWolfFur, countBoarLeather)
 			if itemcraftable < 1 {
-				fmt.Printf("\nTu n'as pas les objets requis pour Bottes de l'aventurier de l'Aventurier\n\n")
+				fmt.Printf("\n❌ Tu n'as pas les objets requis pour Bottes de l'aventurier de l'Aventurier\n\n")
 				break
 			} else {
 				fmt.Printf("\nTu peux fabriquer %d x Bottes de l'aventurier\n", itemcraftable)

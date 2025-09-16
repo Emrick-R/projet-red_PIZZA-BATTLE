@@ -58,7 +58,7 @@ func main() {
 				case 6:
 				default:
 					// Choix invalide
-					fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
+					fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 				}
 				// Reset de la variable menuChoice pour éviter les boucles infinies
 				if menuChoice == 6 {
@@ -73,7 +73,7 @@ func main() {
 			os.Exit(0)
 		default:
 			// Choix invalide
-			fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
+			fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 		}
 	}
 }

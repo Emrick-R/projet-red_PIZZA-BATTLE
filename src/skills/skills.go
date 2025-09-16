@@ -36,7 +36,7 @@ func SkillChoice(c *structures.Character) structures.Skill {
 			return c.SkillList[skill_choice-1]
 		}
 		// Si le choix n'est pas valide, affiche un message d'erreur et redemande
-		fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
+		fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 	}
 }
 
