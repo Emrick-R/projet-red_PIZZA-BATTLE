@@ -61,14 +61,15 @@ func EnemyPatern(c *structures.Character, e *structures.Enemy, t int) {
 	}
 }
 
-func Combat(e *structures.Enemy, c *structures.Character) {
+func Combat(c *structures.Character, e *structures.Enemy) {
 	for {
 		var combat_choice int
+		fmt.Println("======== Comnbat : ========")
+		fmt.Println("Début du combat vous vous battez contre un", e.Name, "! Prudence !")
+		fmt.Println("1 - Attaquer ")
+		fmt.Println("2 - Inventaire ")
+		fmt.Println("3 - Fuir devant la puissance de l'ennemi")
 		fmt.Scan(&combat_choice)
-		fmt.Print("Début du combat vous vous battez contre un", e.Name, "! Prudence !")
-		fmt.Printf("1 - Attaquer ")
-		fmt.Printf("2 - Inventaire ")
-		fmt.Printf("3 - Fuir devant la puissance de l'ennemi")
 		switch combat_choice {
 		case 1:
 			skills.SkillChoice(c)
