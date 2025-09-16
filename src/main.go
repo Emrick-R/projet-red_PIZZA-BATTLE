@@ -5,6 +5,7 @@ import (
 	"os"
 	"projet-red_PIZZA-BATTLE/affichage"
 	"projet-red_PIZZA-BATTLE/character"
+	"projet-red_PIZZA-BATTLE/combat"
 	"projet-red_PIZZA-BATTLE/forgeron"
 	"projet-red_PIZZA-BATTLE/items"
 	"projet-red_PIZZA-BATTLE/marchand"
@@ -15,7 +16,7 @@ func main() {
 	var menuChoice int
 
 	for {
-		affichage.AffichageMenuPrincipal()
+		affichage.AffichageMenuDemarrage()
 		fmt.Scan(&menuChoice)
 		switch menuChoice {
 		case 1:
@@ -31,30 +32,38 @@ func main() {
 			}
 			// Initialiser le personnage
 			c1 := structures.InitCharacter(1, inv, 10, 100, skillList)
+			// Création du personnage par l'utilisateur
 			character.CharacterCreation(c1)
-			e1 := structures.InitEnemy("Giovanni", 100, 100, 5, "Facile")
+			// Initialiser l'ennemi
+			e1 := structures.InitEnemy("Petit Giovanni", 100, 100, 5, "Facile")
 
 			for {
-				affichage.AffichageMenuPersonnage()
+				affichage.AffichageMenuPrincipal()
 				fmt.Scan(&menuChoice)
 
 				switch menuChoice {
 				case 1:
+					// Afficher les infos du personnage
 					character.DisplayCInfo(c1)
 				case 2:
+					// Menu Inventaire
 					for {
 						menuChoice = 0
 						character.AccessInventory(c1)
 						character.AccessEquipement(c1)
 						character.AccessSkills(c1)
+						// Menu Inventaire
 						affichage.AffichageMenuInventaire()
 						fmt.Scan(&menuChoice)
 						switch menuChoice {
 						case 1:
+							// Utiliser une potion
 							items.TakePot(c1)
 						case 2:
+							// Equiper un équipement
 							character.EquipEquipment(c1)
 						case 3:
+							// Retour
 						}
 						if menuChoice == 3 {
 							menuChoice = 0
@@ -62,15 +71,13 @@ func main() {
 						}
 					}
 				case 3:
-					fmt.Printf("\nLe petit enfant Giovanni apparaît devant toi !\n-50 PV\n")
-					character.DisplayEInfo(e1)
-
-					fmt.Println("Tu lances une potion de poison !")
-					items.ThrowPoisonPot(c1, e1)
-					character.DisplayEInfo(e1)
+					// Test de combat (1v1)
+					combat.TurnCombat1v1(c1, e1)
 				case 4:
+					// Marchand
 					marchand.Marchand(c1)
 				case 5:
+					// Forgeron
 					forgeron.Forgeron(c1)
 				case 6:
 				}

@@ -48,12 +48,14 @@ func EnemyPatern(c *structures.Character, e *structures.Enemy, t int) {
 
 	T3*/
 	if t%3 == 0 {
-		fmt.Print(e.Name, "attaque", c.Name, "et lui inflige", e.Damage*2, "de dégâts")
+		fmt.Print(e.Name, " attaque ", c.Name, " et lui inflige ", e.Damage*2, " de dégâts")
 		c.ActualHp = c.ActualHp - (e.Damage * 2)
+		fmt.Printf("%s : %d/%d hp\n", c.Name, c.ActualHp, c.MaxHp)
 	} else {
 		// Autre tours
 		c.ActualHp = c.ActualHp - e.Damage
-		fmt.Print(e.Name, "attaque", c.Name, "et lui inflige", e.Damage, "de dégâts")
+		fmt.Print(e.Name, " attaque ", c.Name, " et lui inflige ", e.Damage, " de dégâts")
+		fmt.Printf("%s : %d/%d hp\n", c.Name, c.ActualHp, c.MaxHp)
 	}
 }
 
@@ -64,16 +66,16 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 	Turn := 1
 	for {
 		if Turn%2 == 0 { //Le tour du joueur, donc Tour 2
-			fmt.Println("Tour :", Turn)
-			fmt.Printf("A ton tour %s!\n", c.Name)
+			fmt.Println("\nTour :", Turn)
+			fmt.Printf("A ton tour %s!\n\n", c.Name)
 			//Appel de la fonction tour du Joueur
 			if EnemyIsDead(e) {
 				score.Addscore(c, e)
 			}
 			Turn++
 		} else { //Le tour de l'IA, donc Tour 2
-			fmt.Println("Tour :", Turn)
-			fmt.Printf("C'est au tour de %s \n", e.Name)
+			fmt.Println("\nTour :", Turn)
+			fmt.Printf("C'est au tour de %s \n\n", e.Name)
 			EnemyPatern(c, e, Turn)
 			CharacterIsDead(c)
 			Turn++

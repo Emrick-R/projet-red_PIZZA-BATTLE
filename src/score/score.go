@@ -17,5 +17,5 @@ func Addscore(c *structures.Character, e *structures.Enemy) {
 }
 
 func ShowScore(c *structures.Character) {
-	fmt.Printf("Score de %s : %d\n", c.Name, c.Score)
+	fmt.Printf("\n\nScore de %s : %d\n\n", c.Name, c.Score)
 }

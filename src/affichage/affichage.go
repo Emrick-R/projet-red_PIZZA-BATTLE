@@ -6,7 +6,7 @@ func separator() {
 	fmt.Println("======================================")
 }
 
-func AffichageMenuPrincipal() {
+func AffichageMenuDemarrage() {
 	separator()
 	fmt.Println("🍕 BIENVENUE DANS PIZZA BATTLE 🍕")
 	separator()
@@ -15,13 +15,13 @@ func AffichageMenuPrincipal() {
 	separator()
 }
 
-func AffichageMenuPersonnage() {
+func AffichageMenuPrincipal() {
 	separator()
-	fmt.Println("👤 Menu Personnage :")
+	fmt.Println("👤 Menu Principal :")
 	separator()
 	fmt.Println("1 - Afficher le personnage")
 	fmt.Println("2 - Afficher l'inventaire")
-	fmt.Println("3 - Test de combat : Utiliser une potion de poison")
+	fmt.Println("3 - Test de combat (1v1)")
 	fmt.Println("4 - Marchand")
 	fmt.Println("5 - Forgeron")
 	fmt.Println("6 - RETOUR")
