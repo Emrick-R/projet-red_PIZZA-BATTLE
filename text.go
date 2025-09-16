@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func main() {
+func mainn() {
 	// Chemin spécifique du projet
 	projectPath := "C:\\Users\\harol\\Documents\\Cours\\Projet RED\\projet-red_PIZZA-BATTLE"
 	outputFile := "project_files.txt"

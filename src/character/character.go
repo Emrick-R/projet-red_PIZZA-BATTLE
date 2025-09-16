@@ -7,8 +7,8 @@ import (
 )
 
 func DisplayCInfo(c *structures.Character) {
-	fmt.Printf("\nNom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\nArgent: %d\nScore: %d",
-		c.Name, c.Class, c.Level, c.ActualHp, c.MaxHp, c.Money, c.Score)
+	fmt.Printf("\nNom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\nArgent: %d\nScore: %d\nInitiative: %d",
+		c.Name, c.Class, c.Level, c.ActualHp, c.MaxHp, c.Money, c.Score, c.Initiative, c.ExpActual, c.ExpMax)
 	for _, skill := range c.SkillList {
 		fmt.Printf("Liste des skills :\n%s, %d de dégats\n\n", skill.Name, skill.Damage)
 	}
@@ -16,8 +16,7 @@ func DisplayCInfo(c *structures.Character) {
 }
 
 func DisplayEInfo(e *structures.Enemy) {
-	fmt.Printf("\nNom: %s\nPV: %d/%d\n",
-		e.Name, e.ActualHp, e.MaxHp)
+	fmt.Printf("\nNom: %s\nPV: %d/%d\nInitiative: %d", e.Name, e.ActualHp, e.MaxHp, e.Initiative)
 }
 
 func AccessInventory(c *structures.Character) {
