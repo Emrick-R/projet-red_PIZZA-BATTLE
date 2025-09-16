@@ -73,6 +73,7 @@ func main() {
 				case 3:
 					// Test de combat (1v1)
 					combat.TurnCombat1v1(c1, e1)
+					combat.Combat(c1, e1)
 				case 4:
 					// Marchand
 					marchand.Marchand(c1)
