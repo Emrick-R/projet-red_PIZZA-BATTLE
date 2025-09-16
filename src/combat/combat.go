@@ -3,7 +3,9 @@ package combat
 import (
 	"fmt"
 	"os"
+	"projet-red_PIZZA-BATTLE/affichage"
 	"projet-red_PIZZA-BATTLE/score"
+	"projet-red_PIZZA-BATTLE/skills"
 	"projet-red_PIZZA-BATTLE/structures"
 	"time"
 )
@@ -45,7 +47,6 @@ func EnemyPatern(c *structures.Character, e *structures.Enemy, t int) {
 	T2 = 100% notre perso
 	T3 = 200% enemy attaque
 	T4 = 100% notre perso
-
 	T3*/
 	if t%3 == 0 {
 		fmt.Print(e.Name, "attaque", c.Name, "et lui inflige", e.Damage*2, "de dégâts")
@@ -54,6 +55,26 @@ func EnemyPatern(c *structures.Character, e *structures.Enemy, t int) {
 		// Autre tours
 		c.ActualHp = c.ActualHp - e.Damage
 		fmt.Print(e.Name, "attaque", c.Name, "et lui inflige", e.Damage, "de dégâts")
+	}
+}
+
+func Combat() {
+	for {
+		var combat_choice int
+		fmt.Scan(&combat_choice)
+		fmt.Print("Début du combat vous vous battez contre un", e.Name, "! Prudence !")
+		fmt.Printf("1 - Attaquer ")
+		fmt.Printf("2 - Inventaire ")
+		fmt.Printf("3 - Fuir devant la puissance de l'ennemi")
+		switch combat_choice {
+		case 1:
+			skills.SkillChoice()
+		case 2:
+			affichage.AffichageMenuInventaire()
+		case 3:
+			fmt.Printf("Vous venez de fuir !")
+		}
+
 	}
 }
 
@@ -79,4 +100,5 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 			Turn++
 		}
 	}
+
 }
