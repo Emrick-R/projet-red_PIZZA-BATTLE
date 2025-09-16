@@ -23,10 +23,12 @@ func Forgeron(c *structures.Character) {
 	trollSkin := structures.Object{Name: "Peau de Troll", Quantity: 1}
 	boarLeather := structures.Object{Name: "Cuir de Sanglier", Quantity: 1}
 	ravenFeather := structures.Object{Name: "Plume de Corbeau", Quantity: 1}
+
 	// Objets fabriqués
 	chapeauAventurier := structures.Object{Name: "Chapeau de l'aventurier", Quantity: 1}
 	tuniqueAventurier := structures.Object{Name: "Tunique de l'aventurier", Quantity: 1}
 	bottesAventurier := structures.Object{Name: "Bottes de l'aventurier", Quantity: 1}
+
 	// Initialisation des variables pour les choix du joueur
 	var forgeron_choice int
 	var craft_confirmation int
