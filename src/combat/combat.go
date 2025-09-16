@@ -37,19 +37,20 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 
 	// Variable du choix du joueur
 	var choix int
-
-	fmt.Println("🟩⬜🟥 Épreuve de la Mamma : \nChoisissez un nombre, celui le plus proche du score de la Mamma commence !")
-
+	affichage.Separator()
+	fmt.Println("🟩⬜🟥 Épreuve de la Mamma 🟩⬜🟥")
+	affichage.Separator()
+	fmt.Println("Choisissez un nombre (1 à 100). Celui le plus proche du score de la Mamma commence !")
 	// input joueur sécurisé
 	for {
-		fmt.Print("Entrez votre nombre (1-100) : ")
+		fmt.Print("👉 Entres ton nombre : ")
 		_, err := fmt.Scan(&choix)
 		// vérification de l'input
 		if err == nil && choix >= 1 && choix <= 100 {
 			// input valide, on sort de la boucle
 			break
 		}
-		fmt.Println("❌ Valeur invalide ! Tapez un nombre entre 1 et 100.")
+		fmt.Println("❌ Valeur invalide ! Tapes un nombre entre 1 et 100.")
 	}
 
 	// premier lancer
@@ -57,14 +58,14 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 	ennemi := rollDice()
 
 	// affichage clair
-	fmt.Printf("Ton Chiffre : %d | Chiffre de la Mamma : %d | Chiffre de l'ennemi : %d\n", choix, mamma, ennemi)
+	fmt.Printf("🎲 Ton nombre : %d | 🎲 Mamma : %d | 🎲 Ennemi : %d\n", choix, mamma, ennemi)
 
 	// en cas d'égalité on relance les dés
 	for choix == ennemi {
 		fmt.Println("Égalité — relance du nombre !")
 		mamma = rollDice()
 		ennemi = rollDice()
-		fmt.Printf("Chiffre : %d | Chiffre de la Mamma : %d | Chiffre de l'ennemi : %d\n", choix, mamma, ennemi)
+		fmt.Printf("🎲 Chiffre : %d | 🎲 Mamma : %d | 🎲 Ennemi : %d\n", choix, mamma, ennemi)
 	}
 
 	// distances absolues (Rappel: la distance est petite == Gagnant)
@@ -75,11 +76,11 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 
 	if distJoueur < distEnnemi {
 		// Joueur gagne
-		fmt.Printf("✅ Vous êtes le plus proche du chiffre de la Mamma avec une distance de %d, vous commencez !\n", distJoueur)
+		fmt.Printf("✅ Tu est le plus proche du chiffre de la Mamma avec une distance de %d, vous commencez !\n", distJoueur)
 		return true
 	} else {
 		// Ennemi gagne
-		fmt.Printf("❌ L'ennemi le plus proche du chiffre de la Mamma avec une distance de %d, il commence !\n", distEnnemi)
+		fmt.Printf("❌ L'ennemi est plus proche du chiffre de la Mamma avec une distance de %d, il commence !\n", distEnnemi)
 		return false
 	}
 }
@@ -100,6 +101,7 @@ func DisplayCombatInventory(c *structures.Character, e *structures.Enemy) {
 		// Affichage des choix
 		affichage.AffichageMenuInventaire()
 		menuChoice := 0
+		fmt.Print("👉 Ton choix : ")
 		fmt.Scan(&menuChoice)
 		switch menuChoice {
 		case 1:
@@ -107,6 +109,7 @@ func DisplayCombatInventory(c *structures.Character, e *structures.Enemy) {
 			for {
 				affichage.AffichageMenuCombatPotion()
 				menuChoice := 0
+				fmt.Print("👉 Ton choix : ")
 				fmt.Scan(&menuChoice)
 				switch menuChoice {
 				case 1:
@@ -154,9 +157,9 @@ func DisplayCombatInventory(c *structures.Character, e *structures.Enemy) {
 func CharacterIsDead(c *structures.Character) {
 	//Vérification si impossibilité de renaître (MaxHp <= 10)
 	if c.MaxHp <= 10 {
-		fmt.Println("\nTu es mort pour de bon !")
+		fmt.Println("\n💀 Tu es mort pour de bon !")
 		fmt.Println("Impossibilité de renaître...")
-		fmt.Println("========Fin de partie========")
+		fmt.Println("======== Fin de partie ========")
 		//Affichage du score final
 		score.ShowScore(c)
 		//Pause de 7 secondes avant fermeture du programme
@@ -166,12 +169,12 @@ func CharacterIsDead(c *structures.Character) {
 
 	//Vérification de la mort du personnage puis résurrection avec moitié des PV max
 	if c.ActualHp <= 0 {
-		fmt.Println("\nTu es mort !")
+		fmt.Println("\n💀 Tu es mort !")
 		//Résurrection avec moitié des PV max
 		c.MaxHp /= 2
 		c.ActualHp = c.MaxHp
-		fmt.Println("Tu viens de renaître avec 50% de HP en moins.")
-		fmt.Printf("PV actuels: %d/%d\n", c.ActualHp, c.MaxHp)
+		fmt.Println("✨ Résurrection avec 50% de HP en moins.")
+		fmt.Printf("❤️ PV actuels: %d/%d\n", c.ActualHp, c.MaxHp)
 	}
 }
 
@@ -179,7 +182,7 @@ func CharacterIsDead(c *structures.Character) {
 func EnemyIsDead(e *structures.Enemy) bool {
 	//Si les PV de l'ennemi sont inférieurs ou égaux à 0
 	if e.ActualHp <= 0 {
-		fmt.Printf("Tu as vaincus %s !\n", e.Name)
+		fmt.Printf("⚔️  Tu as vaincu %s !\n", e.Name)
 		//Ennemi mort donc true
 		return true
 	}
@@ -196,17 +199,17 @@ func EnemyPattern(c *structures.Character, e *structures.Enemy, t int) {
 		e.PowerCount = 0
 		//Dégâts doublés sur ce tour
 		p := e.Damage * 2
-		fmt.Print(e.Name, " utilise une attaque spéciale sur ", c.Name, " et lui inflige ", p, " de dégâts\n")
+		fmt.Printf("🔥 %s utilise une ATTAQUE SPÉCIALE sur %s et inflige %d dégâts !\n", e.Name, c.Name, p)
 		//Application des dégâts
 		c.ActualHp = c.ActualHp - p
 		//Affichage des PV restants
-		fmt.Printf("%s : %d/%d hp\n", c.Name, c.ActualHp, c.MaxHp)
+		fmt.Printf("❤️ %s : %d/%d HP\n", c.Name, c.ActualHp, c.MaxHp)
 	} else {
 		//Autre tours
 		//Attaque normale
 		c.ActualHp = c.ActualHp - e.Damage
-		fmt.Print(e.Name, " attaque ", c.Name, " et lui inflige ", e.Damage, " de dégâts\n")
-		fmt.Printf("%s : %d/%d hp\n", c.Name, c.ActualHp, c.MaxHp)
+		fmt.Printf("👊 %s attaque %s et inflige %d dégâts\n", e.Name, c.Name, e.Damage)
+		fmt.Printf("❤️ %s : %d/%d HP\n", c.Name, c.ActualHp, c.MaxHp)
 		//Incrémentation du compteur de l'attaque spéciale
 		e.PowerCount++
 	}
@@ -218,10 +221,13 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 		//Boucle infinie jusqu'à un retour (fin du tour)
 		var combat_choice int
 		//Affichage du menu combat
-		fmt.Println("======== Combat : ========")
-		fmt.Println("Début du combat vous vous battez contre un", e.Name, "! Prudence !")
-		fmt.Println("1 - Attaquer ")
-		fmt.Println("2 - Inventaire ")
+		affichage.Separator()
+		fmt.Println("⚔️  COMBAT :")
+		affichage.Separator()
+		fmt.Println("1 - 🗡️ Attaquer")
+		fmt.Println("2 - 🎒 Inventaire")
+
+		fmt.Print("👉 Ton choix : ")
 		fmt.Scan(&combat_choice)
 		switch combat_choice {
 		case 1:
@@ -231,8 +237,8 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 			// Utilisation de la compétence sur l'ennemi
 			skills.UseSkill(c, e, chosenSkill)
 			// Affichage des dégâts infligés et des PV restants de l'ennemi
-			fmt.Printf("\n%s a infligé %d points de dégâts à %s\n", c.Name, chosenSkill.Damage, e.Name)
-			fmt.Printf("%s : %d/%d hp\n", e.Name, e.ActualHp, e.MaxHp)
+			fmt.Printf("\n💥 %s inflige %d points de dégâts à %s !\n", c.Name, chosenSkill.Damage, e.Name)
+			fmt.Printf("❤️ %s : %d/%d HP\n", e.Name, e.ActualHp, e.MaxHp)
 			// Fin du tour du joueur
 			return
 		case 2:
@@ -248,6 +254,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 				// Affichage des choix
 				affichage.AffichageMenuInventaire()
 				menuChoice := 0
+				fmt.Print("👉 Ton choix : ")
 				fmt.Scan(&menuChoice)
 				switch menuChoice {
 				case 1:
@@ -255,6 +262,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 						// Affichage des choix de potions
 						affichage.AffichageMenuCombatPotion()
 						menuChoice := 0
+						fmt.Print("👉 Ton choix : ")
 						fmt.Scan(&menuChoice)
 						switch menuChoice {
 						case 1:
@@ -317,8 +325,7 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 	for {
 		//Le tour du joueur (Turn == pair)
 		if Turn%2 == 0 {
-			fmt.Println("\nTour :", TrueTurn)
-			fmt.Printf("A ton tour %s!\n\n", c.Name)
+			fmt.Printf("🎯 Tour %d — À ton tour %s !\n", TrueTurn, c.Name)
 			//Déroulement du tour du joueur
 			CharacterTurn(c, e)
 			//Vérification de la mort
@@ -331,8 +338,7 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 
 		} else {
 			//Le tour de l'IA (Turn == impair)
-			fmt.Println("\nTour :", TrueTurn)
-			fmt.Printf("C'est au tour de %s \n\n", e.Name)
+			fmt.Printf("🎯 Tour %d — C'est au tour de %s !\n", TrueTurn, e.Name)
 			//Verification de l'effet de poison
 			items.CheckPoisonStatus(e)
 			if EnemyIsDead(e) {
@@ -348,15 +354,17 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 		}
 	}
 	//Fin du combat (ennemi mort)
-	fmt.Printf("\nBravo ! Tu as térassé %s !\n", e.Name)
+	fmt.Printf("🏆 Bravo ! Tu as terrassé %s !\n", e.Name)
 	//Récompenses du combat (Argent + Score)
 	score.AddScore(c, e)
 	inventory.AddMoney(c, e)
 	character.AddExp(c, e)
-	fmt.Printf("\nTu gagnes %d d'argent\n", e.GiveMoney)
-	fmt.Printf("\nTu gagnes %d d'expérience\n", e.GiveExp)
-	fmt.Printf("\nTu gagnes %d points de score\n", e.GiveScore)
+	fmt.Printf("\n💰 +%d argent", e.GiveMoney)
+	fmt.Printf("\n📚 +%d expérience", e.GiveExp)
+	fmt.Printf("\n⭐ +%d points de score\n", e.GiveScore)
 	//Affichage de l'argent, de l'Exp et du score
-	fmt.Printf("Argent : %d; Exp : %d/%d; Score : %d\n", c.Money, c.ActualExp, c.MaxHp, c.Score)
+	affichage.Separator()
+	fmt.Printf("💵 Argent : %d | 📖 Exp : %d | 🏅 Score : %d\n", c.Money, c.ActualExp, c.Score)
+	affichage.Separator()
 	// Retour au menu principal
 }

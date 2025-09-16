@@ -2,6 +2,7 @@ package marchand
 
 import (
 	"fmt"
+	"projet-red_PIZZA-BATTLE/affichage"
 	"projet-red_PIZZA-BATTLE/character"
 	"projet-red_PIZZA-BATTLE/inventory"
 	"projet-red_PIZZA-BATTLE/skills"
@@ -12,6 +13,7 @@ import (
 func Marchand(c *structures.Character) {
 	//Initialisation des objets et compétences vendus par le marchand
 	var marchand_choice int
+
 	//Objets
 	HpPot := structures.Object{Name: "Potion de Vie", Quantity: 1}
 	ManaPot := structures.Object{Name: "Potion de Vie", Quantity: 1}
@@ -20,6 +22,7 @@ func Marchand(c *structures.Character) {
 	TrollSkin := structures.Object{Name: "Peau de Troll", Quantity: 1}
 	BoarLeather := structures.Object{Name: "Cuir de Sanglier", Quantity: 1}
 	RavenFeather := structures.Object{Name: "Plume de Corbeau", Quantity: 1}
+
 	//Compétences
 	FireBall := structures.Skill{Name: "Boule de feu", Damage: 20}
 	DeathSpell := structures.Skill{Name: "Sort de la mort qui tue", Damage: 500}
@@ -27,21 +30,26 @@ func Marchand(c *structures.Character) {
 	//Boucle principale du marchand
 	for {
 		//Menu du marchand
-		fmt.Println("\n======== Marchand : ========")
-		fmt.Printf("Bonjour je suis le marchand, quel est votre choix ?\n\n")
-		fmt.Printf("1 - %s - 3 Pièces d'or\n", HpPot.Name)
-		fmt.Printf("2 - %s - 6 Pièces d'or\n", PoisonPot.Name)
-		fmt.Printf("3 - %s - 4 Pièces d'or\n", ManaPot.Name)
-		fmt.Printf("4 - Livre de Sort : %s - 25 pièces d'or\n", FireBall.Name)
-		fmt.Printf("5 - %s - 4 pièces d'or\n", WolfFur.Name)
-		fmt.Printf("6 - %s - 7 pièces d'or\n", TrollSkin.Name)
-		fmt.Printf("7 - %s - 3 pièces d'or\n", BoarLeather.Name)
-		fmt.Printf("8 - %s - 1 pièce d'or\n", RavenFeather.Name)
-		fmt.Printf("9 - Augmenter la taille de l'inventaire +10 slots - 30 pièce d'or\n")
-		fmt.Println("10 - RETOUR")
+		affichage.Separator()
+		fmt.Println("🛒 Bienvenue chez le Marchand !")
+		affichage.Separator()
+		fmt.Println("Que veux-tu acheter ?")
+		fmt.Printf("1 - 🧪 %s - 3💰\n", HpPot.Name)
+		fmt.Printf("2 - ☠️  %s - 6💰\n", PoisonPot.Name)
+		fmt.Printf("3 - 🔮 %s - 4💰\n", ManaPot.Name)
+		fmt.Printf("4 - 📖 Livre de Sort : %s - 25💰\n", FireBall.Name)
+		fmt.Printf("5 - 🐺 %s - 4💰\n", WolfFur.Name)
+		fmt.Printf("6 - 👹 %s - 7💰\n", TrollSkin.Name)
+		fmt.Printf("7 - 🐗 %s - 3💰\n", BoarLeather.Name)
+		fmt.Printf("8 - 🪶 %s - 1💰\n", RavenFeather.Name)
+		fmt.Printf("9 - 📦 Agrandir inventaire (+10 emplacements) - 30💰\n")
+		fmt.Println("10 - ⬅️ Retour")
 		// Test
-		fmt.Printf("11 - Livre de Sort : %s - 50 pièces d'or (test)\n", DeathSpell.Name)
+		fmt.Printf("11 - 📖 Livre de Sort : %s - 50💰 (test)\n", DeathSpell.Name)
 		// Fin test
+
+		affichage.Separator()
+		fmt.Print("👉 Ton choix : ")
 		fmt.Scan(&marchand_choice)
 		switch marchand_choice {
 		case 1:
@@ -53,9 +61,9 @@ func Marchand(c *structures.Character) {
 				// Déduction de l'argent
 				c.Money -= 3
 				// Message de confirmation
-				fmt.Println("Super ! Tu as acheté une Potion de vie. Tu perds 3 Pièces d'or.")
+				fmt.Println("✅ Tu as acheté une Potion de Vie (-3💰)")
 				// Affichage de l'argent restant
-				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				fmt.Println("Tu as maintenant", c.Money, "💰")
 				// Affichage de l'inventaire
 				character.AccessInventory(c)
 				// Retour au menu du marchand
@@ -71,8 +79,8 @@ func Marchand(c *structures.Character) {
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, PoisonPot)
 				c.Money -= 6
-				fmt.Println("Super ! Tu as acheté une Potion de poison. Tu perds 6 Pièces d'or.")
-				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				fmt.Println("✅ Tu as acheté une Potion de Poison (-6💰)")
+				fmt.Println("Tu as maintenant", c.Money, "💰")
 				character.AccessInventory(c)
 			} else {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
@@ -83,8 +91,8 @@ func Marchand(c *structures.Character) {
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, ManaPot)
 				c.Money -= 4
-				fmt.Println("Super ! Tu as acheté une Potion de Mana. Tu perds 4 Pièces d'or.")
-				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				fmt.Println("✅ Tu as acheté une Potion de Mana (-4💰)")
+				fmt.Println("Tu as maintenant", c.Money, "💰")
 				character.AccessInventory(c)
 			} else {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
@@ -97,10 +105,10 @@ func Marchand(c *structures.Character) {
 				// Ajout de la compétence au personnage
 				skills.AddSkills(c, FireBall)
 				c.Money -= 25
-				fmt.Printf("\nSuper ! Tu as acheté un Livre de Sort : %s. Tu perds 25 Pièces d'or.\n", FireBall.Name)
+				fmt.Printf("✅ Tu as acheté un Livre de Sort : %s (-25💰)\n", FireBall.Name)
 				// Affichage de la compétence apprise
-				fmt.Printf("Tu connais maintenant la compétance %s : %d de dégats\n", FireBall.Name, FireBall.Damage)
-				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				fmt.Printf("🔥 Nouvelle compétence : %s (%d dégâts)\n", FireBall.Name, FireBall.Damage)
+				fmt.Println("Tu as maintenant", c.Money, "💰")
 				character.AccessInventory(c)
 			} else {
 				fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
@@ -111,8 +119,8 @@ func Marchand(c *structures.Character) {
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, WolfFur)
 				c.Money -= 4
-				fmt.Println("\nSuper ! Tu as acheté une Fourrure de Loup. Tu perds 4 Pièces d'or.")
-				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				fmt.Println("✅ Tu as acheté une Peau de Loup (-4💰)")
+				fmt.Println("Tu as maintenant", c.Money, "💰")
 				character.AccessInventory(c)
 			} else {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
@@ -123,8 +131,8 @@ func Marchand(c *structures.Character) {
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, TrollSkin)
 				c.Money -= 7
-				fmt.Println("\nSuper ! Tu as acheté une Peau de Troll. Tu perds 7 Pièces d'or.")
-				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				fmt.Println("✅ Tu as acheté une Peau de Troll (-7💰)")
+				fmt.Println("Tu as maintenant", c.Money, "💰")
 				character.AccessInventory(c)
 			} else {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
@@ -135,8 +143,8 @@ func Marchand(c *structures.Character) {
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, BoarLeather)
 				c.Money -= 3
-				fmt.Println("\nSuper ! Tu as acheté un Cuir de Sanglier. Tu perds 3 Pièces d'or.")
-				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				fmt.Println("✅ Tu as acheté un Cuir de Sanglier (-3💰)")
+				fmt.Println("Tu as maintenant", c.Money, "💰")
 				character.AccessInventory(c)
 			} else {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
@@ -147,8 +155,8 @@ func Marchand(c *structures.Character) {
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, RavenFeather)
 				c.Money -= 1
-				fmt.Println("\nSuper ! Tu as acheté une Plume de Corbeau. Tu perds 1 Pièce d'or.")
-				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				fmt.Println("✅ Tu as acheté une Plume de Corbeau (-1💰)")
+				fmt.Println("Tu as maintenant", c.Money, "💰")
 				character.AccessInventory(c)
 			} else {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
@@ -158,8 +166,8 @@ func Marchand(c *structures.Character) {
 		case 9:
 			// Achat d'une augmentation de l'inventaire
 			c.Money -= 30
-			fmt.Println("\nSuper ! Ton inventaire s'est agrandi de 10 places. Tu perds 30 Pièce d'or.")
-			fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+			fmt.Println("✅ Ton inventaire s'est agrandi de 10 places (-30💰)")
+			fmt.Println("Tu as maintenant", c.Money, "💰")
 			// Augmentation de la taille de l'inventaire de 10 slots
 			inventory.UpgradeInventorySlot(c)
 
@@ -169,9 +177,9 @@ func Marchand(c *structures.Character) {
 			// Test achat d'un livre de sort (compétence)
 			if !skills.CheckSkills(c, DeathSpell) {
 				skills.AddSkills(c, DeathSpell)
-				fmt.Printf("\nSuper ! Tu as acheté un Livre de Sort : %s. Tu test le sort.\n", DeathSpell.Name)
-				fmt.Printf("Tu connais maintenant la compétance %s : %d de dégats\n", DeathSpell.Name, DeathSpell.Damage)
-				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				fmt.Printf("✅ Tu as acheté un Livre de Sort : %s (-50💰)\n", DeathSpell.Name)
+				fmt.Printf("💀 Nouvelle compétence : %s (%d dégâts)\n", DeathSpell.Name, DeathSpell.Damage)
+				fmt.Println("Tu as maintenant", c.Money, "💰")
 				character.AccessInventory(c)
 			} else {
 				fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")

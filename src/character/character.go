@@ -10,18 +10,36 @@ import (
 
 // DisplayCInfo affiche les informations du personnage (nom, classe, PV, niveau, expérience, argent, initiative, score)
 func DisplayCInfo(c *structures.Character) {
-	fmt.Printf("\nNom: %s\nClasse: %s, PV: %d/%d\n Niveau: %d, Expérience: %d/%d\nArgent: %d\nInitiative: %d\nScore: %d\n",
-		c.Name, c.Class, c.ActualHp, c.MaxHp, c.Level, c.ActualExp, c.MaxExp, c.Money, c.Initiative, c.Score)
+	affichage.Separator()
+	fmt.Println("👤 Informations du personnage :")
+	affichage.Separator()
+	fmt.Printf("📛 Nom : %s\n", c.Name)
+	fmt.Printf("🏹 Classe : %s\n", c.Class)
+	fmt.Printf("❤️ PV : %d/%d\n", c.ActualHp, c.MaxHp)
+	fmt.Printf("⭐ Niveau : %d\n", c.Level)
+	fmt.Printf("📚 Expérience : %d/%d\n", c.ActualExp, c.MaxExp)
+	fmt.Printf("💰 Argent : %d\n", c.Money)
+	fmt.Printf("⚡ Initiative : %d\n", c.Initiative)
+	fmt.Printf("🏆 Score : %d\n", c.Score)
+	affichage.Separator()
 }
 
 // DisplayEInfo affiche les informations de l'ennemi (nom, PV, initiative)
 func DisplayEInfo(e *structures.Enemy) {
-	fmt.Printf("\nNom: %s\nPV: %d/%d\nInitiative: %d", e.Name, e.ActualHp, e.MaxHp, e.Initiative)
+	affichage.Separator()
+	fmt.Println("👹 Informations de l'ennemi :")
+	affichage.Separator()
+	fmt.Printf("📛 Nom : %s\n", e.Name)
+	fmt.Printf("❤️ PV : %d/%d\n", e.ActualHp, e.MaxHp)
+	fmt.Printf("⚡ Initiative : %d\n", e.Initiative)
+	affichage.Separator()
 }
 
 // AccessInventory affiche le contenu de l'inventaire du personnage (nom et quantité des objets)
 func AccessInventory(c *structures.Character) {
-	fmt.Println("\nInventaire :")
+	affichage.Separator()
+	fmt.Println("🎒 Inventaire :")
+	affichage.Separator()
 	for i := range c.Inventory {
 		fmt.Printf("- %s (x%d)\n", c.Inventory[i].Name, c.Inventory[i].Quantity)
 	}
@@ -29,33 +47,36 @@ func AccessInventory(c *structures.Character) {
 
 // AccessSkills affiche la liste des compétences du personnage (nom et dégâts)
 func AccessSkills(c *structures.Character) {
-	fmt.Println("\nCompétences :")
+	affichage.Separator()
+	fmt.Println("📜 Compétences :")
+	affichage.Separator()
 	for s := range c.SkillList {
-		fmt.Printf("%s: %d points de dégâts\n", c.SkillList[s].Name, c.SkillList[s].Damage)
+		fmt.Printf("- %s : %d points de dégâts\n", c.SkillList[s].Name, c.SkillList[s].Damage)
 	}
 	fmt.Println()
 }
 
 // AccessEquipement affiche l'équipement porté par le personnage (nom de l'armure de tête, torse et jambes)
 func AccessEquipement(c *structures.Character) {
-	fmt.Println("\nEquipement :")
+	affichage.Separator()
+	fmt.Println("🛡️  Équipement :")
+	affichage.Separator()
 	H := c.Armor.Head.Name
 	C := c.Armor.Chest.Name
 	L := c.Armor.Legs.Name
-	if c.Armor.Head.Name == "" {
+	if H == "" {
 		H = "Rien"
 	}
-	fmt.Println("Armure de tête : ", H)
-
-	if c.Armor.Chest.Name == "" {
+	if C == "" {
 		C = "Rien"
 	}
-	fmt.Println("Armure de torse : ", C)
-
-	if c.Armor.Legs.Name == "" {
+	if L == "" {
 		L = "Rien"
 	}
-	fmt.Println("Armure de jambes : ", L)
+
+	fmt.Println("👒 Armure de tête : ", H)
+	fmt.Println("👕 Armure de torse : ", C)
+	fmt.Println("👖 Armure de jambes : ", L)
 
 }
 
@@ -68,6 +89,7 @@ func InventoryChoice(c *structures.Character) {
 		AccessSkills(c)
 		affichage.AffichageMenuInventaire()
 		menuChoice := 0
+		fmt.Print("👉 Ton choix : ")
 		fmt.Scan(&menuChoice)
 		switch menuChoice {
 		case 1:
@@ -98,11 +120,16 @@ func EquipEquipment(c *structures.Character) {
 	botAvent := structures.Object{Name: "Bottes de l'aventurier", Quantity: 1}
 	for {
 		// Affichage du menu d'équipement
-		fmt.Println("\nQuel équipement veux-tu porter ?")
-		fmt.Println("1 - Chapeau de l'aventurier")
-		fmt.Println("2 - Tunique de l'aventurier")
-		fmt.Println("3 - Bottes de l'aventurier")
-		fmt.Println("4 - RETOUR")
+		affichage.Separator()
+		fmt.Println("🛡️  Choisis ton équipement :")
+		affichage.Separator()
+		fmt.Println("1 - 👒 Chapeau de l'aventurier")
+		fmt.Println("2 - 👕 Tunique de l'aventurier")
+		fmt.Println("3 - 👢 Bottes de l'aventurier")
+		fmt.Println("4 - ⬅️ RETOUR")
+		affichage.Separator()
+
+		fmt.Print("👉 Ton choix : ")
 		fmt.Scan(&newEquipChoice)
 		// Vérification si le joueur possède l'équipement dans son inventaire
 		// Iniatialisation des booléens pour savoir si le joueur possède l'équipement
@@ -135,21 +162,21 @@ func EquipEquipment(c *structures.Character) {
 				inventory.AddEquipment(c, chapAvent)
 			} else {
 				// Message d'erreur si le joueur ne possède pas l'équipement
-				fmt.Printf("\nTu ne possèdes pas : %s\n\n", chapAvent.Name)
+				fmt.Printf("\n❌ Tu ne possèdes pas : %s\n\n", chapAvent.Name)
 			}
 		case 2:
 			// Équiper la tunique de l'aventurier
 			if hadTun {
 				inventory.AddEquipment(c, tunAvent)
 			} else {
-				fmt.Printf("\nTu ne possèdes pas : %s\n\n", tunAvent.Name)
+				fmt.Printf("\n❌ Tu ne possèdes pas : %s\n\n", tunAvent.Name)
 			}
 		case 3:
 			// Équiper les bottes de l'aventurier
 			if hadBot {
 				inventory.AddEquipment(c, botAvent)
 			} else {
-				fmt.Printf("\nTu ne possèdes pas : %s\n\n", botAvent.Name)
+				fmt.Printf("\n❌Tu ne possèdes pas : %s\n\n", botAvent.Name)
 			}
 		case 4:
 
@@ -171,7 +198,10 @@ func CharacterCreation(c *structures.Character) {
 
 	// Boucle pour demander un pseudo valide
 	for {
-		fmt.Println("\nQuel est votre pseudo ?")
+		affichage.Separator()
+		fmt.Println("✏️  Création du personnage")
+		affichage.Separator()
+		fmt.Print("👉 Quel est ton pseudo ? ")
 		fmt.Scan(&username)
 		valid = true
 		result := []rune(username)
@@ -186,7 +216,7 @@ func CharacterCreation(c *structures.Character) {
 		// Vérification que chaque caractère est une lettre
 		for _, r := range result {
 			if r < 65 || (r > 90 && r < 97) || r > 122 {
-				fmt.Println("❌ Votre pseudo n'est pas correct, il ne contient que des lettres.")
+				fmt.Println("❌ Le pseudo ne doit contenir que des lettres.")
 				valid = false
 				break
 			}
@@ -217,10 +247,15 @@ func CharacterCreation(c *structures.Character) {
 	var class_choice int
 	// Boucle pour demander un choix de classe valide
 	for {
-		fmt.Println("\nSuper", c.Name, ", quelle classe veux-tu choisir ?")
-		fmt.Println("1 - Elfe : 80 PV Max")
-		fmt.Println("2 - Nain : 120 PV Max")
-		fmt.Println("3 - Humain : 100 PV Max")
+		affichage.Separator()
+		fmt.Printf("🎭 %s, quelle classe veux-tu choisir ?\n", c.Name)
+		affichage.Separator()
+		fmt.Println("1 - 🏹 Elfe : 80 PV Max")
+		fmt.Println("2 - ⛏️ Nain : 120 PV Max")
+		fmt.Println("3 - 🧑 Humain : 100 PV Max")
+		affichage.Separator()
+
+		fmt.Print("👉 Ton choix : ")
 		fmt.Scan(&class_choice)
 
 		// Vérification que le choix est valide
@@ -235,7 +270,7 @@ func CharacterCreation(c *structures.Character) {
 	switch class_choice {
 	case 1:
 		// Classe Elfe (80 PV Max, 40 PV Actuels (on commence avec la moitier des PV max), 120 Mana Max)
-		fmt.Println("\nTu as choisi la classe Elfe : agile, précis et en communion avec la nature.")
+		fmt.Println("🌿 Tu as choisi la classe Elfe : agile, précis et en communion avec la nature.")
 		c.MaxHp = 80
 		c.ActualHp = 40
 		c.ManaMax = 120
@@ -243,7 +278,7 @@ func CharacterCreation(c *structures.Character) {
 		c.Class = "Elfe"
 	case 2:
 		// Classe Nain (120 PV Max, 60 PV Actuels, 80 Mana Max)
-		fmt.Println("\nTu as choisi la classe Nain : robuste, courageux et maître de la forge.")
+		fmt.Println("🪓 Tu as choisi la classe Nain : robuste, courageux et maître de la forge.")
 		c.MaxHp = 120
 		c.ActualHp = 60
 		c.ManaMax = 80
@@ -251,7 +286,7 @@ func CharacterCreation(c *structures.Character) {
 		c.Class = "Nain"
 	case 3:
 		// Classe Humain (100 PV Max, 50 PV Actuels, 80 Mana Max)
-		fmt.Println("\nTu as choisi la classe Humain : polyvalent, ingénieux et déterminé.")
+		fmt.Println("⚔️  Tu as choisi la classe Humain : polyvalent, ingénieux et déterminé.")
 		c.MaxHp = 100
 		c.ActualHp = 50
 		c.ManaMax = 80
