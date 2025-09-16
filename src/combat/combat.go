@@ -13,25 +13,28 @@ import (
 	"time"
 )
 
+// Fonction valeur absolue
 func abs(x int) int {
-	// Fonction valeur absolue
+	// Si x est négatif
 	if x < 0 {
-		// Si x est négatif, on retourne son opposé
+		// On retourne son opposé
 		return -x
 	}
 	// Sinon on retourne x
 	return x
 }
 
+// Fonction pour lancer un dé à 100 faces
 func rollDice() int {
-	// Génère un nombre aléatoire entre 1 et 100
+	// Génère et retourne un nombre aléatoire entre 1 et 100
 	return rand.Intn(100) + 1
 }
 
+// Fonction pour déterminer l'initiative en utilisant le mini-jeu "Épreuve de la Mamma"
+// Si le joueur gagne, il commence, sinon l'ennemi commence
 func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
-	//Est-ce que le joueur ?
 
-	// Choix du joueur
+	// Variable du choix du joueur
 	var choix int
 
 	fmt.Println("🟩⬜🟥 Épreuve de la Mamma : \nChoisissez un nombre, celui le plus proche du score de la Mamma commence !")
@@ -80,17 +83,19 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 	}
 }
 
+// Affichage de l'inventaire disponible uniquement en combat
 func DisplayCombatInventory(c *structures.Character, e *structures.Enemy) {
-	// Affichage de l'inventaire de combat
 	// Boucle infinie jusqu'au retour
-
 	for {
 		// Affichage de l'inventaire via une fonction
 		character.AccessInventory(c)
+
 		// Affichage de l'équipement
 		character.AccessEquipement(c)
+
 		// Affichage des compétences
 		character.AccessSkills(c)
+
 		// Affichage des choix
 		affichage.AffichageMenuInventaire()
 		menuChoice := 0
@@ -144,17 +149,24 @@ func DisplayCombatInventory(c *structures.Character, e *structures.Enemy) {
 	}
 }
 
+// Vérification de la mort du personnage avec résurrection (MaxHp/2), si mort définitive (MaxHp <= 10) fin de partie
 func CharacterIsDead(c *structures.Character) {
+	//Vérification si impossibilité de renaître (MaxHp <= 10)
 	if c.MaxHp <= 10 {
 		fmt.Println("\nTu es mort pour de bon !")
 		fmt.Println("Impossibilité de renaître...")
 		fmt.Println("========Fin de partie========")
+		//Affichage du score final
 		score.ShowScore(c)
+		//Pause de 7 secondes avant fermeture du programme
 		time.Sleep(7 * time.Second)
 		os.Exit(0)
 	}
+
+	//Vérification de la mort du personnage puis résurrection avec moitié des PV max
 	if c.ActualHp <= 0 {
 		fmt.Println("\nTu es mort !")
+		//Résurrection avec moitié des PV max
 		c.MaxHp /= 2
 		c.ActualHp = c.MaxHp
 		fmt.Println("Tu viens de renaître avec 50% de HP en moins.")
@@ -162,22 +174,23 @@ func CharacterIsDead(c *structures.Character) {
 	}
 }
 
+// Vérification de la mort de l'ennemi, si mort renvoie true
 func EnemyIsDead(e *structures.Enemy) bool {
-	//Vérification de la mort de l'ennemi
-
+	//Si les PV de l'ennemi sont inférieurs ou égaux à 0
 	if e.ActualHp <= 0 {
 		fmt.Printf("Tu as vaincus %s !\n", e.Name)
+		//Ennemi mort donc true
 		return true
 	}
+	//Ennemi toujours en vie donc false
 	return false
 }
 
-func EnemyPatern(c *structures.Character, e *structures.Enemy, t int) {
-	// Tour de l'ennemi
+// Comportement de l'ennemi lors de son tour
+func EnemyPattern(c *structures.Character, e *structures.Enemy, t int) {
 	//Tout les 3 tours l'ennemi fait une attaque spéciale (double dégâts)
 	if e.PowerCount == 3 {
 		//Tour Spécial
-
 		//Remise à 0 du compteur
 		e.PowerCount = 0
 		//Dégâts doublés sur ce tour
@@ -188,8 +201,7 @@ func EnemyPatern(c *structures.Character, e *structures.Enemy, t int) {
 		//Affichage des PV restants
 		fmt.Printf("%s : %d/%d hp\n", c.Name, c.ActualHp, c.MaxHp)
 	} else {
-		// Autre tours
-
+		//Autre tours
 		//Attaque normale
 		c.ActualHp = c.ActualHp - e.Damage
 		fmt.Print(e.Name, " attaque ", c.Name, " et lui inflige ", e.Damage, " de dégâts\n")
@@ -199,9 +211,10 @@ func EnemyPatern(c *structures.Character, e *structures.Enemy, t int) {
 	}
 }
 
+// Tour du personnage
 func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 	for {
-		// Tour du joueur
+		//Boucle infinie jusqu'à un retour (fin du tour)
 		var combat_choice int
 		//Affichage du menu combat
 		fmt.Println("======== Combat : ========")
@@ -288,8 +301,8 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 	}
 }
 
+// Fonction principale du combat 1v1 entre le personnage et l'ennemi
 func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
-	// 1v1 combat
 	// Initialisation du tour
 	Turn := 1
 	TrueTurn := 1
@@ -320,7 +333,7 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 			fmt.Println("\nTour :", TrueTurn)
 			fmt.Printf("C'est au tour de %s \n\n", e.Name)
 			//Déroulement du tour de l'IA
-			EnemyPatern(c, e, Turn)
+			EnemyPattern(c, e, Turn)
 			//Vérification de la mort
 			CharacterIsDead(c)
 			Turn++

@@ -2,10 +2,12 @@ package affichage
 
 import "fmt"
 
+// separator affiche une série de =
 func separator() {
-	fmt.Println("======================================")
+	fmt.Println("==================================================")
 }
 
+// AffichageMenuDemarrage affiche le menu de démarrage
 func AffichageMenuDemarrage() {
 	separator()
 	fmt.Println("🍕 BIENVENUE DANS PIZZA BATTLE 🍕")
@@ -15,19 +17,21 @@ func AffichageMenuDemarrage() {
 	separator()
 }
 
+// AffichageMenuPrincipal affiche le menu principal
 func AffichageMenuPrincipal() {
 	separator()
 	fmt.Println("👤 Menu Principal :")
 	separator()
 	fmt.Println("1 - Afficher le personnage")
 	fmt.Println("2 - Afficher l'inventaire")
-	fmt.Println("3 - Test de combat (1v1)")
+	fmt.Println("3 - Combat en 1 contre 1")
 	fmt.Println("4 - Marchand")
 	fmt.Println("5 - Forgeron")
 	fmt.Println("6 - RETOUR")
 	separator()
 }
 
+//AffichageMenuInventaire affiche le menu de l'inventaire
 func AffichageMenuInventaire() {
 	separator()
 	fmt.Println("🎒 Inventaire :")
@@ -38,6 +42,7 @@ func AffichageMenuInventaire() {
 	separator()
 }
 
+//AffichageMenuCombatPotion affiche le menu des potions uniquement lors des combats
 func AffichageMenuCombatPotion() {
 	separator()
 	fmt.Println("🧪 Utiliser une potion :")
@@ -48,6 +53,7 @@ func AffichageMenuCombatPotion() {
 	separator()
 }
 
+//CharacterTurn affiche le menu lors du tour du joueur dans un combat
 func CharacterTurn() {
 	separator()
 	fmt.Println("⚔️  Combat :")

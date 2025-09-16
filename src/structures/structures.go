@@ -1,10 +1,12 @@
 package structures
 
+// Object représente un objet dans l'inventaire ou l'équipement
 type Object struct {
 	Name     string
 	Quantity int
 }
 
+// Character représente un personnage joueur avec ses attributs et son inventaire
 type Character struct {
 	Name       string
 	Class      string
@@ -23,21 +25,26 @@ type Character struct {
 	ActualMana int
 	ManaMax    int
 }
+
+// Enemy représente un ennemi avec ses attributs
 type Enemy struct {
 	Name       string
 	MaxHp      int
 	ActualHp   int
 	Damage     int
-	Difficulty string //3 types : Facile= score 5, Normal= score 10, Boss= score 20
+	Difficulty string //3 types : Facile= score 5, Normale= score 10, Boss= score 20
 	Initiative int
 	PowerCount int
 }
 
+// Skill représente une compétence que le personnage peut utiliser en combat
 type Skill struct {
-	Name   string
-	Damage int
+	Name     string
+	Damage   int
+	ManaCost int
 }
 
+// Equipment représente l'équipement porté par le personnage
 type Equipment struct {
 	Head  *Object //Pointeur unique vide de structure Objects
 	Chest *Object //Un équipement pour le torse
@@ -45,37 +52,88 @@ type Equipment struct {
 
 }
 
-func InitCharacter(level int, inv []Object, maxInv int, money int, skill []Skill, initiative int, ExpActual, ExpMax int) *Character {
+// InitCharacter initialise un personnage avec des valeurs par défaut sans nom ni classe (définis par CharacterCreation)
+func InitCharacter() *Character {
 	return &Character{
-		Level:     level,
-		Inventory: inv,
-		MaxInv:    maxInv,
-		Money:     money,
-		SkillList: skill,
+		Level:      1,
+		ExpActual:  0,
+		ExpMax:     100,
+		Initiative: 100,
+		// Initialisation avec 3 potions
+		Inventory: []Object{
+			{Name: "Potion de Vie", Quantity: 3},
+		},
+		ActualHp: 100,
+		MaxInv:   10,
+		Money:    100,
+		// Initialisation de la compétance de base
+		SkillList: []Skill{
+			{Name: "Coup de poing", Damage: 10, ManaCost: 0},
+		},
+		// Initialisation de l'armure (rien d'éauipé)
 		Armor: Equipment{
 			Head:  &Object{Name: ""},
 			Chest: &Object{Name: ""},
 			Legs:  &Object{Name: ""},
 		},
-		Score:      int(0),
-		Initiative: initiative,
-		ExpActual:  0,
-		ExpMax:     100,
+		//Score de fin de partie
+		Score: 0,
 	}
 }
 
-func InitEnemy(name string, maxhp int, actualhp int, damage int, grade string, initiative int) *Enemy {
+// InitEnemy initialise un Ennemi avec des valeurs donnée selon la difficulté donnée et les valeurs données
+func InitEnemy(name string, grade string) *Enemy {
+	switch grade {
+	// si La difficultées donnée est "Facile"
+	case "Facile":
+
+		return &Enemy{
+			Name:       name,
+			MaxHp:      100,
+			ActualHp:   100,
+			Damage:     5,
+			Difficulty: "Facile",
+			Initiative: 100,
+			PowerCount: 0,
+		}
+		// si La difficultées donnée est "Normale"
+	case "Normale":
+
+		return &Enemy{
+			Name:       name,
+			MaxHp:      120,
+			ActualHp:   120,
+			Damage:     15,
+			Difficulty: "Normal",
+			Initiative: 120,
+			PowerCount: 0,
+		}
+		// si La difficultées donnée est "Boss"
+	case "Boss":
+
+		return &Enemy{
+			Name:       name,
+			MaxHp:      200,
+			ActualHp:   200,
+			Damage:     25,
+			Difficulty: "Boss",
+			Initiative: 150,
+			PowerCount: 0,
+		}
+	}
+	// si La difficultées donnée est rien initialise quand même un ennemi "Facile"
 	return &Enemy{
 		Name:       name,
-		MaxHp:      maxhp,
-		ActualHp:   actualhp,
-		Damage:     damage,
-		Difficulty: grade,
-		Initiative: initiative,
+		MaxHp:      100,
+		ActualHp:   100,
+		Damage:     5,
+		Difficulty: "Facile",
+		Initiative: 100,
 		PowerCount: 0,
 	}
 }
 
+//Initialise une compétence utilisable dans la liste des compétences
 func InitSkill(name string, damage int) *Skill {
 	return &Skill{
 		Name:   name,

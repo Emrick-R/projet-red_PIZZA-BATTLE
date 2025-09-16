@@ -11,31 +11,30 @@ import (
 	"projet-red_PIZZA-BATTLE/structures"
 )
 
+// main est le point d'entrée du programme
 func main() {
+	// Initialisation du choix du menu
 	var menuChoice int
 
+	// Boucle principale du jeu
 	for {
+		// Affichage du menu de démarrage
 		affichage.AffichageMenuDemarrage()
 		fmt.Scan(&menuChoice)
 		switch menuChoice {
 		case 1:
-			// Initialiser l'inventaire de départ
-			HpPot := structures.Object{Name: "Potion de Vie"}
-			inv := []structures.Object{
-				{Name: HpPot.Name, Quantity: 3},
-			}
-			// Initialiser le skill de départ
-			punch := structures.InitSkill("Coup de poing", 10)
-			skillList := []structures.Skill{
-				{Name: punch.Name, Damage: punch.Damage},
-			}
-			// Initialiser le personnage
-			c1 := structures.InitCharacter(1, inv, 10, 100, skillList, 100, 0, 100)
+			// On lance une nouvelle partie
+
+			// Initialisation des statistiques, de l'inventaire et des compétance de l'ennemi
+			c1 := structures.InitCharacter()
+
 			// Création du personnage par l'utilisateur
 			character.CharacterCreation(c1)
-			// Initialiser l'ennemi
-			e1 := structures.InitEnemy("Petit Giovanni", 100, 100, 5, "Facile", 100)
 
+			// Initialisation de l'ennemi
+			e1 := structures.InitEnemy("Petit Giovanni", "Facile")
+
+			// Boucle du menu principal
 			for {
 				affichage.AffichageMenuPrincipal()
 				fmt.Scan(&menuChoice)
@@ -48,7 +47,7 @@ func main() {
 					// Menu Inventaire
 					character.InventoryChoice(c1)
 				case 3:
-					// Test de combat (1v1)
+					// Combat en 1 contre 1
 					combat.TurnCombat1v1(c1, e1)
 				case 4:
 					// Marchand
@@ -58,17 +57,22 @@ func main() {
 					forgeron.Forgeron(c1)
 				case 6:
 				default:
+					// Choix invalide
 					fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
 				}
+				// Reset de la variable menuChoice pour éviter les boucles infinies
 				if menuChoice == 6 {
 					menuChoice = 0
+					// Retour au menu précédent (menu de démarrage)
 					break
 				}
 
 			}
 		case 2:
+			// Quitter le jeu
 			os.Exit(0)
 		default:
+			// Choix invalide
 			fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
 		}
 	}
