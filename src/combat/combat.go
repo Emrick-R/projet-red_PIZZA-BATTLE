@@ -92,7 +92,7 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 		if Turn%2 == 0 { //Le tour du joueur, donc Tour 2
 			fmt.Println("\nTour :", Turn)
 			fmt.Printf("A ton tour %s!\n\n", c.Name)
-			Combat(c, e)
+			//Appel de la fonction tour du Joueur
 			if EnemyIsDead(e) {
 				score.Addscore(c, e)
 			}
