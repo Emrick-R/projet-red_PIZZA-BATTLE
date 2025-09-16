@@ -61,14 +61,14 @@ func EnemyPatern(c *structures.Character, e *structures.Enemy, t int) {
 	}
 }
 
-func Combat() {
+func Combat(e *structures.Enemy, c *structures.Character) {
 	for {
 		var combat_choice int
+		fmt.Scan(&combat_choice)
 		fmt.Print("Début du combat vous vous battez contre un", e.Name, "! Prudence !")
 		fmt.Printf("1 - Attaquer ")
 		fmt.Printf("2 - Inventaire ")
 		fmt.Printf("3 - Fuir devant la puissance de l'ennemi")
-		fmt.Scan(&combat_choice)
 		switch combat_choice {
 		case 1:
 			skills.SkillChoice(c)
@@ -90,7 +90,7 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 		if Turn%2 == 0 { //Le tour du joueur, donc Tour 2
 			fmt.Println("\nTour :", Turn)
 			fmt.Printf("A ton tour %s!\n\n", c.Name)
-			Combat(c, e)
+			//Appel de la fonction tour du Joueur
 			if EnemyIsDead(e) {
 				score.Addscore(c, e)
 			}
