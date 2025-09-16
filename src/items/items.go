@@ -30,6 +30,31 @@ func TakePot(c *structures.Character) {
 	}
 	fmt.Println("Il n'y a pas de potions de Vie dans l'inventaire")
 }
+func TakeManaPot(c *structures.Character) {
+	ManaPot := structures.Object{Name: "Potion de Mana"}
+	if c.ActualMana == c.ManaMax {
+		fmt.Printf("\nLes points de vie sont déjà au max\n\n")
+		return
+	}
+	for i := 0; i < len(c.Inventory); i++ {
+		if c.Inventory[i].Name == ManaPot.Name {
+			c.ActualHp += 20
+			c.Inventory[i].Quantity--
+			if c.Inventory[i].Quantity == 0 {
+				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
+			}
+			if c.ActualMana >= c.ManaMax {
+				c.ActualMana = c.ManaMax
+			}
+			fmt.Printf("\nPotion consommée !\n")
+			fmt.Printf("Mana actuel: %d\n", c.ActualMana)
+
+			return
+		}
+	}
+	fmt.Println("Il n'y a pas de potions de Mana dans l'inventaire")
+}
+
 func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 	PoisonPot := structures.Object{Name: "Potion de Poison"}
 	for i := 0; i < len(c.Inventory); i++ {

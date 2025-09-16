@@ -144,7 +144,7 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) {
 
 	// en cas d'égalité
 	for choix == ennemi {
-		fmt.Println("Égalité — relance des dés !")
+		fmt.Println("Égalité — relance du nombre !")
 		mamma = rollDice()
 		ennemi = rollDice()
 		fmt.Printf("Chiffre : %d | Chiffre de la Mamma : %d | Chiffre de l'ennemi : %d\n", choix, mamma, ennemi)

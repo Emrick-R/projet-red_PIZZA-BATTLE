@@ -170,16 +170,19 @@ func CharacterCreation(c *structures.Character) {
 		fmt.Println("\nTu as choisi la classe Elfe : agile, précis et en communion avec la nature.")
 		c.MaxHp = 80
 		c.ActualHp = 40
+		c.ManaMax = 120
 		c.Class = "Elfe"
 	case 2:
 		fmt.Println("\nTu as choisi la classe Nain : robuste, courageux et maître de la forge.")
 		c.MaxHp = 120
 		c.ActualHp = 60
+		c.ManaMax = 80
 		c.Class = "Nain"
 	case 3:
 		fmt.Println("\nTu as choisi la classe Humain : polyvalent, ingénieux et déterminé.")
 		c.MaxHp = 100
 		c.ActualHp = 50
+		c.ManaMax = 80
 		c.Class = "Humain"
 	}
 }
