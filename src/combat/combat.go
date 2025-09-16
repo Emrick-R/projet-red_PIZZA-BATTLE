@@ -2,10 +2,43 @@ package combat
 
 import (
 	"fmt"
-	"projet-red_PIZZA-BATTLE/character"
+	"os"
+	"projet-red_PIZZA-BATTLE/score"
 	"projet-red_PIZZA-BATTLE/structures"
+	"time"
 )
 
+func DisplayCombatInventory(c *structures.Character) {
+	fmt.Println("Voici ton inventaire :")
+	for i := range c.Inventory {
+		fmt.Printf("%d - %s (x%d)\n", i+1, c.Inventory[i].Name, c.Inventory[i].Quantity)
+	}
+}
+
+func CharacterIsDead(c *structures.Character) {
+	if c.MaxHp <= 10 {
+		fmt.Println("Tu es mort pour de bon !")
+		fmt.Println("Impossibilité de renaître...")
+		fmt.Println("========Fin de partie========")
+		score.ShowScore(c)
+		time.Sleep(15 * time.Second)
+		os.Exit(0)
+	}
+	if c.ActualHp <= 0 {
+		fmt.Println("Tu es mort !")
+		c.MaxHp /= 2
+		c.ActualHp = c.MaxHp
+		fmt.Println("Tu viens de renaître avec 50% de HP en moins.")
+	}
+}
+
+func EnemyIsDead(e *structures.Enemy) bool {
+	if e.ActualHp <= 0 {
+		fmt.Printf("Tu as vaincus %s !\n", e.Name)
+		return true
+	}
+	return false
+}
 func EnemyPatern(c *structures.Character, e *structures.Enemy, t int) {
 	/*Tour = T
 	T1 = Enemy attaque 100% des dégats
@@ -29,14 +62,21 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 	Enemy commence tour 1 et chaque tour impair (T1,T3,T5,T7 etc.)
 	Joueur commence tour 2 et chaque Tour pair (T2,T4,T6,T8,etc.)*/
 	Turn := 1
-	if Turn%2 == 0 { //Le tour du joueur, donc Tour 2
-		fmt.Printf("A ton tour %s!\n", c.Name)
-		//Appel de la fonction tour du Joueur
-		character.CharacterIsDead(c)
-		Turn++
-	} else { //Le tour de l'IA, donc Tour 2
-		fmt.Printf("C'est au tour de %s \n", e.Name)
-		EnemyPatern(c, e, Turn)
-		Turn++
+	for {
+		if Turn%2 == 0 { //Le tour du joueur, donc Tour 2
+			fmt.Println("Tour :", Turn)
+			fmt.Printf("A ton tour %s!\n", c.Name)
+			//Appel de la fonction tour du Joueur
+			if EnemyIsDead(e) {
+				score.Addscore(c, e)
+			}
+			Turn++
+		} else { //Le tour de l'IA, donc Tour 2
+			fmt.Println("Tour :", Turn)
+			fmt.Printf("C'est au tour de %s \n", e.Name)
+			EnemyPatern(c, e, Turn)
+			CharacterIsDead(c)
+			Turn++
+		}
 	}
 }

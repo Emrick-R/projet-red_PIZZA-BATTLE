@@ -7,8 +7,8 @@ import (
 )
 
 func DisplayCInfo(c *structures.Character) {
-	fmt.Printf("\nNom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\nArgent: %d\n",
-		c.Name, c.Class, c.Level, c.ActualHp, c.MaxHp, c.Money)
+	fmt.Printf("\nNom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\nArgent: %d\nScore: %d",
+		c.Name, c.Class, c.Level, c.ActualHp, c.MaxHp, c.Money, c.Score)
 	for _, skill := range c.SkillList {
 		fmt.Printf("Liste des skills :\n%s, %d de dégats\n\n", skill.Name, skill.Damage)
 	}
@@ -22,16 +22,15 @@ func DisplayEInfo(e *structures.Enemy) {
 
 func AccessInventory(c *structures.Character) {
 	fmt.Println("\nInventaire :")
-	for _, item := range c.Inventory {
-		fmt.Printf("%s x%d\n", item.Name, item.Quantity)
+	for i := range c.Inventory {
+		fmt.Printf("- %s (x%d)\n", c.Inventory[i].Name, c.Inventory[i].Quantity)
 	}
-	fmt.Println()
 }
 
 func AccessSkills(c *structures.Character) {
 	fmt.Println("\nCompétences :")
-	for _, Skill := range c.SkillList {
-		fmt.Printf("%s: %d points de dégâts\n", Skill.Name, Skill.Damage)
+	for s := range c.SkillList {
+		fmt.Printf("%s: %d points de dégâts\n", c.SkillList[s].Name, c.SkillList[s].Damage)
 	}
 	fmt.Println()
 }
@@ -56,20 +55,6 @@ func AccessEquipement(c *structures.Character) {
 	}
 	fmt.Println("Armure de jambes : ", L)
 
-}
-
-func CharacterIsDead(c *structures.Character) {
-	if c.MaxHp == 1 {
-		fmt.Println("Tu es mort pour de bon !")
-		fmt.Println("Impossibilité de renaître...")
-		fmt.Println("========Fin de partie========")
-	}
-	if c.ActualHp <= 0 {
-		fmt.Println("Tu es mort !")
-		c.MaxHp /= 2
-		c.ActualHp = c.MaxHp
-		fmt.Println("Tu viens de renaître avec 50% de HP en moins.")
-	}
 }
 
 func EquipEquipment(c *structures.Character) {
