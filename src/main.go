@@ -36,7 +36,7 @@ func main() {
 			// Initialiser le personnage
 			c1 := structures.InitCharacter(1, inv, 10, 100, skillList)
 			character.CharacterCreation(c1)
-			e1 := structures.InitEnemy("Giovanni", 100, 100)
+			e1 := structures.InitEnemy("Giovanni", 100, 100, 5)
 
 			for {
 				fmt.Println("\n======== Menu Personnage : ========")
