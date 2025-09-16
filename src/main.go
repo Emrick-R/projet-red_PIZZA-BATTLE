@@ -13,6 +13,7 @@ import (
 
 func main() {
 	var menuChoice int
+
 	for {
 		affichage.AffichageMenuPrincipal()
 		fmt.Scan(&menuChoice)
@@ -64,7 +65,7 @@ func main() {
 					fmt.Printf("\nLe petit enfant Giovanni apparaît devant toi !\n-50 PV\n")
 					character.DisplayEInfo(e1)
 
-					fmt.Println("Tu lance une potion de poison !")
+					fmt.Println("Tu lances une potion de poison !")
 					items.ThrowPoisonPot(c1, e1)
 					character.DisplayEInfo(e1)
 				case 4:
@@ -77,6 +78,7 @@ func main() {
 					menuChoice = 0
 					break
 				}
+
 			}
 		case 2:
 			os.Exit(0)

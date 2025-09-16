@@ -57,5 +57,4 @@ func Attaques(skills []string) {
 	}
 	fmt.Println("0 - RETOUR")
 	separator()
-
 }
