@@ -1,0 +1,1084 @@
+// FILE: C:\Users\harol\Documents\Cours\Projet RED\projet-red_PIZZA-BATTLE\src\affichage\affichage.go
+package affichage
+
+import "fmt"
+
+func separator() {
+	fmt.Println("======================================")
+}
+
+func AffichageMenuPrincipal() {
+	separator()
+	fmt.Println("🍕 BIENVENUE DANS PIZZA BATTLE 🍕")
+	separator()
+	fmt.Println("1 - Commencer une nouvelle partie")
+	fmt.Println("2 - Quitter")
+	separator()
+}
+
+func AffichageMenuPersonnage() {
+	separator()
+	fmt.Println("👤 Menu Personnage :")
+	separator()
+	fmt.Println("1 - Afficher le personnage")
+	fmt.Println("2 - Afficher l'inventaire")
+	fmt.Println("3 - Test de combat : Utiliser une potion de poison")
+	fmt.Println("4 - Marchand")
+	fmt.Println("5 - Forgeron")
+	fmt.Println("6 - RETOUR")
+	separator()
+}
+
+func AffichageMenuInventaire() {
+	separator()
+	fmt.Println("🎒 Inventaire :")
+	separator()
+	fmt.Println("1 - Utiliser une potion")
+	fmt.Println("2 - Equiper un équipement")
+	fmt.Println("3 - RETOUR")
+	separator()
+}
+
+func CharacterTurn() {
+	separator()
+	fmt.Println("⚔️  Combat :")
+	separator()
+	fmt.Println("1 - Attaquer")
+	fmt.Println("2 - Inventaire")
+	fmt.Println("3 - RETOUR")
+	separator()
+}
+
+// Pour afficher les attaques, passe la liste des skills en paramètre
+func Attaques(skills []string) {
+	separator()
+	fmt.Println("💥 Attaques :")
+	for i, skill := range skills {
+		fmt.Printf("%d - %s\n", i+1, skill)
+	}
+	fmt.Println("0 - RETOUR")
+	separator()
+}
+
+
+///
+
+// FILE: C:\Users\harol\Documents\Cours\Projet RED\projet-red_PIZZA-BATTLE\src\character\character.go
+package character
+
+import (
+	"fmt"
+	"projet-red_PIZZA-BATTLE/inventory"
+	"projet-red_PIZZA-BATTLE/structures"
+)
+
+func DisplayCInfo(c *structures.Character) {
+	fmt.Printf("\nNom: %s\nClasse: %s\nNiveau: %d\nPV: %d/%d\nArgent: %d\nScore: %d",
+		c.Name, c.Class, c.Level, c.ActualHp, c.MaxHp, c.Money, c.Score)
+	for _, skill := range c.SkillList {
+		fmt.Printf("Liste des skills :\n%s, %d de dégats\n\n", skill.Name, skill.Damage)
+	}
+
+}
+
+func DisplayEInfo(e *structures.Enemy) {
+	fmt.Printf("\nNom: %s\nPV: %d/%d\n",
+		e.Name, e.ActualHp, e.MaxHp)
+}
+
+func AccessInventory(c *structures.Character) {
+	fmt.Println("\nInventaire :")
+	for i := range c.Inventory {
+		fmt.Printf("- %s (x%d)\n", c.Inventory[i].Name, c.Inventory[i].Quantity)
+	}
+}
+
+func AccessSkills(c *structures.Character) {
+	fmt.Println("\nCompétences :")
+	for s := range c.SkillList {
+		fmt.Printf("%s: %d points de dégâts\n", c.SkillList[s].Name, c.SkillList[s].Damage)
+	}
+	fmt.Println()
+}
+
+func AccessEquipement(c *structures.Character) {
+	fmt.Println("\nEquipement :")
+	H := c.Armor.Head.Name
+	C := c.Armor.Chest.Name
+	L := c.Armor.Legs.Name
+	if c.Armor.Head.Name == "" {
+		H = "Rien"
+	}
+	fmt.Println("Armure de tête : ", H)
+
+	if c.Armor.Chest.Name == "" {
+		C = "Rien"
+	}
+	fmt.Println("Armure de torse : ", C)
+
+	if c.Armor.Legs.Name == "" {
+		L = "Rien"
+	}
+	fmt.Println("Armure de jambes : ", L)
+
+}
+
+func EquipEquipment(c *structures.Character) {
+	var newEquipChoice int
+	chapAvent := structures.Object{Name: "Chapeau de l'aventurier", Quantity: 1}
+	tunAvent := structures.Object{Name: "Tunique de l'aventurier", Quantity: 1}
+	botAvent := structures.Object{Name: "Bottes de l'aventurier", Quantity: 1}
+	for {
+		fmt.Println("\nQuel équipement veux-tu porter ?")
+		fmt.Println("1 - Chapeau de l'aventurier")
+		fmt.Println("2 - Tunique de l'aventurier")
+		fmt.Println("3 - Bottes de l'aventurier")
+		fmt.Println("4 - RETOUR")
+		fmt.Scan(&newEquipChoice)
+		hadChap := false
+		hadTun := false
+		hadBot := false
+		for _, i := range c.Inventory {
+			if i.Name == chapAvent.Name {
+				hadChap = true
+			}
+			if i.Name == tunAvent.Name {
+				hadTun = true
+			}
+			if i.Name == botAvent.Name {
+				hadBot = true
+			}
+		}
+		switch newEquipChoice {
+		case 1:
+			if hadChap {
+				inventory.AddEquipment(c, chapAvent)
+			} else {
+				fmt.Printf("\nTu ne possèdes pas : %s\n\n", chapAvent.Name)
+			}
+		case 2:
+			if hadTun {
+				inventory.AddEquipment(c, tunAvent)
+			} else {
+				fmt.Printf("\nTu ne possèdes pas : %s\n\n", tunAvent.Name)
+			}
+		case 3:
+			if hadBot {
+				inventory.AddEquipment(c, botAvent)
+			} else {
+				fmt.Printf("\nTu ne possèdes pas : %s\n\n", botAvent.Name)
+			}
+		case 4:
+		}
+		if newEquipChoice == 4 {
+			newEquipChoice = 0
+			break
+		}
+	}
+}
+
+func CharacterCreation(c *structures.Character) {
+	var username string
+	var valid bool
+
+	for {
+		fmt.Println("\nQuel est votre pseudo ?")
+		fmt.Scan(&username)
+		valid = true
+		result := []rune(username)
+
+		if len(result) == 0 {
+			fmt.Println("Le pseudo ne peut pas être vide.")
+			valid = false
+			continue
+		}
+
+		for _, r := range result {
+			if r < 65 || (r > 90 && r < 97) || r > 122 {
+				fmt.Println("Votre pseudo n'est pas correct, il ne contient que des lettres.")
+				valid = false
+				break
+			}
+		}
+
+		if valid {
+			if result[0] >= 97 && result[0] <= 122 {
+				result[0] = result[0] - ('a' - 'A')
+			}
+			for i := 1; i < len(result); i++ {
+				if result[i] >= 65 && result[i] <= 90 {
+					result[i] = result[i] + ('a' - 'A')
+				}
+			}
+
+			username = string(result)
+			c.Name = username
+			break
+		}
+	}
+
+	fmt.Println("\nPersonnage créé avec le nom :", c.Name)
+	var class_choice int
+	for {
+		fmt.Println("\nSuper", c.Name, ", quelle classe veux-tu choisir ?")
+		fmt.Println("1 - Elfe : 80 PV Max")
+		fmt.Println("2 - Nain : 120 PV Max")
+		fmt.Println("3 - Humain : 100 PV Max")
+		fmt.Scan(&class_choice)
+
+		if class_choice >= 1 && class_choice <= 3 {
+			break
+		}
+		fmt.Println("Choix invalide, essaye encore.")
+	}
+
+	switch class_choice {
+	case 1:
+		fmt.Println("\nTu as choisi la classe Elfe : agile, précis et en communion avec la nature.")
+		c.MaxHp = 80
+		c.ActualHp = 40
+		c.Class = "Elfe"
+	case 2:
+		fmt.Println("\nTu as choisi la classe Nain : robuste, courageux et maître de la forge.")
+		c.MaxHp = 120
+		c.ActualHp = 60
+		c.Class = "Nain"
+	case 3:
+		fmt.Println("\nTu as choisi la classe Humain : polyvalent, ingénieux et déterminé.")
+		c.MaxHp = 100
+		c.ActualHp = 50
+		c.Class = "Humain"
+	}
+}
+
+
+///
+
+// FILE: C:\Users\harol\Documents\Cours\Projet RED\projet-red_PIZZA-BATTLE\src\combat\combat.go
+package combat
+
+import (
+	"fmt"
+	"os"
+	"projet-red_PIZZA-BATTLE/score"
+	"projet-red_PIZZA-BATTLE/structures"
+	"time"
+)
+
+func DisplayCombatInventory(c *structures.Character) {
+	fmt.Println("Voici ton inventaire :")
+	for i := range c.Inventory {
+		fmt.Printf("%d - %s (x%d)\n", i+1, c.Inventory[i].Name, c.Inventory[i].Quantity)
+	}
+}
+
+func CharacterIsDead(c *structures.Character) {
+	if c.MaxHp <= 10 {
+		fmt.Println("Tu es mort pour de bon !")
+		fmt.Println("Impossibilité de renaître...")
+		fmt.Println("========Fin de partie========")
+		score.ShowScore(c)
+		time.Sleep(15 * time.Second)
+		os.Exit(0)
+	}
+	if c.ActualHp <= 0 {
+		fmt.Println("Tu es mort !")
+		c.MaxHp /= 2
+		c.ActualHp = c.MaxHp
+		fmt.Println("Tu viens de renaître avec 50% de HP en moins.")
+	}
+}
+
+func EnemyIsDead(e *structures.Enemy) bool {
+	if e.ActualHp <= 0 {
+		fmt.Printf("Tu as vaincus %s !\n", e.Name)
+		return true
+	}
+	return false
+}
+func EnemyPatern(c *structures.Character, e *structures.Enemy, t int) {
+	/*Tour = T
+	T1 = Enemy attaque 100% des dégats
+	T2 = 100% notre perso
+	T3 = 200% enemy attaque
+	T4 = 100% notre perso
+
+	T3*/
+	if t%3 == 0 {
+		fmt.Print(e.Name, "attaque", c.Name, "et lui inflige", e.Damage*2, "de dégâts")
+		c.ActualHp = c.ActualHp - (e.Damage * 2)
+	} else {
+		// Autre tours
+		c.ActualHp = c.ActualHp - e.Damage
+		fmt.Print(e.Name, "attaque", c.Name, "et lui inflige", e.Damage, "de dégâts")
+	}
+}
+
+func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
+	/* 1v1 =
+	Enemy commence tour 1 et chaque tour impair (T1,T3,T5,T7 etc.)
+	Joueur commence tour 2 et chaque Tour pair (T2,T4,T6,T8,etc.)*/
+	Turn := 1
+	for {
+		if Turn%2 == 0 { //Le tour du joueur, donc Tour 2
+			fmt.Println("Tour :", Turn)
+			fmt.Printf("A ton tour %s!\n", c.Name)
+			//Appel de la fonction tour du Joueur
+			if EnemyIsDead(e) {
+				score.Addscore(c, e)
+			}
+			Turn++
+		} else { //Le tour de l'IA, donc Tour 2
+			fmt.Println("Tour :", Turn)
+			fmt.Printf("C'est au tour de %s \n", e.Name)
+			EnemyPatern(c, e, Turn)
+			CharacterIsDead(c)
+			Turn++
+		}
+	}
+}
+
+
+///
+
+// FILE: C:\Users\harol\Documents\Cours\Projet RED\projet-red_PIZZA-BATTLE\src\forgeron\forgeron.go
+package forgeron
+
+import (
+	"fmt"
+	"projet-red_PIZZA-BATTLE/inventory"
+	"projet-red_PIZZA-BATTLE/structures"
+)
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func Forgeron(c *structures.Character) {
+	wolfFur := structures.Object{Name: "Peau de Loup", Quantity: 1}
+	trollSkin := structures.Object{Name: "Peau de Troll", Quantity: 1}
+	boarLeather := structures.Object{Name: "Cuir de Sanglier", Quantity: 1}
+	ravenFeather := structures.Object{Name: "Plume de Corbeau", Quantity: 1}
+
+	chapeauAventurier := structures.Object{Name: "Chapeau de l'aventurier", Quantity: 1}
+	tuniqueAventurier := structures.Object{Name: "Tunique de l'aventurier", Quantity: 1}
+	bottesAventurier := structures.Object{Name: "Bottes de l'aventurier", Quantity: 1}
+
+	var forgeron_choice int
+	var craft_confirmation int
+
+	for {
+		fmt.Println("======== Forgeron : ========")
+		fmt.Println("Bonjour je suis le Forgeron, quel est votre choix ?")
+		fmt.Println("1 - Fabrication : Chapeau de l'aventurier (1 Plume de Corbeau + 1 Cuir de Sanglier)")
+		fmt.Println("2 - Fabrication : Tunique de l'aventurier (2 Fourrures de Loup + 1 Peau de Troll)")
+		fmt.Println("3 - Fabrication : Bottes de l'aventurier (1 Fourrure de Loup + 1 Cuir de Sanglier)")
+		fmt.Println("4 - RETOUR")
+		fmt.Scan(&forgeron_choice)
+
+		var countRavenFeather, countBoarLeather, countWolfFur, countTrollSkin int
+
+		for i := range c.Inventory {
+			switch c.Inventory[i].Name {
+			case "Plume de Corbeau":
+				countRavenFeather = c.Inventory[i].Quantity
+			case "Cuir de Sanglier":
+				countBoarLeather = c.Inventory[i].Quantity
+			case "Peau de Loup":
+				countWolfFur = c.Inventory[i].Quantity
+			case "Peau de Troll":
+				countTrollSkin = c.Inventory[i].Quantity
+			}
+		}
+
+		switch forgeron_choice {
+		case 1:
+			itemcraftable := min(countRavenFeather, countBoarLeather)
+			if itemcraftable < 1 {
+				fmt.Printf("\nTu n'as pas les objets requis pour fabriquer le Chapeau de l'Aventurier\n\n")
+				break
+			} else {
+				fmt.Printf("\nTu peux fabriquer %d x Chapeau de l'Aventurier\n", itemcraftable)
+			}
+
+			fmt.Println("1 - Oui je suis sûr !")
+			fmt.Println("2 - Non je ne suis pas sûr, retour !")
+			fmt.Scan(&craft_confirmation)
+			switch craft_confirmation {
+			case 1:
+				fmt.Println("\nTu viens de fabriquer", itemcraftable, "x Chapeau de l'Aventurier")
+				inventory.RemoveInventory(c, ravenFeather)
+				inventory.RemoveInventory(c, boarLeather)
+				inventory.AddInventory(c, chapeauAventurier)
+			case 2:
+				fmt.Printf("\nRetour au menu précédent\n")
+			}
+
+		case 2:
+			itemcraftable := min(countWolfFur/2, countTrollSkin) //besoin de 2 fourrures de loup
+			if itemcraftable < 1 {
+				fmt.Printf("\nTu n'as pas les objets requis pour Tunique de l'aventurier de l'Aventurier\n\n")
+				break
+			} else {
+				fmt.Printf("\nTu peux fabriquer %d x Tunique de l'aventurier\n\n", itemcraftable)
+			}
+
+			fmt.Println("1 - Oui je suis sûr !")
+			fmt.Println("2 - Non je ne suis pas sûr, retour !")
+			fmt.Scan(&craft_confirmation)
+			switch craft_confirmation {
+			case 1:
+				fmt.Printf("\nTu viens de fabriquer %d x Tunique de l'Aventurier\n\n", itemcraftable)
+				inventory.RemoveInventory(c, wolfFur)
+				inventory.RemoveInventory(c, wolfFur) //Retire 2 fourrures de loup
+				inventory.RemoveInventory(c, trollSkin)
+				inventory.AddInventory(c, tuniqueAventurier)
+			case 2:
+				fmt.Printf("\nRetour au menu précédent\n\n")
+			}
+
+		case 3:
+			itemcraftable := min(countWolfFur, countBoarLeather)
+			if itemcraftable < 1 {
+				fmt.Printf("\nTu n'as pas les objets requis pour Bottes de l'aventurier de l'Aventurier\n\n")
+				break
+			} else {
+				fmt.Printf("\nTu peux fabriquer %d x Bottes de l'aventurier\n", itemcraftable)
+			}
+
+			fmt.Println("1 - Oui je suis sûr !")
+			fmt.Println("2 - Non je ne suis pas sûr, retour !")
+			fmt.Scan(&craft_confirmation)
+			switch craft_confirmation {
+			case 1:
+				fmt.Printf("\nTu viens de fabriquer %d x Bottes de l'Aventurier\n\n", itemcraftable)
+				inventory.RemoveInventory(c, wolfFur)
+				inventory.RemoveInventory(c, boarLeather)
+				inventory.AddInventory(c, bottesAventurier)
+			case 2:
+				fmt.Printf("\nRetour au menu précédent\n")
+			}
+
+		case 4:
+		}
+		if forgeron_choice == 4 {
+			forgeron_choice = 0
+			break
+		}
+	}
+}
+
+
+///
+
+// FILE: C:\Users\harol\Documents\Cours\Projet RED\projet-red_PIZZA-BATTLE\src\inventory\inventory.go
+package inventory
+
+import (
+	"fmt"
+	"projet-red_PIZZA-BATTLE/structures"
+)
+
+func AddInventory(c *structures.Character, newObj structures.Object) {
+	for i := range c.Inventory {
+		if c.Inventory[i].Name == newObj.Name {
+			c.Inventory[i].Quantity += newObj.Quantity
+			return
+		}
+	}
+	c.Inventory = append(c.Inventory, newObj)
+}
+
+func AddEquipment(c *structures.Character, newObj structures.Object) {
+	switch newObj.Name {
+	case "Chapeau de l'aventurier":
+		if c.Armor.Head.Name != "Chapeau de l'aventurier" {
+			c.Armor.Head = &newObj
+			fmt.Printf("\nTu équipes : Chapeau de l'aventurier\n\n")
+			fmt.Printf("\nTu gagnes + 10 PV Max\n\n")
+			fmt.Printf("%d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+10)
+			c.MaxHp += 10
+			RemoveInventory(c, newObj)
+		} else {
+			fmt.Printf("\nTu as déjà équipé : %s\n\n", newObj.Name)
+		}
+	case "Tunique de l'aventurier":
+		if c.Armor.Chest.Name != "Tunique de l'aventurier" {
+			c.Armor.Chest = &newObj
+			fmt.Printf("\nTu équipes : Tunique de l'aventurier\n\n")
+			fmt.Printf("\nTu gagnes + 25 PV Max\n\n")
+			fmt.Printf("%d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+25)
+			c.MaxHp += 25
+			RemoveInventory(c, newObj)
+		} else {
+			fmt.Printf("\nTu as déjà équipé : %s\n\n", newObj.Name)
+		}
+	case "Bottes de l'aventurier":
+		if c.Armor.Legs.Name != "Bottes de l'aventurier" {
+			c.Armor.Legs = &newObj
+			fmt.Printf("\nTu équipes : Bottes de l'aventurier\n\n")
+			fmt.Printf("\nTu gagnes + 15 PV Max\n\n")
+			fmt.Printf("%d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+15)
+			c.MaxHp += 15
+			RemoveInventory(c, newObj)
+		} else {
+			fmt.Printf("\nTu as déjà équipé : %s\n\n", newObj.Name)
+		}
+	}
+}
+
+func RemoveInventory(c *structures.Character, obj structures.Object) {
+	for i := range c.Inventory {
+		if c.Inventory[i].Name == obj.Name {
+			if c.Inventory[i].Quantity > obj.Quantity {
+				c.Inventory[i].Quantity -= obj.Quantity
+			} else {
+				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
+			}
+			return
+		}
+	}
+}
+
+func CheckMaxInventory(c *structures.Character) bool { // True = Il y a de la place
+	counter := 0
+	for i := range c.Inventory {
+		counter = counter + c.Inventory[i].Quantity
+	}
+	return counter < c.MaxInv
+}
+
+func UpgradeInventorySlot(c *structures.Character) {
+	c.MaxInv = c.MaxInv + 10
+}
+
+
+///
+
+// FILE: C:\Users\harol\Documents\Cours\Projet RED\projet-red_PIZZA-BATTLE\src\items\items.go
+package items
+
+import (
+	"fmt"
+	"projet-red_PIZZA-BATTLE/structures"
+	"time"
+)
+
+func TakePot(c *structures.Character) {
+	HpPot := structures.Object{Name: "Potion de Vie"}
+	if c.ActualHp == c.MaxHp {
+		fmt.Printf("\nLes points de vie sont déjà au max\n\n")
+		return
+	}
+	for i := 0; i < len(c.Inventory); i++ {
+		if c.Inventory[i].Name == HpPot.Name {
+			c.ActualHp += 50
+			c.Inventory[i].Quantity--
+			if c.Inventory[i].Quantity == 0 {
+				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
+			}
+			if c.ActualHp >= c.MaxHp {
+				c.ActualHp = c.MaxHp
+			}
+			fmt.Printf("\nPotion consommée !\n")
+			fmt.Printf("PV actuels: %d\n", c.ActualHp)
+
+			return
+		}
+	}
+	fmt.Println("Il n'y a pas de potions de Vie dans l'inventaire")
+}
+func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
+	PoisonPot := structures.Object{Name: "Potion de Poison"}
+	for i := 0; i < len(c.Inventory); i++ {
+		if c.Inventory[i].Name == PoisonPot.Name {
+			if c.Inventory[i].Quantity == 0 {
+				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
+				e.ActualHp -= 10
+				c.Inventory[i].Quantity--
+			}
+			fmt.Printf("\nPotion envoyée !\n")
+			for i := 0; i < 3; i++ {
+				e.ActualHp -= 10
+				fmt.Printf("L'ennemi a perdu : %d hp\n", e.ActualHp)
+				time.Sleep(1 * time.Second)
+			}
+
+		}
+	}
+	fmt.Println("Il n'y a pas de potions de Poison dans l'inventaire")
+}
+
+
+///
+
+// FILE: C:\Users\harol\Documents\Cours\Projet RED\projet-red_PIZZA-BATTLE\src\main.go
+package main
+
+import (
+	"fmt"
+	"os"
+	"projet-red_PIZZA-BATTLE/affichage"
+	"projet-red_PIZZA-BATTLE/character"
+	"projet-red_PIZZA-BATTLE/forgeron"
+	"projet-red_PIZZA-BATTLE/items"
+	"projet-red_PIZZA-BATTLE/marchand"
+	"projet-red_PIZZA-BATTLE/structures"
+)
+
+func main() {
+	var menuChoice int
+
+	for {
+		affichage.AffichageMenuPrincipal()
+		fmt.Scan(&menuChoice)
+		switch menuChoice {
+		case 1:
+			// Initialiser l'inventaire de départ
+			HpPot := structures.Object{Name: "Potion de Vie"}
+			inv := []structures.Object{
+				{Name: HpPot.Name, Quantity: 3},
+			}
+			// Initialiser le skill de départ
+			punch := structures.InitSkill("Coup de poing", 10)
+			skillList := []structures.Skill{
+				{Name: punch.Name, Damage: punch.Damage},
+			}
+			// Initialiser le personnage
+			c1 := structures.InitCharacter(1, inv, 10, 100, skillList)
+			character.CharacterCreation(c1)
+			e1 := structures.InitEnemy("Giovanni", 100, 100, 5, "Facile")
+
+			for {
+				affichage.AffichageMenuPersonnage()
+				fmt.Scan(&menuChoice)
+
+				switch menuChoice {
+				case 1:
+					character.DisplayCInfo(c1)
+				case 2:
+					for {
+						menuChoice = 0
+						character.AccessInventory(c1)
+						character.AccessEquipement(c1)
+						character.AccessSkills(c1)
+						affichage.AffichageMenuInventaire()
+						fmt.Scan(&menuChoice)
+						switch menuChoice {
+						case 1:
+							items.TakePot(c1)
+						case 2:
+							character.EquipEquipment(c1)
+						case 3:
+						}
+						if menuChoice == 3 {
+							menuChoice = 0
+							break
+						}
+					}
+				case 3:
+					fmt.Printf("\nLe petit enfant Giovanni apparaît devant toi !\n-50 PV\n")
+					character.DisplayEInfo(e1)
+
+					fmt.Println("Tu lances une potion de poison !")
+					items.ThrowPoisonPot(c1, e1)
+					character.DisplayEInfo(e1)
+				case 4:
+					marchand.Marchand(c1)
+				case 5:
+					forgeron.Forgeron(c1)
+				case 6:
+				}
+				if menuChoice == 6 {
+					menuChoice = 0
+					break
+				}
+
+			}
+		case 2:
+			os.Exit(0)
+		}
+	}
+}
+
+
+///
+
+// FILE: C:\Users\harol\Documents\Cours\Projet RED\projet-red_PIZZA-BATTLE\src\marchand\marchand.go
+package marchand
+
+import (
+	"fmt"
+	"projet-red_PIZZA-BATTLE/character"
+	"projet-red_PIZZA-BATTLE/inventory"
+	"projet-red_PIZZA-BATTLE/skills"
+	"projet-red_PIZZA-BATTLE/structures"
+)
+
+func Marchand(c *structures.Character) {
+	var marchand_choice int
+	HpPot := structures.Object{Name: "Potion de Vie", Quantity: 1}
+	PoisonPot := structures.Object{Name: "Potion de Poison", Quantity: 1}
+	WolfFur := structures.Object{Name: "Peau de Loup", Quantity: 1}
+	TrollSkin := structures.Object{Name: "Peau de Troll", Quantity: 1}
+	BoarLeather := structures.Object{Name: "Cuir de Sanglier", Quantity: 1}
+	RavenFeather := structures.Object{Name: "Plume de Corbeau", Quantity: 1}
+
+	FireBall := structures.Skill{Name: "Boule de feu", Damage: 20}
+
+	for {
+		fmt.Println("\n======== Marchand : ========")
+		fmt.Printf("Bonjour je suis le marchand, quel est votre choix ?\n\n")
+		fmt.Printf("1 - %s - 3 Pièces d'or\n", HpPot.Name)
+		fmt.Printf("2 - %s - 6 Pièces d'or\n", PoisonPot.Name)
+		fmt.Printf("3 - Livre de Sort : %s - 25 pièces d'or\n", FireBall.Name)
+		fmt.Printf("4 - %s - 4 pièces d'or\n", WolfFur.Name)
+		fmt.Printf("5 - %s - 7 pièces d'or\n", TrollSkin.Name)
+		fmt.Printf("6 - %s - 3 pièces d'or\n", BoarLeather.Name)
+		fmt.Printf("7 - %s - 1 pièce d'or\n", RavenFeather.Name)
+		fmt.Printf("8 - Augmenter la taille de l'inventaire +10 slots - 30 pièce d'or\n")
+		fmt.Println("9 - RETOUR")
+		fmt.Scan(&marchand_choice)
+		switch marchand_choice {
+		case 1:
+			if inventory.CheckMaxInventory(c) {
+				inventory.AddInventory(c, HpPot)
+				c.Money -= 3
+				fmt.Println("Super ! Tu as acheté une Potion de vie. Tu perds 3 Pièces d'or.")
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			} else {
+				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				character.AccessInventory(c)
+			}
+		case 2:
+			if inventory.CheckMaxInventory(c) {
+				inventory.AddInventory(c, PoisonPot)
+				c.Money -= 6
+				fmt.Println("Super ! Tu as acheté une Potion de poison. Tu perds 6 Pièces d'or.")
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			} else {
+				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				character.AccessInventory(c)
+			}
+		case 3:
+			if !skills.CheckSkills(c, FireBall) {
+				skills.AddSkills(c, FireBall)
+				c.Money -= 25
+				fmt.Printf("\nSuper ! Tu as acheté un Livre de Sort : %s. Tu perds 25 Pièces d'or.\n", FireBall.Name)
+				fmt.Printf("Tu connais maintenant la compétance %s : %d de dégats\n", FireBall.Name, FireBall.Damage)
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			} else {
+				fmt.Print("\nTu possèdes déjà cette compétence\n\n")
+				character.AccessInventory(c)
+			}
+		case 4:
+			if inventory.CheckMaxInventory(c) {
+				inventory.AddInventory(c, WolfFur)
+				c.Money -= 4
+				fmt.Println("\nSuper ! Tu as acheté une Fourrure de Loup. Tu perds 4 Pièces d'or.")
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			} else {
+				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				character.AccessInventory(c)
+			}
+		case 5:
+			if inventory.CheckMaxInventory(c) {
+				inventory.AddInventory(c, TrollSkin)
+				c.Money -= 7
+				fmt.Println("\nSuper ! Tu as acheté une Peau de Troll. Tu perds 7 Pièces d'or.")
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			} else {
+				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				character.AccessInventory(c)
+			}
+		case 6:
+			if inventory.CheckMaxInventory(c) {
+				inventory.AddInventory(c, BoarLeather)
+				c.Money -= 3
+				fmt.Println("\nSuper ! Tu as acheté un Cuir de Sanglier. Tu perds 3 Pièces d'or.")
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			} else {
+				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				character.AccessInventory(c)
+			}
+		case 7:
+			if inventory.CheckMaxInventory(c) {
+				inventory.AddInventory(c, RavenFeather)
+				c.Money -= 1
+				fmt.Println("\nSuper ! Tu as acheté une Plume de Corbeau. Tu perds 1 Pièce d'or.")
+				fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+				character.AccessInventory(c)
+			} else {
+				fmt.Printf("\nIl n'y a pas assez de place dans l'inventaire\n\n")
+				character.AccessInventory(c)
+			}
+
+		case 8:
+			c.Money -= 30
+			fmt.Println("\nSuper ! Ton inventaire s'est agrandi de 10 slots. Tu perds 30 Pièce d'or.")
+			fmt.Println("Tu as maintenant", c.Money, "Pièces d'or")
+			inventory.UpgradeInventorySlot(c)
+
+		case 9:
+		}
+		if marchand_choice == 9 {
+			marchand_choice = 0
+			break
+		}
+	}
+}
+
+
+///
+
+// FILE: C:\Users\harol\Documents\Cours\Projet RED\projet-red_PIZZA-BATTLE\src\score\score.go
+package score
+
+import (
+	"fmt"
+	"projet-red_PIZZA-BATTLE/structures"
+)
+
+func Addscore(c *structures.Character, e *structures.Enemy) {
+	switch e.Difficulty {
+	case "Facile":
+		c.Score += 5
+	case "Normal":
+		c.Score += 10
+	case "Boss":
+		c.Score += 20
+	}
+}
+
+func ShowScore(c *structures.Character) {
+	fmt.Printf("Score de %s : %d\n", c.Name, c.Score)
+}
+
+
+///
+
+// FILE: C:\Users\harol\Documents\Cours\Projet RED\projet-red_PIZZA-BATTLE\src\skills\skills.go
+package skills
+
+import (
+	"fmt"
+	"projet-red_PIZZA-BATTLE/structures"
+)
+
+func AddSkills(c *structures.Character, newSkill structures.Skill) {
+	c.SkillList = append(c.SkillList, newSkill)
+}
+
+func CheckSkills(c *structures.Character, newSkill structures.Skill) bool { //True = Il a déjà la comp.
+	for i := range c.SkillList {
+		if c.SkillList[i].Name == newSkill.Name {
+			return true
+		}
+	}
+	return false
+}
+
+func SkillChoice(c *structures.Character) structures.Skill {
+	var skill_choice int
+	for {
+		fmt.Println("\nQuelle compétence veux-tu utiliser ?")
+		for i := range c.SkillList {
+			fmt.Printf("%d - %s\n", i+1, c.SkillList[i].Name)
+		}
+		fmt.Scan(&skill_choice)
+		if skill_choice >= 1 && skill_choice <= len(c.SkillList) {
+			break
+		}
+		fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
+	}
+	return c.SkillList[skill_choice-1]
+}
+
+func UseSkill(c *structures.Character, e *structures.Enemy, skill structures.Skill) {
+	e.ActualHp -= skill.Damage
+}
+
+
+///
+
+// FILE: C:\Users\harol\Documents\Cours\Projet RED\projet-red_PIZZA-BATTLE\src\structures\structures.go
+package structures
+
+type Object struct {
+	Name     string
+	Quantity int
+}
+
+type Character struct {
+	Name      string
+	Class     string
+	Level     int
+	MaxHp     int
+	ActualHp  int
+	Inventory []Object
+	MaxInv    int
+	Money     int
+	SkillList []Skill
+	Armor     Equipment
+	Score     int
+}
+type Enemy struct {
+	Name       string
+	MaxHp      int
+	ActualHp   int
+	Damage     int
+	Difficulty string //3 types : Facile= score 5, Normal= score 10, Boss= score 20
+}
+
+type Skill struct {
+	Name   string
+	Damage int
+}
+
+type Equipment struct {
+	Head  *Object //Pointeur unique vide de structure Objects
+	Chest *Object //Un équipement pour le torse
+	Legs  *Object //Un équipement pour les pieds
+
+}
+
+func InitCharacter(level int, inv []Object, maxInv int, money int, skill []Skill) *Character {
+	return &Character{
+		Level:     level,
+		Inventory: inv,
+		MaxInv:    maxInv,
+		Money:     money,
+		SkillList: skill,
+		Armor: Equipment{
+			Head:  &Object{Name: ""},
+			Chest: &Object{Name: ""},
+			Legs:  &Object{Name: ""},
+		},
+		Score: int(0),
+	}
+}
+
+func InitEnemy(name string, maxhp int, actualhp int, damage int, grade string) *Enemy {
+	return &Enemy{
+		Name:       name,
+		MaxHp:      maxhp,
+		ActualHp:   actualhp,
+		Damage:     damage,
+		Difficulty: grade,
+	}
+}
+
+func InitSkill(name string, damage int) *Skill {
+	return &Skill{
+		Name:   name,
+		Damage: damage,
+	}
+
+}
+
+
+///
+
+// FILE: C:\Users\harol\Documents\Cours\Projet RED\projet-red_PIZZA-BATTLE\test.go
+package main
+
+import "fmt"
+
+func EnemyPatern(c *structures.Character, e *structures.enemy) {
+	// T1
+	c.ActualHp = c.ActualHp - e.Damage
+	fmt.Print(e.Name, "attaque", c.Name, "et lui inflige", e.Damage, "de dégâts")
+
+	// T3
+	//if nombre de tours % 3 == 0 alors
+	fmt.Print(e.Name, "attaque", c.Name, "et lui inflige", e.Damage*2, "de dégâts")
+	c.ActualHp = c.ActualHp - (e.Damage * 2)
+
+}
+
+/*Tour = T
+T1 = Enemy attaque 100% des dégats
+T2 = 100% notre perso
+T3 = 200% enemy attaque
+T4 = 100% notre perso
+*/
+
+
+///
+
+// FILE: C:\Users\harol\Documents\Cours\Projet RED\projet-red_PIZZA-BATTLE\text.go
+package main
+
+import (
+	"fmt"
+	"io/ioutil"
+	"os"
+	"path/filepath"
+	"strings"
+)
+
+func main() {
+	// Chemin spécifique du projet
+	projectPath := "C:\\Users\\harol\\Documents\\Cours\\Projet RED\\projet-red_PIZZA-BATTLE"
+	outputFile := "project_files.txt"
+
+	// Store all file contents
+	var allContents []string
+
+	// Walk through the directory
+	err := filepath.Walk(projectPath, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+
+		// Skip directories and non-go files
+		if info.IsDir() || !strings.HasSuffix(info.Name(), ".go") {
+			return nil
+		}
+
+		// Skip the output file itself
+		if info.Name() == outputFile {
+			return nil
+		}
+
+		// Read file content
+		content, err := ioutil.ReadFile(path)
+		if err != nil {
+			fmt.Printf("Error reading file %s: %v\n", path, err)
+			return nil // Continue with other files
+		}
+
+		// Add file path and content to collection
+		fileEntry := fmt.Sprintf("// FILE: %s\n%s", path, string(content))
+		allContents = append(allContents, fileEntry)
+		fmt.Printf("Added file: %s\n", path)
+
+		return nil
+	})
+
+	if err != nil {
+		fmt.Printf("Error walking directory: %v\n", err)
+		return
+	}
+
+	// Join all contents with separator
+	joinedContent := strings.Join(allContents, "\n\n///\n\n")
+
+	// Write to output file
+	err = ioutil.WriteFile(outputFile, []byte(joinedContent), 0644)
+	if err != nil {
+		fmt.Printf("Error writing to output file: %v\n", err)
+		return
+	}
+
+	fmt.Printf("\nSuccess! All Go files from %s combined into %s\n", projectPath, outputFile)
+}
