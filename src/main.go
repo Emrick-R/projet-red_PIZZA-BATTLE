@@ -18,10 +18,12 @@ func main() {
 		fmt.Scan(&menuChoice)
 		switch menuChoice {
 		case 1:
+			// Initialiser l'inventaire de départ
 			HpPot := structures.Object{Name: "Potion de Vie"}
 			inv := []structures.Object{
 				{Name: HpPot.Name, Quantity: 3},
 			}
+			// Initialiser le skill de départ
 			punch := structures.InitSkill("Coup de poing", 10)
 			skillList := []structures.Skill{
 				{Name: punch.Name, Damage: punch.Damage},
