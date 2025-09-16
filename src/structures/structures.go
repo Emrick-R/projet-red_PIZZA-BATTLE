@@ -16,12 +16,14 @@ type Character struct {
 	Money     int
 	SkillList []Skill
 	Armor     Equipment
+	Score     int
 }
 type Enemy struct {
-	Name     string
-	MaxHp    int
-	ActualHp int
-	Damage   int
+	Name       string
+	MaxHp      int
+	ActualHp   int
+	Damage     int
+	Difficulty string //3 types : Facile= score 5, Normal= score 10, Boss= score 20
 }
 
 type Skill struct {
@@ -48,15 +50,17 @@ func InitCharacter(level int, inv []Object, maxInv int, money int, skill []Skill
 			Chest: &Object{Name: ""},
 			Legs:  &Object{Name: ""},
 		},
+		Score: int(0),
 	}
 }
 
-func InitEnemy(name string, maxhp int, actualhp int, damage int) *Enemy {
+func InitEnemy(name string, maxhp int, actualhp int, damage int, grade string) *Enemy {
 	return &Enemy{
-		Name:     name,
-		MaxHp:    maxhp,
-		ActualHp: actualhp,
-		Damage:   damage,
+		Name:       name,
+		MaxHp:      maxhp,
+		ActualHp:   actualhp,
+		Damage:     damage,
+		Difficulty: grade,
 	}
 }
 
