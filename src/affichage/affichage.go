@@ -38,6 +38,16 @@ func AffichageMenuInventaire() {
 	separator()
 }
 
+func AffichageMenuCombatPotion() {
+	separator()
+	fmt.Println("🧪 Utiliser une potion :")
+	separator()
+	fmt.Println("1 - Potion de soin")
+	fmt.Println("2 - Potion de poison")
+	fmt.Println("3 - RETOUR")
+	separator()
+}
+
 func CharacterTurn() {
 	separator()
 	fmt.Println("⚔️  Combat :")
@@ -45,16 +55,5 @@ func CharacterTurn() {
 	fmt.Println("1 - Attaquer")
 	fmt.Println("2 - Inventaire")
 	fmt.Println("3 - RETOUR")
-	separator()
-}
-
-// Pour afficher les attaques, passe la liste des skills en paramètre
-func Attaques(skills []string) {
-	separator()
-	fmt.Println("💥 Attaques :")
-	for i, skill := range skills {
-		fmt.Printf("%d - %s\n", i+1, skill)
-	}
-	fmt.Println("0 - RETOUR")
 	separator()
 }

@@ -23,7 +23,8 @@ type Enemy struct {
 	MaxHp      int
 	ActualHp   int
 	Damage     int
-	Difficulty string //3 types : Facile= score 5, Normal= score 10, Boss= score 20
+	Difficulty string //3 grades : Facile= score 5, Normal= score 10, Boss= score 20
+	PowerCount int
 }
 
 type Skill struct {
@@ -61,6 +62,7 @@ func InitEnemy(name string, maxhp int, actualhp int, damage int, grade string) *
 		ActualHp:   actualhp,
 		Damage:     damage,
 		Difficulty: grade,
+		PowerCount: 0,
 	}
 }
 

@@ -2,7 +2,9 @@ package character
 
 import (
 	"fmt"
+	"projet-red_PIZZA-BATTLE/affichage"
 	"projet-red_PIZZA-BATTLE/inventory"
+	"projet-red_PIZZA-BATTLE/items"
 	"projet-red_PIZZA-BATTLE/structures"
 )
 
@@ -24,6 +26,33 @@ func AccessInventory(c *structures.Character) {
 	fmt.Println("\nInventaire :")
 	for i := range c.Inventory {
 		fmt.Printf("- %s (x%d)\n", c.Inventory[i].Name, c.Inventory[i].Quantity)
+	}
+}
+
+func InventoryChoice(c *structures.Character) {
+	for {
+		AccessInventory(c)
+		AccessEquipement(c)
+		AccessSkills(c)
+		affichage.AffichageMenuInventaire()
+		menuChoice := 0
+		fmt.Scan(&menuChoice)
+		switch menuChoice {
+		case 1:
+			// Utiliser une potion
+			items.TakePot(c)
+		case 2:
+			// Equiper un équipement
+			EquipEquipment(c)
+		case 3:
+		// Retour
+		default:
+			fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
+		}
+		if menuChoice == 3 {
+			menuChoice = 0
+			return
+		}
 	}
 }
 
@@ -103,6 +132,9 @@ func EquipEquipment(c *structures.Character) {
 				fmt.Printf("\nTu ne possèdes pas : %s\n\n", botAvent.Name)
 			}
 		case 4:
+
+		default:
+			fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
 		}
 		if newEquipChoice == 4 {
 			newEquipChoice = 0

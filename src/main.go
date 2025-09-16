@@ -7,7 +7,6 @@ import (
 	"projet-red_PIZZA-BATTLE/character"
 	"projet-red_PIZZA-BATTLE/combat"
 	"projet-red_PIZZA-BATTLE/forgeron"
-	"projet-red_PIZZA-BATTLE/items"
 	"projet-red_PIZZA-BATTLE/marchand"
 	"projet-red_PIZZA-BATTLE/structures"
 )
@@ -47,33 +46,10 @@ func main() {
 					character.DisplayCInfo(c1)
 				case 2:
 					// Menu Inventaire
-					for {
-						menuChoice = 0
-						character.AccessInventory(c1)
-						character.AccessEquipement(c1)
-						character.AccessSkills(c1)
-						// Menu Inventaire
-						affichage.AffichageMenuInventaire()
-						fmt.Scan(&menuChoice)
-						switch menuChoice {
-						case 1:
-							// Utiliser une potion
-							items.TakePot(c1)
-						case 2:
-							// Equiper un équipement
-							character.EquipEquipment(c1)
-						case 3:
-							// Retour
-						}
-						if menuChoice == 3 {
-							menuChoice = 0
-							break
-						}
-					}
+					character.InventoryChoice(c1)
 				case 3:
 					// Test de combat (1v1)
 					combat.TurnCombat1v1(c1, e1)
-					combat.Combat(c1, e1)
 				case 4:
 					// Marchand
 					marchand.Marchand(c1)
@@ -81,6 +57,8 @@ func main() {
 					// Forgeron
 					forgeron.Forgeron(c1)
 				case 6:
+				default:
+					fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
 				}
 				if menuChoice == 6 {
 					menuChoice = 0
@@ -90,6 +68,8 @@ func main() {
 			}
 		case 2:
 			os.Exit(0)
+		default:
+			fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
 		}
 	}
 }

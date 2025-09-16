@@ -27,11 +27,10 @@ func SkillChoice(c *structures.Character) structures.Skill {
 		}
 		fmt.Scan(&skill_choice)
 		if skill_choice >= 1 && skill_choice <= len(c.SkillList) {
-			break
+			return c.SkillList[skill_choice-1]
 		}
 		fmt.Printf("\nIl ne se passe rien... Choix invalide.\n")
 	}
-	return c.SkillList[skill_choice-1]
 }
 
 func UseSkill(c *structures.Character, e *structures.Enemy, skill structures.Skill) {

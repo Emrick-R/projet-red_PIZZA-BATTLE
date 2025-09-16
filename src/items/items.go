@@ -22,7 +22,7 @@ func TakePot(c *structures.Character) {
 			if c.ActualHp >= c.MaxHp {
 				c.ActualHp = c.MaxHp
 			}
-			fmt.Printf("\nPotion consommée !\n")
+			fmt.Printf("\nPotion consommée ! +50 PV\n")
 			fmt.Printf("PV actuels: %d\n", c.ActualHp)
 
 			return
