@@ -20,6 +20,8 @@ type Character struct {
 	Initiative int
 	ExpActual  int
 	ExpMax     int
+	ActualMana int
+	ManaMax    int
 }
 type Enemy struct {
 	Name       string
@@ -58,7 +60,7 @@ func InitCharacter(level int, inv []Object, maxInv int, money int, skill []Skill
 		Score:      int(0),
 		Initiative: initiative,
 		ExpActual:  0,
-		ExpMax:     100, // 100 XP pour le premier niveau
+		ExpMax:     100,
 	}
 }
 
