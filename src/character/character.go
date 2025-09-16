@@ -58,12 +58,17 @@ func AccessEquipement(c *structures.Character) {
 
 }
 
-func IsDead(c *structures.Character) {
+func CharacterIsDead(c *structures.Character) {
+	if c.MaxHp == 1 {
+		fmt.Println("Tu es mort pour de bon !")
+		fmt.Println("Impossibilité de renaître...")
+		fmt.Println("========Fin de partie========")
+	}
 	if c.ActualHp <= 0 {
-		fmt.Println("Vous êtes mort !")
+		fmt.Println("Tu es mort !")
 		c.MaxHp /= 2
 		c.ActualHp = c.MaxHp
-		fmt.Println("Vous venez de renaître avec 50% de HP en moins.")
+		fmt.Println("Tu viens de renaître avec 50% de HP en moins.")
 	}
 }
 
