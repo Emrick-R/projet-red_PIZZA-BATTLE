@@ -30,11 +30,11 @@ func main() {
 				{Name: punch.Name, Damage: punch.Damage},
 			}
 			// Initialiser le personnage
-			c1 := structures.InitCharacter(1, inv, 10, 100, skillList)
+			c1 := structures.InitCharacter(1, inv, 10, 100, skillList, 100, 0, 100)
 			// Création du personnage par l'utilisateur
 			character.CharacterCreation(c1)
 			// Initialiser l'ennemi
-			e1 := structures.InitEnemy("Petit Giovanni", 100, 100, 5, "Facile")
+			e1 := structures.InitEnemy("Petit Giovanni", 100, 100, 5, "Facile", 100)
 
 			for {
 				affichage.AffichageMenuPrincipal()

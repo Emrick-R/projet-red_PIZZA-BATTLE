@@ -6,24 +6,28 @@ type Object struct {
 }
 
 type Character struct {
-	Name      string
-	Class     string
-	Level     int
-	MaxHp     int
-	ActualHp  int
-	Inventory []Object
-	MaxInv    int
-	Money     int
-	SkillList []Skill
-	Armor     Equipment
-	Score     int
+	Name       string
+	Class      string
+	Level      int
+	MaxHp      int
+	ActualHp   int
+	Inventory  []Object
+	MaxInv     int
+	Money      int
+	SkillList  []Skill
+	Armor      Equipment
+	Score      int
+	Initiative int
+	ExpActual  int
+	ExpMax     int
 }
 type Enemy struct {
 	Name       string
 	MaxHp      int
 	ActualHp   int
 	Damage     int
-	Difficulty string //3 grades : Facile= score 5, Normal= score 10, Boss= score 20
+	Difficulty string //3 types : Facile= score 5, Normal= score 10, Boss= score 20
+	Initiative int
 	PowerCount int
 }
 
@@ -39,7 +43,7 @@ type Equipment struct {
 
 }
 
-func InitCharacter(level int, inv []Object, maxInv int, money int, skill []Skill) *Character {
+func InitCharacter(level int, inv []Object, maxInv int, money int, skill []Skill, initiative int, ExpActual, ExpMax int) *Character {
 	return &Character{
 		Level:     level,
 		Inventory: inv,
@@ -51,17 +55,21 @@ func InitCharacter(level int, inv []Object, maxInv int, money int, skill []Skill
 			Chest: &Object{Name: ""},
 			Legs:  &Object{Name: ""},
 		},
-		Score: int(0),
+		Score:      int(0),
+		Initiative: initiative,
+		ExpActual:  0,
+		ExpMax:     100, // 100 XP pour le premier niveau
 	}
 }
 
-func InitEnemy(name string, maxhp int, actualhp int, damage int, grade string) *Enemy {
+func InitEnemy(name string, maxhp int, actualhp int, damage int, grade string, initiative int) *Enemy {
 	return &Enemy{
 		Name:       name,
 		MaxHp:      maxhp,
 		ActualHp:   actualhp,
 		Damage:     damage,
 		Difficulty: grade,
+		Initiative: initiative,
 		PowerCount: 0,
 	}
 }

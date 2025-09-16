@@ -2,6 +2,7 @@ package combat
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
 	"projet-red_PIZZA-BATTLE/affichage"
 	"projet-red_PIZZA-BATTLE/character"
@@ -199,4 +200,62 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 		}
 	}
 
+}
+
+var choix int
+
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
+func rollDice() int {
+	return rand.Intn(100) + 1
+}
+
+func InitiativeMamma(c *structures.Character, e *structures.Enemy) {
+
+	fmt.Println("🟩⬜🟥 Épreuve de la Mamma : choisissez un nombre, celui le plus proche du score de la Mamma commence.")
+
+	// input joueur sécurisé
+	for {
+		fmt.Print("Entrez votre nombre (1-100) : ")
+		_, err := fmt.Scan(&choix)
+		if err == nil && choix >= 1 && choix <= 100 {
+			break
+		}
+		fmt.Println("Valeur invalide ! Tapez un nombre entre 1 et 100.")
+	}
+
+	// premier lancer
+	mamma := rollDice()
+	ennemi := rollDice()
+
+	// affichage clair
+	fmt.Printf("Ton Chiffre : %d | Chiffre de la Mamma : %d | Chiffre de l'ennemi : %d\n", choix, mamma, ennemi)
+
+	// en cas d'égalité
+	for choix == ennemi {
+		fmt.Println("Égalité — relance des dés !")
+		mamma = rollDice()
+		ennemi = rollDice()
+		fmt.Printf("Chiffre : %d | Chiffre de la Mamma : %d | Chiffre de l'ennemi : %d\n", choix, mamma, ennemi)
+	}
+
+	// distances absolues
+	distJoueur := abs(choix - mamma)
+	distEnnemi := abs(ennemi - mamma)
+
+	// initiative
+	if distJoueur < distEnnemi {
+		fmt.Printf("✅ Vous êtes le plus proche du chiffre de la Mamma avec une distance de %d, vous commencez !\n", distJoueur)
+		c.Initiative = c.Initiative + distJoueur
+		fmt.Printf("Vous avez %d durant ce combat\n", c.Initiative)
+	} else {
+		fmt.Printf("❌ L'ennemi le plus proche du chiffre de la Mamma avec une distance de %d, il commence !\n", distEnnemi)
+		e.Initiative = e.Initiative - distEnnemi
+		fmt.Printf("l'ennemi a %d durant ce combat\n", c.Initiative)
+	}
 }
