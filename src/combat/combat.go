@@ -19,18 +19,19 @@ func DisplayCombatInventory(c *structures.Character) {
 
 func CharacterIsDead(c *structures.Character) {
 	if c.MaxHp <= 10 {
-		fmt.Println("Tu es mort pour de bon !")
+		fmt.Println("\nTu es mort pour de bon !")
 		fmt.Println("Impossibilité de renaître...")
 		fmt.Println("========Fin de partie========")
 		score.ShowScore(c)
-		time.Sleep(15 * time.Second)
+		time.Sleep(7 * time.Second)
 		os.Exit(0)
 	}
 	if c.ActualHp <= 0 {
-		fmt.Println("Tu es mort !")
+		fmt.Println("\nTu es mort !")
 		c.MaxHp /= 2
 		c.ActualHp = c.MaxHp
 		fmt.Println("Tu viens de renaître avec 50% de HP en moins.")
+		fmt.Printf("PV actuels: %d/%d\n", c.ActualHp, c.MaxHp)
 	}
 }
 
@@ -49,18 +50,18 @@ func EnemyPatern(c *structures.Character, e *structures.Enemy, t int) {
 	T4 = 100% notre perso
 	T3*/
 	if t%3 == 0 {
-		fmt.Print(e.Name, " attaque ", c.Name, " et lui inflige ", e.Damage*2, " de dégâts")
+		fmt.Print(e.Name, " attaque ", c.Name, " et lui inflige ", e.Damage*2, " de dégâts\n")
 		c.ActualHp = c.ActualHp - (e.Damage * 2)
 		fmt.Printf("%s : %d/%d hp\n", c.Name, c.ActualHp, c.MaxHp)
 	} else {
 		// Autre tours
 		c.ActualHp = c.ActualHp - e.Damage
-		fmt.Print(e.Name, " attaque ", c.Name, " et lui inflige ", e.Damage, " de dégâts")
+		fmt.Print(e.Name, " attaque ", c.Name, " et lui inflige ", e.Damage, " de dégâts\n")
 		fmt.Printf("%s : %d/%d hp\n", c.Name, c.ActualHp, c.MaxHp)
 	}
 }
 
-func Combat(c *structures.Character, e *structures.Enemy) {
+func Combat() {
 	for {
 		var combat_choice int
 		fmt.Print("Début du combat vous vous battez contre un", e.Name, "! Prudence !")
