@@ -2,48 +2,21 @@ package main
 
 import "fmt"
 
-func CharacterCreation() {
-	var username string
-	var valid bool
+func EnemyPatern(c *structures.Character, e *structures.enemy) {
+	// T1
+	c.ActualHp = c.ActualHp - e.Damage
+	fmt.Print(e.Name, "attaque", c.Name, "et lui inflige", e.Damage, "de dégâts")
 
-	for {
-		fmt.Println("Quel est votre pseudo ?")
-		fmt.Scan(&username)
+	// T3
+	//if nombre de tours % 3 == 0 alors
+	fmt.Print(e.Name, "attaque", c.Name, "et lui inflige", e.Damage*2, "de dégâts")
+	c.ActualHp = c.ActualHp - (e.Damage * 2)
 
-		valid = true
-		result := []rune(username)
-
-		if len(result) == 0 {
-			fmt.Println("Le pseudo ne peut pas être vide.")
-			valid = false
-			continue
-		}
-
-		for _, r := range result {
-			if r < 65 || (r > 90 && r < 97) || r > 122 {
-				fmt.Println("Votre pseudo n'est pas correct, il ne contient pas que des lettres.")
-				valid = false
-				break
-			}
-		}
-
-		if valid {
-			// Première lettre en majuscule
-			if result[0] >= 97 && result[0] <= 122 {
-				result[0] = result[0] - ('a' - 'A')
-			}
-			// Reste des lettres en minuscules
-			for i := 1; i < len(result); i++ {
-				if result[i] >= 65 && result[i] <= 90 {
-					result[i] = result[i] + ('a' - 'A')
-				}
-			}
-
-			username = string(result)
-			c.Name = username
-			break
-		}
-	}
-
-	fmt.Println("Personnage créé avec le nom :", c.Name)
 }
+
+/*Tour = T
+T1 = Enemy attaque 100% des dégats
+T2 = 100% notre perso
+T3 = 200% enemy attaque
+T4 = 100% notre perso
+*/
