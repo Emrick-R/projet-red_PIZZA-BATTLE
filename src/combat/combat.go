@@ -299,14 +299,14 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 								fmt.Printf("\n❌ La Mana déjà pleine\n\n")
 							} else {
 								if c.ActualMana == c.MaxMana {
-									ManaPot := structures.Object{Name: "Potion de Mana"}
+									ManaPot := structures.Object{Name: "Bocal de Sauce Tomate"}
 									for i := 0; i < len(c.Inventory); i++ {
 										if c.Inventory[i].Name == ManaPot.Name {
 											items.TakeManaPot(c)
 											return
 										}
 									}
-									fmt.Println("❌ Il n'y a pas de potion de mana dans l'inventaire.")
+									fmt.Println("❌ Il n'y a pas de Bocal de Sauce Tomate dans l'inventaire.")
 								}
 							}
 						case 4:
