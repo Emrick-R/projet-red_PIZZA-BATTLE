@@ -16,7 +16,7 @@ func DisplayCInfo(c *structures.Character) {
 	fmt.Printf("📛 Nom : %s\n", c.Name)
 	fmt.Printf("🏹 Classe : %s\n", c.Class)
 	fmt.Printf("❤️  PV : %d/%d\n", c.ActualHp, c.MaxHp)
-	fmt.Printf("🔵 Mana : %d/%d\n", c.ActualMana, c.MaxMana)
+	fmt.Printf("🍅 Sauce Tomate : %d/%d\n", c.ActualMana, c.MaxMana)
 	fmt.Printf("⭐ Niveau : %d\n", c.Level)
 	fmt.Printf("📚 Expérience : %d/%d\n", c.ActualExp, c.MaxExp)
 	fmt.Printf("💵 Argent : %d\n", c.Money)
@@ -251,9 +251,9 @@ func CharacterCreation(c *structures.Character) {
 		affichage.Separator()
 		fmt.Printf("🎭 %s, quelle classe veux-tu choisir ?\n", c.Name)
 		affichage.Separator()
-		fmt.Printf("1 - 🏹 Elfe : %d PV Max | %d Mana Max\n", 80, 120)
-		fmt.Printf("2 - ⛏️ Nain : %d PV Max | %d Mana Max\n", 120, 80)
-		fmt.Printf("3 - 🧑 Humain : %d PV Max | %d Mana Max\n", 100, 100)
+		fmt.Printf("1 - 🧀 Sculpteur de Mozzarella : %d PV Max | %d Sauce Tomate Max\n", 80, 120)
+		fmt.Printf("2 - 🔥 Maître du Four		   : %d PV Max | %d Sauce Tomate Max\n", 120, 80)
+		fmt.Printf("3 - 🍝 Artiste des pâtes	   : %d PV Max | %d Sauce Tomate Max\n", 100, 100)
 		affichage.Separator()
 
 		fmt.Print("👉 Ton choix : ")
@@ -271,28 +271,28 @@ func CharacterCreation(c *structures.Character) {
 	switch class_choice {
 	case 1:
 		// Classe Elfe (80 PV Max, 40 PV Actuels (on commence avec la moitier des PV max), 120 Mana Max)
-		fmt.Println("🌿 Tu as choisi la classe Elfe : agile, précis et en communion avec la nature.")
+		fmt.Println("🧀 Tu as choisi la classe Sculpteur de Mozzarella : souple, raffiné et maître des formes crémeuses.")
 		c.MaxHp = 80
 		c.ActualHp = 40
 		c.MaxMana = 120
 		c.ActualMana = 120
-		c.Class = "Elfe"
+		c.Class = "Sculpteur de mozzarella"
 	case 2:
 		// Classe Nain (120 PV Max, 60 PV Actuels, 80 Mana Max)
-		fmt.Println("🪓 Tu as choisi la classe Nain : robuste, courageux et maître de la forge.")
+		fmt.Println("🔥 Tu as choisi la classe Maître du Four : ardents, créatifs et maîtres des saveurs dorées.")
 		c.MaxHp = 120
 		c.ActualHp = 60
 		c.MaxMana = 80
 		c.ActualMana = 80
-		c.Class = "Nain"
+		c.Class = "Maître du four"
 	case 3:
 		// Classe Humain (100 PV Max, 50 PV Actuels, 80 Mana Max)
-		fmt.Println("⚔️  Tu as choisi la classe Humain : polyvalent, ingénieux et déterminé.")
+		fmt.Println("🍝 Tu as choisi la classe Artiste des Pâtes : inventif, habile et guidé par la passion des saveurs.")
 		c.MaxHp = 100
 		c.ActualHp = 50
 		c.MaxMana = 100
 		c.ActualMana = 100
-		c.Class = "Humain"
+		c.Class = "Artiste des pâtes"
 	}
 }
 

@@ -1,21 +1,28 @@
 🍕 RPG – Pizza Battle
+
+Classe
+
+Elfe = Sculpteur de mozzarella
+Nain = Maître du four
+Humain = Artiste des pâtes
+
+
 🧪 Potions
 
 Potion de Vie = Tiramisu 🍰
 
 Potion de Poison = Tabasco 🌶️
 
-Potion de Mana = Bocal de Sauce Tomate 🍅
+Potion de Mana = Bocal de Sauce Tomate 🫙
 Mana = Sauce Tomate 🍅
 
 🎒 Inventaire
 
-Frigo Portable 🧊
-
 🛒 Marchand – Super Marché
+
 Objets en vente :
 
-Tiramisu (Potion de Soin) → 3💵
+Tiramisu (Potion de Soin) 🍰 → 3💵
 
 Tabasco (Potion Poison) → 6💵
 
@@ -23,13 +30,13 @@ Sauce Tomate (Potion de Mana) → 4💵
 
 Ressources :
 
-Plume de Corbeau → Coton = 1💵
+Plume de Corbeau → Coton ☁️ = 1💵 
 
-Cuir de Sanglier → Ficelle = 3💵
+Cuir de Sanglier → Ficelle 🪢 = 3💵
 
-Fourrures de Loup → Laine = 4💵
+Fourrures de Loup → Laine 🧶 = 4💵
 
-Peau de Troll → Cuir = 7💵
+Peau de Troll → Cuir 🟫 = 7💵
 
 ⚒️ Forgeron
 

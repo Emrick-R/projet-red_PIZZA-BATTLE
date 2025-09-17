@@ -25,7 +25,7 @@ func Marchand(c *structures.Character) {
 
 	//Compétences
 	FireBall := structures.Skill{Name: "Lancer de Piments", Damage: 20, ManaCost: 20}
-	DeathSpell := structures.Skill{Name: "Sort de la mort qui tue", Damage: 500}
+	DeathSpell := structures.Skill{Name: "Covid-19", Damage: 500}
 
 	// Effacer l'écran
 	fmt.Print("\033[H\033[2J")
@@ -36,21 +36,21 @@ func Marchand(c *structures.Character) {
 		character.AccessInventory(c)
 		//Menu du marchand
 		affichage.Separator()
-		fmt.Println("🛒 Bienvenue chez le Marchand !")
+		fmt.Println("🛒 Bienvenue au SuperMarché !")
 		affichage.Separator()
 		fmt.Println("Que veux-tu acheter ?")
-		fmt.Printf("1 - 🧪 %s - 3💵\n", HpPot.Name)
-		fmt.Printf("2 - ☠️  %s - 6💵\n", PoisonPot.Name)
-		fmt.Printf("3 - 🔮 %s - 4💵\n", ManaPot.Name)
-		fmt.Printf("4 - 📖 Livre de Sort : %s - 25💵\n", FireBall.Name)
-		fmt.Printf("5 - 🐺 %s - 4💵\n", WolfFur.Name)
-		fmt.Printf("6 - 👹 %s - 7💵\n", TrollSkin.Name)
-		fmt.Printf("7 - 🐗 %s - 3💵\n", BoarLeather.Name)
-		fmt.Printf("8 - 🪶 %s - 1💵\n", RavenFeather.Name)
+		fmt.Printf("1 - 🍰 %s - 3💵\n", HpPot.Name)
+		fmt.Printf("2 - 🌶️  %s - 6💵\n", PoisonPot.Name)
+		fmt.Printf("3 - 🫙 %s - 4💵\n", ManaPot.Name)
+		fmt.Printf("4 - 📖 Livre de Cuisine : %s - 25💵\n", FireBall.Name)
+		fmt.Printf("5 - 🧶 %s - 4💵\n", WolfFur.Name)
+		fmt.Printf("6 - 🟫 %s - 7💵\n", TrollSkin.Name)
+		fmt.Printf("7 - 🪢 %s - 3💵\n", BoarLeather.Name)
+		fmt.Printf("8 - ☁️ %s - 1💵\n", RavenFeather.Name)
 		fmt.Printf("9 - 📦 Agrandir inventaire (+10 emplacements) - 30💵\n")
 		fmt.Println("10 - ⬅️  RETOUR")
 		// Test
-		fmt.Printf("11 - 📖 Livre de Sort : %s - 0💵 (test)\n", DeathSpell.Name)
+		fmt.Printf("11 - 📖 Livre de Cuisine : %s - 0💵 (test)\n", DeathSpell.Name)
 		// Fin test
 
 		affichage.Separator()
@@ -104,7 +104,7 @@ func Marchand(c *structures.Character) {
 				// Ajout de la compétence au personnage
 				skills.AddSkills(c, FireBall)
 				c.Money -= 25
-				fmt.Printf("✅ Tu as acheté un Livre de Sort : %s (-25💵)\n", FireBall.Name)
+				fmt.Printf("✅ Tu as acheté un Livre de Cuisine : %s (-25💵)\n", FireBall.Name)
 				// Affichage de la compétence apprise
 				fmt.Printf("🔥 Nouvelle compétence : %s (%d dégâts)\n", FireBall.Name, FireBall.Damage)
 				fmt.Println("Tu as maintenant", c.Money, "💵")
@@ -166,7 +166,7 @@ func Marchand(c *structures.Character) {
 			// Test achat d'un livre de sort (compétence)
 			if !skills.CheckSkills(c, DeathSpell) {
 				skills.AddSkills(c, DeathSpell)
-				fmt.Printf("✅ Tu as acheté un Livre de Sort : %s\n", DeathSpell.Name)
+				fmt.Printf("✅ Tu as acheté un Livre de Cuisine : %s\n", DeathSpell.Name)
 				fmt.Printf("💀 Nouvelle compétence : %s (%d dégâts)\n", DeathSpell.Name, DeathSpell.Damage)
 				fmt.Println("Tu as maintenant", c.Money, "💵")
 			} else {

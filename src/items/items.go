@@ -59,12 +59,12 @@ func TakeManaPot(c *structures.Character) {
 			if c.ActualMana >= c.MaxMana {
 				c.ActualMana = c.MaxMana
 			}
-			fmt.Printf("\n🧪 Potion consommée !\n")
-			fmt.Printf("🔵 %s : %d/%d Mana\n", c.Name, c.ActualMana, c.MaxMana)
+			fmt.Printf("\n🧪 Bocal consommée !\n")
+			fmt.Printf("🍅 %s : %d/%d Sauce Tomate\n", c.Name, c.ActualMana, c.MaxMana)
 			return
 		}
 	}
-	fmt.Println("❌Il n'y a pas de potions de Mana dans l'inventaire")
+	fmt.Println("❌Il n'y a pas de Bocal de Sauce Tomate dans l'inventaire")
 }
 
 // Fonction pour utiliser une potion de poison.

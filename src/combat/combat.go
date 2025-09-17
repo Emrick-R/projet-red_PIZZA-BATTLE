@@ -198,10 +198,10 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 				affichage.Separator()
 				fmt.Println("👊  Quelle compétence veux-tu utiliser ?")
 				affichage.Separator()
-				fmt.Printf("🔵 %s : %d/%d Mana\n\n", c.Name, c.ActualMana, c.MaxMana)
+				fmt.Printf("🍅 %s : %d/%d Sauce Tomate\n\n", c.Name, c.ActualMana, c.MaxMana)
 				// Affiche la liste des compétences disponibles
 				for i := range c.SkillList {
-					fmt.Printf("%d - %s: %d Dégats %d Mana\n", i+1, c.SkillList[i].Name, c.SkillList[i].Damage, c.SkillList[i].ManaCost)
+					fmt.Printf("%d - %s: %d Dégats %d Sauce Tomate\n", i+1, c.SkillList[i].Name, c.SkillList[i].Damage, c.SkillList[i].ManaCost)
 					index = len(c.SkillList) + 1
 				}
 				fmt.Printf("%d - ⬅️  RETOUR\n", index)
@@ -219,12 +219,12 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 							c.ActualMana = 0
 						}
 						skills.UseSkill(c, e, chosenSkill)
-						fmt.Printf("\n🔵 Mana restant : %d/%d\n", c.ActualMana, c.MaxMana)
+						fmt.Printf("\n🍅 Sauce Tomate restant : %d/%d\n", c.ActualMana, c.MaxMana)
 						fmt.Printf("\n💥 %s utilise %s et inflige %d points de dégâts à %s !\n", c.Name, chosenSkill.Name, chosenSkill.Damage, e.Name)
 						fmt.Printf("❤️ %s : %d/%d HP\n", e.Name, e.ActualHp, e.MaxHp)
 						return
 					} else {
-						fmt.Println("❌ Pas assez de mana pour utiliser cette compétence !")
+						fmt.Println("❌ Pas assez de Sauce Tomate pour utiliser cette compétence !")
 						return
 					}
 				} else if skill_choice == index {
@@ -296,7 +296,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 						case 3:
 							// Utiliser une potion de mana.
 							if c.ActualMana == c.MaxMana {
-								fmt.Printf("\n❌ La Mana déjà pleine\n\n")
+								fmt.Printf("\n❌ La Sauce Tomate est déjà pleine\n\n")
 							} else {
 								if c.ActualMana == c.MaxMana {
 									ManaPot := structures.Object{Name: "Bocal de Sauce Tomate"}
