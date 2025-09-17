@@ -44,9 +44,9 @@ func TakePot(c *structures.Character) {
 
 // Fonction pour utiliser une potion de mana
 func TakeManaPot(c *structures.Character) {
-	ManaPot := structures.Object{Name: "Potion de Mana"}
+	ManaPot := structures.Object{Name: "Bocal de Sauce Tomate"}
 	if c.ActualMana == c.MaxMana {
-		fmt.Println("❌ Il n'y a pas de potion de mana dans l'inventaire.")
+		fmt.Println("❌ Il n'y a pas de Bocal de Sauce Tomate dans l'inventaire.")
 		return
 	}
 	for i := 0; i < len(c.Inventory); i++ {

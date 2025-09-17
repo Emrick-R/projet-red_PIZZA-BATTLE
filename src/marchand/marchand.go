@@ -16,7 +16,7 @@ func Marchand(c *structures.Character) {
 
 	//Objets
 	HpPot := structures.Object{Name: "Potion de Vie", Quantity: 1}
-	ManaPot := structures.Object{Name: "Potion de Mana", Quantity: 1}
+	ManaPot := structures.Object{Name: "Bocal de Sauce Tomate", Quantity: 1}
 	PoisonPot := structures.Object{Name: "Potion de Poison", Quantity: 1}
 	WolfFur := structures.Object{Name: "Peau de Loup", Quantity: 1}
 	TrollSkin := structures.Object{Name: "Peau de Troll", Quantity: 1}
@@ -92,7 +92,7 @@ func Marchand(c *structures.Character) {
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, ManaPot)
 				c.Money -= 4
-				fmt.Println("✅ Tu as acheté une Potion de Mana (-4💵)")
+				fmt.Println("✅ Tu as acheté un Bocal de Sauce Tomate (-4💵)")
 				fmt.Println("Tu as maintenant", c.Money, "💵")
 			} else {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
