@@ -364,6 +364,7 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 	fmt.Printf("\n⭐ +%d points de score\n", e.GiveScore)
 	//Affichage de l'argent, de l'Exp et du score
 	affichage.Separator()
+	character.NextLevel(c)
 	fmt.Printf("💵 Argent : %d | 📖 Exp : %d | 🏅 Score : %d\n", c.Money, c.ActualExp, c.Score)
 	affichage.Separator()
 	// Retour au menu principal

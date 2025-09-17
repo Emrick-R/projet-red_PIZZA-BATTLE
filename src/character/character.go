@@ -306,13 +306,13 @@ func NextLevel(c *structures.Character) {
 		// Déduction de l'XP du niveau en cours
 		c.ActualExp -= c.MaxExp
 
+		// Monter de niveau
+		c.Level++
+
 		// Augmenter les stats
 		c.MaxExp = int(float64(c.MaxExp) * 1.25)
 		c.ManaMax = c.ManaMax + 20
 		c.MaxHp = c.MaxHp + 20
 		c.Initiative = int(float64(c.MaxHp) * 1.1)
-
-		// Monter de niveau
-		c.Level++
 	}
 }
