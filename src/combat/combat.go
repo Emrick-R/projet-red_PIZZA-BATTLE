@@ -294,7 +294,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 							}
 							fmt.Println("❌ Il n'y a pas de potion de poison dans l'inventaire.")
 						case 3:
-							// Utiliser une potion de mana
+							// Utiliser une potion de mana.
 							if c.ActualMana == c.MaxMana {
 								fmt.Printf("\n❌ La Mana déjà pleine\n\n")
 							} else {

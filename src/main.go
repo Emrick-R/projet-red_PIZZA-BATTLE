@@ -47,7 +47,7 @@ func main() {
 
 				switch menuChoice {
 				case 1:
-					// Afficher les infos du personnage
+					// Afficher les infos du personnage.
 					character.DisplayCInfo(c1)
 				case 2:
 					// Menu Inventaire

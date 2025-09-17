@@ -8,7 +8,7 @@ import (
 	"projet-red_PIZZA-BATTLE/structures"
 )
 
-// DisplayCInfo affiche les informations du personnage (nom, classe, PV, niveau, expérience, argent, initiative, score)
+// DisplayCInfo affiche les informations du personnage (nom, classe, PV, niveau, expérience, argent, initiative, score).
 func DisplayCInfo(c *structures.Character) {
 	affichage.Separator()
 	fmt.Println("👤 Informations du personnage :")

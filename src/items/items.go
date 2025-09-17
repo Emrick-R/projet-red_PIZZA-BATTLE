@@ -67,7 +67,7 @@ func TakeManaPot(c *structures.Character) {
 	fmt.Println("❌Il n'y a pas de potions de Mana dans l'inventaire")
 }
 
-// Fonction pour utiliser une potion de poison
+// Fonction pour utiliser une potion de poison.
 // A FINIR (effet sur plusieurs tours)
 func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 	// Définir le nom de la potion de poison

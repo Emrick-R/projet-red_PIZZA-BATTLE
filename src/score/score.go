@@ -5,7 +5,7 @@ import (
 	"projet-red_PIZZA-BATTLE/structures"
 )
 
-// AddScore ajoute des points au score du personnage en fonction de la difficulté de l'ennemi vaincu
+// AddScore ajoute des points au score du personnage en fonction de la difficulté de l'ennemi vaincu.
 func AddScore(c *structures.Character, e *structures.Enemy) {
 	c.Score += e.GiveScore
 }

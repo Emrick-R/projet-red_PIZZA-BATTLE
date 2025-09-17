@@ -24,7 +24,7 @@ func UseSkill(c *structures.Character, e *structures.Enemy, skill structures.Ski
 	e.ActualHp -= skill.Damage
 }
 
-// CheckMana vérifie si le personnage a assez de mana pour utiliser une compétence
+// CheckMana vérifie si le personnage a assez de mana pour utiliser une compétence.
 func CheckMana(c *structures.Character, skill structures.Skill) bool {
 	return c.ActualMana >= skill.ManaCost
 }

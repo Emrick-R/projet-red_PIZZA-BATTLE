@@ -31,7 +31,7 @@ func RemoveInventory(c *structures.Character, obj structures.Object) {
 	}
 }
 
-// AddEquipment équipe un objet d'armure au personnage, en remplaçant l'armure existante si nécessaire
+// AddEquipment équipe un objet d'armure au personnage, en remplaçant l'armure existante si nécessaire.
 func AddEquipment(c *structures.Character, newObj structures.Object) {
 	// Équipe l'armure en fonction de son type (tête, torse, jambes)
 	switch newObj.Name {

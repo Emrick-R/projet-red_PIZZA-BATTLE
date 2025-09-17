@@ -163,7 +163,7 @@ func Forgeron(c *structures.Character) {
 		if forgeron_choice == 4 {
 			forgeron_choice = 0
 
-			// Effacer l'écran
+			// Effacer l'écran.
 			fmt.Print("\033[H\033[2J")
 
 			break

@@ -27,7 +27,7 @@ type Character struct {
 	Progress   int
 }
 
-// Enemy représente un ennemi avec ses attributs
+// Enemy représente un ennemi avec ses attributs.
 type Enemy struct {
 	Name         string
 	MaxHp        int

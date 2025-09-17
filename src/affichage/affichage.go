@@ -67,7 +67,7 @@ func CharacterTurn() {
 }
 
 func EasterEgg() {
-	// Effacer l'écran
+	// Effacer l'écran.
 	fmt.Print("\033[H\033[2J")
 
 	fmt.Println("===============================================")

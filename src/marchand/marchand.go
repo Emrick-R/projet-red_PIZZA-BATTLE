@@ -182,7 +182,7 @@ func Marchand(c *structures.Character) {
 		if marchand_choice == 10 {
 			marchand_choice = 0
 
-			// Effacer l'écran
+			// Effacer l'écran.
 			fmt.Print("\033[H\033[2J")
 
 			break
