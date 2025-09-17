@@ -232,23 +232,21 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 		switch combat_choice {
 		case 1:
 			// Attaque
-
-			// Choix de la compétence : sors la compétence choisie
 			chosenSkill := skills.SkillChoice(c)
-
-			// Vérification du mana
-			skills.CheckMana(c, chosenSkill)
-			// Déduction du mana
-			c.ActualMana -= chosenSkill.ManaCost
-			// Affichage du mana restant
-			fmt.Printf("🔵 Mana restant : %d/%d\n", c.ActualMana, c.ManaMax)
-			// Utilisation de la compétence sur l'ennemi
-			skills.UseSkill(c, e, chosenSkill)
-			// Affichage des dégâts infligés et des PV restants de l'ennemi
-			fmt.Printf("\n💥 %s inflige %d points de dégâts à %s !\n", c.Name, chosenSkill.Damage, e.Name)
-			fmt.Printf("❤️ %s : %d/%d HP\n", e.Name, e.ActualHp, e.MaxHp)
-			// Fin du tour du joueur
-			return
+			if skills.CheckMana(c, chosenSkill) {
+				c.ActualMana -= chosenSkill.ManaCost
+				if c.ActualMana < 0 {
+					c.ActualMana = 0
+				}
+				fmt.Printf("🔵 Mana restant : %d/%d\n", c.ActualMana, c.ManaMax)
+				skills.UseSkill(c, e, chosenSkill)
+				fmt.Printf("\n💥 %s inflige %d points de dégâts à %s !\n", c.Name, chosenSkill.Damage, e.Name)
+				fmt.Printf("❤️ %s : %d/%d HP\n", e.Name, e.ActualHp, e.MaxHp)
+				return
+			} else {
+				fmt.Println("❌ Pas assez de mana pour utiliser cette compétence !")
+				return
+			}
 		case 2:
 			for {
 				// Affichage de l'inventaire
@@ -363,6 +361,7 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 	}
 	//Fin du combat (ennemi mort)
 	fmt.Printf("🏆 Bravo ! Tu as terrassé %s !\n", e.Name)
+	e.ActualHp = e.MaxHp
 	//Récompenses du combat (Argent + Score)
 	score.AddScore(c, e)
 	inventory.AddMoney(c, e)

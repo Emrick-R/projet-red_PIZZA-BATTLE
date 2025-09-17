@@ -18,7 +18,7 @@ func rollDice() int {
 	return rand.Intn(100) + 1
 }
 
-func main() {
+func mainn() {
 
 	fmt.Println("🟩⬜🟥 Épreuve de la Mamma : choisissez un nombre, celui le plus proche du score de la Mamma commence.")
 
