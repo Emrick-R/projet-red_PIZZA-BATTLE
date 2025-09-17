@@ -12,21 +12,21 @@ func AffichageMenuDemarrage() {
 	Separator()
 	fmt.Println("🍕 BIENVENUE DANS PIZZA BATTLE 🍕")
 	Separator()
-	fmt.Println("1 - Commencer une nouvelle partie")
-	fmt.Println("2 - Quitter")
+	fmt.Println("1 - ▶️ Commencer une nouvelle partie")
+	fmt.Println("2 - 👋 Quitter")
 	Separator()
 }
 
 // AffichageMenuPrincipal affiche le menu principal
 func AffichageMenuPrincipal() {
 	Separator()
-	fmt.Println("👤 Menu Principal :")
+	fmt.Println("🏠 Menu Principal :")
 	Separator()
-	fmt.Println("1 - Afficher le personnage")
+	fmt.Println("1 - 👤 Afficher le personnage")
 	fmt.Println("2 - 🎒 Inventaire")
-	fmt.Println("3 - Combat en 1 contre 1")
+	fmt.Println("3 - ⚔️  Combat en 1 contre 1")
 	fmt.Println("4 - 🛒 Marchand")
-	fmt.Println("5 - Forgeron")
+	fmt.Println("5 - ⚒️ Forgeron")
 	fmt.Println("6 - ⬅️ RETOUR")
 	Separator()
 }
@@ -37,8 +37,8 @@ func AffichageMenuInventaire() {
 	fmt.Println("🎒 Inventaire :")
 	Separator()
 	fmt.Println("1 - 🧪 Utiliser une potion")
-	fmt.Println("2 - 🛡️ Equiper un équipement")
-	fmt.Println("3 - ⬅️ RETOUR")
+	fmt.Println("2 - 🛡️  Equiper un équipement")
+	fmt.Println("3 - ⬅️  RETOUR")
 	Separator()
 }
 
@@ -47,9 +47,9 @@ func AffichageMenuCombatPotion() {
 	Separator()
 	fmt.Println("🧪 Utiliser une potion :")
 	Separator()
-	fmt.Println("1 - Potion de soin")
-	fmt.Println("2 - Potion de poison")
-	fmt.Println("3 - ⬅️ RETOUR")
+	fmt.Println("1 - ❤️  Potion de soin")
+	fmt.Println("2 - 💀 Potion de poison")
+	fmt.Println("3 - ⬅️  RETOUR")
 	Separator()
 }
 

@@ -90,10 +90,13 @@ func CharacterIsDead(c *structures.Character) {
 	//Vérification si impossibilité de renaître (MaxHp <= 10)
 	if c.MaxHp <= 10 {
 		fmt.Println("\n💀 Tu es mort pour de bon !")
-		fmt.Println("Impossibilité de renaître...")
-		fmt.Println("======== Fin de partie ========")
+		fmt.Println("🪦 Impossibilité de renaître...")
+		affichage.Separator()
+		fmt.Println("🎮 Fin de partie")
+		affichage.Separator()
 		//Affichage du score final
 		score.ShowScore(c)
+		affichage.Separator()
 		//Pause de 7 secondes avant fermeture du programme
 		time.Sleep(7 * time.Second)
 		os.Exit(0)
@@ -106,7 +109,7 @@ func CharacterIsDead(c *structures.Character) {
 		c.MaxHp /= 2
 		c.ActualHp = c.MaxHp
 		fmt.Println("✨ Résurrection avec 50% de HP en moins.")
-		fmt.Printf("❤️ PV actuels: %d/%d\n\n", c.ActualHp, c.MaxHp)
+		fmt.Printf("❤️  PV actuels: %d/%d\n\n", c.ActualHp, c.MaxHp)
 	}
 }
 
@@ -141,7 +144,7 @@ func EnemyPattern(c *structures.Character, e *structures.Enemy, t int) {
 		//Attaque normale
 		c.ActualHp = c.ActualHp - e.Damage
 		fmt.Printf("👊 %s attaque %s et inflige %d dégâts\n", e.Name, c.Name, e.Damage)
-		fmt.Printf("❤️ %s : %d/%d HP\n", c.Name, c.ActualHp, c.MaxHp)
+		fmt.Printf("❤️  %s : %d/%d HP\n", c.Name, c.ActualHp, c.MaxHp)
 		//Incrémentation du compteur de l'attaque spéciale
 		e.PowerCount++
 	}
@@ -176,7 +179,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 					fmt.Printf("%d - %s\n", i+1, c.SkillList[i].Name)
 					index = len(c.SkillList) + 1
 				}
-				fmt.Printf("%d - ⬅️ RETOUR\n", index)
+				fmt.Printf("%d - ⬅️  RETOUR\n", index)
 				fmt.Print("👉 Ton choix : ")
 				fmt.Scan(&skill_choice)
 				// Vérifie que le choix est valide dans la liste des compétences

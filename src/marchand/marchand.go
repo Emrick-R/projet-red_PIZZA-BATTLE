@@ -43,7 +43,7 @@ func Marchand(c *structures.Character) {
 		fmt.Printf("7 - 🐗 %s - 3💰\n", BoarLeather.Name)
 		fmt.Printf("8 - 🪶 %s - 1💰\n", RavenFeather.Name)
 		fmt.Printf("9 - 📦 Agrandir inventaire (+10 emplacements) - 30💰\n")
-		fmt.Println("10 - ⬅️ Retour")
+		fmt.Println("10 - ⬅️ RETOUR")
 		// Test
 		fmt.Printf("11 - 📖 Livre de Sort : %s - 0💰 (test)\n", DeathSpell.Name)
 		// Fin test

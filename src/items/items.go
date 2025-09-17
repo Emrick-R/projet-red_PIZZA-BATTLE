@@ -102,8 +102,8 @@ func CheckPoisonStatus(e *structures.Enemy) {
 	if e.Poisoned && e.PoisonTurns > 0 {
 		e.ActualHp -= e.PoisonDamage
 		e.PoisonTurns--
-		fmt.Printf("☠️ %s subit %d dégâts de poison (%d tours restants)\n\n", e.Name, e.PoisonDamage, e.PoisonTurns)
-		fmt.Printf("❤️ %s : %d/%d PV\n\n", e.Name, e.ActualHp, e.MaxHp)
+		fmt.Printf("☠️  %s subit %d dégâts de poison (%d tours restants)\n\n", e.Name, e.PoisonDamage, e.PoisonTurns)
+		fmt.Printf("❤️  %s : %d/%d PV\n\n", e.Name, e.ActualHp, e.MaxHp)
 
 		if e.PoisonTurns == 0 {
 			e.Poisoned = false

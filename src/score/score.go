@@ -12,5 +12,5 @@ func AddScore(c *structures.Character, e *structures.Enemy) {
 
 // ShowScore affiche le score actuel du personnage
 func ShowScore(c *structures.Character) {
-	fmt.Printf("\n\nScore de %s : %d\n\n", c.Name, c.Score)
+	fmt.Printf("\nScore de %s : %d\n\n", c.Name, c.Score)
 }
