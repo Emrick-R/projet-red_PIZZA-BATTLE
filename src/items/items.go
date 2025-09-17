@@ -32,7 +32,7 @@ func TakePot(c *structures.Character) {
 				c.ActualHp = c.MaxHp
 			}
 			// Afficher un message indiquant que la potion a été consommée et les PV actuels
-			fmt.Printf("\n🧪 Tiramisu consommé ! +50 PV\n")
+			fmt.Printf("\n🍰 Tiramisu consommé ! +50 PV\n")
 			fmt.Printf("❤️  %s : %d/%dPV\n\n", c.Name, c.ActualHp, c.MaxHp)
 			// Sortir de la fonction
 			return
@@ -59,7 +59,7 @@ func TakeManaPot(c *structures.Character) {
 			if c.ActualMana >= c.MaxMana {
 				c.ActualMana = c.MaxMana
 			}
-			fmt.Printf("\n🧪 Bocal consommée !\n")
+			fmt.Printf("\n🫙 Bocal consommée !\n")
 			fmt.Printf("🍅 %s : %d/%d Sauce Tomate\n", c.Name, c.ActualMana, c.MaxMana)
 			return
 		}

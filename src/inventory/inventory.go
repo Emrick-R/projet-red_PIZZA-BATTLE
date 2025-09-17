@@ -42,7 +42,7 @@ func AddEquipment(c *structures.Character, newObj structures.Object) {
 			c.Armor.Head = &newObj
 			fmt.Printf("\n✅ Tu équipes : Toq de Chef\n\n")
 			fmt.Printf("\nTu gagnes + 10 PV Max\n\n")
-			fmt.Printf("❤️ %d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+10)
+			fmt.Printf("❤️  %d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+10)
 			// Augmente les PV max du personnage de 10
 			c.MaxHp += 10
 			// Retire l'objet de l'inventaire
@@ -58,7 +58,7 @@ func AddEquipment(c *structures.Character, newObj structures.Object) {
 			c.Armor.Chest = &newObj
 			fmt.Printf("\n✅ Tu équipes : Tablier\n\n")
 			fmt.Printf("\nTu gagnes + 25 PV Max\n\n")
-			fmt.Printf("❤️ %d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+25)
+			fmt.Printf("❤️  %d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+25)
 			c.MaxHp += 25
 			RemoveInventory(c, newObj)
 		} else {
@@ -71,7 +71,7 @@ func AddEquipment(c *structures.Character, newObj structures.Object) {
 			c.Armor.Legs = &newObj
 			fmt.Printf("\n✅ Tu équipes : Bottes de Travail\n\n")
 			fmt.Printf("\nTu gagnes + 15 PV Max\n\n")
-			fmt.Printf("❤️ %d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+15)
+			fmt.Printf("❤️  %d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+15)
 			c.MaxHp += 15
 			RemoveInventory(c, newObj)
 		} else {
