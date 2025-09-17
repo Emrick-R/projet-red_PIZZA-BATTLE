@@ -36,9 +36,12 @@ func rollDice() int {
 func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 
 	// Variable du choix du joueur et des distances
-	var choix int
-	var distJoueur int
-	var distEnnemi int
+	choix := 0
+	distJoueur := 0
+	distEnnemi := 0
+	mamma := 0
+	ennemi := 0
+	// Affichage du mini-jeu
 	affichage.Separator()
 	fmt.Println("🟩⬜🟥 Épreuve de la Mamma 🟩⬜🟥")
 	affichage.Separator()
@@ -56,8 +59,8 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 	}
 
 	// premier lancer
-	mamma := rollDice()
-	ennemi := rollDice()
+	mamma = rollDice()
+	ennemi = rollDice()
 
 	// affichage clair
 	fmt.Printf("🎲 Ton nombre : %d | 🎲 Mamma : %d | 🎲 Ennemi : %d\n", choix, mamma, ennemi)
@@ -87,7 +90,7 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 		if distEnnemi < 0 {
 			distEnnemi = 0
 		}
-		fmt.Printf("Distance après initiative %d : %d | %d : %d\n", c.Initiative, distJoueur, e.Initiative, distEnnemi)
+		fmt.Printf("Distance après initiative %s : %d | Distance après initiative %s : %d\n", c.Name, distJoueur, e.Name, distEnnemi)
 		if distJoueur != distEnnemi {
 			break
 		}
@@ -196,7 +199,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 				affichage.Separator()
 				fmt.Println("👊  Quelle compétence veux-tu utiliser ?")
 				affichage.Separator()
-				fmt.Printf("%s : %d/%d Mana\n\n", c.Name, c.ActualMana, c.MaxMana)
+				fmt.Printf("🔵 %s : %d/%d Mana\n\n", c.Name, c.ActualMana, c.MaxMana)
 				// Affiche la liste des compétences disponibles
 				for i := range c.SkillList {
 					fmt.Printf("%d - %s: %d Dégats %d Mana\n", i+1, c.SkillList[i].Name, c.SkillList[i].Damage, c.SkillList[i].ManaCost)
@@ -264,18 +267,23 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 						fmt.Scan(&menuChoice)
 						switch menuChoice {
 						case 1:
-							HpPot := structures.Object{Name: "Potion de Vie"}
-							for i := 0; i < len(c.Inventory); i++ {
-								if c.Inventory[i].Name == HpPot.Name {
-									//Utiliser une potion de vie
-									items.TakePot(c)
-									// Fin du tour du joueur
-									return
+							// Utiliser une potion de vie
+							if c.ActualHp == c.MaxHp {
+								fmt.Printf("\n❌ Les points de vie sont déjà au max\n\n")
+							} else {
+								HpPot := structures.Object{Name: "Potion de Vie"}
+								for i := 0; i < len(c.Inventory); i++ {
+									if c.Inventory[i].Name == HpPot.Name {
+										//Utiliser une potion de vie
+										items.TakePot(c)
+										// Fin du tour du joueur
+										return
+									}
 								}
+								fmt.Println("❌ Il n'y a pas de potion de vie dans l'inventaire.")
 							}
-							fmt.Println("❌ Il n'y a pas de potion de vie dans l'inventaire.")
-
 						case 2:
+							// Utiliser une potion de poison
 							PoisonPot := structures.Object{Name: "Potion de Poison"}
 							for i := 0; i < len(c.Inventory); i++ {
 								if c.Inventory[i].Name == PoisonPot.Name {
@@ -287,14 +295,21 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 							}
 							fmt.Println("❌ Il n'y a pas de potion de poison dans l'inventaire.")
 						case 3:
-							ManaPot := structures.Object{Name: "Potion de Mana"}
-							for i := 0; i < len(c.Inventory); i++ {
-								if c.Inventory[i].Name == ManaPot.Name {
-									items.TakeManaPot(c)
-									return
+							// Utiliser une potion de mana
+							if c.ActualMana == c.MaxMana {
+								fmt.Printf("\n❌ La Mana déjà pleine\n\n")
+							} else {
+								if c.ActualMana == c.MaxMana {
+									ManaPot := structures.Object{Name: "Potion de Mana"}
+									for i := 0; i < len(c.Inventory); i++ {
+										if c.Inventory[i].Name == ManaPot.Name {
+											items.TakeManaPot(c)
+											return
+										}
+									}
+									fmt.Println("❌ Il n'y a pas de potion de mana dans l'inventaire.")
 								}
 							}
-							fmt.Println("❌ Il n'y a pas de potion de mana dans l'inventaire.")
 						case 4:
 						//Retour
 						default:
@@ -319,7 +334,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 				//Reset de la variable menuChoice
 				if menuChoice == 3 {
 					menuChoice = 0
-					return
+					break
 				}
 			}
 		case 3:

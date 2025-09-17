@@ -11,7 +11,7 @@ func TakePot(c *structures.Character) {
 	HpPot := structures.Object{Name: "Potion de Vie"}
 	// Vérifier si le personnage a déjà les PV max
 	if c.ActualHp == c.MaxHp {
-		fmt.Printf("\nLes points de vie sont déjà au max\n\n")
+		fmt.Printf("\n❌ Les points de vie sont déjà au max\n\n")
 		// Ne rien faire
 		return
 	}
@@ -43,11 +43,10 @@ func TakePot(c *structures.Character) {
 }
 
 // Fonction pour utiliser une potion de mana
-// A FINIR
 func TakeManaPot(c *structures.Character) {
 	ManaPot := structures.Object{Name: "Potion de Mana"}
 	if c.ActualMana == c.MaxMana {
-		fmt.Printf("\nLes Manas sont déjà au max\n\n")
+		fmt.Println("❌ Il n'y a pas de potion de mana dans l'inventaire.")
 		return
 	}
 	for i := 0; i < len(c.Inventory); i++ {

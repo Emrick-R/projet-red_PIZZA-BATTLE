@@ -61,7 +61,7 @@ func main() {
 					fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 				}
 				// Reset de la variable menuChoice pour éviter les boucles infinies
-				if menuChoice == 7 {
+				if menuChoice == 6 {
 					menuChoice = 0
 					// Retour au menu précédent (menu de démarrage)
 					break
