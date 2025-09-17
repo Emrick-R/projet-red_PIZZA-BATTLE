@@ -60,7 +60,7 @@ func Forgeron(c *structures.Character) {
 				countRavenFeather = c.Inventory[i].Quantity
 			case "Ficelle":
 				countBoarLeather = c.Inventory[i].Quantity
-			case "Peau de Loup":
+			case "Laine":
 				countWolfFur = c.Inventory[i].Quantity
 			case "Cuir":
 				countTrollSkin = c.Inventory[i].Quantity
