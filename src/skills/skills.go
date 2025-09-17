@@ -1,7 +1,6 @@
 package skills
 
 import (
-	"fmt"
 	"projet-red_PIZZA-BATTLE/structures"
 )
 

@@ -13,7 +13,8 @@ func AffichageMenuDemarrage() {
 	fmt.Println("🍕 BIENVENUE DANS PIZZA BATTLE 🍕")
 	Separator()
 	fmt.Println("1 - Commencer une nouvelle partie")
-	fmt.Println("2 - Quitter")
+	fmt.Println("2 - Options (Easter Egg)")
+	fmt.Println("3 - Quitter")
 	Separator()
 }
 
