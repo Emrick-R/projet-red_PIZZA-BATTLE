@@ -69,18 +69,18 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 	}
 
 	// distances absolues (Rappel: la distance est petite == Gagnant)
-	distJoueur := abs(choix - mamma)
-	distEnnemi := abs(ennemi - mamma)
+	distJoueur := abs(choix + c.Initiative - mamma)
+	distEnnemi := abs(ennemi + e.Initiative - mamma)
 
 	// affichage du résultat
 
 	if distJoueur < distEnnemi {
 		// Joueur gagne
-		fmt.Printf("✅ Tu est le plus proche du chiffre de la Mamma avec une distance de %d, vous commencez !\n", distJoueur)
+		fmt.Printf("✅ Tu est le plus proche du chiffre de la Mamma avec une distance de %d (Initiative de %d contre %d), vous commencez !\n", distJoueur, c.Initiative, e.Initiative)
 		return true
 	} else {
 		// Ennemi gagne
-		fmt.Printf("❌ L'ennemi est plus proche du chiffre de la Mamma avec une distance de %d, il commence !\n", distEnnemi)
+		fmt.Printf("❌ L'ennemi est plus proche du chiffre de la Mamma avec une distance de %d (Initiative de %d contre %d), il commence !\n", distEnnemi, e.Initiative, c.Initiative)
 		return false
 	}
 }
