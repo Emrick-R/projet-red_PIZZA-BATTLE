@@ -29,6 +29,7 @@ func SkillChoice(c *structures.Character) structures.Skill {
 		for i := range c.SkillList {
 			fmt.Printf("%d - %s\n", i+1, c.SkillList[i].Name)
 		}
+		fmt.Print("👉 Ton choix : ")
 		fmt.Scan(&skill_choice)
 		// Vérifie que le choix est valide dans la liste des compétences
 		if skill_choice >= 1 && skill_choice <= len(c.SkillList) {
@@ -43,4 +44,12 @@ func SkillChoice(c *structures.Character) structures.Skill {
 // UseSkill applique les effets de la compétence sur les pv de l'ennemi
 func UseSkill(c *structures.Character, e *structures.Enemy, skill structures.Skill) {
 	e.ActualHp -= skill.Damage
+}
+
+// CheckMana vérifie si le personnage a assez de mana pour utiliser une compétence
+func CheckMana(c *structures.Character, skill structures.Skill) {
+	if c.ActualMana < skill.ManaCost {
+		fmt.Println("Vous n'avez pas assez de mana pour lancer ce sort")
+	}
+
 }

@@ -16,7 +16,7 @@ func DisplayCInfo(c *structures.Character) {
 	fmt.Printf("📛 Nom : %s\n", c.Name)
 	fmt.Printf("🏹 Classe : %s\n", c.Class)
 	fmt.Printf("❤️ PV : %d/%d\n", c.ActualHp, c.MaxHp)
-	fmt.Printf("❤️ PV : %d/%d\n", c.ActualHp, c.MaxHp)
+	fmt.Printf("🔵 Mana : %d\n", c.ManaMax)
 	fmt.Printf("⭐ Niveau : %d\n", c.Level)
 	fmt.Printf("📚 Expérience : %d/%d\n", c.ActualExp, c.MaxExp)
 	fmt.Printf("💰 Argent : %d\n", c.Money)
@@ -306,13 +306,13 @@ func NextLevel(c *structures.Character) {
 		// Déduction de l'XP du niveau en cours
 		c.ActualExp -= c.MaxExp
 
+		// Monter de niveau
+		c.Level++
+
 		// Augmenter les stats
 		c.MaxExp = int(float64(c.MaxExp) * 1.25)
 		c.ManaMax = c.ManaMax + 20
 		c.MaxHp = c.MaxHp + 20
 		c.Initiative = int(float64(c.MaxHp) * 1.1)
-
-		// Monter de niveau
-		c.Level++
 	}
 }
