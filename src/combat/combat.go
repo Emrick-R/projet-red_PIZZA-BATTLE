@@ -69,18 +69,18 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 	}
 
 	// distances absolues (Rappel: la distance est petite == Gagnant)
-	distJoueur := abs(choix + c.Initiative - mamma)
-	distEnnemi := abs(ennemi + e.Initiative - mamma)
+	distJoueur := abs(choix - mamma + c.Initiative)
+	distEnnemi := abs(ennemi - mamma + e.Initiative)
 
 	// affichage du résultat
 
-	if distJoueur < distEnnemi {
+	if distJoueur > distEnnemi {
 		// Joueur gagne
-		fmt.Printf("✅ Tu est le plus proche du chiffre de la Mamma avec une distance de %d (Initiative de %d contre %d), vous commencez !\n", distJoueur, c.Initiative, e.Initiative)
+		fmt.Printf("✅ Tu est le plus proche du chiffre de la Mamma avec une distance de %d contre %d (Initiative de %d contre %d), vous commencez !\n", distJoueur, distEnnemi, c.Initiative, e.Initiative)
 		return true
 	} else {
 		// Ennemi gagne
-		fmt.Printf("❌ L'ennemi est plus proche du chiffre de la Mamma avec une distance de %d (Initiative de %d contre %d), il commence !\n", distEnnemi, e.Initiative, c.Initiative)
+		fmt.Printf("❌ L'ennemi est plus proche du chiffre de la Mamma avec une distance de %d contre %d (Initiative de %d contre %d), il commence !\n", distEnnemi, distJoueur, e.Initiative, c.Initiative)
 		return false
 	}
 }
@@ -101,7 +101,7 @@ func CharacterIsDead(c *structures.Character) {
 
 	//Vérification de la mort du personnage puis résurrection avec moitié des PV max
 	if c.ActualHp <= 0 {
-		fmt.Println("\n💀 Tu es mort !\n")
+		fmt.Printf("\n💀 Tu es mort !\n\n")
 		//Résurrection avec moitié des PV max
 		c.MaxHp /= 2
 		c.ActualHp = c.MaxHp
@@ -165,23 +165,52 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 		switch combat_choice {
 		case 1:
 			// Attaque
+			for {
+				// Choix de la compétence
+				var chosenSkill structures.Skill
+				var skill_choice int
+				var index int
+				fmt.Println("\nQuelle compétence veux-tu utiliser ?")
+				// Affiche la liste des compétences disponibles
+				for i := range c.SkillList {
+					fmt.Printf("%d - %s\n", i+1, c.SkillList[i].Name)
+					index = len(c.SkillList) + 1
+				}
+				fmt.Printf("%d - ⬅️ RETOUR\n", index)
+				fmt.Print("👉 Ton choix : ")
+				fmt.Scan(&skill_choice)
+				// Vérifie que le choix est valide dans la liste des compétences
+				if skill_choice >= 1 && skill_choice <= len(c.SkillList) {
+					// Retourne la compétence choisie (indexée à partir de 0)
+					chosenSkill = c.SkillList[skill_choice-1]
 
-			// Choix de la compétence : sors la compétence choisie
-			chosenSkill := skills.SkillChoice(c)
+					// Vérification du mana
+					skills.CheckMana(c, chosenSkill)
+					// Déduction du mana
+					c.ActualMana -= chosenSkill.ManaCost
+					// Affichage du mana restant
+					fmt.Printf("🔵 Mana restant : %d/%d\n", c.ActualMana, c.ManaMax)
+					// Utilisation de la compétence sur l'ennemi
+					skills.UseSkill(c, e, chosenSkill)
+					// Affichage des dégâts infligés et des PV restants de l'ennemi
+					fmt.Printf("\n💥 %s inflige %d points de dégâts à %s !\n", c.Name, chosenSkill.Damage, e.Name)
+					fmt.Printf("❤️ %s : %d/%d HP\n", e.Name, e.ActualHp, e.MaxHp)
+					// Fin du tour du joueur
+					return
+				} else if skill_choice == index {
+					// Retour
 
-			// Vérification du mana
-			skills.CheckMana(c, chosenSkill)
-			// Déduction du mana
-			c.ActualMana -= chosenSkill.ManaCost
-			// Affichage du mana restant
-			fmt.Printf("🔵 Mana restant : %d/%d\n", c.ActualMana, c.ManaMax)
-			// Utilisation de la compétence sur l'ennemi
-			skills.UseSkill(c, e, chosenSkill)
-			// Affichage des dégâts infligés et des PV restants de l'ennemi
-			fmt.Printf("\n💥 %s inflige %d points de dégâts à %s !\n", c.Name, chosenSkill.Damage, e.Name)
-			fmt.Printf("❤️ %s : %d/%d HP\n", e.Name, e.ActualHp, e.MaxHp)
-			// Fin du tour du joueur
-			return
+					// Reset de la variable chosenSkill
+					skill_choice = 0
+					// Reset de la variable skill_choice
+					index = 0
+					// Sortie de la boucle
+					break
+				} else {
+					// Si le choix n'est pas valide, affiche un message d'erreur et redemande
+					fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
+				}
+			}
 		case 2:
 			for {
 				// Affichage de l'inventaire
@@ -207,17 +236,17 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 						fmt.Scan(&menuChoice)
 						switch menuChoice {
 						case 1:
-							HpPot := structures.Object{Name: "Potion de Vie", Quantity: 1}
+							HpPot := structures.Object{Name: "Potion de Vie"}
 							for i := 0; i < len(c.Inventory); i++ {
 								if c.Inventory[i].Name == HpPot.Name {
 									//Utiliser une potion de vie
 									items.TakePot(c)
 									// Fin du tour du joueur
 									return
-								} else {
-									fmt.Println("❌ Il n'y a pas de vie de poison dans l'inventaire.")
 								}
 							}
+							fmt.Println("❌ Il n'y a pas de vie de poison dans l'inventaire.")
+
 						case 2:
 							PoisonPot := structures.Object{Name: "Potion de Poison"}
 							for i := 0; i < len(c.Inventory); i++ {
@@ -226,10 +255,9 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 									items.ThrowPoisonPot(c, e)
 									// Fin du tour du joueur
 									return
-								} else {
-									fmt.Println("❌ Il n'y a pas de potion de poison dans l'inventaire.")
 								}
 							}
+							fmt.Println("❌ Il n'y a pas de potion de poison dans l'inventaire.")
 
 						case 3:
 						//Retour
