@@ -34,55 +34,58 @@ func rollDice() int {
 // Fonction pour déterminer l'initiative en utilisant le mini-jeu "Épreuve de la Mamma"
 // Si le joueur gagne, il commence, sinon l'ennemi commence
 func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
+	// Variables locales
+	var choix, distJoueur, distEnnemi, mamma, ennemi int
 
-	// Variable du choix du joueur et des distances
-	choix := 0
-	distJoueur := 0
-	distEnnemi := 0
-	mamma := 0
-	ennemi := 0
 	// Affichage du mini-jeu
 	affichage.Separator()
 	fmt.Println("🟩⬜🟥 Épreuve de la Mamma 🟩⬜🟥")
 	affichage.Separator()
 	fmt.Println("Choisissez un nombre (1 à 100). Celui le plus proche du score de la Mamma commence !")
-	// input joueur sécurisé
+
+	// Input joueur sécurisé
 	for {
 		fmt.Print("👉 Entres ton nombre : ")
 		_, err := fmt.Scan(&choix)
-		// vérification de l'input
 		if err == nil && choix >= 1 && choix <= 100 {
-			// input valide, on sort de la boucle
 			break
 		}
 		fmt.Println("❌ Valeur invalide ! Tapes un nombre entre 1 et 100.")
 	}
 
-	// premier lancer
+	// Premier lancer
 	mamma = rollDice()
 	ennemi = rollDice()
-
-	// affichage clair
 	fmt.Printf("🎲 Ton nombre : %d | 🎲 Mamma : %d | 🎲 Ennemi : %d\n", choix, mamma, ennemi)
 
-	for {
-		// en cas d'égalité on relance les dés
-		for choix == ennemi {
-			fmt.Println("Égalité — relance du nombre !")
-			mamma = rollDice()
-			ennemi = rollDice()
-			fmt.Printf("🎲 Ton nombre : %d | 🎲 Mamma : %d | 🎲 Ennemi : %d\n", choix, mamma, ennemi)
+	// Gestion des égalités initiales
+	for choix == ennemi {
+		fmt.Println("Égalité — relance du nombre !")
+		mamma = rollDice()
+		ennemi = rollDice()
+		fmt.Printf("🎲 Ton nombre : %d | 🎲 Mamma : %d | 🎲 Ennemi : %d\n", choix, mamma, ennemi)
+	}
 
-		}
-		// réinitialisation des distances
+	// Calcul des distances
+	distJoueur = abs(choix-mamma) - c.Initiative
+	distEnnemi = abs(ennemi-mamma) - e.Initiative
+
+	if distJoueur < 0 {
 		distJoueur = 0
+	}
+	if distEnnemi < 0 {
 		distEnnemi = 0
-		// distances absolues
-		distJoueur = abs(choix - mamma)
-		distEnnemi = abs(ennemi - mamma)
-		// Prises en compte de l'initiative
-		distJoueur -= (c.Initiative)
-		distEnnemi -= (e.Initiative)
+	}
+	fmt.Printf("Distance après initiative %s : %d | Distance après initiative %s : %d\n", c.Name, distJoueur, e.Name, distEnnemi)
+
+	// Gestion des égalités après initiative
+	for distJoueur == distEnnemi {
+		fmt.Println("Égalité avec initiative — relance du nombre !")
+		mamma = rollDice()
+		ennemi = rollDice()
+
+		distJoueur = abs(choix-mamma) - c.Initiative
+		distEnnemi = abs(ennemi-mamma) - e.Initiative
 
 		if distJoueur < 0 {
 			distJoueur = 0
@@ -91,13 +94,9 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 			distEnnemi = 0
 		}
 		fmt.Printf("Distance après initiative %s : %d | Distance après initiative %s : %d\n", c.Name, distJoueur, e.Name, distEnnemi)
-		if distJoueur != distEnnemi {
-			break
-		}
-		fmt.Println("Égalité avec initiative — relance du nombre !")
 	}
-	// affichage du résultat (Rappel: la distance est petite == Gagnant)
 
+	// Retour du résultat : true si joueur commence
 	if distJoueur < distEnnemi {
 		// Joueur gagne
 		fmt.Printf("✅ Tu est le plus proche du chiffre de la Mamma avec une distance de %d contre %d (Initiative de %d contre %d), vous commencez !\n", distJoueur, distEnnemi, c.Initiative, e.Initiative)
@@ -354,6 +353,10 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 	Turn := 1
 	TrueTurn := 1
 	//Initialisation de l'initiative
+
+	// Effacer l'écran
+	fmt.Print("\033[H\033[2J")
+
 	if InitiativeMamma(c, e) {
 		Turn = 2
 	} else {
@@ -396,6 +399,10 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 			TrueTurn++
 		}
 	}
+
+	// Effacer l'écran
+	fmt.Print("\033[H\033[2J")
+
 	//Fin du combat (ennemi mort)
 	affichage.Separator()
 	fmt.Printf("🏆 Bravo ! Tu as terrassé %s !\n", e.Name)

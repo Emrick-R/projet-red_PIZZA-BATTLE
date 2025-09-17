@@ -24,6 +24,7 @@ type Character struct {
 	MaxExp     int
 	ActualMana int
 	MaxMana    int
+	Progress   int
 }
 
 // Enemy représente un ennemi avec ses attributs
@@ -131,8 +132,8 @@ func InitEnemy(name string, grade string) *Enemy {
 			Difficulty: "Boss",
 			Initiative: 50,
 			PowerCount: 0,
-			GiveScore:  5,
-			GiveMoney:  5,
+			GiveScore:  20,
+			GiveMoney:  50,
 			GiveExp:    300,
 		}
 	}

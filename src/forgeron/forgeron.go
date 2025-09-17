@@ -34,6 +34,9 @@ func Forgeron(c *structures.Character) {
 	var forgeron_choice int
 	var craft_confirmation int
 
+	// Effacer l'écran
+	fmt.Print("\033[H\033[2J")
+
 	// Boucle principale du forgeron
 	for {
 		affichage.Separator()
@@ -159,6 +162,10 @@ func Forgeron(c *structures.Character) {
 		}
 		if forgeron_choice == 4 {
 			forgeron_choice = 0
+
+			// Effacer l'écran
+			fmt.Print("\033[H\033[2J")
+
 			break
 		}
 	}

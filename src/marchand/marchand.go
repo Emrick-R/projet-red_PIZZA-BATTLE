@@ -27,6 +27,9 @@ func Marchand(c *structures.Character) {
 	FireBall := structures.Skill{Name: "Boule de feu", Damage: 20, ManaCost: 20}
 	DeathSpell := structures.Skill{Name: "Sort de la mort qui tue", Damage: 500}
 
+	// Effacer l'écran
+	fmt.Print("\033[H\033[2J")
+
 	//Boucle principale du marchand
 	for {
 		// Affichage de l'inventaire
@@ -178,6 +181,10 @@ func Marchand(c *structures.Character) {
 		// Permet de ne pas rester bloqué dans la boucle du marchand
 		if marchand_choice == 10 {
 			marchand_choice = 0
+
+			// Effacer l'écran
+			fmt.Print("\033[H\033[2J")
+
 			break
 		}
 	}

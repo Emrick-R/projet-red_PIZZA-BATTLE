@@ -313,6 +313,10 @@ func NextLevel(c *structures.Character) {
 		c.MaxExp = int(float64(c.MaxExp) * 1.25)
 		c.MaxMana = c.MaxMana + 20
 		c.MaxHp = c.MaxHp + 20
-		c.Initiative = int(float64(c.MaxHp) * 1.1)
+		c.Initiative = c.Initiative + 5
+
+		// Rétablir les PV et le Mana au maximum
+		c.ActualHp = c.MaxHp
+		c.ActualMana = c.MaxMana
 	}
 }

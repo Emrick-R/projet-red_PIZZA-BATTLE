@@ -18,12 +18,18 @@ func main() {
 
 	// Boucle principale du jeu
 	for {
+		// Effacer l'écran
+		fmt.Print("\033[H\033[2J")
+
 		// Affichage du menu de démarrage
 		affichage.AffichageMenuDemarrage()
 		fmt.Scan(&menuChoice)
 		switch menuChoice {
 		case 1:
 			// On lance une nouvelle partie
+
+			// Effacer l'écran
+			fmt.Print("\033[H\033[2J")
 
 			// Initialisation des statistiques, de l'inventaire et des compétance de l'ennemi
 			c1 := structures.InitCharacter()
