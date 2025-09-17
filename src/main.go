@@ -9,6 +9,7 @@ import (
 	"projet-red_PIZZA-BATTLE/forgeron"
 	"projet-red_PIZZA-BATTLE/marchand"
 	"projet-red_PIZZA-BATTLE/structures"
+	"time"
 )
 
 // main est le point d'entrée du programme
@@ -60,8 +61,12 @@ func main() {
 					forgeron.Forgeron(c1)
 				case 6:
 				default:
+					fmt.Print("\033[H\033[2J")
 					// Choix invalide
 					fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
+
+					time.Sleep(2 * time.Second)
+
 				}
 				// Reset de la variable menuChoice pour éviter les boucles infinies
 				if menuChoice == 6 {
@@ -90,6 +95,11 @@ func main() {
 			// Quitter le jeu
 			os.Exit(0)
 		default:
+
+			fmt.Print("\033[H\033[2J")
+
+			time.Sleep(2 * time.Second)
+
 			// Choix invalide
 			fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 		}

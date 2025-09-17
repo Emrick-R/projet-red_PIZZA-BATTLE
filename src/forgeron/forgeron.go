@@ -75,6 +75,7 @@ func Forgeron(c *structures.Character) {
 			itemcraftable := min(countRavenFeather, countBoarLeather)
 			//Vérification si le joueur a les matériaux nécessaires
 			if itemcraftable < 1 {
+				fmt.Print("\033[H\033[2J")
 				fmt.Printf("\n❌ Tu n'as pas les objets requis pour fabriquer le Toq de Chef\n\n")
 				// Il n'a pas les matériaux nécessaires, retour au menu
 				break
@@ -91,6 +92,7 @@ func Forgeron(c *structures.Character) {
 			fmt.Scan(&craft_confirmation)
 			switch craft_confirmation {
 			case 1:
+				fmt.Print("\033[H\033[2J")
 				// Fabrication du chapeau
 				fmt.Println("\n✅ Tu viens de fabriquer", itemcraftable, "x Toq de Chef")
 				// Retrait des matériaux de l'inventaire
@@ -99,6 +101,7 @@ func Forgeron(c *structures.Character) {
 				// Ajout du chapeau à l'inventaire
 				inventory.AddInventory(c, chapeauAventurier)
 			case 2:
+				fmt.Print("\033[H\033[2J")
 				// Retour au menu précédent sans fabriquer l'objet
 				fmt.Printf("\nRetour au menu précédent\n")
 			}
@@ -108,10 +111,11 @@ func Forgeron(c *structures.Character) {
 			//besoin de 2 Laine + 1 Cuir
 			itemcraftable := min(countWolfFur/2, countTrollSkin)
 			if itemcraftable < 1 {
+				fmt.Print("\033[H\033[2J")
 				fmt.Printf("\n❌ Tu n'as pas les objets requis pour Tablier de l'Aventurier\n\n")
 				break
 			} else {
-				fmt.Printf("\n✅ Tu peux fabriquer %dx Toq de Chef, veux-tu en fabriquer 1 ?\n", itemcraftable)
+				fmt.Printf("\n✅ Tu peux fabriquer %dx Tablier, veux-tu en fabriquer 1 ?\n", itemcraftable)
 			}
 
 			fmt.Println("1 - Oui je suis sûr !")
@@ -120,6 +124,7 @@ func Forgeron(c *structures.Character) {
 			fmt.Scan(&craft_confirmation)
 			switch craft_confirmation {
 			case 1:
+				fmt.Print("\033[H\033[2J")
 				// Fabrication de la tunique, retrait des matériaux et ajout à l'inventaire
 				fmt.Printf("\n✅ Tu viens de fabriquer %d x Tablier\n\n", itemcraftable)
 				inventory.RemoveInventory(c, wolfFur)
@@ -127,6 +132,7 @@ func Forgeron(c *structures.Character) {
 				inventory.RemoveInventory(c, trollSkin)
 				inventory.AddInventory(c, tuniqueAventurier)
 			case 2:
+				fmt.Print("\033[H\033[2J")
 				// Retour au menu précédent sans fabriquer l'objet
 				fmt.Printf("\nRetour au menu précédent\n\n")
 			}
@@ -135,10 +141,11 @@ func Forgeron(c *structures.Character) {
 			// Fabrication des Bottes de l'aventurier
 			itemcraftable := min(countWolfFur, countBoarLeather)
 			if itemcraftable < 1 {
+				fmt.Print("\033[H\033[2J")
 				fmt.Printf("\n❌ Tu n'as pas les objets requis pour Bottes de Travail de l'Aventurier\n\n")
 				break
 			} else {
-				fmt.Printf("\n✅ Tu peux fabriquer %dx Toq de Chef, veux-tu en fabriquer 1 ?\n", itemcraftable)
+				fmt.Printf("\n✅ Tu peux fabriquer %dx Bottes de Travail, veux-tu en fabriquer 1 ?\n", itemcraftable)
 			}
 
 			fmt.Println("1 - Oui je suis sûr !")
@@ -147,12 +154,14 @@ func Forgeron(c *structures.Character) {
 			fmt.Scan(&craft_confirmation)
 			switch craft_confirmation {
 			case 1:
+				fmt.Print("\033[H\033[2J")
 				// Fabrication des bottes, retrait des matériaux et ajout à l'inventaire
 				fmt.Printf("\n✅ Tu viens de fabriquer %d x Bottes de Travail\n\n", itemcraftable)
 				inventory.RemoveInventory(c, wolfFur)
 				inventory.RemoveInventory(c, boarLeather)
 				inventory.AddInventory(c, bottesAventurier)
 			case 2:
+				fmt.Print("\033[H\033[2J")
 				// Retour au menu précédent sans fabriquer l'objet
 				fmt.Printf("\nRetour au menu précédent\n")
 			}

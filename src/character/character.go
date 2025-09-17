@@ -6,10 +6,15 @@ import (
 	"projet-red_PIZZA-BATTLE/inventory"
 	"projet-red_PIZZA-BATTLE/items"
 	"projet-red_PIZZA-BATTLE/structures"
+	"time"
 )
 
 // DisplayCInfo affiche les informations du personnage (nom, classe, PV, niveau, expérience, argent, initiative, score).
 func DisplayCInfo(c *structures.Character) {
+
+	// Effacer l'écran
+	fmt.Print("\033[H\033[2J")
+
 	affichage.Separator()
 	fmt.Println("👤 Informations du personnage :")
 	affichage.Separator()
@@ -38,6 +43,10 @@ func DisplayEInfo(e *structures.Enemy) {
 
 // AccessInventory affiche le contenu de l'inventaire du personnage (nom et quantité des objets)
 func AccessInventory(c *structures.Character) {
+
+	// Effacer l'écran
+	fmt.Print("\033[H\033[2J")
+
 	affichage.Separator()
 	fmt.Println("🎒 Inventaire :")
 	affichage.Separator()
@@ -84,6 +93,7 @@ func AccessEquipement(c *structures.Character) {
 // InventoryChoice affiche l'inventaire, les equipements equipés, la liste des compétences et
 // permet au joueur de choisir une action (utiliser une potion, équiper un équipement, ou revenir en arrière)
 func InventoryChoice(c *structures.Character) {
+	fmt.Print("\033[H\033[2J")
 	for {
 		AccessInventory(c)
 		AccessEquipement(c)
@@ -109,6 +119,7 @@ func InventoryChoice(c *structures.Character) {
 		}
 		if menuChoice == 4 {
 			menuChoice = 0
+			fmt.Print("\033[H\033[2J")
 			return
 		}
 	}
@@ -122,6 +133,10 @@ func EquipEquipment(c *structures.Character) {
 	chapAvent := structures.Object{Name: "Toq de Chef", Quantity: 1}
 	tunAvent := structures.Object{Name: "Tablier", Quantity: 1}
 	botAvent := structures.Object{Name: "Bottes de Travail", Quantity: 1}
+
+	// Effacer l'écran
+	fmt.Print("\033[H\033[2J")
+
 	for {
 		// Affichage du menu d'équipement
 		affichage.Separator()
@@ -167,6 +182,9 @@ func EquipEquipment(c *structures.Character) {
 			} else {
 				// Message d'erreur si le joueur ne possède pas l'équipement
 				fmt.Printf("\n❌ Tu ne possèdes pas : %s\n\n", chapAvent.Name)
+
+				time.Sleep(2 * time.Second)
+
 			}
 		case 2:
 			// Équiper la tunique de l'aventurier
@@ -174,6 +192,9 @@ func EquipEquipment(c *structures.Character) {
 				inventory.AddEquipment(c, tunAvent)
 			} else {
 				fmt.Printf("\n❌ Tu ne possèdes pas : %s\n\n", tunAvent.Name)
+
+				time.Sleep(2 * time.Second)
+
 			}
 		case 3:
 			// Équiper les bottes de l'aventurier
@@ -181,14 +202,21 @@ func EquipEquipment(c *structures.Character) {
 				inventory.AddEquipment(c, botAvent)
 			} else {
 				fmt.Printf("\n❌Tu ne possèdes pas : %s\n\n", botAvent.Name)
+
+				time.Sleep(2 * time.Second)
+
 			}
 		case 4:
 
 		default:
 			fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
+
+			time.Sleep(2 * time.Second)
+
 		}
 		if newEquipChoice == 4 {
 			newEquipChoice = 0
+			fmt.Print("\033[H\033[2J")
 			break
 		}
 	}
@@ -199,6 +227,9 @@ func CharacterCreation(c *structures.Character) {
 	// Initialisation des variables
 	var username string
 	var valid bool
+
+	// Effacer l'écran
+	fmt.Print("\033[H\033[2J")
 
 	// Boucle pour demander un pseudo valide
 	for {
@@ -213,6 +244,8 @@ func CharacterCreation(c *structures.Character) {
 		// Vérification que le pseudo n'est pas vide et ne contient que des lettres
 		if len(result) == 0 {
 			fmt.Println("❌ Le pseudo ne peut pas être vide.")
+			time.Sleep(2 * time.Second)
+
 			valid = false
 			continue
 		}
@@ -221,6 +254,9 @@ func CharacterCreation(c *structures.Character) {
 		for _, r := range result {
 			if r < 65 || (r > 90 && r < 97) || r > 122 {
 				fmt.Println("❌ Le pseudo ne doit contenir que des lettres.")
+
+				time.Sleep(2 * time.Second)
+
 				valid = false
 				break
 			}
@@ -297,6 +333,7 @@ func CharacterCreation(c *structures.Character) {
 		c.ActualMana = 100
 		c.Class = "Artiste des pâtes"
 	}
+	time.Sleep(3 * time.Second)
 }
 
 // Fonction pour ajouter de l'experience au personnage en fonction de la difficulté de l'ennemi vaincu
@@ -321,5 +358,12 @@ func NextLevel(c *structures.Character) {
 		// Rétablir les PV et le Mana au maximum
 		c.ActualHp = c.MaxHp
 		c.ActualMana = c.MaxMana
+
+		// Afficher un message de félicitations
+		affichage.Separator()
+		fmt.Printf("🎉 Félicitations %s ! Tu es maintenant niveau %d ! 🎉\n", c.Name, c.Level)
+		fmt.Printf("❤️  PV max : %d | 🍅 Sauce Tomate max : %d | ⚡ Initiative : %d | 📚 XP pour le prochain niveau : %d\n", c.MaxHp, c.MaxMana, c.Initiative, c.MaxExp)
+		affichage.Separator()
+		time.Sleep(3 * time.Second)
 	}
 }
