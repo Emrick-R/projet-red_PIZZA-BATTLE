@@ -16,17 +16,15 @@ func Marchand(c *structures.Character) {
 
 	//Objets
 	HpPot := structures.Object{Name: "Tiramisu", Quantity: 1}
-	ManaPot := structures.Object{Name: "Potion de Mana", Quantity: 1}
+	ManaPot := structures.Object{Name: "Bocal de Sauce Tomate", Quantity: 1}
 	PoisonPot := structures.Object{Name: "Tabasco", Quantity: 1}
 	WolfFur := structures.Object{Name: "Laine", Quantity: 1}
 	TrollSkin := structures.Object{Name: "Cuir", Quantity: 1}
 	BoarLeather := structures.Object{Name: "Ficelle", Quantity: 1}
 	RavenFeather := structures.Object{Name: "Coton", Quantity: 1}
-	HpPot := structures.Object{Name: "Potion de Vie", Quantity: 1}
-	ManaPot := structures.Object{Name: "Bocal de Sauce Tomate", Quantity: 1}1}
 
 	//Compétences
-	FireBall := structures.Skill{Name: "Boule de feu", Damage: 20, ManaCost: 20}
+	FireBall := structures.Skill{Name: "Lancer de Piments", Damage: 20, ManaCost: 20}
 	DeathSpell := structures.Skill{Name: "Sort de la mort qui tue", Damage: 500}
 
 	// Effacer l'écran

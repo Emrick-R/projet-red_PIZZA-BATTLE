@@ -75,7 +75,7 @@ func InitCharacter() *Character {
 		Money:    100,
 		// Initialisation de la compétance de base
 		SkillList: []Skill{
-			{Name: "Coup de poing", Damage: 10, ManaCost: 0},
+			{Name: "Coup de Rouleau", Damage: 10, ManaCost: 0},
 		},
 		// Initialisation de l'armure (rien d'éauipé)
 		Armor: Equipment{

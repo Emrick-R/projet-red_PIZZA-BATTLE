@@ -35,12 +35,12 @@ func RemoveInventory(c *structures.Character, obj structures.Object) {
 func AddEquipment(c *structures.Character, newObj structures.Object) {
 	// Équipe l'armure en fonction de son type (tête, torse, jambes)
 	switch newObj.Name {
-	case "Chapeau de l'aventurier":
+	case "Toq de Chef":
 		// Vérifie si l'armure de tête est déjà équipée
-		if c.Armor.Head.Name != "Chapeau de l'aventurier" {
+		if c.Armor.Head.Name != "Toq de Chef" {
 			// Si l'armure de tête n'est pas équipée, l'équipe
 			c.Armor.Head = &newObj
-			fmt.Printf("\n✅ Tu équipes : Chapeau de l'aventurier\n\n")
+			fmt.Printf("\n✅ Tu équipes : Toq de Chef\n\n")
 			fmt.Printf("\nTu gagnes + 10 PV Max\n\n")
 			fmt.Printf("❤️ %d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+10)
 			// Augmente les PV max du personnage de 10
@@ -51,12 +51,12 @@ func AddEquipment(c *structures.Character, newObj structures.Object) {
 			// Si l'armure de tête est déjà équipée, affiche un message et ne fait rien
 			fmt.Printf("\n❌ Tu as déjà équipé : %s\n\n", newObj.Name)
 		}
-	case "Tunique de l'aventurier":
+	case "Tablier":
 		// Vérifie si l'armure de torse est déjà équipée, si ce n'est pas le cas, l'équipe
 		// et augmente les PV max de 25
-		if c.Armor.Chest.Name != "Tunique de l'aventurier" {
+		if c.Armor.Chest.Name != "Tablier" {
 			c.Armor.Chest = &newObj
-			fmt.Printf("\n✅ Tu équipes : Tunique de l'aventurier\n\n")
+			fmt.Printf("\n✅ Tu équipes : Tablier\n\n")
 			fmt.Printf("\nTu gagnes + 25 PV Max\n\n")
 			fmt.Printf("❤️ %d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+25)
 			c.MaxHp += 25
@@ -64,12 +64,12 @@ func AddEquipment(c *structures.Character, newObj structures.Object) {
 		} else {
 			fmt.Printf("\n❌ Tu as déjà équipé : %s\n\n", newObj.Name)
 		}
-	case "Bottes de l'aventurier":
+	case "Bottes de Travail":
 		// Vérifie si l'armure de jambes est déjà équipée, si ce n'est pas le cas, l'équipe
 		// et augmente les PV max de 15
-		if c.Armor.Legs.Name != "Bottes de l'aventurier" {
+		if c.Armor.Legs.Name != "Bottes de Travail" {
 			c.Armor.Legs = &newObj
-			fmt.Printf("\n✅ Tu équipes : Bottes de l'aventurier\n\n")
+			fmt.Printf("\n✅ Tu équipes : Bottes de Travail\n\n")
 			fmt.Printf("\nTu gagnes + 15 PV Max\n\n")
 			fmt.Printf("❤️ %d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+15)
 			c.MaxHp += 15

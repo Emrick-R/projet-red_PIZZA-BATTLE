@@ -116,17 +116,17 @@ func InventoryChoice(c *structures.Character) {
 func EquipEquipment(c *structures.Character) {
 	//Itinialisation des équipements disponibles
 	var newEquipChoice int
-	chapAvent := structures.Object{Name: "Chapeau de l'aventurier", Quantity: 1}
-	tunAvent := structures.Object{Name: "Tunique de l'aventurier", Quantity: 1}
-	botAvent := structures.Object{Name: "Bottes de l'aventurier", Quantity: 1}
+	chapAvent := structures.Object{Name: "Toq de Chef", Quantity: 1}
+	tunAvent := structures.Object{Name: "Tablier", Quantity: 1}
+	botAvent := structures.Object{Name: "Bottes de Travail", Quantity: 1}
 	for {
 		// Affichage du menu d'équipement
 		affichage.Separator()
 		fmt.Println("🛡️  Choisis ton équipement :")
 		affichage.Separator()
-		fmt.Println("1 - 👒 Chapeau de l'aventurier")
-		fmt.Println("2 - 👕 Tunique de l'aventurier")
-		fmt.Println("3 - 👢 Bottes de l'aventurier")
+		fmt.Println("1 - 👒 Toq de Chef")
+		fmt.Println("2 - 👕 Tablier")
+		fmt.Println("3 - 👢 Bottes de Travail")
 		fmt.Println("4 - ⬅️  RETOUR")
 		affichage.Separator()
 
