@@ -46,22 +46,22 @@ func TakePot(c *structures.Character) {
 // A FINIR
 func TakeManaPot(c *structures.Character) {
 	ManaPot := structures.Object{Name: "Potion de Mana"}
-	if c.ActualMana == c.ManaMax {
+	if c.ActualMana == c.MaxMana {
 		fmt.Printf("\nLes Manas sont déjà au max\n\n")
 		return
 	}
 	for i := 0; i < len(c.Inventory); i++ {
 		if c.Inventory[i].Name == ManaPot.Name {
-			c.ActualHp += 25
+			c.ActualMana += 25
 			c.Inventory[i].Quantity--
 			if c.Inventory[i].Quantity == 0 {
 				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
 			}
-			if c.ActualMana >= c.ManaMax {
-				c.ActualMana = c.ManaMax
+			if c.ActualMana >= c.MaxMana {
+				c.ActualMana = c.MaxMana
 			}
 			fmt.Printf("\n🧪 Potion consommée !\n")
-			fmt.Printf("🔵 %s : %d/%d Mana\n", c.Name, c.ActualMana, c.ManaMax)
+			fmt.Printf("🔵 %s : %d/%d Mana\n", c.Name, c.ActualMana, c.MaxMana)
 			return
 		}
 	}

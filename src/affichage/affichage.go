@@ -50,6 +50,7 @@ func AffichageMenuCombatPotion() {
 	Separator()
 	fmt.Println("1 - ❤️  Potion de soin")
 	fmt.Println("2 - 💀 Potion de poison")
+	fmt.Println("2 - 🔵 Potion de poison")
 	fmt.Println("3 - ⬅️  RETOUR")
 	Separator()
 }

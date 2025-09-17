@@ -35,8 +35,10 @@ func rollDice() int {
 // Si le joueur gagne, il commence, sinon l'ennemi commence
 func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 
-	// Variable du choix du joueur
+	// Variable du choix du joueur et des distances
 	var choix int
+	var distJoueur int
+	var distEnnemi int
 	affichage.Separator()
 	fmt.Println("🟩⬜🟥 Épreuve de la Mamma 🟩⬜🟥")
 	affichage.Separator()
@@ -60,19 +62,38 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 	// affichage clair
 	fmt.Printf("🎲 Ton nombre : %d | 🎲 Mamma : %d | 🎲 Ennemi : %d\n", choix, mamma, ennemi)
 
-	// en cas d'égalité on relance les dés
-	for choix == ennemi {
-		fmt.Println("Égalité — relance du nombre !")
-		mamma = rollDice()
-		ennemi = rollDice()
-		fmt.Printf("🎲 Chiffre : %d | 🎲 Mamma : %d | 🎲 Ennemi : %d\n", choix, mamma, ennemi)
+	for {
+		// en cas d'égalité on relance les dés
+		for choix == ennemi {
+			fmt.Println("Égalité — relance du nombre !")
+			mamma = rollDice()
+			ennemi = rollDice()
+			fmt.Printf("🎲 Ton nombre : %d | 🎲 Mamma : %d | 🎲 Ennemi : %d\n", choix, mamma, ennemi)
+
+		}
+		// réinitialisation des distances
+		distJoueur = 0
+		distEnnemi = 0
+		// distances absolues
+		distJoueur = abs(choix - mamma)
+		distEnnemi = abs(ennemi - mamma)
+		// Prises en compte de l'initiative
+		distJoueur -= (c.Initiative)
+		distEnnemi -= (e.Initiative)
+
+		if distJoueur < 0 {
+			distJoueur = 0
+		}
+		if distEnnemi < 0 {
+			distEnnemi = 0
+		}
+		fmt.Printf("Distance après initiative %d : %d | %d : %d\n", c.Initiative, distJoueur, e.Initiative, distEnnemi)
+		if distJoueur != distEnnemi {
+			break
+		}
+		fmt.Println("Égalité avec initiative — relance du nombre !")
 	}
-
-	// distances absolues (Rappel: la distance est petite == Gagnant)
-	distJoueur := abs(choix - mamma + c.Initiative)
-	distEnnemi := abs(ennemi - mamma + e.Initiative)
-
-	// affichage du résultat
+	// affichage du résultat (Rappel: la distance est petite == Gagnant)
 
 	if distJoueur < distEnnemi {
 		// Joueur gagne
@@ -173,9 +194,9 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 				var skill_choice int
 				var index int
 				affichage.Separator()
-				fmt.Println("\n👊  Quelle compétence veux-tu utiliser ?")
+				fmt.Println("👊  Quelle compétence veux-tu utiliser ?")
 				affichage.Separator()
-				fmt.Printf("%s : %d/%d Mana\n", c.Name, c.ActualMana, c.ManaMax)
+				fmt.Printf("%s : %d/%d Mana\n\n", c.Name, c.ActualMana, c.MaxMana)
 				// Affiche la liste des compétences disponibles
 				for i := range c.SkillList {
 					fmt.Printf("%d - %s: %d Dégats %d Mana\n", i+1, c.SkillList[i].Name, c.SkillList[i].Damage, c.SkillList[i].ManaCost)
@@ -195,8 +216,8 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 						if c.ActualMana < 0 {
 							c.ActualMana = 0
 						}
-						fmt.Printf("\n🔵 Mana restant : %d/%d\n", c.ActualMana, c.ManaMax)
 						skills.UseSkill(c, e, chosenSkill)
+						fmt.Printf("\n🔵 Mana restant : %d/%d\n", c.ActualMana, c.MaxMana)
 						fmt.Printf("\n💥 %s utilise %s et inflige %d points de dégâts à %s !\n", c.Name, chosenSkill.Name, chosenSkill.Damage, e.Name)
 						fmt.Printf("❤️ %s : %d/%d HP\n", e.Name, e.ActualHp, e.MaxHp)
 						return
@@ -277,7 +298,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 						case 4:
 						//Retour
 						default:
-							// Choix autre que 1, 2 ou 3
+							// Choix autre que 1, 2, 3 ou 4
 							fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 						}
 						//Reset de la variable menuChoice
@@ -369,7 +390,7 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 	score.AddScore(c, e)
 	inventory.AddMoney(c, e)
 	character.AddExp(c, e)
-	fmt.Printf("\n💵 +%d argent", e.GiveMoney)
+	fmt.Printf("💵 +%d argent", e.GiveMoney)
 	fmt.Printf("\n📚 +%d expérience", e.GiveExp)
 	fmt.Printf("\n⭐ +%d points de score\n", e.GiveScore)
 	//Affichage de l'argent, de l'Exp et du score

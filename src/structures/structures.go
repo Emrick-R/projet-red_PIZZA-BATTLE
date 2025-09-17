@@ -23,7 +23,7 @@ type Character struct {
 	ActualExp  int
 	MaxExp     int
 	ActualMana int
-	ManaMax    int
+	MaxMana    int
 }
 
 // Enemy représente un ennemi avec ses attributs
@@ -64,7 +64,7 @@ func InitCharacter() *Character {
 		Level:      1,
 		ActualExp:  0,
 		MaxExp:     100,
-		Initiative: 100,
+		Initiative: 0,
 		// Initialisation avec 3 potions
 		Inventory: []Object{
 			{Name: "Potion de Vie", Quantity: 3},
@@ -99,7 +99,7 @@ func InitEnemy(name string, grade string) *Enemy {
 			ActualHp:   100,
 			Damage:     5,
 			Difficulty: "Facile",
-			Initiative: 100,
+			Initiative: 0,
 			PowerCount: 0,
 			GiveScore:  5,
 			GiveMoney:  5,
@@ -114,7 +114,7 @@ func InitEnemy(name string, grade string) *Enemy {
 			ActualHp:   120,
 			Damage:     15,
 			Difficulty: "Normal",
-			Initiative: 120,
+			Initiative: 20,
 			PowerCount: 0,
 			GiveScore:  10,
 			GiveMoney:  10,
@@ -129,7 +129,7 @@ func InitEnemy(name string, grade string) *Enemy {
 			ActualHp:   200,
 			Damage:     25,
 			Difficulty: "Boss",
-			Initiative: 150,
+			Initiative: 50,
 			PowerCount: 0,
 			GiveScore:  5,
 			GiveMoney:  5,
@@ -143,7 +143,7 @@ func InitEnemy(name string, grade string) *Enemy {
 		ActualHp:   100,
 		Damage:     5,
 		Difficulty: "Facile",
-		Initiative: 100,
+		Initiative: 0,
 		PowerCount: 0,
 		GiveScore:  5,
 		GiveMoney:  5,

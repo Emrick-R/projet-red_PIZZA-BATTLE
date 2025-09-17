@@ -16,7 +16,7 @@ func DisplayCInfo(c *structures.Character) {
 	fmt.Printf("📛 Nom : %s\n", c.Name)
 	fmt.Printf("🏹 Classe : %s\n", c.Class)
 	fmt.Printf("❤️  PV : %d/%d\n", c.ActualHp, c.MaxHp)
-	fmt.Printf("🔵 Mana : %d/%d\n", c.ActualMana, c.ManaMax)
+	fmt.Printf("🔵 Mana : %d/%d\n", c.ActualMana, c.MaxMana)
 	fmt.Printf("⭐ Niveau : %d\n", c.Level)
 	fmt.Printf("📚 Expérience : %d/%d\n", c.ActualExp, c.MaxExp)
 	fmt.Printf("💵 Argent : %d\n", c.Money)
@@ -274,7 +274,7 @@ func CharacterCreation(c *structures.Character) {
 		fmt.Println("🌿 Tu as choisi la classe Elfe : agile, précis et en communion avec la nature.")
 		c.MaxHp = 80
 		c.ActualHp = 40
-		c.ManaMax = 120
+		c.MaxMana = 120
 		c.ActualMana = 120
 		c.Class = "Elfe"
 	case 2:
@@ -282,7 +282,7 @@ func CharacterCreation(c *structures.Character) {
 		fmt.Println("🪓 Tu as choisi la classe Nain : robuste, courageux et maître de la forge.")
 		c.MaxHp = 120
 		c.ActualHp = 60
-		c.ManaMax = 80
+		c.MaxMana = 80
 		c.ActualMana = 80
 		c.Class = "Nain"
 	case 3:
@@ -290,7 +290,7 @@ func CharacterCreation(c *structures.Character) {
 		fmt.Println("⚔️  Tu as choisi la classe Humain : polyvalent, ingénieux et déterminé.")
 		c.MaxHp = 100
 		c.ActualHp = 50
-		c.ManaMax = 100
+		c.MaxMana = 100
 		c.ActualMana = 100
 		c.Class = "Humain"
 	}
@@ -311,7 +311,7 @@ func NextLevel(c *structures.Character) {
 
 		// Augmenter les stats
 		c.MaxExp = int(float64(c.MaxExp) * 1.25)
-		c.ManaMax = c.ManaMax + 20
+		c.MaxMana = c.MaxMana + 20
 		c.MaxHp = c.MaxHp + 20
 		c.Initiative = int(float64(c.MaxHp) * 1.1)
 	}
