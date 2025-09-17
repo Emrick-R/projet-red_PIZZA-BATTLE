@@ -232,8 +232,16 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 		switch combat_choice {
 		case 1:
 			// Attaque
+
 			// Choix de la compétence : sors la compétence choisie
 			chosenSkill := skills.SkillChoice(c)
+
+			// Vérification du mana
+			skills.CheckMana(c, chosenSkill)
+			// Déduction du mana
+			c.ActualMana -= chosenSkill.ManaCost
+			// Affichage du mana restant
+			fmt.Printf("🔵 Mana restant : %d/%d\n", c.ActualMana, c.ManaMax)
 			// Utilisation de la compétence sur l'ennemi
 			skills.UseSkill(c, e, chosenSkill)
 			// Affichage des dégâts infligés et des PV restants de l'ennemi

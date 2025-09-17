@@ -73,7 +73,7 @@ func Forgeron(c *structures.Character) {
 				break
 			} else {
 				// Il a les matériaux nécessaires, affiche le nombre d'objets fabriquables
-				fmt.Printf("\nTu peux fabriquer %d x Chapeau de l'Aventurier\n", itemcraftable)
+				fmt.Printf("\nTu peux fabriquer %dx Chapeau de l'Aventurier, veux-tu en fabriquer 1 ?\n", itemcraftable)
 			}
 
 			// Demande de confirmation au joueur avant de fabriquer l'objet
@@ -103,7 +103,7 @@ func Forgeron(c *structures.Character) {
 				fmt.Printf("\n❌ Tu n'as pas les objets requis pour Tunique de l'aventurier de l'Aventurier\n\n")
 				break
 			} else {
-				fmt.Printf("\nTu peux fabriquer %d x Tunique de l'aventurier\n\n", itemcraftable)
+				fmt.Printf("\nTu peux fabriquer %dx Chapeau de l'Aventurier, veux-tu en fabriquer 1 ?\n", itemcraftable)
 			}
 
 			fmt.Println("1 - Oui je suis sûr !")
@@ -129,7 +129,7 @@ func Forgeron(c *structures.Character) {
 				fmt.Printf("\n❌ Tu n'as pas les objets requis pour Bottes de l'aventurier de l'Aventurier\n\n")
 				break
 			} else {
-				fmt.Printf("\nTu peux fabriquer %d x Bottes de l'aventurier\n", itemcraftable)
+				fmt.Printf("\nTu peux fabriquer %dx Chapeau de l'Aventurier, veux-tu en fabriquer 1 ?\n", itemcraftable)
 			}
 
 			fmt.Println("1 - Oui je suis sûr !")

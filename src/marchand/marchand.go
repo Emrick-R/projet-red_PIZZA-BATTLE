@@ -24,7 +24,7 @@ func Marchand(c *structures.Character) {
 	RavenFeather := structures.Object{Name: "Plume de Corbeau", Quantity: 1}
 
 	//Compétences
-	FireBall := structures.Skill{Name: "Boule de feu", Damage: 20}
+	FireBall := structures.Skill{Name: "Boule de feu", Damage: 20, ManaCost: 20}
 	DeathSpell := structures.Skill{Name: "Sort de la mort qui tue", Damage: 500}
 
 	//Boucle principale du marchand
