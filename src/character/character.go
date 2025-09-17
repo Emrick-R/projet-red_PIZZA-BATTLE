@@ -251,9 +251,9 @@ func CharacterCreation(c *structures.Character) {
 		affichage.Separator()
 		fmt.Printf("🎭 %s, quelle classe veux-tu choisir ?\n", c.Name)
 		affichage.Separator()
-		fmt.Printf("1 - 🏹 Elfe : %d PV Max | %d Sauce Tomate Max\n", 80, 120)
-		fmt.Printf("2 - ⛏️ Nain : %d PV Max | %d Sauce Tomate Max\n", 120, 80)
-		fmt.Printf("3 - 🧑 Humain : %d PV Max | %d Sauce Tomate Max\n", 100, 100)
+		fmt.Printf("1 - 🧀 Sculpteur de Mozzarella : %d PV Max | %d Sauce Tomate Max\n", 80, 120)
+		fmt.Printf("2 - 🔥 Maître du Four		   : %d PV Max | %d Sauce Tomate Max\n", 120, 80)
+		fmt.Printf("3 - 🍝 Artiste des pâtes	   : %d PV Max | %d Sauce Tomate Max\n", 100, 100)
 		affichage.Separator()
 
 		fmt.Print("👉 Ton choix : ")
