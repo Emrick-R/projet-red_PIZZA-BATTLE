@@ -74,7 +74,7 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 
 	// affichage du résultat
 
-	if distJoueur > distEnnemi {
+	if distJoueur < distEnnemi {
 		// Joueur gagne
 		fmt.Printf("✅ Tu est le plus proche du chiffre de la Mamma avec une distance de %d contre %d (Initiative de %d contre %d), vous commencez !\n", distJoueur, distEnnemi, c.Initiative, e.Initiative)
 		return true
@@ -117,7 +117,6 @@ func CharacterIsDead(c *structures.Character) {
 func EnemyIsDead(e *structures.Enemy) bool {
 	//Si les PV de l'ennemi sont inférieurs ou égaux à 0
 	if e.ActualHp <= 0 {
-		fmt.Printf("⚔️  Tu as vaincu %s !\n", e.Name)
 		//Ennemi mort donc true
 		return true
 	}
@@ -159,7 +158,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 		affichage.Separator()
 		fmt.Println("⚔️  COMBAT :")
 		affichage.Separator()
-		fmt.Println("1 - 🗡️ Attaquer")
+		fmt.Println("1 - 🗡️  Attaquer")
 		fmt.Println("2 - 🎒 Inventaire")
 		fmt.Println("3 - 💀 Suicide")
 
@@ -173,10 +172,13 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 				var chosenSkill structures.Skill
 				var skill_choice int
 				var index int
-				fmt.Println("\nQuelle compétence veux-tu utiliser ?")
+				affichage.Separator()
+				fmt.Println("\n👊  Quelle compétence veux-tu utiliser ?")
+				affichage.Separator()
+				fmt.Printf("%s : %d/%d Mana\n", c.Name, c.ActualMana, c.ManaMax)
 				// Affiche la liste des compétences disponibles
 				for i := range c.SkillList {
-					fmt.Printf("%d - %s\n", i+1, c.SkillList[i].Name)
+					fmt.Printf("%d - %s: %d Dégats %d Mana\n", i+1, c.SkillList[i].Name, c.SkillList[i].Damage, c.SkillList[i].ManaCost)
 					index = len(c.SkillList) + 1
 				}
 				fmt.Printf("%d - ⬅️  RETOUR\n", index)
@@ -193,9 +195,9 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 						if c.ActualMana < 0 {
 							c.ActualMana = 0
 						}
-						fmt.Printf("🔵 Mana restant : %d/%d\n", c.ActualMana, c.ManaMax)
+						fmt.Printf("\n🔵 Mana restant : %d/%d\n", c.ActualMana, c.ManaMax)
 						skills.UseSkill(c, e, chosenSkill)
-						fmt.Printf("\n💥 %s inflige %d points de dégâts à %s !\n", c.Name, chosenSkill.Damage, e.Name)
+						fmt.Printf("\n💥 %s utilise %s et inflige %d points de dégâts à %s !\n", c.Name, chosenSkill.Name, chosenSkill.Damage, e.Name)
 						fmt.Printf("❤️ %s : %d/%d HP\n", e.Name, e.ActualHp, e.MaxHp)
 						return
 					} else {
@@ -250,7 +252,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 									return
 								}
 							}
-							fmt.Println("❌ Il n'y a pas de vie de poison dans l'inventaire.")
+							fmt.Println("❌ Il n'y a pas de potion de vie dans l'inventaire.")
 
 						case 2:
 							PoisonPot := structures.Object{Name: "Potion de Poison"}
@@ -263,15 +265,23 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 								}
 							}
 							fmt.Println("❌ Il n'y a pas de potion de poison dans l'inventaire.")
-
 						case 3:
+							ManaPot := structures.Object{Name: "Potion de Mana"}
+							for i := 0; i < len(c.Inventory); i++ {
+								if c.Inventory[i].Name == ManaPot.Name {
+									items.TakeManaPot(c)
+									return
+								}
+							}
+							fmt.Println("❌ Il n'y a pas de potion de mana dans l'inventaire.")
+						case 4:
 						//Retour
 						default:
 							// Choix autre que 1, 2 ou 3
 							fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 						}
 						//Reset de la variable menuChoice
-						if menuChoice == 3 {
+						if menuChoice == 4 {
 							menuChoice = 0
 							break
 						}
@@ -351,13 +361,15 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 		}
 	}
 	//Fin du combat (ennemi mort)
+	affichage.Separator()
 	fmt.Printf("🏆 Bravo ! Tu as terrassé %s !\n", e.Name)
+	affichage.Separator()
 	e.ActualHp = e.MaxHp
 	//Récompenses du combat (Argent + Score)
 	score.AddScore(c, e)
 	inventory.AddMoney(c, e)
 	character.AddExp(c, e)
-	fmt.Printf("\n💰 +%d argent", e.GiveMoney)
+	fmt.Printf("\n💵 +%d argent", e.GiveMoney)
 	fmt.Printf("\n📚 +%d expérience", e.GiveExp)
 	fmt.Printf("\n⭐ +%d points de score\n", e.GiveScore)
 	//Affichage de l'argent, de l'Exp et du score

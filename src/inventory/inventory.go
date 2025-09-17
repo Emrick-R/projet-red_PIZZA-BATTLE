@@ -40,9 +40,9 @@ func AddEquipment(c *structures.Character, newObj structures.Object) {
 		if c.Armor.Head.Name != "Chapeau de l'aventurier" {
 			// Si l'armure de tête n'est pas équipée, l'équipe
 			c.Armor.Head = &newObj
-			fmt.Printf("\nTu équipes : Chapeau de l'aventurier\n\n")
+			fmt.Printf("\n✅ Tu équipes : Chapeau de l'aventurier\n\n")
 			fmt.Printf("\nTu gagnes + 10 PV Max\n\n")
-			fmt.Printf("%d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+10)
+			fmt.Printf("❤️ %d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+10)
 			// Augmente les PV max du personnage de 10
 			c.MaxHp += 10
 			// Retire l'objet de l'inventaire
@@ -56,9 +56,9 @@ func AddEquipment(c *structures.Character, newObj structures.Object) {
 		// et augmente les PV max de 25
 		if c.Armor.Chest.Name != "Tunique de l'aventurier" {
 			c.Armor.Chest = &newObj
-			fmt.Printf("\nTu équipes : Tunique de l'aventurier\n\n")
+			fmt.Printf("\n✅ Tu équipes : Tunique de l'aventurier\n\n")
 			fmt.Printf("\nTu gagnes + 25 PV Max\n\n")
-			fmt.Printf("%d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+25)
+			fmt.Printf("❤️ %d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+25)
 			c.MaxHp += 25
 			RemoveInventory(c, newObj)
 		} else {
@@ -69,9 +69,9 @@ func AddEquipment(c *structures.Character, newObj structures.Object) {
 		// et augmente les PV max de 15
 		if c.Armor.Legs.Name != "Bottes de l'aventurier" {
 			c.Armor.Legs = &newObj
-			fmt.Printf("\nTu équipes : Bottes de l'aventurier\n\n")
+			fmt.Printf("\n✅ Tu équipes : Bottes de l'aventurier\n\n")
 			fmt.Printf("\nTu gagnes + 15 PV Max\n\n")
-			fmt.Printf("%d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+15)
+			fmt.Printf("❤️ %d/%d PV -> %d/%d PV\n\n", c.ActualHp, c.MaxHp, c.ActualHp, c.MaxHp+15)
 			c.MaxHp += 15
 			RemoveInventory(c, newObj)
 		} else {

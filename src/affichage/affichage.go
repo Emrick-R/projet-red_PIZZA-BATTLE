@@ -12,8 +12,8 @@ func AffichageMenuDemarrage() {
 	Separator()
 	fmt.Println("🍕 BIENVENUE DANS PIZZA BATTLE 🍕")
 	Separator()
-	fmt.Println("1 - ▶️ Commencer une nouvelle partie")
-	fmt.Println("2 - 🪺 Options (Easter Egg)")
+	fmt.Println("1 - ▶️  Commencer une nouvelle partie")
+	fmt.Println("2 - 🪺  Options (Easter Egg)")
 	fmt.Println("3 - 👋 Quitter")
 	Separator()
 }
@@ -27,8 +27,8 @@ func AffichageMenuPrincipal() {
 	fmt.Println("2 - 🎒 Inventaire")
 	fmt.Println("3 - ⚔️  Combat en 1 contre 1")
 	fmt.Println("4 - 🛒 Marchand")
-	fmt.Println("5 - ⚒️ Forgeron")
-	fmt.Println("6 - ⬅️ RETOUR")
+	fmt.Println("5 - ⚒️  Forgeron")
+	fmt.Println("6 - ⬅️  RETOUR")
 	Separator()
 }
 
@@ -63,4 +63,31 @@ func CharacterTurn() {
 	fmt.Println("2 - 🎒 Inventaire")
 	fmt.Println("3 - ⬅️ RETOUR")
 	Separator()
+}
+
+func EasterEgg() {
+	// Effacer l'écran
+	fmt.Print("\033[H\033[2J")
+
+	fmt.Println("===============================================")
+	fmt.Println("        *** EASTER EGG DÉCOUVERT! ***         ")
+	fmt.Println("===============================================")
+
+	fmt.Println("\n🍕 Pizza Battle 🍕")
+	fmt.Printf("Développé par les légendaires goateurs de pizza:\n\n")
+	fmt.Println("Emrick Rivet & Harold François")
+
+	fmt.Println("\n-----------------------------------------------")
+	fmt.Println("RÉFÉRENCES CACHÉES DANS LE JEU:")
+	fmt.Println("-----------------------------------------------")
+
+	fmt.Println("\nÉtape 2 - Références musicales:")
+	fmt.Println("ABBA")
+
+	fmt.Println("\nÉtape 3 - Références cinématographiques:")
+	fmt.Println("Steven Spielberg")
+
+	fmt.Println("\n===============================================")
+	fmt.Println("Appuyez sur 0 pour revenir au menu principal")
+	fmt.Println("===============================================")
 }

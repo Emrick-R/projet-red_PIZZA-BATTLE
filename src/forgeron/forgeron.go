@@ -2,6 +2,7 @@ package forgeron
 
 import (
 	"fmt"
+	"projet-red_PIZZA-BATTLE/affichage"
 	"projet-red_PIZZA-BATTLE/inventory"
 	"projet-red_PIZZA-BATTLE/structures"
 )
@@ -35,12 +36,15 @@ func Forgeron(c *structures.Character) {
 
 	// Boucle principale du forgeron
 	for {
+		affichage.Separator()
 		fmt.Println("⚒️ Bienvenue chez le Forgeron !")
+		affichage.Separator()
 		fmt.Println("Que veux tu frabriquer ?")
 		fmt.Println("1 - 👒 Chapeau de l'aventurier (1 Plume de Corbeau + 1 Cuir de Sanglier)")
 		fmt.Println("2 - 👕 Tunique de l'aventurier (2 Fourrures de Loup + 1 Peau de Troll)")
 		fmt.Println("3 - 👖 Bottes de l'aventurier (1 Fourrure de Loup + 1 Cuir de Sanglier)")
-		fmt.Println("4 - ⬅️ RETOUR")
+		fmt.Println("4 - ⬅️  RETOUR")
+		fmt.Print("👉 Ton choix : ")
 		fmt.Scan(&forgeron_choice)
 
 		// Initialisation des compteurs pour chaque matériau
@@ -80,6 +84,7 @@ func Forgeron(c *structures.Character) {
 			// 1 = Oui, 2 = Non
 			fmt.Println("1 - Oui je suis sûr !")
 			fmt.Println("2 - Non je ne suis pas sûr, retour !")
+			fmt.Print("👉 Ton choix : ")
 			fmt.Scan(&craft_confirmation)
 			switch craft_confirmation {
 			case 1:
@@ -108,6 +113,7 @@ func Forgeron(c *structures.Character) {
 
 			fmt.Println("1 - Oui je suis sûr !")
 			fmt.Println("2 - Non je ne suis pas sûr, retour !")
+			fmt.Print("👉 Ton choix : ")
 			fmt.Scan(&craft_confirmation)
 			switch craft_confirmation {
 			case 1:
@@ -134,6 +140,7 @@ func Forgeron(c *structures.Character) {
 
 			fmt.Println("1 - Oui je suis sûr !")
 			fmt.Println("2 - Non je ne suis pas sûr, retour !")
+			fmt.Print("👉 Ton choix : ")
 			fmt.Scan(&craft_confirmation)
 			switch craft_confirmation {
 			case 1:

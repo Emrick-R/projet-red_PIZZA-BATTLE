@@ -32,8 +32,8 @@ func TakePot(c *structures.Character) {
 				c.ActualHp = c.MaxHp
 			}
 			// Afficher un message indiquant que la potion a été consommée et les PV actuels
-			fmt.Printf("\nPotion consommée ! +50 PV\n")
-			fmt.Printf("❤️ %s : %d/%d\n", c.Name, c.ActualHp, c.MaxHp)
+			fmt.Printf("\n🧪 Potion consommée ! +50 PV\n")
+			fmt.Printf("❤️  %s : %d/%dPV\n\n", c.Name, c.ActualHp, c.MaxHp)
 			// Sortir de la fonction
 			return
 		}
@@ -47,12 +47,12 @@ func TakePot(c *structures.Character) {
 func TakeManaPot(c *structures.Character) {
 	ManaPot := structures.Object{Name: "Potion de Mana"}
 	if c.ActualMana == c.ManaMax {
-		fmt.Printf("\nLes points de vie sont déjà au max\n\n")
+		fmt.Printf("\nLes Manas sont déjà au max\n\n")
 		return
 	}
 	for i := 0; i < len(c.Inventory); i++ {
 		if c.Inventory[i].Name == ManaPot.Name {
-			c.ActualHp += 20
+			c.ActualHp += 25
 			c.Inventory[i].Quantity--
 			if c.Inventory[i].Quantity == 0 {
 				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
@@ -60,9 +60,8 @@ func TakeManaPot(c *structures.Character) {
 			if c.ActualMana >= c.ManaMax {
 				c.ActualMana = c.ManaMax
 			}
-			fmt.Printf("\nPotion consommée !\n")
-			fmt.Printf("Mana actuel: %d\n", c.ActualMana)
-
+			fmt.Printf("\n🧪 Potion consommée !\n")
+			fmt.Printf("🔵 %s : %d/%d Mana\n", c.Name, c.ActualMana, c.ManaMax)
 			return
 		}
 	}

@@ -71,40 +71,16 @@ func main() {
 		case 2:
 			// Easter Egg secret
 			var returnChoice int
-
-			// Effacer l'écran
-			fmt.Print("\033[H\033[2J")
-
-			fmt.Println("===============================================")
-			fmt.Println("        *** EASTER EGG DÉCOUVERT! ***         ")
-			fmt.Println("===============================================")
-
-			fmt.Println("\n🍕 Pizza Battle 🍕")
-			fmt.Println("Développé par les légendaires goateurs de pizza:")
-			fmt.Println("Emrick Rivet & Harold François")
-
-			fmt.Println("\n-----------------------------------------------")
-			fmt.Println("RÉFÉRENCES CACHÉES DANS LE JEU:")
-			fmt.Println("-----------------------------------------------")
-
-			fmt.Println("\nÉtape 2 - Références musicales:")
-			fmt.Println("ABBA")
-
-			fmt.Println("\nÉtape 3 - Références cinématographiques:")
-			fmt.Println("Steven Spielberg")
-
-			fmt.Println("\n===============================================")
-			fmt.Println("Appuyez sur 0 pour revenir au menu principal")
-			fmt.Println("===============================================")
+			affichage.EasterEgg()
 
 			// Attente de la saisie utilisateur pour retourner au menu
 			for {
-				fmt.Print("Votre choix: ")
+				fmt.Print("👉 Ton choix : ")
 				fmt.Scan(&returnChoice)
 				if returnChoice == 0 {
 					break
 				} else {
-					fmt.Println("Appuyez sur 0 pour revenir au menu principal")
+					fmt.Println("Appuyes sur 0 pour revenir au menu principal")
 				}
 			}
 		case 3:

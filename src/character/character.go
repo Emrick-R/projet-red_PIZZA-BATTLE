@@ -15,11 +15,11 @@ func DisplayCInfo(c *structures.Character) {
 	affichage.Separator()
 	fmt.Printf("📛 Nom : %s\n", c.Name)
 	fmt.Printf("🏹 Classe : %s\n", c.Class)
-	fmt.Printf("❤️ PV : %d/%d\n", c.ActualHp, c.MaxHp)
-	fmt.Printf("🔵 Mana : %d\n", c.ManaMax)
+	fmt.Printf("❤️  PV : %d/%d\n", c.ActualHp, c.MaxHp)
+	fmt.Printf("🔵 Mana : %d/%d\n", c.ActualMana, c.ManaMax)
 	fmt.Printf("⭐ Niveau : %d\n", c.Level)
 	fmt.Printf("📚 Expérience : %d/%d\n", c.ActualExp, c.MaxExp)
-	fmt.Printf("💰 Argent : %d\n", c.Money)
+	fmt.Printf("💵 Argent : %d\n", c.Money)
 	fmt.Printf("⚡ Initiative : %d\n", c.Initiative)
 	fmt.Printf("🏆 Score : %d\n", c.Score)
 	affichage.Separator()
@@ -127,7 +127,7 @@ func EquipEquipment(c *structures.Character) {
 		fmt.Println("1 - 👒 Chapeau de l'aventurier")
 		fmt.Println("2 - 👕 Tunique de l'aventurier")
 		fmt.Println("3 - 👢 Bottes de l'aventurier")
-		fmt.Println("4 - ⬅️ RETOUR")
+		fmt.Println("4 - ⬅️  RETOUR")
 		affichage.Separator()
 
 		fmt.Print("👉 Ton choix : ")
@@ -251,9 +251,9 @@ func CharacterCreation(c *structures.Character) {
 		affichage.Separator()
 		fmt.Printf("🎭 %s, quelle classe veux-tu choisir ?\n", c.Name)
 		affichage.Separator()
-		fmt.Println("1 - 🏹 Elfe : 80 PV Max")
-		fmt.Println("2 - ⛏️ Nain : 120 PV Max")
-		fmt.Println("3 - 🧑 Humain : 100 PV Max")
+		fmt.Printf("1 - 🏹 Elfe : %d PV Max | %d Mana Max\n", 80, 120)
+		fmt.Printf("2 - ⛏️ Nain : %d PV Max | %d Mana Max\n", 120, 80)
+		fmt.Printf("3 - 🧑 Humain : %d PV Max | %d Mana Max\n", 100, 100)
 		affichage.Separator()
 
 		fmt.Print("👉 Ton choix : ")
@@ -290,8 +290,8 @@ func CharacterCreation(c *structures.Character) {
 		fmt.Println("⚔️  Tu as choisi la classe Humain : polyvalent, ingénieux et déterminé.")
 		c.MaxHp = 100
 		c.ActualHp = 50
-		c.ManaMax = 80
-		c.ActualMana = 80
+		c.ManaMax = 100
+		c.ActualMana = 100
 		c.Class = "Humain"
 	}
 }
