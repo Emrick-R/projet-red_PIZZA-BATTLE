@@ -25,9 +25,9 @@ func AffichageMenuPrincipal() {
 	Separator()
 	fmt.Println("1 - 👤 Afficher le personnage")
 	fmt.Println("2 - 🎒 Inventaire")
-	fmt.Println("3 - ⚔️  Combat en 1 contre 1")
-	fmt.Println("4 - 🛒 Marchand")
-	fmt.Println("5 - ⚒️  Atelier de l'Oncle Pepito")
+	fmt.Println("3 - 🥊  Combat en 1 contre 1")
+	fmt.Println("4 - 🛒 Supermarché")
+	fmt.Println("5 - 🪡  Atelier de l'Oncle Pepito")
 	fmt.Println("6 - ⬅️  RETOUR")
 	Separator()
 }

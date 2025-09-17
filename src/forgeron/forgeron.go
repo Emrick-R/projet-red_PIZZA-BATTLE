@@ -40,7 +40,7 @@ func Forgeron(c *structures.Character) {
 	// Boucle principale du forgeron
 	for {
 		affichage.Separator()
-		fmt.Println("⚒️ Bienvenue à l'Atelier de l'Oncle Pepito !")
+		fmt.Println("🪡 Bienvenue à l'Atelier de l'Oncle Pepito !")
 		affichage.Separator()
 		fmt.Println("Que veux tu frabriquer ?")
 		fmt.Println("1 - 👒 Toq de Chef : + 10 PV Max (1 Coton + 1 Ficelle)")

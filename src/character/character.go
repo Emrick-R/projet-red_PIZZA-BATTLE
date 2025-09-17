@@ -271,28 +271,28 @@ func CharacterCreation(c *structures.Character) {
 	switch class_choice {
 	case 1:
 		// Classe Elfe (80 PV Max, 40 PV Actuels (on commence avec la moitier des PV max), 120 Mana Max)
-		fmt.Println("🌿 Tu as choisi la classe Elfe : agile, précis et en communion avec la nature.")
+		fmt.Println("🧀 Tu as choisi la classe Sculpteur de Mozzarella : souple, raffiné et maître des formes crémeuses.")
 		c.MaxHp = 80
 		c.ActualHp = 40
 		c.MaxMana = 120
 		c.ActualMana = 120
-		c.Class = "Elfe"
+		c.Class = "Sculpteur de mozzarella"
 	case 2:
 		// Classe Nain (120 PV Max, 60 PV Actuels, 80 Mana Max)
-		fmt.Println("🪓 Tu as choisi la classe Nain : robuste, courageux et maître de la forge.")
+		fmt.Println("🔥 Tu as choisi la classe Maître du Four : ardents, créatifs et maîtres des saveurs dorées.")
 		c.MaxHp = 120
 		c.ActualHp = 60
 		c.MaxMana = 80
 		c.ActualMana = 80
-		c.Class = "Nain"
+		c.Class = "Maître du four"
 	case 3:
 		// Classe Humain (100 PV Max, 50 PV Actuels, 80 Mana Max)
-		fmt.Println("⚔️  Tu as choisi la classe Humain : polyvalent, ingénieux et déterminé.")
+		fmt.Println("🍝 Tu as choisi la classe Artiste des Pâtes : inventif, habile et guidé par la passion des saveurs.")
 		c.MaxHp = 100
 		c.ActualHp = 50
 		c.MaxMana = 100
 		c.ActualMana = 100
-		c.Class = "Humain"
+		c.Class = "Artiste des pâtes"
 	}
 }
 
