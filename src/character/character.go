@@ -16,6 +16,7 @@ func DisplayCInfo(c *structures.Character) {
 	fmt.Printf("📛 Nom : %s\n", c.Name)
 	fmt.Printf("🏹 Classe : %s\n", c.Class)
 	fmt.Printf("❤️ PV : %d/%d\n", c.ActualHp, c.MaxHp)
+	fmt.Printf("❤️ PV : %d/%d\n", c.ActualHp, c.MaxHp)
 	fmt.Printf("⭐ Niveau : %d\n", c.Level)
 	fmt.Printf("📚 Expérience : %d/%d\n", c.ActualExp, c.MaxExp)
 	fmt.Printf("💰 Argent : %d\n", c.Money)
