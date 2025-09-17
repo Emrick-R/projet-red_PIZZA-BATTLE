@@ -21,9 +21,9 @@ func Forgeron(c *structures.Character) {
 	// Initialisation des objets nécessaires à la fabrication et des objets fabriqués
 	// Objets nécessaires
 	wolfFur := structures.Object{Name: "Peau de Loup", Quantity: 1}
-	trollSkin := structures.Object{Name: "Peau de Troll", Quantity: 1}
-	boarLeather := structures.Object{Name: "Cuir de Sanglier", Quantity: 1}
-	ravenFeather := structures.Object{Name: "Plume de Corbeau", Quantity: 1}
+	trollSkin := structures.Object{Name: "Cuir", Quantity: 1}
+	boarLeather := structures.Object{Name: "Ficelle", Quantity: 1}
+	ravenFeather := structures.Object{Name: "Coton", Quantity: 1}
 
 	// Objets fabriqués
 	chapeauAventurier := structures.Object{Name: "Chapeau de l'aventurier", Quantity: 1}
@@ -43,9 +43,9 @@ func Forgeron(c *structures.Character) {
 		fmt.Println("⚒️ Bienvenue chez le Forgeron !")
 		affichage.Separator()
 		fmt.Println("Que veux tu frabriquer ?")
-		fmt.Println("1 - 👒 Chapeau de l'aventurier : + 10 PV Max (1 Plume de Corbeau + 1 Cuir de Sanglier)")
-		fmt.Println("2 - 👕 Tunique de l'aventurier : + 25 PV Max (2 Fourrures de Loup + 1 Peau de Troll)")
-		fmt.Println("3 - 👖 Bottes de l'aventurier : + 15 PV Max (1 Fourrure de Loup + 1 Cuir de Sanglier)")
+		fmt.Println("1 - 👒 Chapeau de l'aventurier : + 10 PV Max (1 Coton + 1 Ficelle)")
+		fmt.Println("2 - 👕 Tunique de l'aventurier : + 25 PV Max (2 Laines + 1 Cuir)")
+		fmt.Println("3 - 👖 Bottes de l'aventurier : + 15 PV Max (1 Laine + 1 Ficelle)")
 		fmt.Println("4 - ⬅️  RETOUR")
 		fmt.Print("👉 Ton choix : ")
 		fmt.Scan(&forgeron_choice)
@@ -56,13 +56,13 @@ func Forgeron(c *structures.Character) {
 		// Comptage des matériaux dans l'inventaire du personnage
 		for i := range c.Inventory {
 			switch c.Inventory[i].Name {
-			case "Plume de Corbeau":
+			case "Coton":
 				countRavenFeather = c.Inventory[i].Quantity
-			case "Cuir de Sanglier":
+			case "Ficelle":
 				countBoarLeather = c.Inventory[i].Quantity
 			case "Peau de Loup":
 				countWolfFur = c.Inventory[i].Quantity
-			case "Peau de Troll":
+			case "Cuir":
 				countTrollSkin = c.Inventory[i].Quantity
 			}
 		}
@@ -105,7 +105,7 @@ func Forgeron(c *structures.Character) {
 
 		case 2:
 			// Fabrication de la Tunique de l'aventurier
-			//besoin de 2 fourrures de loup + 1 peau de troll
+			//besoin de 2 Laine + 1 Cuir
 			itemcraftable := min(countWolfFur/2, countTrollSkin)
 			if itemcraftable < 1 {
 				fmt.Printf("\n❌ Tu n'as pas les objets requis pour Tunique de l'aventurier de l'Aventurier\n\n")
@@ -123,7 +123,7 @@ func Forgeron(c *structures.Character) {
 				// Fabrication de la tunique, retrait des matériaux et ajout à l'inventaire
 				fmt.Printf("\n✅ Tu viens de fabriquer %d x Tunique de l'Aventurier\n\n", itemcraftable)
 				inventory.RemoveInventory(c, wolfFur)
-				inventory.RemoveInventory(c, wolfFur) //Retire 2 fourrures de loup
+				inventory.RemoveInventory(c, wolfFur) //Retire 2 Laine
 				inventory.RemoveInventory(c, trollSkin)
 				inventory.AddInventory(c, tuniqueAventurier)
 			case 2:

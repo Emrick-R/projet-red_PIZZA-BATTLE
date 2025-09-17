@@ -68,7 +68,7 @@ func InitCharacter() *Character {
 		Initiative: 0,
 		// Initialisation avec 3 potions
 		Inventory: []Object{
-			{Name: "Potion de Vie", Quantity: 3},
+			{Name: "Tiramisu", Quantity: 3},
 		},
 		ActualHp: 100,
 		MaxInv:   10,

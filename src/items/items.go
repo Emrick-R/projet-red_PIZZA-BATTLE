@@ -5,19 +5,19 @@ import (
 	"projet-red_PIZZA-BATTLE/structures"
 )
 
-// Fonction pour utiliser une potion de vie
+// Fonction pour utiliser une potion de vie /
 func TakePot(c *structures.Character) {
-	// Définir le nom de la potion de vie
-	HpPot := structures.Object{Name: "Potion de Vie"}
+	// Définir le nom de la potion de vie /
+	HpPot := structures.Object{Name: "Tiramisu"}
 	// Vérifier si le personnage a déjà les PV max
 	if c.ActualHp == c.MaxHp {
 		fmt.Printf("\n❌ Les points de vie sont déjà au max\n\n")
 		// Ne rien faire
 		return
 	}
-	// Parcourir l'inventaire du personnage pour trouver la potion de vie
+	// Parcourir l'inventaire du personnage pour trouver la potion de vie/
 	for i := 0; i < len(c.Inventory); i++ {
-		// Si la potion de vie est trouvée
+		// Si la potion de vie/ est trouvée
 		if c.Inventory[i].Name == HpPot.Name {
 			// Augmenter les PV actuels du personnage de 50
 			c.ActualHp += 50
@@ -32,14 +32,14 @@ func TakePot(c *structures.Character) {
 				c.ActualHp = c.MaxHp
 			}
 			// Afficher un message indiquant que la potion a été consommée et les PV actuels
-			fmt.Printf("\n🧪 Potion consommée ! +50 PV\n")
+			fmt.Printf("\n🧪 Tiramisu consommé ! +50 PV\n")
 			fmt.Printf("❤️  %s : %d/%dPV\n\n", c.Name, c.ActualHp, c.MaxHp)
 			// Sortir de la fonction
 			return
 		}
 	}
 	// Si la potion de vie n'est pas trouvée dans l'inventaire, afficher un message d'erreur
-	fmt.Println("❌ Il n'y a pas de potions de Vie dans l'inventaire")
+	fmt.Println("❌ Il n'y a pas de Tiramisu dans l'inventaire")
 }
 
 // Fonction pour utiliser une potion de mana
@@ -71,7 +71,7 @@ func TakeManaPot(c *structures.Character) {
 // A FINIR (effet sur plusieurs tours)
 func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 	// Définir le nom de la potion de poison
-	PoisonPot := structures.Object{Name: "Potion de Poison"}
+	PoisonPot := structures.Object{Name: "Tabasco"}
 	// Parcourir l'inventaire du personnage pour trouver la potion de poison, si trouvée l'utiliser, la retirer
 	// et infliger des dégâts sur plusieurs tours à l'ennemi
 	for i := 0; i < len(c.Inventory); i++ {
@@ -82,7 +82,7 @@ func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 			}
 			// Effet de la potion de poison sur 3 tours (10 dégâts par tour)
 			//A FINIR (ajouter un effet de poison sur plusieurs tours)
-			fmt.Printf("\nPotion envoyée !\n")
+			fmt.Printf("\nTabasco envoyée !\n")
 
 			// Appliquer l’effet poison
 			e.Poisoned = true
@@ -93,7 +93,7 @@ func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 			return
 		}
 	}
-	fmt.Println("❌ Il n'y a pas de potion de poison dans l'inventaire.")
+	fmt.Println("❌ Il n'y a pas de Tabasco dans l'inventaire.")
 }
 
 func CheckPoisonStatus(e *structures.Enemy) {

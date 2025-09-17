@@ -37,7 +37,7 @@ func AffichageMenuInventaire() {
 	Separator()
 	fmt.Println("🎒 Inventaire :")
 	Separator()
-	fmt.Println("1 - 🧪 Utiliser une potion")
+	fmt.Println("1 - 🧪 Utiliser un consommable")
 	fmt.Println("2 - 🛡️  Equiper un équipement")
 	fmt.Println("3 - ⬅️  RETOUR")
 	Separator()
@@ -46,10 +46,10 @@ func AffichageMenuInventaire() {
 //AffichageMenuCombatPotion affiche le menu des potions uniquement lors des combats
 func AffichageMenuCombatPotion() {
 	Separator()
-	fmt.Println("🧪 Utiliser une potion :")
+	fmt.Println("🧪 Utiliser un consommable :")
 	Separator()
-	fmt.Println("1 - ❤️  Potion de soin")
-	fmt.Println("2 - 💀 Potion de poison")
+	fmt.Println("1 - ❤️ Tiramisu")
+	fmt.Println("2 - 💀 Tabasco")
 	fmt.Println("3 - 🔵 Potion de mana")
 	fmt.Println("4 - ⬅️  RETOUR")
 	Separator()

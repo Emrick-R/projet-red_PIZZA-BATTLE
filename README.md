@@ -1,118 +1,95 @@
-🍕 Pizza Quest RPG
-Un jeu de rôle thématique pizza développé en Go
+🍕 RPG – Pizza Battle
+🧪 Potions
 
-📋 Description
-Pizza Quest RPG est un jeu de rôle en ligne de commande où vous incarnez un aventurier culinaire dans un monde peuplé de chefs italiens. Collectez des ingrédients, préparez des potions gourmandes et devenez le maître pizza ultime !
+Potion de Vie = Tiramisu 🍰
 
-🚀 Installation et Lancement
-Cloner le projet :
-git clone https://github.com/Emrick-R/projet-red_PIZZA-BATTLE.git
+Potion de Poison = Tabasco 🌶️
 
-# Lancer le jeu
-go run main.go
-🎮 Fonctionnalités du Jeu
-⚔️ Système de Combat
+Potion de Mana = Bocal de Sauce Tomate 🍅
+Mana = Sauce Tomate 🍅
 
-Ennemis : Chefs italiens de différents niveaux
-Types d'ennemis :
+🎒 Inventaire
 
-🟢 Facile : Petit Giovanni
-🟡 Normal : El Don Pastabox 3000
-🔴 Boss : Ultra Mega Hyper Giovanni EX Turbo GX
+Frigo Portable 🧊
 
+🛒 Marchand – Super Marché
+Objets en vente :
 
+Tiramisu (Potion de Soin) → 3💵
 
-🏃‍♂️ Statistiques du Personnage
+Tabasco (Potion Poison) → 6💵
 
+Sauce Tomate (Potion de Mana) → 4💵
 
+Ressources :
 
-🎒 Système d'Inventaire
+Plume de Corbeau → Coton = 1💵
 
-Frigo portatif : Inventaire limité en taille
-Objets disponibles :
+Cuir de Sanglier → Ficelle = 3💵
 
-🧪 Séance de Sport : Potion de vie
-🧪 Tabasco : Potion de Poison
-📚 Livres de sorts et recettes :
-🍖 Ingrédients (Peau de Loup, Cuir de Sanglier, etc.) :
-👨‍🍳 Équipements de chef :
+Fourrures de Loup → Laine = 4💵
 
+Peau de Troll → Cuir = 7💵
 
+⚒️ Forgeron
 
-🏪 Commerce
+👨‍🏭 Pepito, l’oncle du héros
 
-Marchand : Super Marché : Achat/vente d'objets
-Oncle Pepito : Forgeron Craft d'objets
+Équipements disponibles :
 
-⚡ Compétences
+🎩 Toq de Chef (Chapeau de l’Aventurier) → +10 PV Max
 
-Coup de poing : 10 dégâts - 0 Mana
-Boule de feu : 20 dégâts (sort magique)
-Sort de la Mort Qui Tue : One Shot l'ennemi
+👕 Tablier (Tunique de l’Aventurier) → +25 PV Max
 
-🎯 Équipements
+👢 Bottes de Travail (Bottes de l’Aventurier) → +15 PV Max
 
-👒 Chapeau de l'Aventurier : Toque de Chef
-👔 Tablier
-🥾 Bottes d'Aventurier 
-🔪 Couteaux de cuisine
-🍕 Rouleau à pizza
+🥊 Attaques
 
-🛠️ Structure du Code
-Phase 1 - Fonctionnalités Implémentées ✅
+✊ Coup de Poing = Coup de Rouleau 🥖
 
-Structure Character - Définition du personnage
-initCharacter() - Initialisation dans main()
-displayInfo() - Affichage des informations
-accessInventory() - Accès à l'inventaire
-takePot() - Utilisation des potions
-Menu Principal - Interface switch/case
-Gestion Inventaire :
+🔥 Boule de Feu = Lancer de Piments 🌶️
 
-addInventory() - Ajouter objets
-removeInventory() - Retirer objets
+👾 Ennemis
+
+😈 Facile : Petit Giovanni
+
+🤖🍝 Moyen : El Don Pastabox 3000
+
+⚡ Difficile : Ultra Mega Hyper Giovanni EX Turbo GX
+
+📚 Livre de Sorts
+
+📖 Livre de Recette du Lancer de Piment = débloque le sort Boule de Feu
 
 
-isDead() - Vérification état de vie
-poisonPot() - Système de poison temporel
-Système de Skills :
-
-Skills de base
-Skill books
-spellbook() - Utilisation des sorts
 
 
-characterCreation() - Création personnalisée
-Limite d'inventaire - Gestion du poids
+HpPot
+Potion de vie
+Tiramisu
 
-🎨 Fonctionnalités Spéciales
-🍄 Système de Poison
+PoisonPot
+Potion de Poison
+Tabasco
 
-Tabasco : Potion de poison thématique
-Effet temporel avec bibliothèque time
-Dégâts progressifs 10 dégâts par tour à l'ennemi
 
-🎲 Combat : à modifier
+Potion de Mana
+ManaPot
+TomatoSauce
+Sauce Tomate
 
-Options :
-Easter egg découvert
+Coton
+Plume de Corbeau
+RavenFeather
 
-📊 Système de Progression
+Cuir de Sanglier
+BoarLeather
+Ficelle
 
-Gain d'expérience par combat
-Montée en niveau automatique
-Amélioration des statistiques
+Fourrure de Loup
+WolfFur
+Laine
 
-🔧 Commandes de Développement
-go run main.go
-
-Ne pas atteindre un certain poids kilogramme sinon la mort vous attend
-
-📝 Notes de Développement
-
-Interface utilisateur avec emojis intégrés
-Menus structurés selon le package d'affichage
-Commentaires détaillés dans le code
-Architecture modulaire et extensible
-
-Bon appétit et bonne aventure dans pizza battle ! 🍕⚔️
+Peau de Troll
+TrollSkin
+Cuir

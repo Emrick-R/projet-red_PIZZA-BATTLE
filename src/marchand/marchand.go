@@ -15,13 +15,13 @@ func Marchand(c *structures.Character) {
 	var marchand_choice int
 
 	//Objets
-	HpPot := structures.Object{Name: "Potion de Vie", Quantity: 1}
+	HpPot := structures.Object{Name: "Tiramisu", Quantity: 1}
 	ManaPot := structures.Object{Name: "Potion de Mana", Quantity: 1}
-	PoisonPot := structures.Object{Name: "Potion de Poison", Quantity: 1}
-	WolfFur := structures.Object{Name: "Peau de Loup", Quantity: 1}
-	TrollSkin := structures.Object{Name: "Peau de Troll", Quantity: 1}
-	BoarLeather := structures.Object{Name: "Cuir de Sanglier", Quantity: 1}
-	RavenFeather := structures.Object{Name: "Plume de Corbeau", Quantity: 1}
+	PoisonPot := structures.Object{Name: "Tabasco", Quantity: 1}
+	WolfFur := structures.Object{Name: "Laine", Quantity: 1}
+	TrollSkin := structures.Object{Name: "Cuir", Quantity: 1}
+	BoarLeather := structures.Object{Name: "Ficelle", Quantity: 1}
+	RavenFeather := structures.Object{Name: "Coton", Quantity: 1}
 
 	//Compétences
 	FireBall := structures.Skill{Name: "Boule de feu", Damage: 20, ManaCost: 20}
@@ -58,7 +58,7 @@ func Marchand(c *structures.Character) {
 		fmt.Scan(&marchand_choice)
 		switch marchand_choice {
 		case 1:
-			// Achat d'une potion de vie
+			// Achat d'un Tiramisu (potion de vie)
 			// Vérification de la place dans l'inventaire
 			if inventory.CheckMaxInventory(c) {
 				// Ajout de l'objet dans l'inventaire
@@ -66,7 +66,7 @@ func Marchand(c *structures.Character) {
 				// Déduction de l'argent
 				c.Money -= 3
 				// Message de confirmation
-				fmt.Println("✅ Tu as acheté une Potion de Vie (-3💵)")
+				fmt.Println("✅ Tu as acheté un Tiramisu (-3💵)")
 				// Affichage de l'argent restant
 				fmt.Println("Tu as maintenant", c.Money, "💵")
 				// Retour au menu du marchand
@@ -80,7 +80,7 @@ func Marchand(c *structures.Character) {
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, PoisonPot)
 				c.Money -= 6
-				fmt.Println("✅ Tu as acheté une Potion de Poison (-6💵)")
+				fmt.Println("✅ Tu as acheté un Tabasco (-6💵)")
 				fmt.Println("Tu as maintenant", c.Money, "💵")
 
 			} else {
@@ -112,31 +112,31 @@ func Marchand(c *structures.Character) {
 				fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
 			}
 		case 5:
-			// Achat d'une fourrure de loup
+			// Achat d'une Laine
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, WolfFur)
 				c.Money -= 4
-				fmt.Println("✅ Tu as acheté une Peau de Loup (-4💵)")
+				fmt.Println("✅ Tu as acheté une Laine (-4💵)")
 				fmt.Println("Tu as maintenant", c.Money, "💵")
 			} else {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
 			}
 		case 6:
-			// Achat d'une peau de troll
+			// Achat d'une Cuir
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, TrollSkin)
 				c.Money -= 7
-				fmt.Println("✅ Tu as acheté une Peau de Troll (-7💵)")
+				fmt.Println("✅ Tu as acheté une Cuir (-7💵)")
 				fmt.Println("Tu as maintenant", c.Money, "💵")
 			} else {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
 			}
 		case 7:
-			// Achat d'un cuir de sanglier
+			// Achat d'un Ficelle
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, BoarLeather)
 				c.Money -= 3
-				fmt.Println("✅ Tu as acheté un Cuir de Sanglier (-3💵)")
+				fmt.Println("✅ Tu as acheté un Ficelle (-3💵)")
 				fmt.Println("Tu as maintenant", c.Money, "💵")
 			} else {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
@@ -146,7 +146,7 @@ func Marchand(c *structures.Character) {
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, RavenFeather)
 				c.Money -= 1
-				fmt.Println("✅ Tu as acheté une Plume de Corbeau (-1💵)")
+				fmt.Println("✅ Tu as acheté une Coton (-1💵)")
 				fmt.Println("Tu as maintenant", c.Money, "💵")
 			} else {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
@@ -182,7 +182,7 @@ func Marchand(c *structures.Character) {
 		if marchand_choice == 10 {
 			marchand_choice = 0
 
-			// Effacer l'écran.
+			// Effacer l'écran
 			fmt.Print("\033[H\033[2J")
 
 			break

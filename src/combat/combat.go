@@ -270,7 +270,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 							if c.ActualHp == c.MaxHp {
 								fmt.Printf("\n❌ Les points de vie sont déjà au max\n\n")
 							} else {
-								HpPot := structures.Object{Name: "Potion de Vie"}
+								HpPot := structures.Object{Name: "Tiramisu"}
 								for i := 0; i < len(c.Inventory); i++ {
 									if c.Inventory[i].Name == HpPot.Name {
 										//Utiliser une potion de vie
@@ -279,11 +279,11 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 										return
 									}
 								}
-								fmt.Println("❌ Il n'y a pas de potion de vie dans l'inventaire.")
+								fmt.Println("❌ Il n'y a pas de Tiramisu dans l'inventaire.")
 							}
 						case 2:
 							// Utiliser une potion de poison
-							PoisonPot := structures.Object{Name: "Potion de Poison"}
+							PoisonPot := structures.Object{Name: "Tabasco"}
 							for i := 0; i < len(c.Inventory); i++ {
 								if c.Inventory[i].Name == PoisonPot.Name {
 									//Utiliser une potion de poison
@@ -292,7 +292,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 									return
 								}
 							}
-							fmt.Println("❌ Il n'y a pas de potion de poison dans l'inventaire.")
+							fmt.Println("❌ Il n'y a pas de Tabasco dans l'inventaire.")
 						case 3:
 							// Utiliser une potion de mana.
 							if c.ActualMana == c.MaxMana {
