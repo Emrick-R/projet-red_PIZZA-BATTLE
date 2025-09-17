@@ -85,74 +85,6 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 	}
 }
 
-// Affichage de l'inventaire disponible uniquement en combat
-func DisplayCombatInventory(c *structures.Character, e *structures.Enemy) {
-	// Boucle infinie jusqu'au retour
-	for {
-		// Affichage de l'inventaire via une fonction
-		character.AccessInventory(c)
-
-		// Affichage de l'équipement
-		character.AccessEquipement(c)
-
-		// Affichage des compétences
-		character.AccessSkills(c)
-
-		// Affichage des choix
-		affichage.AffichageMenuInventaire()
-		menuChoice := 0
-		fmt.Print("👉 Ton choix : ")
-		fmt.Scan(&menuChoice)
-		switch menuChoice {
-		case 1:
-			// Choix 1 : Utiliser une potion
-			for {
-				affichage.AffichageMenuCombatPotion()
-				menuChoice := 0
-				fmt.Print("👉 Ton choix : ")
-				fmt.Scan(&menuChoice)
-				switch menuChoice {
-				case 1:
-					// Utiliser une potion de vie
-					items.TakePot(c)
-					return
-				case 2:
-					//Utiliser une potion de poison
-					items.ThrowPoisonPot(c, e)
-					return
-				case 3:
-				//Retour
-				default:
-					// Choix autre que 1, 2 ou 3
-					fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
-				}
-
-				if menuChoice == 3 {
-					//Reset de la variable menuChoice si choix 3
-					menuChoice = 0
-					//on retourne au menu inventaire
-					break
-				}
-			}
-		case 2:
-			// Equiper un équipement
-			character.EquipEquipment(c)
-		case 3:
-			//Retour
-		default:
-			// Choix autre que 1, 2 ou 3
-			fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
-		}
-
-		if menuChoice == 3 {
-			//Reset de la variable menuChoice si choix 3
-			menuChoice = 0
-			//on retourne au menu inventaire
-			break
-		}
-	}
-}
-
 // Vérification de la mort du personnage avec résurrection (MaxHp/2), si mort définitive (MaxHp <= 10) fin de partie
 func CharacterIsDead(c *structures.Character) {
 	//Vérification si impossibilité de renaître (MaxHp <= 10)
@@ -169,12 +101,12 @@ func CharacterIsDead(c *structures.Character) {
 
 	//Vérification de la mort du personnage puis résurrection avec moitié des PV max
 	if c.ActualHp <= 0 {
-		fmt.Println("\n💀 Tu es mort !")
+		fmt.Println("\n💀 Tu es mort !\n")
 		//Résurrection avec moitié des PV max
 		c.MaxHp /= 2
 		c.ActualHp = c.MaxHp
 		fmt.Println("✨ Résurrection avec 50% de HP en moins.")
-		fmt.Printf("❤️ PV actuels: %d/%d\n", c.ActualHp, c.MaxHp)
+		fmt.Printf("❤️ PV actuels: %d/%d\n\n", c.ActualHp, c.MaxHp)
 	}
 }
 
@@ -226,6 +158,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 		affichage.Separator()
 		fmt.Println("1 - 🗡️ Attaquer")
 		fmt.Println("2 - 🎒 Inventaire")
+		fmt.Println("3 - 💀 Suicide")
 
 		fmt.Print("👉 Ton choix : ")
 		fmt.Scan(&combat_choice)
@@ -266,15 +199,30 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 						fmt.Scan(&menuChoice)
 						switch menuChoice {
 						case 1:
-							// Utiliser une potion
-							items.TakePot(c)
-							// Fin du tour du joueur
-							return
+							HpPot := structures.Object{Name: "Potion de Vie", Quantity: 1}
+							for i := 0; i < len(c.Inventory); i++ {
+								if c.Inventory[i].Name == HpPot.Name {
+									//Utiliser une potion de vie
+									items.TakePot(c)
+									// Fin du tour du joueur
+									return
+								} else {
+									fmt.Println("❌ Il n'y a pas de vie de poison dans l'inventaire.")
+								}
+							}
 						case 2:
-							//Utiliser une potion de poison
-							items.ThrowPoisonPot(c, e)
-							// Fin du tour du joueur
-							return
+							PoisonPot := structures.Object{Name: "Potion de Poison"}
+							for i := 0; i < len(c.Inventory); i++ {
+								if c.Inventory[i].Name == PoisonPot.Name {
+									//Utiliser une potion de poison
+									items.ThrowPoisonPot(c, e)
+									// Fin du tour du joueur
+									return
+								} else {
+									fmt.Println("❌ Il n'y a pas de potion de poison dans l'inventaire.")
+								}
+							}
+
 						case 3:
 						//Retour
 						default:
@@ -302,6 +250,9 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 					return
 				}
 			}
+		case 3:
+			c.ActualHp = 0
+			return
 		default:
 			// Choix autre que 1 ou 2
 			fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
@@ -325,7 +276,9 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 	for {
 		//Le tour du joueur (Turn == pair)
 		if Turn%2 == 0 {
+			affichage.Separator()
 			fmt.Printf("🎯 Tour %d — À ton tour %s !\n", TrueTurn, c.Name)
+			affichage.Separator()
 			//Déroulement du tour du joueur
 			CharacterTurn(c, e)
 			//Vérification de la mort
@@ -333,12 +286,15 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 				//L'ennemi est mort
 				break
 			}
+			CharacterIsDead(c)
 			Turn++
 			TrueTurn++
 
 		} else {
 			//Le tour de l'IA (Turn == impair)
+			affichage.Separator()
 			fmt.Printf("🎯 Tour %d — C'est au tour de %s !\n", TrueTurn, e.Name)
+			affichage.Separator()
 			//Verification de l'effet de poison
 			items.CheckPoisonStatus(e)
 			if EnemyIsDead(e) {

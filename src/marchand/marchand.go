@@ -45,7 +45,7 @@ func Marchand(c *structures.Character) {
 		fmt.Printf("9 - 📦 Agrandir inventaire (+10 emplacements) - 30💰\n")
 		fmt.Println("10 - ⬅️ Retour")
 		// Test
-		fmt.Printf("11 - 📖 Livre de Sort : %s - 50💰 (test)\n", DeathSpell.Name)
+		fmt.Printf("11 - 📖 Livre de Sort : %s - 0💰 (test)\n", DeathSpell.Name)
 		// Fin test
 
 		affichage.Separator()
@@ -177,7 +177,7 @@ func Marchand(c *structures.Character) {
 			// Test achat d'un livre de sort (compétence)
 			if !skills.CheckSkills(c, DeathSpell) {
 				skills.AddSkills(c, DeathSpell)
-				fmt.Printf("✅ Tu as acheté un Livre de Sort : %s (-50💰)\n", DeathSpell.Name)
+				fmt.Printf("✅ Tu as acheté un Livre de Sort : %s\n", DeathSpell.Name)
 				fmt.Printf("💀 Nouvelle compétence : %s (%d dégâts)\n", DeathSpell.Name, DeathSpell.Damage)
 				fmt.Println("Tu as maintenant", c.Money, "💰")
 				character.AccessInventory(c)

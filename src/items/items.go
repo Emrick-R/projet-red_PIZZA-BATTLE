@@ -33,27 +33,13 @@ func TakePot(c *structures.Character) {
 			}
 			// Afficher un message indiquant que la potion a été consommée et les PV actuels
 			fmt.Printf("\nPotion consommée ! +50 PV\n")
-			fmt.Printf("PV actuels: %d\n", c.ActualHp)
+			fmt.Printf("❤️ %s : %d/%d\n", c.Name, c.ActualHp, c.MaxHp)
 			// Sortir de la fonction
 			return
 		}
 	}
 	// Si la potion de vie n'est pas trouvée dans l'inventaire, afficher un message d'erreur
 	fmt.Println("❌ Il n'y a pas de potions de Vie dans l'inventaire")
-}
-
-func CheckPoisonStatus(e *structures.Enemy) {
-	if e.Poisoned && e.PoisonTurns > 0 {
-		e.ActualHp -= e.PoisonDamage
-		fmt.Printf("☠️ %s subit %d dégâts de poison (%d tours restants)\n", e.Name, e.PoisonDamage, e.PoisonTurns)
-		e.PoisonTurns--
-
-		if e.PoisonTurns == 0 {
-			e.Poisoned = false
-			fmt.Println("✅ Le poison s’est dissipé.")
-		}
-	}
-
 }
 
 // Fonction pour utiliser une potion de mana
@@ -92,10 +78,9 @@ func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 	// et infliger des dégâts sur plusieurs tours à l'ennemi
 	for i := 0; i < len(c.Inventory); i++ {
 		if c.Inventory[i].Name == PoisonPot.Name {
+			c.Inventory[i].Quantity--
 			if c.Inventory[i].Quantity == 0 {
 				c.Inventory = append(c.Inventory[:i], c.Inventory[i+1:]...)
-				e.ActualHp -= 10
-				c.Inventory[i].Quantity--
 			}
 			// Effet de la potion de poison sur 3 tours (10 dégâts par tour)
 			//A FINIR (ajouter un effet de poison sur plusieurs tours)
@@ -111,4 +96,19 @@ func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 		}
 	}
 	fmt.Println("❌ Il n'y a pas de potion de poison dans l'inventaire.")
+}
+
+func CheckPoisonStatus(e *structures.Enemy) {
+	if e.Poisoned && e.PoisonTurns > 0 {
+		e.ActualHp -= e.PoisonDamage
+		e.PoisonTurns--
+		fmt.Printf("☠️ %s subit %d dégâts de poison (%d tours restants)\n\n", e.Name, e.PoisonDamage, e.PoisonTurns)
+		fmt.Printf("❤️ %s : %d/%d PV\n\n", e.Name, e.ActualHp, e.MaxHp)
+
+		if e.PoisonTurns == 0 {
+			e.Poisoned = false
+			fmt.Printf("✅ Le poison s'est dissipé.\n\n")
+		}
+	}
+
 }
