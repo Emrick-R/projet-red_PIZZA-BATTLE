@@ -32,7 +32,7 @@ func main() {
 			character.CharacterCreation(c1)
 
 			// Initialisation de l'ennemi
-			e1 := structures.InitEnemy("Petit Giovanni", "Facile")
+			e1 := structures.InitEnemy("Petit Giovanni", "Boss")
 
 			// Boucle du menu principal
 			for {
