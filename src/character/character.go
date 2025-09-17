@@ -299,3 +299,19 @@ func CharacterCreation(c *structures.Character) {
 func AddExp(c *structures.Character, e *structures.Enemy) {
 	c.ActualExp += e.GiveExp
 }
+
+func NextLevel(c *structures.Character) {
+	for c.ActualExp >= c.MaxExp {
+		// Déduction de l'XP du niveau en cours
+		c.ActualExp -= c.MaxExp
+
+		// Augmenter les stats
+		c.MaxExp = int(float64(c.MaxExp) * 1.25)
+		c.ManaMax = c.ManaMax + 20
+		c.MaxHp = c.MaxHp + 20
+		c.Initiative = int(float64(c.MaxHp) * 1.1)
+
+		// Monter de niveau
+		c.Level++
+	}
+}
