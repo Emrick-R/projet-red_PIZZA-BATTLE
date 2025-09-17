@@ -52,7 +52,7 @@ func AccessSkills(c *structures.Character) {
 	fmt.Println("📜 Compétences :")
 	affichage.Separator()
 	for s := range c.SkillList {
-		fmt.Printf("- %s : %d points de dégâts\n", c.SkillList[s].Name, c.SkillList[s].Damage)
+		fmt.Printf("- %s : %d points de dégâts, -%d Sauce Tomate\n", c.SkillList[s].Name, c.SkillList[s].Damage, c.SkillList[s].ManaCost)
 	}
 	fmt.Println()
 }
@@ -97,14 +97,17 @@ func InventoryChoice(c *structures.Character) {
 			// Utiliser une potion
 			items.TakePot(c)
 		case 2:
+			// Utiliser une potion de mana
+			items.TakeManaPot(c)
+		case 3:
 			// Equiper un équipement
 			EquipEquipment(c)
-		case 3:
+		case 4:
 		// Retour
 		default:
 			fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 		}
-		if menuChoice == 3 {
+		if menuChoice == 4 {
 			menuChoice = 0
 			return
 		}

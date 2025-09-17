@@ -35,7 +35,7 @@ func rollDice() int {
 // Si le joueur gagne, il commence, sinon l'ennemi commence
 func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 	// Variables locales
-	var choix, distJoueur, distEnnemi, mamma, ennemi int
+	var choix, distJoueur, distEnnemi, mamma, ennemi, counter int
 
 	// Affichage du mini-jeu
 	affichage.Separator()
@@ -80,6 +80,13 @@ func InitiativeMamma(c *structures.Character, e *structures.Enemy) bool {
 
 	// Gestion des égalités après initiative
 	for distJoueur == distEnnemi {
+		counter++
+		if counter == 3 {
+			// Après 3 égalités, le joueur gagne par défaut
+			fmt.Println("⚠️  Trop d'égalités, tu gagnes par défaut !")
+			return true
+		}
+
 		fmt.Println("Égalité avec initiative — relance du nombre !")
 		mamma = rollDice()
 		ennemi = rollDice()
@@ -183,7 +190,9 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 		affichage.Separator()
 		fmt.Println("1 - 🗡️  Attaquer")
 		fmt.Println("2 - 🎒 Inventaire")
-		fmt.Println("3 - 💀 Suicide")
+		fmt.Println("3 - 👹 Information ennemi")
+		fmt.Println("4 - 💀 Suicide")
+		affichage.Separator()
 
 		fmt.Print("👉 Ton choix : ")
 		fmt.Scan(&combat_choice)
@@ -201,7 +210,7 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 				fmt.Printf("🍅 %s : %d/%d Sauce Tomate\n\n", c.Name, c.ActualMana, c.MaxMana)
 				// Affiche la liste des compétences disponibles
 				for i := range c.SkillList {
-					fmt.Printf("%d - %s: %d Dégats %d Sauce Tomate\n", i+1, c.SkillList[i].Name, c.SkillList[i].Damage, c.SkillList[i].ManaCost)
+					fmt.Printf("%d - %s: %d Dégats, -%d Sauce Tomate\n", i+1, c.SkillList[i].Name, c.SkillList[i].Damage, c.SkillList[i].ManaCost)
 					index = len(c.SkillList) + 1
 				}
 				fmt.Printf("%d - ⬅️  RETOUR\n", index)
@@ -273,10 +282,16 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 								HpPot := structures.Object{Name: "Tiramisu"}
 								for i := 0; i < len(c.Inventory); i++ {
 									if c.Inventory[i].Name == HpPot.Name {
-										//Utiliser une potion de vie
-										items.TakePot(c)
-										// Fin du tour du joueur
-										return
+										//Vérification si le personnage a déjà les PV max
+										if c.ActualHp == c.MaxHp {
+											//Message d'erreur si les PV sont déjà au max
+											fmt.Printf("\n❌ Les points de vie sont déjà au max\n\n")
+										} else {
+											//Utiliser une potion de vie
+											items.TakePot(c)
+											// Fin du tour du joueur
+											return
+										}
 									}
 								}
 								fmt.Println("❌ Il n'y a pas de Tiramisu dans l'inventaire.")
@@ -298,16 +313,20 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 							if c.ActualMana == c.MaxMana {
 								fmt.Printf("\n❌ La Sauce Tomate est déjà pleine\n\n")
 							} else {
-								if c.ActualMana == c.MaxMana {
-									ManaPot := structures.Object{Name: "Bocal de Sauce Tomate"}
-									for i := 0; i < len(c.Inventory); i++ {
-										if c.Inventory[i].Name == ManaPot.Name {
+
+								ManaPot := structures.Object{Name: "Bocal de Sauce Tomate"}
+								for i := 0; i < len(c.Inventory); i++ {
+									if c.Inventory[i].Name == ManaPot.Name {
+										if c.ActualMana == c.MaxMana {
+											fmt.Printf("\n❌ La Sauce Tomate est déjà pleine\n\n")
+										} else {
 											items.TakeManaPot(c)
 											return
 										}
 									}
-									fmt.Println("❌ Il n'y a pas de Bocal de Sauce Tomate dans l'inventaire.")
 								}
+								fmt.Println("❌ Il n'y a pas de Bocal de Sauce Tomate dans l'inventaire.")
+
 							}
 						case 4:
 						//Retour
@@ -337,6 +356,9 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 				}
 			}
 		case 3:
+			// Afficher les informations de l'ennemi
+			character.DisplayEInfo(e)
+		case 4:
 			c.ActualHp = 0
 			return
 		default:
@@ -347,15 +369,45 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 	}
 }
 
+// SetDifficulty ajuste les statistiques de l'ennemi en fonction de la difficulté choisie par le joueur
+func SetDifficulty(c *structures.Character, e *structures.Enemy) {
+	e.MaxHp = c.Difficulty * e.MaxHp
+	e.Damage = c.Difficulty * e.Damage
+	e.ActualHp = e.MaxHp
+}
+
 // Fonction principale du combat 1v1 entre le personnage et l'ennemi
-func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
+func TurnCombat1v1(c *structures.Character) {
+
+	// Effacer l'écran
+	fmt.Print("\033[H\033[2J")
+
+	e := &structures.Enemy{}
+	// Initialisation de l'ennemi en fonction de la progression du joueur
+	if c.Progress == 1 {
+		fmt.Println("Tu affronte le Petit Giovanni !, Prudence...")
+		e = structures.InitEnemy("Petit Giovanni", "Facile")
+	} else if c.Progress > 1 && c.Progress < 5 {
+		r := rand.Intn(2)
+		if r == 0 {
+			fmt.Println("Tu affronte El Don Pastabox 3000 !, Attention !")
+			e = structures.InitEnemy("El Don Pastabox 3000", "Normale")
+		} else {
+			fmt.Println("Tu affronte le Petit Giovanni !, Prudence...")
+			e = structures.InitEnemy("Petit Giovanni", "Facile")
+		}
+	} else if c.Progress == 6 {
+		fmt.Println("Tu affronte le Ultra Mega Hyper Giovanni EX Turbo GX !, les enjeux sont à leur comble !")
+		e = structures.InitEnemy("Ultra Mega Hyper Giovanni EX Turbo GX", "Boss")
+	}
+
+	// Initialisation de la difficulté de l'ennemi en fonction de la progression du joueur
+	SetDifficulty(c, e)
+
 	// Initialisation du tour
 	Turn := 1
 	TrueTurn := 1
 	//Initialisation de l'initiative
-
-	// Effacer l'écran
-	fmt.Print("\033[H\033[2J")
 
 	if InitiativeMamma(c, e) {
 		Turn = 2
@@ -399,7 +451,41 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 			TrueTurn++
 		}
 	}
+	//Le combat est terminé
 
+	//Le joueur a gagné
+	// Fin de partie si le boss final est vaincu
+	//
+	if c.Progress == 6 {
+
+		// Effacer l'écran
+		fmt.Print("\033[H\033[2J")
+		//Reset de la progression
+		c.Progress = 1
+		endChoice := 0
+		score.ShowScore(c)
+		affichage.GameEnd()
+		for {
+			fmt.Print("👉 Ton choix : ")
+			fmt.Scan(&endChoice)
+			switch endChoice {
+			case 1:
+				c.Difficulty++
+				c.VictoryLap++
+
+			case 2:
+				// Quitter le jeu
+				os.Exit(0)
+			default:
+				// Choix autre que 1 ou 2
+				fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
+			}
+			if endChoice == 1 {
+				endChoice = 0
+				break
+			}
+		}
+	}
 	// Effacer l'écran
 	fmt.Print("\033[H\033[2J")
 
@@ -407,7 +493,7 @@ func TurnCombat1v1(c *structures.Character, e *structures.Enemy) {
 	affichage.Separator()
 	fmt.Printf("🏆 Bravo ! Tu as terrassé %s !\n", e.Name)
 	affichage.Separator()
-	e.ActualHp = e.MaxHp
+
 	//Récompenses du combat (Argent + Score)
 	score.AddScore(c, e)
 	inventory.AddMoney(c, e)

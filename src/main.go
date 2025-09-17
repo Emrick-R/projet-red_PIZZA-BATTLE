@@ -37,9 +37,6 @@ func main() {
 			// Création du personnage par l'utilisateur
 			character.CharacterCreation(c1)
 
-			// Initialisation de l'ennemi
-			e1 := structures.InitEnemy("Petit Giovanni", "Boss")
-
 			// Boucle du menu principal
 			for {
 				affichage.AffichageMenuPrincipal()
@@ -54,7 +51,7 @@ func main() {
 					character.InventoryChoice(c1)
 				case 3:
 					// Combat en 1 contre 1
-					combat.TurnCombat1v1(c1, e1)
+					combat.TurnCombat1v1(c1)
 				case 4:
 					// Marchand
 					marchand.Marchand(c1)

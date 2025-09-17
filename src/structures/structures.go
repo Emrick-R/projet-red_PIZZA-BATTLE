@@ -18,13 +18,18 @@ type Character struct {
 	Money      int
 	SkillList  []Skill
 	Armor      Equipment
-	Score      int
 	Initiative int
 	ActualExp  int
 	MaxExp     int
 	ActualMana int
 	MaxMana    int
 	Progress   int
+	Difficulty int
+	Score      int
+	VictoryLap int
+	EasyKill   int
+	NormalKill int
+	BossKill   int
 }
 
 // Enemy représente un ennemi avec ses attributs.
@@ -84,7 +89,13 @@ func InitCharacter() *Character {
 			Legs:  &Object{Name: ""},
 		},
 		//Score de fin de partie
-		Score: 0,
+		Score:      0,
+		VictoryLap: 0,
+		EasyKill:   0,
+		NormalKill: 0,
+		BossKill:   0,
+		Progress:   1,
+		Difficulty: 1,
 	}
 }
 
@@ -118,7 +129,7 @@ func InitEnemy(name string, grade string) *Enemy {
 			Initiative: 20,
 			PowerCount: 0,
 			GiveScore:  10,
-			GiveMoney:  10,
+			GiveMoney:  15,
 			GiveExp:    150,
 		}
 		// si La difficulté donnée est "Boss"
@@ -128,12 +139,12 @@ func InitEnemy(name string, grade string) *Enemy {
 			Name:       name,
 			MaxHp:      200,
 			ActualHp:   200,
-			Damage:     25,
+			Damage:     35,
 			Difficulty: "Boss",
 			Initiative: 50,
 			PowerCount: 0,
 			GiveScore:  20,
-			GiveMoney:  50,
+			GiveMoney:  100,
 			GiveExp:    300,
 		}
 	}

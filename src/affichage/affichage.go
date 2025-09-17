@@ -38,8 +38,9 @@ func AffichageMenuInventaire() {
 	fmt.Println("🎒 Inventaire :")
 	Separator()
 	fmt.Println("1 - 🍰 Utiliser un Tiramisu")
-	fmt.Println("2 - 🛡️  Equiper un équipement")
-	fmt.Println("3 - ⬅️  RETOUR")
+	fmt.Println("2 - 🍅 Utiliser un Bocal de Sauce Tomate")
+	fmt.Println("3 - 🛡️  Equiper un équipement")
+	fmt.Println("4 - ⬅️  RETOUR")
 	Separator()
 }
 
@@ -91,4 +92,16 @@ func EasterEgg() {
 	fmt.Println("\n===============================================")
 	fmt.Println("Appuyez sur 0 pour revenir au menu principal")
 	fmt.Println("===============================================")
+}
+
+func GameEnd() {
+	Separator()
+	fmt.Println("🎮 FIN DE PARTIE 🎮")
+	Separator()
+	fmt.Println("Bravo tu as terminé Pizza Battle ! 🎉")
+	fmt.Println("Merci d'avoir joué à Pizza Battle !")
+	fmt.Println("Tu as maintenant 2 choix :")
+	fmt.Println("1 - Continuer avec une difficulté plus élevée")
+	fmt.Println("2 - Dire adieu à l'Oncle Pepito et quitter le jeu")
+	Separator()
 }

@@ -46,7 +46,7 @@ func TakePot(c *structures.Character) {
 func TakeManaPot(c *structures.Character) {
 	ManaPot := structures.Object{Name: "Bocal de Sauce Tomate"}
 	if c.ActualMana == c.MaxMana {
-		fmt.Println("❌ Il n'y a pas de Bocal de Sauce Tomate dans l'inventaire.")
+		fmt.Println("❌ La Sauce Tomate est déjà pleine")
 		return
 	}
 	for i := 0; i < len(c.Inventory); i++ {

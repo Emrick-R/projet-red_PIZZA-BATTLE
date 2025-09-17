@@ -7,6 +7,7 @@ Nain = Maître du four
 Humain = Artiste des pâtes
 
 
+
 🧪 Potions
 
 Potion de Vie = Tiramisu 🍰
@@ -14,11 +15,19 @@ Potion de Vie = Tiramisu 🍰
 Potion de Poison = Tabasco 🌶️
 
 Potion de Mana = Bocal de Sauce Tomate 🫙
+
+
 Mana = Sauce Tomate 🍅
+
+
 
 🎒 Inventaire
 
+
+
 🛒 Marchand – Super Marché
+
+
 
 Objets en vente :
 
@@ -27,6 +36,8 @@ Tiramisu (Potion de Soin) 🍰 → 3💵
 Tabasco (Potion Poison) → 6💵
 
 Sauce Tomate (Potion de Mana) → 4💵
+
+
 
 Ressources :
 
@@ -38,9 +49,19 @@ Fourrures de Loup → Laine 🧶 = 4💵
 
 Peau de Troll → Cuir 🟫 = 7💵
 
+
+
+ Livre de Sorts 
+
+📖 Livre de Sorts Boule de Feu = Livre de Recette du Lancer de Pimentsort Boule de Feu
+
+
+
 ⚒️ Forgeron
 
-👨‍🏭 Pepito, l’oncle du héros
+👨‍🏭 Pepito le couturier, l’oncle du héros
+
+
 
 Équipements disponibles :
 
@@ -50,11 +71,15 @@ Peau de Troll → Cuir 🟫 = 7💵
 
 👢 Bottes de Travail (Bottes de l’Aventurier) → +15 PV Max
 
+
+
 🥊 Attaques
 
 ✊ Coup de Poing = Coup de Rouleau 🥖
 
 🔥 Boule de Feu = Lancer de Piments 🌶️
+
+
 
 👾 Ennemis
 
@@ -64,39 +89,9 @@ Peau de Troll → Cuir 🟫 = 7💵
 
 ⚡ Difficile : Ultra Mega Hyper Giovanni EX Turbo GX
 
-📚 Livre de Sorts
-
-📖 Livre de Recette du Lancer de Piment = débloque le sort Boule de Feu
 
 
 
 
-HpPot
-Potion de vie
-Tiramisu
-
-PoisonPot
-Potion de Poison
-Tabasco
 
 
-Potion de Mana
-ManaPot
-TomatoSauce
-Sauce Tomate
-
-Coton
-Plume de Corbeau
-RavenFeather
-
-Cuir de Sanglier
-BoarLeather
-Ficelle
-
-Fourrure de Loup
-WolfFur
-Laine
-
-Peau de Troll
-TrollSkin
-Cuir

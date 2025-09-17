@@ -25,6 +25,8 @@ func Marchand(c *structures.Character) {
 
 	//Compétences
 	FireBall := structures.Skill{Name: "Lancer de Piments", Damage: 20, ManaCost: 20}
+	CurryExplosion := structures.Skill{Name: "Explosion de Curry", Damage: 60, ManaCost: 60}
+	Ultimate := structures.Skill{Name: "Ma che vuoi ? 🤌", Damage: 500, ManaCost: 500}
 	DeathSpell := structures.Skill{Name: "Covid-19", Damage: 500}
 
 	// Effacer l'écran
@@ -42,15 +44,17 @@ func Marchand(c *structures.Character) {
 		fmt.Printf("1 - 🍰 %s (+50PV) - 3💵\n", HpPot.Name)
 		fmt.Printf("2 - 🌶️  %s (10 dégâts sur 3 Tours) - 6💵\n", PoisonPot.Name)
 		fmt.Printf("3 - 🫙  %s (+25 Sauces Tomate) - 4💵\n", ManaPot.Name)
-		fmt.Printf("4 - 📖 Livre de Cuisine : %s - 25💵\n", FireBall.Name)
-		fmt.Printf("5 - 🧶 %s - 4💵\n", WolfFur.Name)
-		fmt.Printf("6 - 🟫 %s - 7💵\n", TrollSkin.Name)
-		fmt.Printf("7 - 🪢  %s - 3💵\n", BoarLeather.Name)
-		fmt.Printf("8 - ☁️  %s - 1💵\n", RavenFeather.Name)
-		fmt.Printf("9 - 📦 Agrandir inventaire (+10 emplacements) - 30💵\n")
-		fmt.Println("10 - ⬅️  RETOUR")
+		fmt.Printf("4 - 📖 Livre de Cuisine : %s - 20💵\n", FireBall.Name)
+		fmt.Printf("5 - 📖 Livre de Cuisine : %s - 60💵\n", CurryExplosion.Name)
+		fmt.Printf("6 - 📖 Livre de Cuisine : %s - 250💵\n", Ultimate.Name)
+		fmt.Printf("7 - 🧶 %s - 4💵\n", WolfFur.Name)
+		fmt.Printf("8 - 🟫 %s - 7💵\n", TrollSkin.Name)
+		fmt.Printf("9 - 🪢  %s - 3💵\n", BoarLeather.Name)
+		fmt.Printf("10 - ☁️  %s - 1💵\n", RavenFeather.Name)
+		fmt.Printf("11 - 📦 Agrandir inventaire (+10 emplacements) - 30💵\n")
+		fmt.Println("12 - ⬅️  RETOUR")
 		// Test
-		fmt.Printf("11 - 📖 Livre de Cuisine : %s - 0💵 (test)\n", DeathSpell.Name)
+		fmt.Printf("\n13 - 📖 Livre de Cuisine : %s - 0💵 (test)\n", DeathSpell.Name)
 		// Fin test
 
 		affichage.Separator()
@@ -112,6 +116,26 @@ func Marchand(c *structures.Character) {
 				fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
 			}
 		case 5:
+			if !skills.CheckSkills(c, CurryExplosion) {
+				skills.AddSkills(c, CurryExplosion)
+				c.Money -= 60
+				fmt.Printf("✅ Tu as acheté un Livre de Cuisine : %s (-60💵)\n", CurryExplosion.Name)
+				fmt.Printf("💥 Nouvelle compétence : %s (%d dégâts)\n", CurryExplosion.Name, CurryExplosion.Damage)
+				fmt.Println("Tu as maintenant", c.Money, "💵")
+			} else {
+				fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
+			}
+		case 6:
+			if !skills.CheckSkills(c, Ultimate) {
+				skills.AddSkills(c, Ultimate)
+				c.Money -= 250
+				fmt.Printf("✅ Tu as acheté un Livre de Cuisine : %s (-250💵)\n", Ultimate.Name)
+				fmt.Printf("🤌 Nouvelle compétence : %s (%d dégâts)\n", Ultimate.Name, Ultimate.Damage)
+				fmt.Println("Tu as maintenant", c.Money, "💵")
+			} else {
+				fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
+			}
+		case 7:
 			// Achat d'une Laine
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, WolfFur)
@@ -121,7 +145,7 @@ func Marchand(c *structures.Character) {
 			} else {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
 			}
-		case 6:
+		case 8:
 			// Achat d'une Cuir
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, TrollSkin)
@@ -131,7 +155,7 @@ func Marchand(c *structures.Character) {
 			} else {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
 			}
-		case 7:
+		case 9:
 			// Achat d'un Ficelle
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, BoarLeather)
@@ -141,7 +165,7 @@ func Marchand(c *structures.Character) {
 			} else {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
 			}
-		case 8:
+		case 10:
 			// Achat d'une plume de corbeau
 			if inventory.CheckMaxInventory(c) {
 				inventory.AddInventory(c, RavenFeather)
@@ -152,7 +176,7 @@ func Marchand(c *structures.Character) {
 				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
 			}
 
-		case 9:
+		case 11:
 			// Achat d'une augmentation de l'inventaire
 			c.Money -= 30
 			fmt.Println("✅ Ton inventaire s'est agrandi de 10 places (-30💵)")
@@ -160,9 +184,9 @@ func Marchand(c *structures.Character) {
 			// Augmentation de la taille de l'inventaire de 10 slots
 			inventory.UpgradeInventorySlot(c)
 
-		case 10:
+		case 12:
 			// Retour au menu précédent
-		case 11:
+		case 13:
 			// Test achat d'un livre de sort (compétence)
 			if !skills.CheckSkills(c, DeathSpell) {
 				skills.AddSkills(c, DeathSpell)
@@ -173,13 +197,13 @@ func Marchand(c *structures.Character) {
 				fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
 			}
 		default:
-			// Choix autre que 1 à 10
+			// Choix autre que 1 à 13
 			fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 		}
 		// Retour au menu précédent si le choix est 10
 		// Reset de la variable marchand_choice si le choix est 10
 		// Permet de ne pas rester bloqué dans la boucle du marchand
-		if marchand_choice == 10 {
+		if marchand_choice == 12 {
 			marchand_choice = 0
 
 			// Effacer l'écran
