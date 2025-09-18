@@ -45,27 +45,33 @@ func main() {
 
 				switch menuChoice {
 				case 1:
+
 					// Afficher les infos du personnage.
 					character.DisplayCInfo(c1)
 				case 2:
+
 					// Menu Inventaire
 					character.InventoryChoice(c1)
 				case 3:
+
 					// Combat en 1 contre 1
 					combat.TurnCombat1v1(c1)
 				case 4:
+
 					// Marchand
 					marchand.Marchand(c1)
 				case 5:
+
 					// Forgeron
 					forgeron.Forgeron(c1)
 				case 6:
+
 				default:
 					fmt.Print("\033[H\033[2J")
 					// Choix invalide
 					fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 
-					time.Sleep(2 * time.Second)
+					time.Sleep(1 * time.Second)
 
 				}
 				// Reset de la variable menuChoice pour éviter les boucles infinies
@@ -98,7 +104,7 @@ func main() {
 
 			fmt.Print("\033[H\033[2J")
 
-			time.Sleep(2 * time.Second)
+			time.Sleep(1 * time.Second)
 
 			// Choix invalide
 			fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")

@@ -14,7 +14,7 @@ func TakePot(c *structures.Character) {
 	if c.ActualHp == c.MaxHp {
 		fmt.Printf("\n❌ Les points de vie sont déjà au max\n\n")
 
-		time.Sleep(2 * time.Second)
+		time.Sleep(1 * time.Second)
 
 		// Ne rien faire
 		return
@@ -39,7 +39,7 @@ func TakePot(c *structures.Character) {
 			fmt.Printf("\n🍰 Tiramisu consommé ! +50 PV\n")
 			fmt.Printf("❤️  %s : %d/%dPV\n\n", c.Name, c.ActualHp, c.MaxHp)
 
-			time.Sleep(2 * time.Second)
+			time.Sleep(1 * time.Second)
 
 			// Sortir de la fonction
 			return
@@ -48,7 +48,7 @@ func TakePot(c *structures.Character) {
 	// Si la potion de vie n'est pas trouvée dans l'inventaire, afficher un message d'erreur
 	fmt.Println("❌ Il n'y a pas de Tiramisu dans l'inventaire")
 
-	time.Sleep(2 * time.Second)
+	time.Sleep(1 * time.Second)
 
 }
 
@@ -58,7 +58,7 @@ func TakeManaPot(c *structures.Character) {
 	if c.ActualMana == c.MaxMana {
 		fmt.Println("❌ La Sauce Tomate est déjà pleine")
 
-		time.Sleep(2 * time.Second)
+		time.Sleep(1 * time.Second)
 
 		return
 	}
@@ -75,14 +75,14 @@ func TakeManaPot(c *structures.Character) {
 			fmt.Printf("\n🫙 Bocal consommée !\n")
 			fmt.Printf("🍅 %s : %d/%d Sauce Tomate\n", c.Name, c.ActualMana, c.MaxMana)
 
-			time.Sleep(2 * time.Second)
+			time.Sleep(1 * time.Second)
 
 			return
 		}
 	}
 	fmt.Println("❌Il n'y a pas de Bocal de Sauce Tomate dans l'inventaire")
 
-	time.Sleep(2 * time.Second)
+	time.Sleep(1 * time.Second)
 
 }
 
@@ -103,7 +103,7 @@ func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 			//A FINIR (ajouter un effet de poison sur plusieurs tours)
 			fmt.Printf("\nTabasco envoyée !\n")
 
-			time.Sleep(2 * time.Second)
+			time.Sleep(1 * time.Second)
 
 			// Appliquer l’effet poison
 			e.Poisoned = true
@@ -112,14 +112,14 @@ func ThrowPoisonPot(c *structures.Character, e *structures.Enemy) {
 
 			fmt.Println("\n💀 L'ennemi est empoisonné pour 3 tours !")
 
-			time.Sleep(2 * time.Second)
+			time.Sleep(1 * time.Second)
 
 			return
 		}
 	}
 	fmt.Println("❌ Il n'y a pas de Tabasco dans l'inventaire.")
 
-	time.Sleep(2 * time.Second)
+	time.Sleep(1 * time.Second)
 
 }
 
@@ -130,13 +130,13 @@ func CheckPoisonStatus(e *structures.Enemy) {
 		fmt.Printf("☠️  %s subit %d dégâts de poison (%d tours restants)\n\n", e.Name, e.PoisonDamage, e.PoisonTurns)
 		fmt.Printf("❤️  %s : %d/%d PV\n\n", e.Name, e.ActualHp, e.MaxHp)
 
-		time.Sleep(2 * time.Second)
+		time.Sleep(1 * time.Second)
 
 		if e.PoisonTurns == 0 {
 			e.Poisoned = false
 			fmt.Printf("✅ Le poison s'est dissipé.\n\n")
 
-			time.Sleep(2 * time.Second)
+			time.Sleep(1 * time.Second)
 
 		}
 	}

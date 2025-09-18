@@ -26,13 +26,13 @@ func AffichageMenuPrincipal() {
 	fmt.Println("1 - 👤 Afficher le personnage")
 	fmt.Println("2 - 🎒 Inventaire")
 	fmt.Println("3 - 🥊  Combat en 1 contre 1")
-	fmt.Println("4 - 🛒 Supermarché")
+	fmt.Println("4 - 🛒 SuperMarché")
 	fmt.Println("5 - 🪡  Atelier de l'Oncle Pepito")
 	fmt.Println("6 - ⬅️  RETOUR")
 	Separator()
 }
 
-//AffichageMenuInventaire affiche le menu de l'inventaire
+//AffichageMenuInventaire affiche le menu de l'inventaire dans le menu principal
 func AffichageMenuInventaire() {
 	Separator()
 	fmt.Println("🎒 Inventaire :")
@@ -44,12 +44,23 @@ func AffichageMenuInventaire() {
 	Separator()
 }
 
+//AffichageMenuCombatInventaire affiche le menu de l'inventaire
+func AffichageMenuCombatInventaire() {
+	Separator()
+	fmt.Println("🎒 Inventaire :")
+	Separator()
+	fmt.Println("1 - 🧪 Utiliser un consommable")
+	fmt.Println("2 - 🛡️  Equiper un équipement")
+	fmt.Println("3 - ⬅️  RETOUR")
+	Separator()
+}
+
 //AffichageMenuCombatPotion affiche le menu des potions uniquement lors des combats
 func AffichageMenuCombatPotion() {
 	Separator()
 	fmt.Println("🧪 Utiliser un consommable :")
 	Separator()
-	fmt.Println("1 - ❤️  Tiramisu")
+	fmt.Println("1 - 🍰  Tiramisu")
 	fmt.Println("2 - 💀 Tabasco")
 	fmt.Println("3 - 🍅 Bocal de Sauce Tomate")
 	fmt.Println("4 - ⬅️  RETOUR")
