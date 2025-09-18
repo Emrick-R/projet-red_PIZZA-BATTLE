@@ -32,7 +32,7 @@ func DisplayEInfo(e *structures.Enemy) {
 	fmt.Println("👹 Informations de l'ennemi :")
 	affichage.Separator()
 	fmt.Printf("📛 Nom : %s\n", e.Name)
-	fmt.Printf("❤️ PV : %d/%d\n", e.ActualHp, e.MaxHp)
+	fmt.Printf("❤️  PV : %d/%d\n", e.ActualHp, e.MaxHp)
 	fmt.Printf("⚡ Initiative : %d\n", e.Initiative)
 	affichage.Separator()
 }
