@@ -53,7 +53,7 @@ func AccessSkills(c *structures.Character) {
 	fmt.Println("📜 Compétences :")
 	affichage.Separator()
 	for s := range c.SkillList {
-		fmt.Printf("- %s : %d points de dégâts\n", c.SkillList[s].Name, c.SkillList[s].Damage)
+		fmt.Printf("- %s : %d points de dégâts, -%d Sauce Tomate\n", c.SkillList[s].Name, c.SkillList[s].Damage, c.SkillList[s].ManaCost)
 	}
 	fmt.Println()
 }
