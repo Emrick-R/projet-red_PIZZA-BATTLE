@@ -54,8 +54,10 @@ func Marchand(c *structures.Character) {
 		fmt.Printf("11 - 📦 Agrandir inventaire (+10 emplacements) - 30💵\n")
 		fmt.Println("12 - ⬅️  RETOUR")
 		// Test
-		fmt.Printf("\n13 - 📖 Livre de Cuisine : %s - 0💵 (test)\n", DeathSpell.Name)
-		// Fin test
+		if c.Test {
+			fmt.Printf("\n13 - 📖 Livre de Cuisine : %s - 0💵 (test)\n", DeathSpell.Name)
+			// Fin test
+		}
 
 		affichage.Separator()
 		fmt.Print("👉 Ton choix : ")
@@ -185,7 +187,7 @@ func Marchand(c *structures.Character) {
 					// Effacer l'écran
 					fmt.Print("\033[H\033[2J")
 					fmt.Printf("✅ Tu as acheté un Livre de Cuisine : %s (-250💵)\n", Ultimate.Name)
-					fmt.Printf("🤌 Nouvelle compétence : %s (%d dégâts)\n", Ultimate.Name, Ultimate.Damage)
+					fmt.Printf("🤌  Nouvelle compétence : %s (%d dégâts)\n", Ultimate.Name, Ultimate.Damage)
 					fmt.Println("Tu as maintenant", c.Money, "💵")
 				} else {
 					// Effacer l'écran
@@ -295,19 +297,25 @@ func Marchand(c *structures.Character) {
 		case 12:
 			// Retour au menu précédent
 		case 13:
-			// Test achat d'un livre de sort (compétence)
-			if !skills.CheckSkills(c, DeathSpell) {
-				skills.AddSkills(c, DeathSpell)
-				// Pas de coût en argent (test)
-				// Effacer l'écran
-				fmt.Print("\033[H\033[2J")
-				fmt.Printf("✅ Tu as acheté un Livre de Cuisine : %s\n", DeathSpell.Name)
-				fmt.Printf("💀 Nouvelle compétence : %s (%d dégâts)\n", DeathSpell.Name, DeathSpell.Damage)
-				fmt.Println("Tu as maintenant", c.Money, "💵")
+			if c.Test {
+				// Test achat d'un livre de sort (compétence)
+				if !skills.CheckSkills(c, DeathSpell) {
+					skills.AddSkills(c, DeathSpell)
+					// Pas de coût en argent (test)
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Printf("✅ Tu as acheté un Livre de Cuisine : %s\n", DeathSpell.Name)
+					fmt.Printf("💀 Nouvelle compétence : %s (%d dégâts)\n", DeathSpell.Name, DeathSpell.Damage)
+					fmt.Println("Tu as maintenant", c.Money, "💵")
+				} else {
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
+				}
 			} else {
 				// Effacer l'écran
 				fmt.Print("\033[H\033[2J")
-				fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
+				fmt.Print("\n❌ Il ne se passe rien... Choix invalide.\n")
 			}
 		default:
 			// Effacer l'écran

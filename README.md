@@ -1,5 +1,16 @@
 🍕 RPG – Pizza Battle
 
+Pizza battle est un mini RPG où le but est de vaincre un série d'ennemis pour terminer le jeu:
+
+Fonction personnalisée en plus :
+Système de progression
+Du scoring
+Une Difficulté d'ennemis selon la progression du joueur
+
+Pour activer le systeme de test (accès à la compétence OP + +9999 Argents) faire 69 dans le menu principal
+
+Ci dessous les notions modifier du Pdf Projet RED avec notre thème :
+
 Classe
 
 Elfe = Sculpteur de mozzarella
@@ -19,15 +30,7 @@ Potion de Mana = Bocal de Sauce Tomate 🫙
 
 Mana = Sauce Tomate 🍅
 
-
-
-🎒 Inventaire
-
-
-
 🛒 Marchand – Super Marché
-
-
 
 Objets en vente :
 
@@ -57,9 +60,7 @@ Peau de Troll → Cuir 🟫 = 7💵
 
 
 
-⚒️ Forgeron
-
-👨‍🏭 Pepito le couturier, l’oncle du héros
+⚒️ Forgeron = 👨‍🏭 Pepito le couturier, l’oncle du héros
 
 
 
@@ -79,6 +80,12 @@ Peau de Troll → Cuir 🟫 = 7💵
 
 🔥 Boule de Feu = Lancer de Piments 🌶️
 
+Explosion de Curry
+
+Ma che vuoi ? 🤌
+
+Covid-19
+
 
 
 👾 Ennemis
@@ -88,6 +95,7 @@ Peau de Troll → Cuir 🟫 = 7💵
 🤖🍝 Moyen : El Don Pastabox 3000
 
 ⚡ Difficile : Ultra Mega Hyper Giovanni EX Turbo GX
+
 
 
 

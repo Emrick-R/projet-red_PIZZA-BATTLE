@@ -30,6 +30,7 @@ type Character struct {
 	EasyKill   int
 	NormalKill int
 	BossKill   int
+	Test       bool
 }
 
 // Enemy représente un ennemi avec ses attributs.
@@ -96,6 +97,7 @@ func InitCharacter() *Character {
 		BossKill:   0,
 		Progress:   1,
 		Difficulty: 1,
+		Test:       false,
 	}
 }
 

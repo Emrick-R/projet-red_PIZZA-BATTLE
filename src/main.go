@@ -80,12 +80,19 @@ func main() {
 					// Forgeron
 					forgeron.Forgeron(c1)
 				case 6:
-
+				case 69: // Mode test pour les développeurs
+					// On active le mode test
+					fmt.Print("\033[H\033[2J")
+					fmt.Println("Mode Test activé")
+					time.Sleep(1 * time.Second)
+					c1.Test = true
+					c1.Money = 9999
 				default:
 					fmt.Print("\033[H\033[2J")
 					// Choix invalide
 					fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 				}
+
 				// Reset de la variable menuChoice pour éviter les boucles infinies
 				if menuChoice == 6 {
 					menuChoice = 0

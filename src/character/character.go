@@ -374,6 +374,8 @@ func NextLevel(c *structures.Character) {
 // True s'il a assez, false sinon
 func CheckMoney(c *structures.Character, amount int) bool {
 	if c.Money >= amount {
+		return true
+	} else {
+		return false
 	}
-	return false
 }
