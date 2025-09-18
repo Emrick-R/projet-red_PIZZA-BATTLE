@@ -85,9 +85,6 @@ func main() {
 					fmt.Print("\033[H\033[2J")
 					// Choix invalide
 					fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
-
-					time.Sleep(1 * time.Second)
-
 				}
 				// Reset de la variable menuChoice pour éviter les boucles infinies
 				if menuChoice == 6 {

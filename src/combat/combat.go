@@ -453,19 +453,20 @@ func TurnCombat1v1(c *structures.Character) {
 
 		e = structures.InitEnemy("Petit Giovanni", "Facile")
 	} else if c.Progress > 1 && c.Progress <= 5 {
-		r := rand.Intn(2)
+		r := rand.Intn(3)
 		if r == 0 {
-			fmt.Println("Tu affronte El Don Pastabox 3000 !, Attention !")
-
-			time.Sleep(1 * time.Second)
-
-			e = structures.InitEnemy("El Don Pastabox 3000", "Normale")
-		} else {
 			fmt.Println("Tu affronte le Petit Giovanni !, Prudence...")
 
 			time.Sleep(1 * time.Second)
 
 			e = structures.InitEnemy("Petit Giovanni", "Facile")
+		} else {
+			fmt.Println("Tu affronte El Don Pastabox 3000 !, Attention !")
+
+			time.Sleep(1 * time.Second)
+
+			e = structures.InitEnemy("El Don Pastabox 3000", "Normale")
+
 		}
 	} else if c.Progress == 6 {
 		fmt.Println("Tu affronte le Ultra Mega Hyper Giovanni EX Turbo GX !, les enjeux sont à leur comble !")
@@ -536,7 +537,8 @@ func TurnCombat1v1(c *structures.Character) {
 	//Le joueur a gagné
 	c.Progress++
 	// Fin de partie si le boss final est vaincu
-	//
+
+	score.AddScore(c, e)
 	if c.Progress > 6 {
 
 		// Effacer l'écran
@@ -579,7 +581,6 @@ func TurnCombat1v1(c *structures.Character) {
 	time.Sleep(1 * time.Second)
 
 	//Récompenses du combat (Argent + Score)
-	score.AddScore(c, e)
 	inventory.AddMoney(c, e)
 	character.AddExp(c, e)
 	fmt.Printf("💵 +%d argent", e.GiveMoney)
