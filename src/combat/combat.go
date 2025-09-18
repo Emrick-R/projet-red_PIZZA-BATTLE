@@ -261,9 +261,8 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 						return
 
 					} else {
+						fmt.Print("\033[H\033[2J")
 						fmt.Println("❌ Pas assez de Sauce Tomate pour utiliser cette compétence !")
-
-						time.Sleep(1 * time.Second)
 
 					}
 				} else if skill_choice == index {
@@ -276,10 +275,9 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 					// Sortie de la boucle
 					break
 				} else {
+					fmt.Print("\033[H\033[2J")
 					// Si le choix n'est pas valide, affiche un message d'erreur et redemande
 					fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
-
-					time.Sleep(1 * time.Second)
 
 				}
 			}
@@ -310,9 +308,8 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 						case 1:
 							// Utiliser une potion de vie
 							if c.ActualHp == c.MaxHp {
+								fmt.Print("\033[H\033[2J")
 								fmt.Printf("\n❌ Les points de vie sont déjà au max\n\n")
-
-								time.Sleep(1 * time.Second)
 
 							} else {
 								HpPot := structures.Object{Name: "Tiramisu"}
@@ -320,10 +317,9 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 									if c.Inventory[i].Name == HpPot.Name {
 										//Vérification si le personnage a déjà les PV max
 										if c.ActualHp == c.MaxHp {
+											fmt.Print("\033[H\033[2J")
 											//Message d'erreur si les PV sont déjà au max
 											fmt.Printf("\n❌ Les points de vie sont déjà au max\n\n")
-
-											time.Sleep(1 * time.Second)
 
 										} else {
 											//Utiliser une potion de vie
@@ -336,9 +332,8 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 										}
 									}
 								}
+								fmt.Print("\033[H\033[2J")
 								fmt.Println("❌ Il n'y a pas de Tiramisu dans l'inventaire.")
-
-								time.Sleep(1 * time.Second)
 
 							}
 						case 2:
@@ -355,16 +350,14 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 									return
 								}
 							}
+							fmt.Print("\033[H\033[2J")
 							fmt.Println("❌ Il n'y a pas de Tabasco dans l'inventaire.")
-
-							time.Sleep(1 * time.Second)
 
 						case 3:
 							// Utiliser une potion de mana.
 							if c.ActualMana == c.MaxMana {
+								fmt.Print("\033[H\033[2J")
 								fmt.Printf("\n❌ La Sauce Tomate est déjà pleine\n\n")
-
-								time.Sleep(1 * time.Second)
 
 							} else {
 
@@ -372,9 +365,8 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 								for i := 0; i < len(c.Inventory); i++ {
 									if c.Inventory[i].Name == ManaPot.Name {
 										if c.ActualMana == c.MaxMana {
+											fmt.Print("\033[H\033[2J")
 											fmt.Printf("\n❌ La Sauce Tomate est déjà pleine\n\n")
-
-											time.Sleep(1 * time.Second)
 
 										} else {
 											items.TakeManaPot(c)
@@ -385,18 +377,17 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 										}
 									}
 								}
+								fmt.Print("\033[H\033[2J")
 								fmt.Println("❌ Il n'y a pas de Bocal de Sauce Tomate dans l'inventaire.")
-
-								time.Sleep(1 * time.Second)
 
 							}
 						case 4:
-						//Retour
+							//Retour
+							fmt.Print("\033[H\033[2J")
 						default:
+							fmt.Print("\033[H\033[2J")
 							// Choix autre que 1, 2, 3 ou 4
 							fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
-
-							time.Sleep(1 * time.Second)
 
 						}
 						//Reset de la variable menuChoice
@@ -412,9 +403,8 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 				// Retour
 				default:
 					// Choix autre que 1, 2 ou 3
+					fmt.Print("\033[H\033[2J")
 					fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
-
-					time.Sleep(1 * time.Second)
 
 				}
 				//Reset de la variable menuChoice
@@ -424,12 +414,15 @@ func CharacterTurn(c *structures.Character, e *structures.Enemy) {
 				}
 			}
 		case 3:
+
+			fmt.Print("\033[H\033[2J")
 			// Afficher les informations de l'ennemi
 			character.DisplayEInfo(e)
 		case 4:
 			c.ActualHp = 0
 			return
 		default:
+			fmt.Print("\033[H\033[2J")
 			// Choix autre que 1 ou 2
 			fmt.Printf("\n❌ Il ne se passe rien... Choix invalide.\n")
 
@@ -499,7 +492,6 @@ func TurnCombat1v1(c *structures.Character) {
 	for {
 		//Le tour du joueur (Turn == pair)
 		if Turn%2 == 0 {
-			fmt.Print("\033[H\033[2J")
 			//Affichage du tour
 			affichage.Separator()
 			fmt.Printf("🎯 Tour %d — À ton tour %s !\n", TrueTurn, c.Name)

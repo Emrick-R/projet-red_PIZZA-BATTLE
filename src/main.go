@@ -46,21 +46,36 @@ func main() {
 				switch menuChoice {
 				case 1:
 
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+
 					// Afficher les infos du personnage.
 					character.DisplayCInfo(c1)
 				case 2:
+
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
 
 					// Menu Inventaire
 					character.InventoryChoice(c1)
 				case 3:
 
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+
 					// Combat en 1 contre 1
 					combat.TurnCombat1v1(c1)
 				case 4:
 
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+
 					// Marchand
 					marchand.Marchand(c1)
 				case 5:
+
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
 
 					// Forgeron
 					forgeron.Forgeron(c1)
