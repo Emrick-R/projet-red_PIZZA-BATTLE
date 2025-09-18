@@ -32,7 +32,7 @@ func DisplayEInfo(e *structures.Enemy) {
 	fmt.Println("👹 Informations de l'ennemi :")
 	affichage.Separator()
 	fmt.Printf("📛 Nom : %s\n", e.Name)
-	fmt.Printf("❤️ PV : %d/%d\n", e.ActualHp, e.MaxHp)
+	fmt.Printf("❤️  PV : %d/%d\n", e.ActualHp, e.MaxHp)
 	fmt.Printf("⚡ Initiative : %d\n", e.Initiative)
 	affichage.Separator()
 }
@@ -53,7 +53,7 @@ func AccessSkills(c *structures.Character) {
 	fmt.Println("📜 Compétences :")
 	affichage.Separator()
 	for s := range c.SkillList {
-		fmt.Printf("- %s : %d points de dégâts\n", c.SkillList[s].Name, c.SkillList[s].Damage)
+		fmt.Printf("- %s : %d points de dégâts, -%d Sauce Tomate\n", c.SkillList[s].Name, c.SkillList[s].Damage, c.SkillList[s].ManaCost)
 	}
 	fmt.Println()
 }

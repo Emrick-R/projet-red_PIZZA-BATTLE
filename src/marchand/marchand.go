@@ -26,7 +26,7 @@ func Marchand(c *structures.Character) {
 	//Compétences
 	FireBall := structures.Skill{Name: "Lancer de Piments", Damage: 20, ManaCost: 20}
 	CurryExplosion := structures.Skill{Name: "Explosion de Curry", Damage: 60, ManaCost: 60}
-	Ultimate := structures.Skill{Name: "Ma che vuoi ? 🤌 ", Damage: 500, ManaCost: 500}
+	Ultimate := structures.Skill{Name: "Ma che vuoi ? 🤌 ", Damage: 500, ManaCost: 250}
 	DeathSpell := structures.Skill{Name: "Covid-19", Damage: 500}
 
 	// Effacer l'écran
