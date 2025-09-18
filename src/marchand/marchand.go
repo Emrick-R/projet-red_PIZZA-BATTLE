@@ -64,168 +64,234 @@ func Marchand(c *structures.Character) {
 		case 1:
 			// Achat d'un Tiramisu (potion de vie)
 			// Vérification de la place dans l'inventaire
-			if inventory.CheckMaxInventory(c) {
-				// Ajout de l'objet dans l'inventaire
-				inventory.AddInventory(c, HpPot)
-				// Déduction de l'argent
-				c.Money -= 3
-				// Message de confirmation
-				// Effacer l'écran
-				fmt.Print("\033[H\033[2J")
-				fmt.Println("✅ Tu as acheté un Tiramisu (-3💵)")
-				// Affichage de l'argent restant
-				fmt.Println("Tu as maintenant", c.Money, "💵")
-				// Retour au menu du marchand
+			if character.CheckMoney(c, 3) {
+
+				if inventory.CheckMaxInventory(c) {
+					// Ajout de l'objet dans l'inventaire
+					inventory.AddInventory(c, HpPot)
+					// Déduction de l'argent
+					c.Money -= 3
+					// Message de confirmation
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Println("✅ Tu as acheté un Tiramisu (-3💵)")
+					// Affichage de l'argent restant
+					fmt.Println("Tu as maintenant", c.Money, "💵")
+					// Retour au menu du marchand
+				} else {
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					// Message d'erreur si l'inventaire est plein
+					fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
+					// Retour au menu du marchand
+				}
 			} else {
 				// Effacer l'écran
 				fmt.Print("\033[H\033[2J")
-				// Message d'erreur si l'inventaire est plein
-				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
-				// Retour au menu du marchand
+				// Message d'erreur si le joueur n'a pas assez d'argent
+				fmt.Printf("\n❌ Tu n'as pas assez d'argent pour acheter cet objet\n\n")
 			}
 		case 2:
-			// Achat d'une potion de poison
-			if inventory.CheckMaxInventory(c) {
-				inventory.AddInventory(c, PoisonPot)
-				c.Money -= 6
-				// Effacer l'écran
-				fmt.Print("\033[H\033[2J")
-				fmt.Println("✅ Tu as acheté un Tabasco (-6💵)")
-				fmt.Println("Tu as maintenant", c.Money, "💵")
+			if character.CheckMoney(c, 6) {
 
+				// Achat d'une potion de poison
+				if inventory.CheckMaxInventory(c) {
+					inventory.AddInventory(c, PoisonPot)
+					c.Money -= 6
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Println("✅ Tu as acheté un Tabasco (-6💵)")
+					fmt.Println("Tu as maintenant", c.Money, "💵")
+
+				} else {
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
+
+				}
 			} else {
-				// Effacer l'écran
 				fmt.Print("\033[H\033[2J")
-				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
-
+				fmt.Printf("\n❌ Tu n'as pas assez d'argent pour acheter cet objet\n\n")
 			}
 		case 3:
-			// Achat d'une potion de mana
-			if inventory.CheckMaxInventory(c) {
-				inventory.AddInventory(c, ManaPot)
-				c.Money -= 4
-				// Effacer l'écran
-				fmt.Print("\033[H\033[2J")
-				fmt.Println("✅ Tu as acheté un Bocal de Sauce Tomate (-4💵)")
-				fmt.Println("Tu as maintenant", c.Money, "💵")
+			if character.CheckMoney(c, 4) {
+				// Achat d'une potion de mana
+				if inventory.CheckMaxInventory(c) {
+					inventory.AddInventory(c, ManaPot)
+					c.Money -= 4
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Println("✅ Tu as acheté un Bocal de Sauce Tomate (-4💵)")
+					fmt.Println("Tu as maintenant", c.Money, "💵")
+				} else {
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
+				}
 			} else {
 				// Effacer l'écran
 				fmt.Print("\033[H\033[2J")
-				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
+				fmt.Printf("\n❌ Tu n'as pas assez d'argent pour acheter cet objet\n\n")
 			}
 		case 4:
-			// Achat d'un livre de sort (compétence)
-			// Vérification si le personnage possède déjà la compétence
-			if !skills.CheckSkills(c, FireBall) {
-				// Ajout de la compétence au personnage
-				skills.AddSkills(c, FireBall)
-				c.Money -= 25
-				// Effacer l'écran
-				fmt.Print("\033[H\033[2J")
-				fmt.Printf("✅ Tu as acheté un Livre de Cuisine : %s (-25💵)\n", FireBall.Name)
-				// Affichage de la compétence apprise
-				fmt.Printf("🔥 Nouvelle compétence : %s (%d dégâts)\n", FireBall.Name, FireBall.Damage)
-				fmt.Println("Tu as maintenant", c.Money, "💵")
+			if character.CheckMoney(c, 25) {
+				// Achat d'un livre de sort (compétence)
+				// Vérification si le personnage possède déjà la compétence
+				if !skills.CheckSkills(c, FireBall) {
+					// Ajout de la compétence au personnage
+					skills.AddSkills(c, FireBall)
+					c.Money -= 25
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Printf("✅ Tu as acheté un Livre de Cuisine : %s (-25💵)\n", FireBall.Name)
+					// Affichage de la compétence apprise
+					fmt.Printf("🔥 Nouvelle compétence : %s (%d dégâts)\n", FireBall.Name, FireBall.Damage)
+					fmt.Println("Tu as maintenant", c.Money, "💵")
+				} else {
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
+				}
 			} else {
 				// Effacer l'écran
 				fmt.Print("\033[H\033[2J")
-				fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
+				fmt.Printf("\n❌ Tu n'as pas assez d'argent pour acheter cet objet\n\n\n\n")
 			}
 		case 5:
-			if !skills.CheckSkills(c, CurryExplosion) {
-				skills.AddSkills(c, CurryExplosion)
-				c.Money -= 60
-				// Effacer l'écran
-				fmt.Print("\033[H\033[2J")
-				fmt.Printf("✅ Tu as acheté un Livre de Cuisine : %s (-60💵)\n", CurryExplosion.Name)
-				fmt.Printf("💥 Nouvelle compétence : %s (%d dégâts)\n", CurryExplosion.Name, CurryExplosion.Damage)
-				fmt.Println("Tu as maintenant", c.Money, "💵")
+			if character.CheckMoney(c, 60) {
+				if !skills.CheckSkills(c, CurryExplosion) {
+					skills.AddSkills(c, CurryExplosion)
+					c.Money -= 60
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Printf("✅ Tu as acheté un Livre de Cuisine : %s (-60💵)\n", CurryExplosion.Name)
+					fmt.Printf("💥 Nouvelle compétence : %s (%d dégâts)\n", CurryExplosion.Name, CurryExplosion.Damage)
+					fmt.Println("Tu as maintenant", c.Money, "💵")
+				} else {
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
+				}
 			} else {
 				// Effacer l'écran
 				fmt.Print("\033[H\033[2J")
-				fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
+				fmt.Printf("\n❌ Tu n'as pas assez d'argent pour acheter cet objet\n\n\n\n")
 			}
 		case 6:
-			if !skills.CheckSkills(c, Ultimate) {
-				skills.AddSkills(c, Ultimate)
-				c.Money -= 250
-				// Effacer l'écran
-				fmt.Print("\033[H\033[2J")
-				fmt.Printf("✅ Tu as acheté un Livre de Cuisine : %s (-250💵)\n", Ultimate.Name)
-				fmt.Printf("🤌 Nouvelle compétence : %s (%d dégâts)\n", Ultimate.Name, Ultimate.Damage)
-				fmt.Println("Tu as maintenant", c.Money, "💵")
+			if character.CheckMoney(c, 250) {
+				if !skills.CheckSkills(c, Ultimate) {
+					skills.AddSkills(c, Ultimate)
+					c.Money -= 250
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Printf("✅ Tu as acheté un Livre de Cuisine : %s (-250💵)\n", Ultimate.Name)
+					fmt.Printf("🤌 Nouvelle compétence : %s (%d dégâts)\n", Ultimate.Name, Ultimate.Damage)
+					fmt.Println("Tu as maintenant", c.Money, "💵")
+				} else {
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
+				}
 			} else {
 				// Effacer l'écran
 				fmt.Print("\033[H\033[2J")
-				fmt.Print("\n❌ Tu possèdes déjà cette compétence\n\n")
+				fmt.Printf("\n❌ Tu n'as pas assez d'argent pour acheter cet objet\n\n\n\n")
 			}
 		case 7:
-			// Achat d'une Laine
-			if inventory.CheckMaxInventory(c) {
-				inventory.AddInventory(c, WolfFur)
-				c.Money -= 4
-				// Effacer l'écran
-				fmt.Print("\033[H\033[2J")
-				fmt.Println("✅ Tu as acheté une Laine (-4💵)")
-				fmt.Println("Tu as maintenant", c.Money, "💵")
+			if character.CheckMoney(c, 4) {
+				// Achat d'une Laine
+				if inventory.CheckMaxInventory(c) {
+					inventory.AddInventory(c, WolfFur)
+					c.Money -= 4
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Println("✅ Tu as acheté une Laine (-4💵)")
+					fmt.Println("Tu as maintenant", c.Money, "💵")
+				} else {
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
+				}
 			} else {
 				// Effacer l'écran
 				fmt.Print("\033[H\033[2J")
-				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
+				fmt.Printf("\n❌ Tu n'as pas assez d'argent pour acheter cet objet\n\n\n\n")
 			}
 		case 8:
-			// Achat d'une Cuir
-			if inventory.CheckMaxInventory(c) {
-				inventory.AddInventory(c, TrollSkin)
-				c.Money -= 7
-				// Effacer l'écran
-				fmt.Print("\033[H\033[2J")
-				fmt.Println("✅ Tu as acheté une Cuir (-7💵)")
-				fmt.Println("Tu as maintenant", c.Money, "💵")
+			if character.CheckMoney(c, 7) {
+				// Achat d'une Cuir
+				if inventory.CheckMaxInventory(c) {
+					inventory.AddInventory(c, TrollSkin)
+					c.Money -= 7
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Println("✅ Tu as acheté une Cuir (-7💵)")
+					fmt.Println("Tu as maintenant", c.Money, "💵")
+				} else {
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
+				}
 			} else {
 				// Effacer l'écran
 				fmt.Print("\033[H\033[2J")
-				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
+				fmt.Printf("\n❌ Tu n'as pas assez d'argent pour acheter cet objet\n\n\n\n")
 			}
 		case 9:
-			// Achat d'un Ficelle
-			if inventory.CheckMaxInventory(c) {
-				inventory.AddInventory(c, BoarLeather)
-				c.Money -= 3
-				// Effacer l'écran
-				fmt.Print("\033[H\033[2J")
-				fmt.Println("✅ Tu as acheté un Ficelle (-3💵)")
-				fmt.Println("Tu as maintenant", c.Money, "💵")
+			if character.CheckMoney(c, 3) {
+				// Achat d'un Ficelle
+				if inventory.CheckMaxInventory(c) {
+					inventory.AddInventory(c, BoarLeather)
+					c.Money -= 3
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Println("✅ Tu as acheté un Ficelle (-3💵)")
+					fmt.Println("Tu as maintenant", c.Money, "💵")
+				} else {
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
+				}
 			} else {
 				// Effacer l'écran
 				fmt.Print("\033[H\033[2J")
-				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
+				fmt.Printf("\n❌ Tu n'as pas assez d'argent pour acheter cet objet\n\n\n\n")
 			}
 		case 10:
-			// Achat d'une plume de corbeau
-			if inventory.CheckMaxInventory(c) {
-				inventory.AddInventory(c, RavenFeather)
-				c.Money -= 1
-				// Effacer l'écran
-				fmt.Print("\033[H\033[2J")
-				fmt.Println("✅ Tu as acheté une Coton (-1💵)")
-				fmt.Println("Tu as maintenant", c.Money, "💵")
+			if character.CheckMoney(c, 1) {
+				// Achat d'une plume de corbeau
+				if inventory.CheckMaxInventory(c) {
+					inventory.AddInventory(c, RavenFeather)
+					c.Money -= 1
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Println("✅ Tu as acheté une Coton (-1💵)")
+					fmt.Println("Tu as maintenant", c.Money, "💵")
+				} else {
+					// Effacer l'écran
+					fmt.Print("\033[H\033[2J")
+					fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
+				}
 			} else {
 				// Effacer l'écran
 				fmt.Print("\033[H\033[2J")
-				fmt.Printf("\n❌ Il n'y a pas assez de place dans l'inventaire\n\n")
+				fmt.Printf("\n❌ Tu n'as pas assez d'argent pour acheter cet objet\n\n\n\n")
 			}
-
 		case 11:
-			// Achat d'une augmentation de l'inventaire
-			c.Money -= 30
-			// Effacer l'écran
-			fmt.Print("\033[H\033[2J")
-			fmt.Println("✅ Ton inventaire s'est agrandi de 10 places (-30💵)")
-			fmt.Println("Tu as maintenant", c.Money, "💵")
-			// Augmentation de la taille de l'inventaire de 10 slots
-			inventory.UpgradeInventorySlot(c)
-
+			if character.CheckMoney(c, 3) {
+				// Achat d'une augmentation de l'inventaire
+				c.Money -= 30
+				// Effacer l'écran
+				fmt.Print("\033[H\033[2J")
+				fmt.Println("✅ Ton inventaire s'est agrandi de 10 places (-30💵)")
+				fmt.Println("Tu as maintenant", c.Money, "💵")
+				// Augmentation de la taille de l'inventaire de 10 slots
+				inventory.UpgradeInventorySlot(c)
+			} else {
+				// Effacer l'écran
+				fmt.Print("\033[H\033[2J")
+				fmt.Printf("\n❌ Tu n'as pas assez d'argent pour acheter cet objet\n\n\n\n")
+			}
 		case 12:
 			// Retour au menu précédent
 		case 13:

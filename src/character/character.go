@@ -369,3 +369,11 @@ func NextLevel(c *structures.Character) {
 		time.Sleep(3 * time.Second)
 	}
 }
+
+// CheckMoney vérifie si le personnage a assez d'argent pour effectuer un achat
+// True s'il a assez, false sinon
+func CheckMoney(c *structures.Character, amount int) bool {
+	if c.Money >= amount {
+	}
+	return false
+}
