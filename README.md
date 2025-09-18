@@ -1,5 +1,7 @@
 🍕 RPG – Pizza Battle
 
+Pour lancer le Jeu : Ouvrir le main.go dans le dossier src
+
 Pizza battle est un mini RPG où le but est de vaincre un série d'ennemis pour terminer le jeu:
 
 Fonction personnalisée en plus :
